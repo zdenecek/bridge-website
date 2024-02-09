@@ -1,0 +1,40 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+
+      - name: Setup Hugo
+        env:
+          HUGO_VERSION: 0.92.2
+        run: |
+          mkdir ~/hugo
+          cd ~/hugo
+          curl -L "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" --output hugo.tar.gz
+          tar -xvzf hugo.tar.gz
+          sudo mv hugo /usr/local/bin
+
+      - name: Build
+        run: hugo --minify --verbose
+
+      - name: Upload via FTP
+        uses: airvzxf/ftp-deployment-action@latest
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_LOGIN }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_dir: "./public/"
+          remote_dir: "./"
+          delete: "true"
