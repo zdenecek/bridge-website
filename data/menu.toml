@@ -1,0 +1,31 @@
+[[entries]]
+title = "Turnaje"
+[[entries.entries]]
+title = "Republikové turnaje"
+post_list = { section = "tournaments", limit = 3, show_more = true, show_more_url = "/tournaments", show_more_text = "Zobrazit více turnajů" }
+[[entries.entries]]
+title = "Turnaje v BK Praha"
+post_list = { section = "bkp-tournaments", limit = 2, show_more = true, show_more_url = "/bkp-tournaments", show_more_text = "Zobrazit více turnajů" }
+
+
+[[entries]]
+title = "Články a návody"
+
+[[entries]]
+title = "Bridžové programy"
+
+[[entries]]
+title = "Soubory"
+
+[[entries]]
+title = "Odkazy"
+[[entries.entries]]
+title = "Český bridžový svaz"
+url = "https://czechbridge.cz"
+[[entries.entries]]
+title = "Bridžový klub Praha"
+url = "https://www.bkpraha.cz"
+[[entries.entries]]
+title = "Havířovská bridžová akademie a Bridžový spolek Havířov"
+url = "https://bridzhavirov.cz"
+

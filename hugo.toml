@@ -1,0 +1,4 @@
+baseURL = 'https://bridge.zdenektomis.eu/'
+languageCode = 'cs'
+title = 'Zdeňkova bridžová stránka'
+theme = "nostyleplease"
