@@ -12,8 +12,8 @@ site: tournaments
 	hugo --minify --verbose
 
 tournaments: 
-	PYTHON3 scripts/convert.py data/tournaments.json content/tournaments/
-	PYTHON3 scripts/convert.py data/bkpTournaments.json content/bkp-tournaments/
+	${PYTHON3} scripts/convert.py data/tournaments.json content/tournaments/
+	${PYTHON3} scripts/convert.py data/bkpTournaments.json content/bkp-tournaments/
 
 clean: 
 	mv content/tournaments/_index.md _index.md.bak
