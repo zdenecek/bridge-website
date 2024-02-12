@@ -1,0 +1,16 @@
+baseURL: "https://bridge.zdenektomis.eu/web/"
+languageCode: "cs-CZ"
+defaultContentLanguage: cs
+theme: "nostyleplease"
+custom_css: 
+  - "css/custom.css"
+languages:
+  cs:
+    contentDir: "content/"
+    disabled: false
+    languageCode: cs-CZ
+    languageName: Čeština
+    params:
+      subtitle: Vše o bridži
+    title: Zdeňkova bridžová stránka
+    weight: 1

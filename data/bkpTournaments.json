@@ -1,0 +1,72 @@
+[
+
+
+    {
+        "title": "Skupinová B Jaro 2023",
+        "date": "2023-02-01",
+        "slug": "skupinova-b-jaro-2023",
+        "entries": [
+            {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4949",
+                "type": "matrika-cbs"
+            },
+            {
+                "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-jaro-2023",
+                "type": "result-presentation"
+            }
+        ]
+    },
+    {
+        "title": "Pražská Bridžová Liga Podzim 2023",
+        "date": "2023-09-01",
+        "slug": "prazska-bridzova-liga-podzim-2023",
+        "entries": [
+            {
+                "link": "#",
+                "type": "matrika-cbs"
+            },
+            {
+                "link": "http://www.bridgebase.6f.sk/results/AK/2023/PL23P/start.php",
+                "type": "result-presentation"
+            }
+        ]
+    },
+    {
+        "title": " Skupinová B Podzim 2023",
+        "date": "2023-09-01",
+        "slug": "skupinova-b-podzim-2023",
+        "entries": [
+            {
+                "link": "#",
+                "type": "matrika-cbs"
+            },
+            {
+                "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-podzim-2023",
+                "type": "result-presentation"
+            }
+        ]
+    },
+    {
+        "title": "Pražská bridžová liga Jaro 2024",
+        "date": "2024-02-01",
+        "slug": "prazska-bridzova-liga-jaro-2024",
+        "entries": [
+  
+            {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/pbl-jaro/",
+                "type": "result-presentation"
+            }
+        ]
+    },
+    {
+        "title": "Skupinová B Jaro 2024",
+        "date": "2024-02-01",
+        "slug": "skupinova-b-jaro-2024",
+        "entries": [
+         
+            {
+                "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-jaro-2024",
+                "type": "result-presentation"
+            }
+        ]
+    }]

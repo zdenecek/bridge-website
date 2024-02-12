@@ -1,0 +1,27 @@
+  
+  {{- range $item := .entries -}}
+        {{ if $item.link }}
+            <a class="link" href="{{ $item.link }}">
+        {{- end -}}
+
+        {{- if $item.title }}
+            <h3>{{ $item.title }}</h3>
+        {{- end -}}
+
+        {{- if $item.type }}
+            <span>{{ i18n $item.type }}</span>
+        {{- end -}}
+
+        {{ if $item.link }}
+            </a>
+        {{- end -}}
+        
+
+        {{- if $item.entries }}
+            {{- partial "_tournament_entries.html" (dict "entries" $item.entries "tournament" .tournament )}}
+            <div class="spacer"></div>
+        {{- end -}}
+
+
+
+    {{- end -}}

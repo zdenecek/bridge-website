@@ -23,11 +23,10 @@ def main():
 
     for entry in data:
         # Generate the front matter
-        front_matter = yaml.dump(entry)
+        front_matter = yaml.dump(entry, allow_unicode=True, explicit_start=True)
         
         file_path = os.path.join(out_dir, entry['date'] + "-" + entry["slug"] + ".md")
         with open(file_path, "w") as md_file:
-            md_file.write("---\n")
             md_file.write(front_matter)
             md_file.write("---\n")
             
