@@ -5,6 +5,9 @@ back:
 photogallery:
   other: 'Fotogalerie'
 
+match-schedule:
+  other: 'Rozpis zápasů'
+
 matrika-cbs:
   other: 'Výsledky v Matrice ČBS'
 

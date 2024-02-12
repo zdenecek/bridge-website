@@ -147,11 +147,11 @@
         "slug": "3-liga-2023",
         "entries": [
             {
-                "link": "",
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5061",
                 "type": "matrika-cbs"
             },
             {
-                "link": "",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2023/3-liga/",
                 "type": "result-presentation"
             }
         ]
@@ -162,11 +162,11 @@
         "slug": "2-liga-2024",
         "entries": [
             {
-                "link": "",
-                "type": "matrika-cbs"
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/2-liga/nasazeni/",
+                "type": "match-schedule"
             },
             {
-                "link": "",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/2-liga/0",
                 "type": "result-presentation"
             }
         ]
