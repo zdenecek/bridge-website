@@ -7,9 +7,10 @@ post_list = { section = "tournaments", limit = 3, show_more = true, show_more_ur
 title = "Turnaje v BK Praha"
 post_list = { section = "bkp-tournaments", limit = 2, show_more = true, show_more_url = "bkp-tournaments", show_more_text = "Zobrazit více turnajů" }
 
-
 [[entries]]
 title = "Články a návody"
+post_list = { section = "posts", limit = 3, show_more = true, show_more_url = "posts", show_more_text = "Zobrazit více" }
+
 
 [[entries]]
 title = "Bridžové programy"
