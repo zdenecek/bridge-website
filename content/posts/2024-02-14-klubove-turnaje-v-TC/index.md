@@ -189,8 +189,8 @@ Cestu doporučuji volit systematicky, například pro každý rok jeden adresá�
 
 Další možnosti, které lze nastavit:
 
-- Live results - zobrazovat výsledky živě
-- Show results only - nezobrazovat rozdání
+- `Live results` - zobrazovat výsledky živě
+- `Show results only` - nezobrazovat rozdání
 - Distributions - Možnost `When all results present` zobrazí v prezentaci rozdání, u kterých jsou výsledky ze všech stolů.
 
 ![alt text](prezNastaveni.png)
