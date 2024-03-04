@@ -4,7 +4,7 @@ date: 2024-02-12
 ---
 
 Tento článek popisuje, jak využít Tournament Calculator pro pořádání klubových
-turnajů. Tedy párových turnajů s jednou sestavou.
+turnajů. Tedy párových turnajů s jedním kolem.
 
 ## Vytvoření turnaje
 
@@ -20,11 +20,11 @@ Při vytváření turnaje máme v zásadě dvě možnosti:
 
 Pro import střídání je potřeba mít střídání ve formátu, který TC umí načíst. TC
 umí načíst střídání v `.csv` (formát hodnoty oddělené čárkou) a sice ve velmi
-jednoduchém formátu, kde každý řádek představuje jedno kolo a stůl a má tuto
+jednoduchém formátu, kde každý řádek představuje jednu sestavu a stůl a má tuto
 podobu:
 
 ```
-stůl,kolo,ns,ew,rozdání nejnižší,rozdání nejvyšší
+stůl,sestava,ns,ew,rozdání nejnižší,rozdání nejvyšší
 ```
 
 Kde `ns` a `ew` jsou čísla párů.
@@ -122,17 +122,17 @@ Ruční zadávání hráčů je možno zcela přeskočit, pokud necháme zadat h
 
 Nyní máme navedené hráče a můžeme importovat střídání.
 
-1. V záložce `Movement` klikneme na horní tlačítko `load movement from NTPN/CSV/TXT` pro vytvoření nové sestavy s požadovaným střídáním.
+1. V záložce `Movement` klikneme na horní tlačítko `load movement from NTPN/CSV/TXT` pro vytvoření nového kola s požadovaným střídáním.
 
 ![import tlacitko](importFromNTP.png)
 
 2. Vybereme soubor, v našem případě `4zluta.csv` a potvrdíme.
-3. Program zobrazí report s kvalitou střídání, potrdíme OK.
-4. Klikneme na tlačítko `Synchronize with scores` pro sjednocení rozpisu s výpočty
+3. Program zobrazí report s kvalitou střídání, potvrdíme.
+4. Klikneme na tlačítko `Synchronize with scores` pro sjednocení rozpisu s výpočty.
 
 ![sjednocení rozpisu s výpočty](sync.png)
 
-Vybereme sjednocení všech kol.
+Vybereme všecha kol pomocí políčka All.
 
 ![Vyber kol](sync2.png)
 
@@ -141,7 +141,7 @@ Odklikneme OK v potvrzovacím dialogu.
 #### Spuštění bridgematů a vytvoření souboru s databází
 
 1. V záložce BWS klikneme na tlačítko `Create new BWS`  
-   BWS je formát databáze výsledků pro bridgematy. Nikdy ho nebudeme otevírat, ale pro zajímavost se jedná o databázi MS Access se změněnou příponou.
+   BWS je formát databáze výsledků pro bridgematy. Nikdy ho nebudeme přímo upravovat, ale pro zajímavost se jedná o databázi MS Access se změněnou příponou.
 
 ![alt text](createBWS.png)
 
@@ -157,14 +157,14 @@ Z nastavení jsou tato nejdůležitější:
 - Lead card - zadávání výnosů - na klubovém turnaji je to asi zbytečné.
 - Member numbers - čísla hráčů - pokud jsou čísla hráčů vložena do bridgematů, lze je přečíst a přiřadit podle databáze tlačítkem v záložce BWS. 
   - Number entry at each round - zadávání čísel hráčů při každém kole - není potřeba.
-- Run BCS - rovnou spustí program pro obsluhu bridgematů s vytvořenou databází.
-- Save as Default - uloží nastavení jako výchozí, příště se tato nastavení načtou.
+- Run BCS (dole) - rovnou spustí program pro obsluhu bridgematů s vytvořenou databází.
+- Save as defaults (dole) - uloží nastavení jako výchozí, při vytváření další BWS se tato nastavení přednačtou.
 
 Doporučuji vše nastavit podle obrázku výše.
 
-Poté stačí potvrdit OK a program vytvoří soubor s databází a spustí program pro obsluhu bridgematů. (pokud jsme zvolili Run BCS)
+Poté stačí potvrdit OK a program vytvoří soubor s databází a spustí program pro obsluhu bridgematů (pokud jsme zvolili Run BCS).
 
-Pokud se BCS nespustí, je možné, že není nastavena cesta k programu. Tuto cestu lze nastavit v záložce `BWS` v sekci Nastavení, viz níže.
+Pokud se BCS nespustí, je možné, že není nastavena cesta k programu, TC ukáže chybovou hlášku. Tuto cestu lze nastavit v záložce `BWS` v sekci Nastavení, viz níže.
 
 ![alt text](findBCS.png)
 
@@ -204,11 +204,12 @@ V TC doporučuji odkliknout v záložče `Presentation` možnost Live results, a
 
 Prezentaci pak manuálně přenahrajeme tlačítkem `Send to FTP now`, nebo počkáme, než se přenahraje automaticky.
 
-## Soubory ke stažení
+## Odkazy
 
 - [Střídání pro BS Havířov](/soubory/movements/bk-havirov) Přepsáno podle
   laminovaných lístků v klubu
 - [Databáze hráčů ČBS](/soubory/databazeHracu.csv) uzpůsobená pro import do TC
 - [Bridge Mate Control](https://support.bridgemate.com/en/support/solutions/articles/44002262504-bridgemate-control-software-3-9-9) - program pro obsluhu bridgematů 
+- [Článek s pokročilými postupy](/posts/2024-03-02-slozitejsi-parove-turnaje-a-postupy-v-TC/)
 
 
