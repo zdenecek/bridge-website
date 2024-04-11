@@ -210,6 +210,6 @@ Prezentaci pak manuálně přenahrajeme tlačítkem `Send to FTP now`, nebo poč
   laminovaných lístků v klubu
 - [Databáze hráčů ČBS](/soubory/databazeHracu.csv) uzpůsobená pro import do TC
 - [Bridge Mate Control](https://support.bridgemate.com/en/support/solutions/articles/44002262504-bridgemate-control-software-3-9-9) - program pro obsluhu bridgematů 
-- [Článek s pokročilými postupy](/posts/2024-03-02-slozitejsi-parove-turnaje-a-postupy-v-TC/)
+- [Článek s pokročilými postupy]({{< relref "/posts/2024-03-02-slozitejsi-parove-turnaje-a-postupy-v-TC/" >}})
 
 
