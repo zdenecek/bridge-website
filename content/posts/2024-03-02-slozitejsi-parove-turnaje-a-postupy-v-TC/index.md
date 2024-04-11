@@ -200,7 +200,7 @@ střídáním.
    Vyplníme FTP údaje a nastavíme název turnaje. Pro FTP údaje program nabízí
    uložit nastavení do interní databáze a při dalším turnaji je načíst a pouze
    změnit cestu s prezentací. Pro detailní návod viz
-   [článek o klubových turnajích](/posts/2024-02-14-klubove-turnaje-v-TC/).
+   [článek o klubových turnajích]({{< relref "/posts/2024-02-14-klubove-turnaje-v-TC" >}} ).
 
 8. Navedeme hráče.
 
@@ -210,7 +210,7 @@ střídáním.
    Přidáme správný počet párů. V našem případě 28 párů.
 
    Pro detailní návod viz
-   [článek o klubových turnajích](/posts/2024-02-14-klubove-turnaje-v-TC/).
+   [článek o klubových turnajích]({{< relref "/posts/2024-02-14-klubove-turnaje-v-TC" >}}).
 
    Postup při pauze:
 
