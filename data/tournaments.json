@@ -45,7 +45,7 @@
         ]
     },
     {
-        "title": "Czech Bridge Tour Havířov",
+        "title": "Czech Bridge Tour Havířov 2024",
         "date": "2023-04-15",
         "slug": "cbt-havirov-2023",
         "entries": [
@@ -169,6 +169,35 @@
                 "link": "https://bridge.zdenektomis.eu/vysledky/2024/2-liga/0",
                 "type": "result-presentation"
             }
+        ]
+    },
+    {
+        "title": "Czech Bridge Tour Havířov",
+        "date": "2024-04-13",
+        "slug": "cbt-havirov-2024",
+        "entries": [
+            {
+                "title": "Hlavní párový turnaj",
+                "entries": [
+                    {
+                        "link": "https://bridge.zdenektomis.eu/vysledky/2024/vc-havirov/",
+                        "type": "result-presentation"
+                    }
+                ]
+            },
+            {
+                "title": "Týmový turnaj",
+                "entries": [
+                    {
+                        "link": "https://bridge.zdenektomis.eu/vysledky/2024/vc-havirov-tymy/",
+                        "type": "result-presentation"
+                    }
+                ]
+            },
+            {
+                "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2023/",
+                "type": "last-year"
+            }  
         ]
     }
 ]
