@@ -9,7 +9,7 @@ watch:
 .PHONY: tournaments site clean all
 
 site: tournaments
-	hugo --minify --verbose
+	hugo --minify
 
 tournaments: 
 	${PYTHON} scripts/convert.py data/tournaments.json content/tournaments/
