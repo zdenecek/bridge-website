@@ -182,6 +182,10 @@
                     {
                         "link": "https://bridge.zdenektomis.eu/vysledky/2024/vc-havirov/",
                         "type": "result-presentation"
+                    },
+                    {
+                        "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5154",
+                        "type": "matrika-cbs"
                     }
                 ]
             },
