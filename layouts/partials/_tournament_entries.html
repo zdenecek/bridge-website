@@ -5,11 +5,25 @@
         {{- end -}}
 
         {{- if $item.title }}
-            <h3>{{ $item.title }}</h3>
+            {{ $level := 3 }}
+            {{- if $item.titleLevel }}
+                {{ $level = add $item.titleLevel 2 }}
+            {{- end -}}
+            <h{{ $level }}>
+                {{ $item.title }}
+            </h{{ $level }}>
         {{- end -}}
 
         {{- if $item.type }}
             <span>{{ i18n $item.type }}</span>
+        {{- end -}}
+
+        {{- if $item.text }}
+        <span>{{ $item.text }}</span>
+        {{- end -}}
+
+        {{- if $item.markdown }}
+        <span>{{ $item.markdown | markdownify }}</span>
         {{- end -}}
 
         {{ if $item.link }}

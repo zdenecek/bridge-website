@@ -3,13 +3,13 @@ PYTHON=python3
 
 all: site
 
-watch:
-	hugo server --minify --disableFastRender --watch
+watch: tournaments
+	hugo server --minify --disableFastRender --watch  --buildFuture
 
 .PHONY: tournaments site clean all
 
 site: tournaments
-	hugo --minify
+	hugo --minify --buildFuture
 
 tournaments: 
 	${PYTHON} scripts/convert.py data/tournaments.json content/tournaments/
