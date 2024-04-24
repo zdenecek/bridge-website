@@ -41,5 +41,21 @@ rozdání na zápas, 2 zápasy v kole. S plným přenosem.
 
 V případě změny počtu týmů nastane úprava parametrů finále C:
 
-- 12 týmů: Finále C každý s každým, bez přenosu.
-- 14 týmů: Finále C švýcarským systémem, s plným přenosem.
+- 12 týmů: čtyřčlenné finále C každý s každým, bez přenosu.
+- 14 týmů: šestičlenné finále C švýcarským systémem, s plným přenosem.
+
+#### Střídání pro 4-členná finále
+
+| Kolo | Zápas 1 | Zápas 2 |
+| ---- | ------- | ------- |
+| 1    | 1 vs. 4 | 2 vs. 3 |
+| 2    | 3 vs. 1 | 4 vs. 2 |
+| 3    | 1 vs. 2 | 3 vs. 4 |
+
+#### Střídání pro 5-členná finále
+
+| Kolo | Zápas 1 | Zápas 2 (trojzápas) |
+| ---- | ------- | ------------------- |
+| 1    | 1 vs. 5 | 2 vs. 3 vs. 4       |
+| 2    | 2 vs. 4 | 1 vs. 3 vs. 4       |
+| 3    | 3 vs. 2 | 1 vs. 4 vs. 5       |
