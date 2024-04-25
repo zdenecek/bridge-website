@@ -19,7 +19,7 @@
 |              | 21:00 | Týmy - 3. kolo finále             |
 | Sobota 4.5.  | 10:00 | Ranní párový turnaj - jednokolový |
 |              | 16:00 | Hlavní párový turnaj - 1. kolo    |
-|              | 17:50 | Pauza na večeři                   |
+|              | 18:50 | Pauza na večeři                   |
 |              | 20:00 | Hlavní párový turnaj - 2. kolo    |
 | Neděle 5.5.  | 10:00 | Nedělní párový turnaj             |
 |              | 14:00 | Slavnostní zakončení              |
