@@ -57,5 +57,5 @@ V případě změny počtu týmů nastane úprava parametrů finále C:
 | Kolo | Zápas 1 | Zápas 2 (trojzápas) |
 | ---- | ------- | ------------------- |
 | 1    | 1 vs. 5 | 2 vs. 3 vs. 4       |
-| 2    | 2 vs. 4 | 1 vs. 3 vs. 4       |
+| 2    | 2 vs. 4 | 1 vs. 3 vs. 5       |
 | 3    | 3 vs. 2 | 1 vs. 4 vs. 5       |
