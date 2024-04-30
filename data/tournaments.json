@@ -226,7 +226,15 @@
         "title": "Hlavní týmový turnaj",
         "entries": [
           {
-            "link": "#",
+            "link": "#hrací-systém-týmového-turnaje",
+            "text": "Hrací systém"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/tymy/0/#000000OO000000000001000001000001000000000000000000",
+            "text": "Nasazení"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/tymy/0",
             "text": "Průběžné výsledky"
           },
           {
@@ -239,7 +247,7 @@
         "title": "Hlavní párový turnaj",
         "entries": [
           {
-            "link": "#",
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/hl-pary",
             "type": "result-presentation"
           },
           {
@@ -252,13 +260,13 @@
         "title": "Vedlejší párové turnaje",
         "entries": [
           {
-            "text": "Čtvrteční ranní turnaj", "link": "#"
+            "text": "Čtvrteční ranní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-ctvrtek"
           },
           {
-            "text": "Páteční ranní turnaj", "link": "#"
+            "text": "Páteční ranní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-patek"
           },
           {
-            "text": "Nedělní turnaj", "link": "#"
+            "text": "Nedělní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-nedele"
           }
         ]
       }

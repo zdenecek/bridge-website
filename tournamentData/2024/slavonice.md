@@ -28,8 +28,9 @@
 
 9 kol po 13 rozdáních.
 
-6 kol kvalifikace švýcarským systémem. Opakování v 6. kole, nebo vůbec. Pauza na
-posledním stole, pauza bez opakování.
+6 kol kvalifikace švýcarským systémem. Pauza na
+posledním stole, pauza bez opakování. Opakování je přípustné. V ideálním případě bez opakování,
+případně s opakováním v posledním kole.
 
 Finále 3 kola ve třech skupinách: A, B, C.
 
