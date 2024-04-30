@@ -28,7 +28,7 @@ Lze využít soubor `results.json`, který je generován v kořenovém adresář
 
 Pro převod použiju nasledující [`jq`](https://jqlang.github.io/jq/) query:
 
-```jq
+```bash
 .Results[] | ( [ .Place, ( [ .Participant._person1._lastName , .Participant._person2._lastName ] | join(" - ") ),  .Result._pointsDecimal, ( .Participant._person1._pid.Number | if . > 10000 then "" end )  , ( .Participant._person2._pid.Number | if . > 10000 then "" end  ) ]  ) | join(",")
 ```
 
