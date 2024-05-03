@@ -262,6 +262,9 @@
             "text": "Páteční ranní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-patek"
           },
           {
+            "text": "Sobotní ranní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-sobota"
+          },
+          {
             "text": "Nedělní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-nedele"
           },
 
@@ -276,6 +279,14 @@
               {
                 "text": "Páteční ranní turnaj",
                 "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5169"
+              },
+              {
+                "text": "Sobotní ranní turnaj",
+                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=5169"
+              },
+              {
+                "text": "Nedělní turnaj",
+                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=5169"
               }
             ]
           }
