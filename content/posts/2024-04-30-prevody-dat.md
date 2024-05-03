@@ -29,13 +29,25 @@ Lze využít soubor `results.json`, který je generován v kořenovém adresář
 Pro převod použiju nasledující [`jq`](https://jqlang.github.io/jq/) query:
 
 ```bash
-.Results[] | ( [ .Place, ( [ .Participant._person1._lastName , .Participant._person2._lastName ] | join(" - ") ),  .Result._pointsDecimal, ( .Participant._person1._pid.Number | if . > 10000 then "" end )  , ( .Participant._person2._pid.Number | if . > 10000 then "" end  ) ]  ) | join(",")
+.Results[] | ( [
+     .Place, 
+    ( ( .Result._pointsDecimal * 100) |  round / 100 ) ,
+    ( [ .Participant._person1._lastName , .Participant._person2._lastName ] | join(" - ") ), 
+    ( .Participant._person1._pid.Number | if . > 10000 then "" else . end )  ,
+    ( .Participant._person2._pid.Number | if . > 10000 then "" else . end  ) ] ) 
+    | join(",")
 ```
 
 `jq` lze spustit z příkazové řadky
 
 ```bash
-curl --silent https://bridge.zdenektomis.eu/vysledky/2024/BKP/0423bavlnka/results.json | jq --raw-output '.Results[] | ( [ .Place, ( [ .Participant._person1._lastName , .Participant._person2._lastName ] | join(" - ") ),  .Result._pointsDecimal, ( .Participant._person1._pid.Number | if . > 10000 then "" else . end )  , ( .Participant._person2._pid.Number | if . > 10000 then "" else . end  ) ]  ) | join(",")'
+curl --silent https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-ctvrtek/results.json | jq --raw-output '.Results[] | ( [
+     .Place, 
+    ( ( .Result._pointsDecimal * 100) |  round / 100 ) ,
+    ( [ .Participant._person1._lastName , .Participant._person2._lastName ] | join(" - ") ), 
+    ( .Participant._person1._pid.Number | if . > 10000 then "" else . end )  ,
+    ( .Participant._person2._pid.Number | if . > 10000 then "" else . end  ) ] ) 
+    | join(",")'
 ```
 
 Případně jde využít také webovou službu [jqplay](https://jqplay.org/), kde lze vložit vstupní json a query a získat výstup, zde je odkaz na kokrétní [dotaz](https://jqplay.org/s/U843SPONZxV).
