@@ -267,6 +267,21 @@
           },
           {
             "text": "Nedělní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-nedele"
+          },
+
+          {
+            "title": "Výsledky v Matrice ČBS",
+            "titleLevel": 3,
+            "entries": [
+              {
+                "text": "Čtvrteční ranní turnaj",
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5168"
+              },
+              {
+                "text": "Páteční ranní turnaj",
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5169"
+              }
+            ]
           }
         ]
       }
