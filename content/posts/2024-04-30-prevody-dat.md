@@ -50,5 +50,5 @@ curl --silent https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-ctvrtek
     | join(",")'
 ```
 
-Případně jde využít také webovou službu [jqplay](https://jqplay.org/), kde lze vložit vstupní json a query a získat výstup, zde je odkaz na kokrétní [dotaz](https://jqplay.org/s/U843SPONZxV).
+Případně jde využít také webovou službu [jqplay](https://jqplay.org/), kde lze vložit vstupní json a query a získat výstup, zde je odkaz na kokrétní [dotaz](https://jqplay.org/s/DOj9fIVDFzJ).
 
