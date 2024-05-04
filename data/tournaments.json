@@ -230,7 +230,7 @@
             "text": "Výsledky"
           },
           {
-            "link": "#",
+            "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=5171",
             "type": "matrika-cbs"
           }
         ]
@@ -243,7 +243,7 @@
             "type": "result-presentation"
           },
           {
-            "link": "#",
+            "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=5172#",
             "type": "matrika-cbs"
           }
         ]
@@ -278,11 +278,11 @@
               },
               {
                 "text": "Sobotní ranní turnaj",
-                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=5169"
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5170"
               },
               {
                 "text": "Nedělní turnaj",
-                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=5169"
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5173"
               }
             ]
           }
