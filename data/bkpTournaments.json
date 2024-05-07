@@ -48,47 +48,24 @@
         "title": "Pražská bridžová liga Jaro 2024",
         "date": "2024-02-01",
         "slug": "prazska-bridzova-liga-jaro-2024",
-        "entries": [
-  
-            {
-                "link": "https://bridge.zdenektomis.eu/vysledky/2024/pbl-jaro/",
-                "type": "result-presentation"
-            }
-        ]
+        "redirect": "https://bridge.zdenektomis.eu/vysledky/2024/pbl-jaro/"
     },
     {
         "title": "Skupinová B Jaro 2024",
         "date": "2024-02-01",
         "slug": "skupinova-b-jaro-2024",
-        "entries": [
-         
-            {
-                "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-jaro-2024",
-                "type": "result-presentation"
-            }
-        ]
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-jaro-2024"
     },
     {
         "title": "Skupinová A Léto 2024",
         "date": "2024-04-16",
         "slug": "skupinova-a-leto-2024",
-        "entries": [
-         
-            {
-                "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-a-leto-2024",
-                "type": "result-presentation"
-            }
-        ]
+        "redirect":  "https://vysledky.zdenektomis.eu/tournament/skupinova-a-leto-2024"
     },
     {
         "title": "Výsledky Bavlnek 2024",
         "date": "2024-05-01",
         "slug": "bavlnky-2024",
-        "entries": [
-            {
-                "link": "https://bridge.zdenektomis.eu/vysledky/2024/BKP/",
-                "text": "Výsledky Bavlnek 2024"
-            }
-        ]
+        "redirect": "https://bridge.zdenektomis.eu/vysledky/2024/BKP/"
     }
 ]

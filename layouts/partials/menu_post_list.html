@@ -32,7 +32,11 @@
             {{- if $context_.show_date }}
             <span>{{- ($post.Date | time.Format site.Params.theme_config.date_format) }}</span>
             {{ end }}
-            <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
+            {{- with .Params.redirect -}}
+                <a href="{{ . | relURL }}">{{ $post.Title }}</a>
+            {{- else -}}
+                <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
+            {{- end -}}
         </li>
         {{ end }}
         {{- if and .show_more $limit_exceeded }}
