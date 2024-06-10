@@ -33,14 +33,14 @@
             <span>{{- ($post.Date | time.Format site.Params.theme_config.date_format) }}</span>
             {{ end }}
             {{- with .Params.redirect -}}
-                <a href="{{ . | relURL }}">{{ $post.Title }}</a>
+                <a href="{{ . | relLangURL }}">{{ $post.Title }}</a>
             {{- else -}}
                 <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
             {{- end -}}
         </li>
         {{ end }}
         {{- if and .show_more $limit_exceeded }}
-            <li><a href="{{ .show_more_url | relURL }}">{{ .show_more_text | default "Show more..." }}</a></li>
+            <li><a href="{{ .show_more_url | relLangURL }}">{{ .show_more_text | default "Show more..." }}</a></li>
         {{ end }}
     </ul>
 {{ end }}

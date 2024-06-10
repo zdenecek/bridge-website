@@ -1,294 +1,642 @@
 [
   {
-    "title": "Středoškolský pohár",
-    "date": "2021-11-13",
-    "slug": "stredoskolsky-pohar-cr-2021",
-    "entries": [
-      {
-        "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4479",
-        "type": "matrika-cbs"
-      },
-      {
-        "link": "https://www.rajce.idnes.cz/bridzhavirov/album/stredoskolsky-pohar-cr-2021",
-        "type": "photogallery"
-      }
-    ]
-  },
-  {
-    "title": "3. celostátní liga",
-    "date": "2022-10-08",
-    "slug": "3-liga-2022",
-    "entries": [
-      {
-        "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4711",
-        "type": "matrika-cbs"
-      }
-    ]
-  },
-  {
-    "title": "Vánoční párový turnaj HABRA",
-    "date": "2022-10-08",
-    "slug": "habra-christmas-pairs-2022",
-    "entries": [
-      {
-        "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4747",
-        "type": "matrika-cbs"
-      },
-      {
-        "link": "http://www.bridgebase.6f.sk/results/ZF/2022/VanocniHABRA/result.php?round_number=1",
-        "type": "result-presentation"
-      },
-      {
-        "link": "https://www.rajce.idnes.cz/bridzhavirov/album/vanocni-parak-habry-2022",
-        "type": "photogallery"
-      }
-    ]
-  },
-  {
-    "title": "Czech Bridge Tour Havířov 2023",
-    "date": "2023-04-15",
-    "slug": "cbt-havirov-2023",
-    "entries": [
-      {
-        "title": "Hlavní párový turnaj",
+    "id": "stredoskolsky-pohar-2021",
+    "translations": {
+      "en": {
+        "title": "High School Cup",
+        "date": "2021-11-13",
+        "slug": "high-school-cup-2021",
         "entries": [
           {
-            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4853",
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4479",
             "type": "matrika-cbs"
           },
           {
-            "link": "http://www.bridgebase.6f.sk/results/ZT/2023/vc-havirov/start2.php",
-            "type": "result-presentation"
+            "link": "https://www.rajce.idnes.cz/bridzhavirov/album/stredoskolsky-pohar-cr-2021",
+            "type": "photogallery"
           }
         ]
       },
-      {
-        "title": "Týmový turnaj",
+      "cs": {
+        "title": "Středoškolský pohár",
+        "date": "2021-11-13",
+        "slug": "stredoskolsky-pohar-cr-2021",
         "entries": [
           {
-            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4854",
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4479",
             "type": "matrika-cbs"
           },
           {
-            "link": "http://www.bridgebase.6f.sk/results/ZT/2023/vc-havirov-tymy/start.php",
-            "type": "result-presentation"
+            "link": "https://www.rajce.idnes.cz/bridzhavirov/album/stredoskolsky-pohar-cr-2021",
+            "type": "photogallery"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "3-liga-2022",
+    "translations": {
+      "en": {
+        "title": "3rd National League",
+        "date": "2022-10-08",
+        "slug": "3rd-national-league-2022",
+        "entries": [
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4711",
+            "type": "matrika-cbs"
           }
         ]
       },
-      {
-        "link": "https://www.rajce.idnes.cz/bridzhavirov/album/cbt-havirov-2023",
-        "type": "photogallery"
-      }
-    ]
-  },
-  {
-    "title": "Středoškolský pohár",
-    "date": "2023-06-17",
-    "slug": "stredoskolsky-pohar-cr-2023",
-    "entries": [
-      {
-        "title": "Párový turnaj",
+      "cs": {
+        "title": "3. celostátní liga",
+        "date": "2022-10-08",
+        "slug": "3-liga-2022",
         "entries": [
           {
-            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4906",
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4711",
+            "type": "matrika-cbs"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "habra-christmas-pairs-2022",
+    "translations": {
+      "en": {
+        "title": "Habra Christmas Pairs Tournament",
+        "date": "2022-10-08",
+        "slug": "habra-christmas-pairs-2022",
+        "entries": [
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4747",
             "type": "matrika-cbs"
           },
           {
-            "link": "https://bridge.zdenektomis.eu/vysledky/2023/jmh/pary",
-            "type": "result-presentation"
-          }
-        ]
-      },
-      {
-        "title": "Týmový turnaj",
-        "entries": [
-          {
-            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4907",
-            "type": "matrika-cbs"
-          },
-          {
-            "link": "https://bridge.zdenektomis.eu/vysledky/2023/jmh/tymy",
-            "type": "result-presentation"
-          }
-        ]
-      },
-      {
-        "title": "Individuál",
-        "entries": [
-          {
-            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4905",
-            "type": "matrika-cbs"
-          },
-          {
-            "link": "https://bridge.zdenektomis.eu/vysledky/2023/jmh/individual",
-            "type": "result-presentation"
-          }
-        ]
-      },
-      {
-        "link": "https://www.rajce.idnes.cz/bridzhavirov/album/jmh-2023",
-        "type": "photogallery"
-      }
-    ]
-  },
-  {
-    "title": "MČR Mixových párů",
-    "date": "2023-11-25",
-    "slug": "mcr-mix-2023",
-    "entries": [
-      {
-        "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5056",
-        "type": "matrika-cbs"
-      },
-      {
-        "link": "https://bridge.zdenektomis.eu/vysledky/2023/mcr-mix/",
-        "type": "result-presentation"
-      }
-    ]
-  },
-  {
-    "title": "3. celostátní liga",
-    "date": "2023-12-02",
-    "slug": "3-liga-2023",
-    "entries": [
-      {
-        "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5061",
-        "type": "matrika-cbs"
-      },
-      {
-        "link": "https://bridge.zdenektomis.eu/vysledky/2023/3-liga/",
-        "type": "result-presentation"
-      }
-    ]
-  },
-  {
-    "title": "2. celostátní liga",
-    "date": "2024-01-01",
-    "slug": "2-liga-2024",
-    "entries": [
-      {
-        "link": "https://bridge.zdenektomis.eu/vysledky/2024/2-liga/nasazeni/",
-        "type": "match-schedule"
-      },
-      {
-        "link": "https://bridge.zdenektomis.eu/vysledky/2024/2-liga/0",
-        "type": "result-presentation"
-      }
-    ]
-  },
-  {
-    "title": "Czech Bridge Tour Havířov 2024",
-    "date": "2024-04-13",
-    "slug": "cbt-havirov-2024",
-    "entries": [
-      {
-        "title": "Hlavní párový turnaj",
-        "entries": [
-          {
-            "link": "https://bridge.zdenektomis.eu/vysledky/2024/vc-havirov/",
+            "link": "http://www.bridgebase.6f.sk/results/ZF/2022/VanocniHABRA/result.php?round_number=1",
             "type": "result-presentation"
           },
           {
-            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5154",
-            "type": "matrika-cbs"
+            "link": "https://www.rajce.idnes.cz/bridzhavirov/album/vanocni-parak-habry-2022",
+            "type": "photogallery"
           }
         ]
       },
-      {
-        "title": "Týmový turnaj",
+      "cs": {
+        "title": "Vánoční párový turnaj HABRA",
+        "date": "2022-10-08",
+        "slug": "habra-christmas-pairs-2022",
         "entries": [
           {
-            "link": "https://bridge.zdenektomis.eu/vysledky/2024/vc-havirov-tymy/",
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4747",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "http://www.bridgebase.6f.sk/results/ZF/2022/VanocniHABRA/result.php?round_number=1",
             "type": "result-presentation"
           },
           {
-            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5155",
-            "type": "matrika-cbs"
+            "link": "https://www.rajce.idnes.cz/bridzhavirov/album/vanocni-parak-habry-2022",
+            "type": "photogallery"
           }
         ]
-      },
-      {
-        "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2023/",
-        "type": "last-year"
       }
-    ]
+    }
   },
   {
-    "title": "Slavonice 2024",
-    "date": "2024-05-01",
-    "slug": "slavonice-2024",
-    "entries": [
-      {
-        "link": "http://www.chaosbridge.com/slavonice/2024/cs/",
-        "text": "Oficiální stránky turnaje"
-      },
-      {
-        "title": "Hlavní týmový turnaj",
+    "id": "cbt-havirov-2023",
+    "translations": {
+      "en": {
+        "title": "Czech Bridge Tour Havířov 2023",
+        "date": "2023-04-15",
+        "slug": "cbt-havirov-2023",
         "entries": [
           {
-            "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/tymy/1",
-            "text": "Výsledky"
-          },
-          {
-            "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=5171",
-            "type": "matrika-cbs"
-          }
-        ]
-      },
-      {
-        "title": "Hlavní párový turnaj",
-        "entries": [
-          {
-            "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/hl-pary",
-            "type": "result-presentation"
-          },
-          {
-            "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=5172#",
-            "type": "matrika-cbs"
-          }
-        ]
-      },
-      {
-        "title": "Vedlejší párové turnaje",
-        "entries": [
-          {
-            "text": "Čtvrteční ranní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-ctvrtek"
-          },
-          {
-            "text": "Páteční ranní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-patek"
-          },
-          {
-            "text": "Sobotní ranní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-sobota"
-          },
-          {
-            "text": "Nedělní turnaj", "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-nedele"
-          },
-
-          {
-            "title": "Výsledky v Matrice ČBS",
-            "titleLevel": 3,
+            "title": "Main Pairs Tournament",
             "entries": [
               {
-                "text": "Čtvrteční ranní turnaj",
-                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5168"
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4853",
+                "type": "matrika-cbs"
               },
               {
-                "text": "Páteční ranní turnaj",
-                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5169"
+                "link": "http://www.bridgebase.6f.sk/results/ZT/2023/vc-havirov/start2.php",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Team Tournament",
+            "entries": [
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4854",
+                "type": "matrika-cbs"
               },
               {
-                "text": "Sobotní ranní turnaj",
-                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5170"
+                "link": "http://www.bridgebase.6f.sk/results/ZT/2023/vc-havirov-tymy/start.php",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "link": "https://www.rajce.idnes.cz/bridzhavirov/album/cbt-havirov-2023",
+            "type": "photogallery"
+          }
+        ]
+      },
+      "cs": {
+        "title": "Czech Bridge Tour Havířov 2023",
+        "date": "2023-04-15",
+        "slug": "cbt-havirov-2023",
+        "entries": [
+          {
+            "title": "Hlavní párový turnaj",
+            "entries": [
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4853",
+                "type": "matrika-cbs"
               },
               {
-                "text": "Nedělní turnaj",
-                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5173"
+                "link": "http://www.bridgebase.6f.sk/results/ZT/2023/vc-havirov/start2.php",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Týmový turnaj",
+            "entries": [
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4854",
+                "type": "matrika-cbs"
+              },
+              {
+                "link": "http://www.bridgebase.6f.sk/results/ZT/2023/vc-havirov-tymy/start.php",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "link": "https://www.rajce.idnes.cz/bridzhavirov/album/cbt-havirov-2023",
+            "type": "photogallery"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "stredoskolsky-pohar-2023",
+    "translations": {
+      "en": {
+        "title": "High School Cup",
+        "date": "2023-06-17",
+        "slug": "high-school-cup-2023",
+        "entries": [
+          {
+            "title": "Pairs Tournament",
+            "entries": [
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4906",
+                "type": "matrika-cbs"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2023/jmh/pary",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Team Tournament",
+            "entries": [
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4907",
+                "type": "matrika-cbs"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2023/jmh/tymy",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Individual",
+            "entries": [
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4905",
+                "type": "matrika-cbs"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2023/jmh/individual",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "link": "https://www.rajce.idnes.cz/bridzhavirov/album/jmh-2023",
+            "type": "photogallery"
+          }
+        ]
+      },
+      "cs": {
+        "title": "Středoškolský pohár",
+        "date": "2023-06-17",
+        "slug": "stredoskolsky-pohar-cr-2023",
+        "entries": [
+          {
+            "title": "Párový turnaj",
+            "entries": [
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4906",
+                "type": "matrika-cbs"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2023/jmh/pary",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Týmový turnaj",
+            "entries": [
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4907",
+                "type": "matrika-cbs"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2023/jmh/tymy",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Individuál",
+            "entries": [
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4905",
+                "type": "matrika-cbs"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2023/jmh/individual",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "link": "https://www.rajce.idnes.cz/bridzhavirov/album/jmh-2023",
+            "type": "photogallery"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "mcr-mix-2023",
+    "translations": {
+      "en": {
+        "title": "Czech National Mixed Pairs Championship",
+        "date": "2023-11-25",
+        "slug": "czech-mixed-championship-2023",
+        "entries": [
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5056",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2023/mcr-mix/",
+            "type": "result-presentation"
+          }
+        ]
+      },
+      "cs": {
+        "title": "MČR Mixových párů",
+        "date": "2023-11-25",
+        "slug": "mcr-mix-2023",
+        "entries": [
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5056",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2023/mcr-mix/",
+            "type": "result-presentation"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "3-liga-2023",
+    "translations": {
+      "en": {
+        "title": "3rd National League",
+        "date": "2023-12-02",
+        "slug": "3rd-national-league-2023",
+        "entries": [
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5061",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2023/3-liga/",
+            "type": "result-presentation"
+          }
+        ]
+      },
+      "cs": {
+        "title": "3. celostátní liga",
+        "date": "2023-12-02",
+        "slug": "3-liga-2023",
+        "entries": [
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5061",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2023/3-liga/",
+            "type": "result-presentation"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "2-liga-2024",
+    "translations": {
+      "en": {
+        "title": "2nd National League",
+        "date": "2024-01-01",
+        "slug": "2nd-national-league-2024",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/2-liga/nasazeni/",
+            "type": "match-schedule"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/2-liga/0",
+            "type": "result-presentation"
+          }
+        ]
+      },
+      "cs": {
+        "title": "2. celostátní liga",
+        "date": "2024-01-01",
+        "slug": "2-liga-2024",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/2-liga/nasazeni/",
+            "type": "match-schedule"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/2-liga/0",
+            "type": "result-presentation"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "cbt-havirov-2024",
+    "translations": {
+      "en": {
+        "title": "Czech Bridge Tour Havířov 2024",
+        "date": "2024-04-13",
+        "slug": "cbt-havirov-2024",
+        "entries": [
+          {
+            "title": "Main Pairs Tournament",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/vc-havirov/",
+                "type": "result-presentation"
+              },
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5154",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "title": "Team Tournament",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/vc-havirov-tymy/",
+                "type": "result-presentation"
+              },
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5155",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2023/",
+            "type": "last-year"
+          }
+        ]
+      },
+      "cs": {
+        "title": "Czech Bridge Tour Havířov 2024",
+        "date": "2024-04-13",
+        "slug": "cbt-havirov-2024",
+        "entries": [
+          {
+            "title": "Hlavní párový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/vc-havirov/",
+                "type": "result-presentation"
+              },
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5154",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "title": "Týmový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/vc-havirov-tymy/",
+                "type": "result-presentation"
+              },
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5155",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2023/",
+            "type": "last-year"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "slavonice-2024",
+    "translations": {
+      "en": {
+        "title": "Slavonice 2024",
+        "date": "2024-05-01",
+        "slug": "slavonice-2024",
+        "entries": [
+          {
+            "link": "http://www.chaosbridge.com/slavonice/2024/en/",
+            "text": "Official Tournament Website"
+          },
+          {
+            "title": "Main Team Tournament",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/tymy/1",
+                "text": "Results"
+              },
+              {
+                "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=5171",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "title": "Main Pairs Tournament",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/hl-pary",
+                "type": "result-presentation"
+              },
+              {
+                "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=5172#",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "title": "Side Pairs Tournaments",
+            "entries": [
+              {
+                "text": "Thursday Morning Tournament",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-ctvrtek"
+              },
+              {
+                "text": "Friday Morning Tournament",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-patek"
+              },
+              {
+                "text": "Saturday Morning Tournament",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-sobota"
+              },
+              {
+                "text": "Sunday Tournament",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-nedele"
+              },
+              {
+                "title": "Results in CBS Database",
+                "titleLevel": 3,
+                "entries": [
+                  {
+                    "text": "Thursday Morning Tournament",
+                    "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5168"
+                  },
+                  {
+                    "text": "Friday Morning Tournament",
+                    "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5169"
+                  },
+                  {
+                    "text": "Saturday Morning Tournament",
+                    "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5170"
+                  },
+                  {
+                    "text": "Sunday Tournament",
+                    "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5173"
+                  }
+                ]
               }
             ]
           }
-        ]
+        ],
+        "content-file": "tournamentData/2024/slavonice.en.md"
+      },
+      "cs": {
+        "title": "Slavonice 2024",
+        "date": "2024-05-01",
+        "slug": "slavonice-2024",
+        "entries": [
+          {
+            "link": "http://www.chaosbridge.com/slavonice/2024/cs/",
+            "text": "Oficiální stránky turnaje"
+          },
+          {
+            "title": "Hlavní týmový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/tymy/1",
+                "text": "Výsledky"
+              },
+              {
+                "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=5171",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "title": "Hlavní párový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/hl-pary",
+                "type": "result-presentation"
+              },
+              {
+                "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=5172#",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "title": "Vedlejší párové turnaje",
+            "entries": [
+              {
+                "text": "Čtvrteční ranní turnaj",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-ctvrtek"
+              },
+              {
+                "text": "Páteční ranní turnaj",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-patek"
+              },
+              {
+                "text": "Sobotní ranní turnaj",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-sobota"
+              },
+              {
+                "text": "Nedělní turnaj",
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/slavonice/pary-nedele"
+              },
+              {
+                "title": "Výsledky v Matrice ČBS",
+                "titleLevel": 3,
+                "entries": [
+                  {
+                    "text": "Čtvrteční ranní turnaj",
+                    "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5168"
+                  },
+                  {
+                    "text": "Páteční ranní turnaj",
+                    "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5169"
+                  },
+                  {
+                    "text": "Sobotní ranní turnaj",
+                    "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5170"
+                  },
+                  {
+                    "text": "Nedělní turnaj",
+                    "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5173"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "content-file": "tournamentData/2024/slavonice.md"
       }
-    ],
-    "content-file": "tournamentData/2024/slavonice.md"
+    }
   }
 ]

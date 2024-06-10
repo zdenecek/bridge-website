@@ -11,7 +11,7 @@ střídáním.
 
 > Pokud nemáte zkušenosti s programe Tournament Calculator, přečtete si prosím
 > nejdříve
-> [článek o klubových turnajích]( {{< relref "/posts/2024-02-14-klubove-turnaje-v-TC" >}} ), ve
+> [článek o klubových turnajích]( {{< ref "/posts/2024-02-14-klubove-turnaje-v-TC" >}} ), ve
 > kterém jsou popsány základní postupy. Článek stojí za přečtení, i pokud
 > neplánujete používat TC na klubové turnaje, jelikož popisuje základní postupy
 > a ovládání programu.

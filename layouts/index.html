@@ -1,0 +1,20 @@
+{{ define "main" }}
+
+<header>
+    {{ $image := resources.Get "img/front.png" }}
+    <img src="{{ $image.RelPermalink }}" class="front-image"  alt="Image with people playing bridge">
+    <h1 align="center">{{ $.Site.Title }}</h1>
+    {{- if $.Site.Params.theme_config.show_description -}}
+        <p>{{ $.Site.Params.description }}</p>
+    {{- end -}}
+</header>
+{{ .Content }}{{ $lang := .Site.Language.Lang }}
+
+{{/* following code find the menu file based on the language and default menu file if not found */}}
+{{ $lang := .Site.Language.Lang }}
+{{ $menuFile := printf "menu.%s" $lang }}
+{{ $defaultMenuFile := "menu" }}
+{{ $menu := index $.Site.Data $menuFile | default (index $.Site.Data $defaultMenuFile) }}
+{{ partial "menu_item.html" (dict "context" . "collection" $menu.entries) }}
+
+{{ end }}

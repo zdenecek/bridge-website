@@ -11,7 +11,7 @@ Díky patří Zdeňku Frabšovi, který střídání zpracoval.
 ## Odkazy
 
 - [Složka se všemi soubory](/soubory/movements/dvoukolove)
-- [Návod na párové turnaje v Tournament Calculator]({{< relref "/posts/2024-03-02-slozitejsi-parove-turnaje-a-postupy-v-TC" >}})
+- [Návod na párové turnaje v Tournament Calculator]({{< ref "/posts/2024-03-02-slozitejsi-parove-turnaje-a-postupy-v-TC" >}})
 
 ## 08
 

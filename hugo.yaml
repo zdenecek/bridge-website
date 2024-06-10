@@ -6,7 +6,7 @@ custom_css:
   - "css/custom.css"
 languages:
   cs:
-    contentDir: "content/"
+    contentDir: "content/cs/"
     disabled: false
     languageCode: cs-CZ
     languageName: Čeština
@@ -14,3 +14,12 @@ languages:
       subtitle: Vše o bridži
     title: Zdeňkova bridžová stránka
     weight: 1
+  en:
+    contentDir: "content/en/"
+    disabled: false
+    languageCode: en-GB
+    languageName: English
+    params:
+      subtitle: Everything about bridge
+    title: Zdeněk's bridge page
+    weight: 2

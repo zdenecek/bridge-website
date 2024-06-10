@@ -1,71 +1,175 @@
 [
-    {
+  {
+    "id": "skupinova-b-jaro-2023",
+    "translations": {
+      "en": {
+        "title": "Group B Spring 2023",
+        "date": "2023-02-01",
+        "slug": "group-b-spring-2023",
+        "entries": [
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4949",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-jaro-2023",
+            "type": "result-presentation"
+          }
+        ]
+      },
+      "cs": {
         "title": "Skupinová B Jaro 2023",
         "date": "2023-02-01",
         "slug": "skupinova-b-jaro-2023",
         "entries": [
-            {
-                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4949",
-                "type": "matrika-cbs"
-            },
-            {
-                "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-jaro-2023",
-                "type": "result-presentation"
-            }
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=4949",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-jaro-2023",
+            "type": "result-presentation"
+          }
         ]
-    },
-    {
+      }
+    }
+  },
+  {
+    "id": "prazska-bridzova-liga-podzim-2023",
+    "translations": {
+      "en": {
+        "title": "Prague Bridge League Autumn 2023",
+        "date": "2023-09-01",
+        "slug": "prague-bridge-league-autumn-2023",
+        "entries": [
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5128",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "http://www.bridgebase.6f.sk/results/AK/2023/PL23P/start.php",
+            "type": "result-presentation"
+          }
+        ]
+      },
+      "cs": {
         "title": "Pražská Bridžová Liga Podzim 2023",
         "date": "2023-09-01",
         "slug": "prazska-bridzova-liga-podzim-2023",
         "entries": [
-            {
-                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5128",
-                "type": "matrika-cbs"
-            },
-            {
-                "link": "http://www.bridgebase.6f.sk/results/AK/2023/PL23P/start.php",
-                "type": "result-presentation"
-            }
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5128",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "http://www.bridgebase.6f.sk/results/AK/2023/PL23P/start.php",
+            "type": "result-presentation"
+          }
         ]
-    },
-    {
-        "title": " Skupinová B Podzim 2023",
+      }
+    }
+  },
+  {
+    "id": "skupinova-b-podzim-2023",
+    "translations": {
+      "en": {
+        "title": "Group B Autumn 2023",
+        "date": "2023-09-01",
+        "slug": "group-b-autumn-2023",
+        "entries": [
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5126",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-podzim-2023",
+            "type": "result-presentation"
+          }
+        ]
+      },
+      "cs": {
+        "title": "Skupinová B Podzim 2023",
         "date": "2023-09-01",
         "slug": "skupinova-b-podzim-2023",
         "entries": [
-            {
-                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5126",
-                "type": "matrika-cbs"
-            },
-            {
-                "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-podzim-2023",
-                "type": "result-presentation"
-            }
+          {
+            "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5126",
+            "type": "matrika-cbs"
+          },
+          {
+            "link": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-podzim-2023",
+            "type": "result-presentation"
+          }
         ]
-    },
-    {
-        "title": "Pražská bridžová liga Jaro 2024",
+      }
+    }
+  },
+  {
+    "id": "prazska-bridzova-liga-jaro-2024",
+    "translations": {
+      "en": {
+        "title": "Prague Bridge League Spring 2024",
+        "date": "2024-02-01",
+        "slug": "prague-bridge-league-spring-2024",
+        "redirect": "https://bridge.zdenektomis.eu/vysledky/2024/pbl-jaro/"
+      },
+      "cs": {
+        "title": "Pražská Bridžová Liga Jaro 2024",
         "date": "2024-02-01",
         "slug": "prazska-bridzova-liga-jaro-2024",
         "redirect": "https://bridge.zdenektomis.eu/vysledky/2024/pbl-jaro/"
-    },
-    {
+      }
+    }
+  },
+  {
+    "id": "skupinova-b-jaro-2024",
+    "translations": {
+      "en": {
+        "title": "Group B Spring 2024",
+        "date": "2024-02-01",
+        "slug": "group-b-spring-2024",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-jaro-2024"
+      },
+      "cs": {
         "title": "Skupinová B Jaro 2024",
         "date": "2024-02-01",
         "slug": "skupinova-b-jaro-2024",
         "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-jaro-2024"
-    },
-    {
+      }
+    }
+  },
+  {
+    "id": "skupinova-a-leto-2024",
+    "translations": {
+      "en": {
+        "title": "Group A Summer 2024",
+        "date": "2024-04-16",
+        "slug": "group-a-summer-2024",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-a-leto-2024"
+      },
+      "cs": {
         "title": "Skupinová A Léto 2024",
         "date": "2024-04-16",
         "slug": "skupinova-a-leto-2024",
-        "redirect":  "https://vysledky.zdenektomis.eu/tournament/skupinova-a-leto-2024"
-    },
-    {
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-a-leto-2024"
+      }
+    }
+  },
+  {
+    "id": "bavlnky-2024",
+    "translations": {
+      "en": {
+        "title": "Results Bavlnka 2024",
+        "date": "2024-05-01",
+        "slug": "results-bavlnka-2024",
+        "redirect": "https://bridge.zdenektomis.eu/vysledky/2024/BKP/en.php"
+      },
+      "cs": {
         "title": "Výsledky Bavlnek 2024",
         "date": "2024-05-01",
         "slug": "bavlnky-2024",
         "redirect": "https://bridge.zdenektomis.eu/vysledky/2024/BKP/"
+      }
     }
+  }
 ]

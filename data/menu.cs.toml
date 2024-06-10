@@ -1,4 +1,8 @@
 [[entries]]
+title = "English version"
+url = "en"
+
+[[entries]]
 title = "Turnaje"
 [[entries.entries]]
 title = "Republikové turnaje"
@@ -32,4 +36,6 @@ url = "https://www.bkpraha.cz"
 [[entries.entries]]
 title = "Havířovská bridžová akademie a Bridžový spolek Havířov"
 url = "https://bridzhavirov.cz"
-
+[[entries.entries]]
+title = "Osobní stránka"
+url = "https://zdenektomis.eu/cs"
