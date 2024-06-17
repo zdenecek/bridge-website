@@ -23,7 +23,7 @@ umí načíst střídání v `.csv` (formát hodnoty oddělené čárkou) a sice
 jednoduchém formátu, kde každý řádek představuje jednu sestavu a stůl a má tuto
 podobu:
 
-```
+```text
 stůl,sestava,ns,ew,rozdání nejnižší,rozdání nejvyšší
 ```
 
