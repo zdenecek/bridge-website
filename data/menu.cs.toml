@@ -21,7 +21,7 @@ post_list = { section = "software", show_more = false, show_date=false }
 
 [[entries]]
 title = "Dražební systém Fools"
-url = /fools
+url = "/fools"
 
 [[entries]]
 title = "Soubory"

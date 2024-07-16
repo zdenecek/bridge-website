@@ -14,7 +14,7 @@ post_list = { section = "posts", limit = 3, show_more = true, show_more_url = "p
 
 [[entries]]
 title = "Fools bidding system and agreements"
-url = /fools
+url = "/fools"
 
 
 [[entries]]
