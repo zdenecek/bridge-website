@@ -1,0 +1,12 @@
+{{- if .IsTranslated -}}
+<div id="language-switcher" >
+    {{ $icon := resources.Get "img/language-icon.svg" }}
+    <img src="{{ $icon.RelPermalink  }}" alt="{{ i18n "change-language" }}">
+    <select  onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+        <option value="{{ .Permalink }}" selected> {{ $.Language.LanguageName }} ({{ .Lang }})</option>
+        {{ range .Translations }}
+            <option value="{{ .Permalink }}" value="/{{ .Permalink }}"> {{ .Language.LanguageName }} ({{ .Lang }})</option>
+        {{ end }}
+    </select>
+</div>
+{{ end }}

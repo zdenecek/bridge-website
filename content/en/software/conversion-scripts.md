@@ -1,8 +1,9 @@
 ---
-title: Tools for bridge data conversion tournaments
+title: Tools for bridge data conversions
 date: 2024-04-30
 url: conversion-scripts
 ---
+
 Tournament management involves the use of various software, often old, proprietary, and undocumented applications. Whether new or old, these applications frequently do not allow for data export to formats that are easily processed. As a result, data from tournaments is often lost, or manually processed, which is time-consuming and error-prone.
 
 These programs include:

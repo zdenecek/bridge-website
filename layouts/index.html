@@ -1,6 +1,7 @@
 {{ define "main" }}
 
 <header>
+    <div class="clearfix"></div>
     {{ $image := resources.Get "img/front.png" }}
     <img src="{{ $image.RelPermalink }}" class="front-image"  alt="Image with people playing bridge">
     <h1 align="center">{{ $.Site.Title }}</h1>

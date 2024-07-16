@@ -1,4 +1,4 @@
-baseURL: "https://bridge.zdenektomis.eu/web/"
+baseURL: "https://bridge.zdenektomis.eu/"
 languageCode: "cs-CZ"
 defaultContentLanguage: cs
 theme: "nostyleplease"

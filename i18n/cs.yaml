@@ -5,6 +5,9 @@ back:
 notfound:
   other: 'Stránka nenalezena'
 
+change-language:
+  other: 'Změnit jazyk'
+
 photogallery:
   other: 'Fotogalerie'
 

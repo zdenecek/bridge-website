@@ -5,6 +5,9 @@ back:
 notfound:
   other: 'Not found'
 
+change-language:
+  other: 'Select language'
+
 photogallery:
   other: 'Photogallery'
 
