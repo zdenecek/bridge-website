@@ -1,0 +1,4 @@
+RewriteEngine On
+
+
+ErrorDocument 404 /en/404.html

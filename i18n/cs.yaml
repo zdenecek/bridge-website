@@ -2,6 +2,9 @@
 back:
   other: 'Domů'
 
+notfound:
+  other: 'Stránka nenalezena'
+
 photogallery:
   other: 'Fotogalerie'
 

@@ -2,6 +2,9 @@
 back:
   other: 'Home'
 
+notfound:
+  other: 'Not found'
+
 photogallery:
   other: 'Photogallery'
 
