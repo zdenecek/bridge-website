@@ -1,6 +1,7 @@
 ---
 title: Nástroje pro převody dat z turnajů
 date: 2024-04-30
+url: prevody-dat
 ---
 
 Řízení turnajů je provázeno využíváním různého software, různých mnohdy starých,
@@ -19,14 +20,15 @@ Tyto programy jsou mimo jiné:
 - [Matrika ČBS](https://www.matrikacbs.cz/): export hráčů je sice v csv, ale bohužel v kódování Windows-1250, což je pro dnešní dobu nepřijatelné.  Vstup pro vytváření turnajů je uzpůsoben pro Giborg, naštěstí existuje také možnost importu z csv. Dokumentace neexistuje, je nutno znát formát vstupu.
 - [bridge-results-presentation](https://github.com/zdenecek/bridge-results-presentation): moje prezentace, zatím pro skupinovky v BKP, využívá skript na převod z souborů produkováných programem pro skupinovky.
 
+## Repozitář se skripty
+
 Pro převod jsem si vytvořil pár skriptů, jsou dostupné 
 na [Githubu](https://github.com/zdenecek/bridge-scripts)
 
+## Podporované funkce
+
 Zatím jsou dostupné následující funkce:
 
-- Nahrání turnajů z Tournament Calculator do Matriky ČBS
-    - pro párové turnaje `tc-cbs-pairs.sh`
-    - pro týmové turnaje `tc-cbs-teams.sh`
-    - pro individuální turnaje `tc-cbs-indiv.sh`
+- Nahrání turnajů z Tournament Calculator do Matriky ČBS, pro párové, týmové i individuální turnaje
 
 Pro návod k použití spusťte skript s parametrem `--help` nebo se podívejte do souboru skriptu.
