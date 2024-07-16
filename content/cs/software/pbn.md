@@ -1,5 +1,6 @@
 ---
 title: PBN - portable bridge notation 
+url: pbn
 date: 2024-04-12
 ---
 
