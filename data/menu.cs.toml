@@ -15,11 +15,13 @@ post_list = { section = "bkp-tournaments", limit = 4, show_more = true, show_mor
 title = "Články a návody"
 post_list = { section = "posts", limit = 3, show_more = true, show_more_url = "posts", show_more_text = "Zobrazit více", show_date=true }
 
-
 [[entries]]
 title = "Bridžové programy"
 post_list = { section = "software", show_more = false, show_date=false }
 
+[[entries]]
+title = "Dražební systém Fools"
+url = /fools
 
 [[entries]]
 title = "Soubory"

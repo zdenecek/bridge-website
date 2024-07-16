@@ -7,6 +7,8 @@
   <title>
     {{ if not .IsHome }}
       {{ .Title }}
+    {{ else if  eq .URL "404.html"}}
+      404 {{ i18n "notfound" }}
     {{ else }}
       {{ $.Site.Title }}
     {{ end }}
