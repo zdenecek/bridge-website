@@ -25,6 +25,7 @@ RewriteRule ^slavonice24$ /tournaments/slavonice-2024/ [R=301,L]
 # Exclude URLs that start with /soubory or /vysledky from being rewritten
 RewriteCond %{REQUEST_URI} !^/domains/bridge.zdenektomis.eu/soubory
 RewriteCond %{REQUEST_URI} !^/domains/bridge.zdenektomis.eu/vysledky
+RewriteCond %{REQUEST_URI} !^/domains/bridge.zdenektomis.eu/fools
 
 # Exclude URLs that already start with /web to prevent looping
 RewriteCond %{REQUEST_URI} !^/domains/bridge.zdenektomis.eu/web/

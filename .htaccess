@@ -1,6 +1,0 @@
-RewriteEngine On
-
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/web/(.*)\sHTTP/[0-9.]+$
-RewriteRule ^ /%1 [R=302,L]
-
-ErrorDocument 404 /404.html
