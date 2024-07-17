@@ -47,8 +47,13 @@
     color: $--primary-text-color;
     font-size: smaller;
 
-    img {
+    .language-icon {
       width: 25px;
+      aspect-ratio: 1;
+      background-color: $--primary-text-color;
+      mask: url("/img/language-icon.svg");
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
     }
     
     &::after {
@@ -59,6 +64,7 @@
 
     select {
       border: none;
+      color: $--primary-text-color;
       background-color: transparent;
     }
   }
