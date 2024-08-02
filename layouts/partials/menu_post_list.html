@@ -33,7 +33,7 @@
             <span>{{- ($post.Date | time.Format site.Params.theme_config.date_format) }}</span>
             {{ end }}
             {{- with .Params.redirect -}}
-                <a href="{{ . | relLangURL }}">{{ $post.Title }}</a>
+                <a href="{{ . | relURL }}">{{ $post.Title }}</a>
             {{- else -}}
                 <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
             {{- end -}}
