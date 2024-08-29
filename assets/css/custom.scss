@@ -5,7 +5,7 @@
   $--link-color,
   $--visited-link-color
 ) {
-  a.link {
+  a.link, .x-button {
     padding: 10px 20px;
     border: solid 1px $--primary-text-color;
     margin-right: 10px;
@@ -23,6 +23,13 @@
       transition: color 0.4s ease-in-out, background-color 0.4s ease-in-out;
     }
   }
+
+  .x-button {
+    background: none;
+    cursor: pointer;
+    font: inherit; /* Inherits the font styling from the parent element */
+  }
+
 
   a {
     color: $--link-color;

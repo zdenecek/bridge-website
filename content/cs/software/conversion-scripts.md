@@ -30,5 +30,6 @@ na [Githubu](https://github.com/zdenecek/bridge-scripts)
 Zatím jsou dostupné následující funkce:
 
 - Nahrání turnajů z Tournament Calculator do Matriky ČBS, pro párové, týmové i individuální turnaje
+- Stažení csv souboru z Matriky ČBS a převod do formátu pro TournamentCalculator. Serverový skript, [který je nasazen na tomto webu]()
 
 Pro návod k použití spusťte skript s parametrem `--help` nebo se podívejte do souboru skriptu.

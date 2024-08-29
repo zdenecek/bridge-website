@@ -23,3 +23,7 @@ languages:
       subtitle: Everything about bridge
     title: Zdeněk's bridge page
     weight: 2
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
