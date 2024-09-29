@@ -1,27 +1,22 @@
 {{ define "main" }}
 {{ partial "back_link.html" .}}
-
 <article>
-
+    {{ if or (and (isset .Params "show_date") .Params.show_date) (not (isset .Params "show_date")) }}
     <p class="post-meta">
         <time datetime="{{ .Date }}">
             {{ .Date | time.Format site.Params.theme_config.date_format }}
         </time>
     </p>
+    {{ end}}
 
     <h1>{{ .Title }}</h1>
 
-    {{ if .Params.entries }}
-    
-    {{ partial "_tournament_entries" (dict "entries" .Params.entries "tournament" .)}}
-
-    {{ end }}
-
-    {{ if .Params.content }}
-    {{ .content | markdownify }}
+    {{ if .Params.toc }}
+        <aside {{ if .Params.tocBorder }} class="toc" {{ end }}>
+            {{ .TableOfContents }}
+        </aside>
     {{ end }}
 
     {{ .Content }}
-
 </article>
 {{ end }}

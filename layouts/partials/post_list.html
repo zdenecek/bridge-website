@@ -1,43 +1,87 @@
 {{- $posts := "" -}}
 
 {{- if .section -}}
-    {{- $posts = (where site.RegularPages "Section" .section) -}}
+{{- $posts = (where site.RegularPages "Section" .section) -}}
 {{- else -}}
-    {{- if (eq .context.Kind "taxonomy") -}}
-        {{- $posts = .context.Pages -}}
-    {{- else -}}
-        {{- if (eq .context.Kind "term") -}}
-            {{- $posts = .context.Data.Pages -}}
-	{{- else -}}
-            {{- $posts = site.RegularPages }}
-	{{- end -}}
-    {{- end -}}
+{{- if (eq .context.Kind "taxonomy") -}}
+{{- $posts = .context.Pages -}}
+{{- else -}}
+{{- if (eq .context.Kind "term") -}}
+{{- $posts = .context.Data.Pages -}}
+{{- else -}}
+{{- $posts = site.RegularPages }}
+{{- end -}}
+{{- end -}}
 {{- end -}}
 
 {{- $limit_exceeded:= "" -}}
 {{- if (and .limit (gt (len $posts) .limit)) -}}
-    {{- $limit_exceeded = true -}}
+{{- $limit_exceeded = true -}}
 {{- else -}}
-    {{- $limit_exceeded = false -}}
+{{- $limit_exceeded = false -}}
 {{ end }}
 
+
+{{- $show_date := true -}}
+{{- if isset .context.Params "item_dates" -}} <!-- Check if the parameter is provided -->
+{{- $show_date = .context.Params.item_dates -}} <!-- Override default if provided -->
+{{- end -}}
+
 {{- if (gt (len $posts) 0) }}
-    {{- if .limit }}
-        {{ $posts = (first .limit $posts ) }}
+
+{{- if isset .context.Params "group_by_year"}}
+{{- $currentYear := "" -}}
+<ul>
+    {{- range $post := $posts -}}
+    {{- $postYear := ($post.Date | time.Format "2006") -}}
+    {{- if ne $postYear $currentYear -}}
+    {{- if ne $currentYear "" -}}
+</ul> <!-- Close previous year's list -->
+{{- end -}}
+<h3>{{ $postYear }}</h3>
+<ul>
+    {{- $currentYear = $postYear -}}
+    {{- end -}}
+    <li>
+        {{- if $show_date -}} <!-- Condition to show date if show_date is not false -->
+        <span>{{- ($post.Date | time.Format (i18n "date-format-without-year")) }} </span>
+        {{- end -}}
+        {{- with $post.Params.redirect -}}
+        <a href="{{ . | absURL }}">{{ $post.Title }}</a>
+        {{- else -}}
+        <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
+        {{- end -}}
+    </li>
     {{ end }}
-    <ul>
-        {{- range $post := $posts -}}
-        <li>
-            <span>{{- ($post.Date | time.Format site.Params.theme_config.date_format) }} </span>
-            {{- with $post.Params.redirect -}}
-            <a href="{{ . | absURL }}">{{ $post.Title }}</a>
-            {{- else -}}
-            <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
-            {{- end -}}
-        </li>
-        {{ end }}
-        {{- if and .show_more $limit_exceeded }}
-            <li><a href="{{ .show_more_url | relURL }}">{{ .show_more_text | default "Show more..." }}</a></li>
-        {{ end }}
-    </ul>
+</ul> <!-- Close the final year's list -->
+{{- if and .show_more $limit_exceeded }}
+<li><a href="{{ .show_more_url | relURL }}">{{ .show_more_text | default "Show more..." }}</a></li>
+{{ end }}
+</ul>
+{{ else }}
+
+{{- if .limit }}
+{{ $posts = (first .limit $posts ) }}
+{{ end }}
+<ul>
+    {{- range $post := $posts -}}
+    <li>
+        {{- if not (eq $show_date false) -}} <!-- Condition to show date if show_date is not false -->
+        
+        <span>{{- ($post.Date | time.Format ( i18n "date-format-with-year" ) ) }} </span>
+
+
+        {{- end -}}
+        {{- with $post.Params.redirect -}}
+        <a href="{{ . | absURL }}">{{ $post.Title }}</a>
+        {{- else -}}
+        <a href="{{ $post.Permalink | relURL }}">{{ $post.Title }}</a>
+        {{- end -}}
+    </li>
+    {{ end }}
+    {{- if and .show_more $limit_exceeded }}
+    <li><a href="{{ .show_more_url | relURL }}">{{ .show_more_text | default "Show more..." }}</a></li>
+    {{ end }}
+</ul>
+{{ end }}
 {{ end }}

@@ -3,14 +3,14 @@
 title = "Tournaments"
 [[entries.entries]]
 title = "National tournaments"
-post_list = { section = "tournaments", limit = 3, show_more = true, show_more_url = "tournaments", show_more_text = "See more tournaments", show_date=true }
+post_list = { section = "tournaments", limit = 3, show_more = true, show_more_url = "tournaments", show_more_text = "see more tournaments", show_date=true }
 [[entries.entries]]
 title = "Tournaments in the Prague Bridge Club"
-post_list = { section = "bkp-tournaments", limit = 4, show_more = true, show_more_url = "bkp-tournaments", show_more_text = "See more tournaments" }
+post_list = { section = "bkp-tournaments", limit = 4, show_more = true, show_more_url = "bkp-tournaments", show_more_text = "see more tournaments" }
 
 [[ignore_entries]]
 title = "Articles"
-post_list = { section = "posts", limit = 3, show_more = true, show_more_url = "posts", show_more_text = "See more", show_date=true }
+post_list = { section = "posts", limit = 3, show_more = true, show_more_url = "posts", show_more_text = "see more", show_date=true }
 
 [[entries]]
 title = "Fools bidding system and agreements"
@@ -27,6 +27,7 @@ url = "/soubory"
 
 [[entries]]
 title = "Links"
+
 [[entries.entries]]
 title = "Czech Bridge Federation"
 url = "https://czechbridge.cz"
@@ -39,4 +40,9 @@ url = "https://bridzhavirov.cz"
 [[entries.entries]]
 title = "Personal page"
 url = "https://zdenektomis.eu/en"
+
+[[entries.entries]]
+title = "more links"
+url = "/links"
+
 

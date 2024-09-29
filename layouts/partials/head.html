@@ -6,9 +6,9 @@
 
   <title>
     {{ if not .IsHome }}
-      {{ .Title }}
+      {{ .Title }} | {{ $.Site.Title }}
     {{ else if eq .RelPermalink "404.html"}}
-      404 {{ i18n "notfound" }}
+      404 {{ i18n "notfound" }} | {{ $.Site.Title }}
     {{ else }}
       {{ $.Site.Title }}
     {{ end }}

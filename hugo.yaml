@@ -1,6 +1,8 @@
 baseURL: "https://bridge.zdenektomis.eu/"
 languageCode: "cs-CZ"
 defaultContentLanguage: cs
+params:
+  debug: false
 theme: "nostyleplease"
 custom_css: 
   - "css/custom.css"
@@ -27,3 +29,4 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+

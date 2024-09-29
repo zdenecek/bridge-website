@@ -3,10 +3,32 @@
     {{- partial "head.html" . -}}
     <body a="{{ $.Site.Params.theme_config.appearance | default "auto" }}">
         <main class="page-content" aria-label="Content">
+
+
+
             <div class="w">
                 {{- partial "language_switcher.html" . -}}
                 {{- block "main" . }}{{- end }}
             </div>
+
+            {{- if .Site.Params.debug -}}
+            <div class="w">
+                <h3>Debug information</h3>
+                <div>Context=</div>
+                <div id="debug-info">  </div>
+                <style>
+                    .spacer {
+                        margin-left: 10px;
+                    }
+                </style>
+                <script>
+                    const str = JSON.stringify(JSON.parse(` {{ debug.Dump .}} `), null, "\t").replace(/\n/g, '<br>');
+                    console.log(str);
+                    const el = document.getElementById("debug-info");
+                    el.innerHTML = str;
+                </script>
+            </div>
+            {{- end -}}
         </main>
     </body>
 </html>

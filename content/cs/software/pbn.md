@@ -1,30 +1,25 @@
 ---
 title: PBN - portable bridge notation 
-url: pbn
 date: 2024-04-12
+layout: single
 ---
 
-PBN is a command line tool for working with Portable Bridge Notation files.
+PBN je nástroj pro práci se soubory `.pbn` (Portable Bridge Notation).
 
-PBN is written in dotnet core with C#.
 
-Intended use is on Windows as it comes with the `dds` library windows binary.
+## Podporované funkce
 
-## Supported functions
+- načtení a validace souboru
+- zobrazení přehledu s informacemi o souboru
+- odstranění nepotřebných částí ze souboru
+- přidání analýzy dvojitého dummy do souboru (díky knihovně [dds](https://github.com/dds-bridge/dds))
 
-- parse a file and validate it
-- print an overview with information about a file
-- strip a file of unnecessary parts
-- add double dummy analysis to a file (thanks to the [dds library](https://github.com/dds-bridge/dds))
+## Kde získat
 
-## Where to get it
+PBN je k dispozici na [Githubu](https://github.com/zdenecek/pbn).
 
-PBN is available on [Github](https://github.com/zdenecek/pbn).
+Spustitelné soubory jsou k dispozici v [sekci Releases](https://github.com/zdenecek/pbn/releases).
 
-For an executable, check the [releases section](https://github.com/zdenecek/pbn/releases).
+---
 
-## User manual
-
-Run the program with the `--help` flag.
-
-Similar user manual can also be found in [guide.md on Github](https://github.com/zdenecek/pbn/blob/master/guide.md).
+Pro více informací se podívejte na [anglickou verzi stránky](/pbn/).

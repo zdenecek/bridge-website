@@ -22,3 +22,9 @@ result-presentation:
 
 last-year:
   other: 'Last year'
+
+date-format-with-year:
+  other: "2006-01-02"
+
+date-format-without-year:
+  other: "01-02"

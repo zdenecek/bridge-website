@@ -1,15 +1,19 @@
+
+
 [[entries]]
 title = "Turnaje"
+
 [[entries.entries]]
 title = "Republikové turnaje"
-post_list = { section = "tournaments", limit = 3, show_more = true, show_more_url = "tournaments", show_more_text = "Zobrazit více turnajů", show_date=true }
+post_list = { section = "tournaments", limit = 3, show_more = true, show_more_url = "turnaje", show_more_text = "zobrazit více turnajů", show_date=true }
+
 [[entries.entries]]
 title = "Turnaje v BK Praha"
-post_list = { section = "bkp-tournaments", limit = 4, show_more = true, show_more_url = "bkp-tournaments", show_more_text = "Zobrazit více turnajů" }
+post_list = { section = "bkp-tournaments", limit = 4, show_more = true, show_more_url = "turnaje-v-bk-praha", show_more_text = "zobrazit více turnajů" }
 
 [[entries]]
 title = "Články a návody"
-post_list = { section = "posts", limit = 3, show_more = true, show_more_url = "posts", show_more_text = "Zobrazit více", show_date=true }
+post_list = { section = "posts", limit = 3, show_more = true, show_more_url = "posts", show_more_text = "zobrazit více", show_date=true }
 
 [[entries]]
 title = "Bridžové programy"
@@ -25,6 +29,8 @@ url = "/soubory"
 
 [[entries]]
 title = "Odkazy"
+
+
 [[entries.entries]]
 title = "Český bridžový svaz"
 url = "https://czechbridge.cz"
@@ -37,3 +43,6 @@ url = "https://bridzhavirov.cz"
 [[entries.entries]]
 title = "Osobní stránka"
 url = "https://zdenektomis.eu/cs"
+[[entries.entries]]
+title = "další bridžové odkazy"
+url = "/odkazy"

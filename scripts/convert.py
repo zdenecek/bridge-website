@@ -15,7 +15,9 @@ def make_tournament_file(data: dict, dirname):
     if "content-file" in data:
         content_file = data["content-file"]
         del data["content-file"]
-        
+    
+    data["type"] = "tournament"
+     
     front_matter = yaml.dump(data, allow_unicode=True, explicit_start=True)
     file_path = os.path.join(dirname, data['date'] + "-" + data["slug"] + ".md")
     with open(file_path, "w") as md_file:

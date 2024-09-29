@@ -22,3 +22,9 @@ result-presentation:
 
 last-year:
   other: 'Loňský ročník'
+
+date-format-with-year:
+  other: '1. 2. 2001'
+
+date-format-without-year:
+  other: '1. 2.'
