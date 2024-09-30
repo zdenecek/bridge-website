@@ -41,7 +41,7 @@ Other than that, I am a software engineer, avid reader and an entrepeuner.
 
 I am currently based in Prague, Czechia.
 
-## Contact
+### Contact
 
 You can reach me at my email address
 [zdnek.tomis@gmail.com](mailto:zdnek.tomis@gmail.com), or on the phone at
@@ -50,7 +50,7 @@ You can reach me at my email address
 You can also checkout [my LinkedIn profile](linkedin.com/in/zdenek-tomis) or my
 personal webpage [zdenektomis.eu](https://zdenektomis.eu).
 
-## Bridge bodies
+### Bridge bodies
 
 Currently, I am a member the [Prague Bridge Club](https://bkpraha.cz), where I
 direct tournaments and serve as a member of the
@@ -62,7 +62,7 @@ member of the [Federation's board](https://www.czechbridge.cz/union).
 
 **I welcome any questions or feedback, ideas or suggestions**.
 
-## Zdeněk - a bridge player
+### Zdeněk - a bridge player
 
 I have been playing bridge since 2013. I have played in numerous tournaments,
 both in Czechia and abroad.
@@ -74,7 +74,7 @@ both in Czechia and abroad.
 <span>Me with Adam Janas in Lyon, France</span>
 </div>
 <div>
-<img alt="Me with Adam Pyszko in Budweis" src="me-adampy.jpg">
+<img alt="Me with Adam Pyszko in Budweis" src="me-adamp.jpg">
 <span>Me with Adam Pyszko in Budweis, Czechia</span>
 </div>
 <div>
@@ -98,7 +98,7 @@ To see my results record, see the WBF database [here](http://db.worldbridge.org/
 For results in Czechia, see the [Czech Bridge Federation Matrika database](https://matrikacbs.cz/Detail-hrace.aspx?id=2876).
 
 
-## Zdeněk - a bridge director
+### Zdeněk - a bridge director
 
 <div class="img-container me"> <div>
 <img src="me-td.jpg" alt="Zdeněk Tomis">
@@ -111,7 +111,7 @@ See the [tournaments](/en/tournaments) section for a list of national tournament
 the [tournaments in the Prague bridge club](/en/bkp-tournaments) section for a list of tournaments in the Prague bridge club, which I directed or took part in.
 
 
-## HABRA - where I grew up
+### HABRA - where I grew up
 
 [HABRA - the HAvířov BRidge Academy](https://bridzhavirov.cz) - is a bridge club in Havířov, Czechia, where I grew up and learned to play bridge.
 

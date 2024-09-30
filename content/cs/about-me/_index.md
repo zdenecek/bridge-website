@@ -40,7 +40,7 @@ Kromě toho jsem softwarový inženýr, zajímám se o literaturu, jazyky a spor
 
 Momentálně žiju v Praze, kde také studuji a pracuji.
 
-## Kontakt
+### Kontakt
 
 Můžete mě kontaktovat na mém emailu 
 [zdnek.tomis@gmail.com](mailto:zdnek.tomis@gmail.com) nebo telefonicky na 
@@ -49,7 +49,7 @@ Můžete mě kontaktovat na mém emailu
 Také můžete navštívit [můj LinkedIn profil](linkedin.com/in/zdenek-tomis) nebo 
 osobní webovou stránku [zdenektomis.eu](https://zdenektomis.eu).
 
-## Klub a svaz
+### Klub a svaz
 
 Momentálně jsem členem [Pražského bridžového klubu](https://bkpraha.cz), kde 
 řídím turnaje a působím jako člen 
@@ -61,7 +61,7 @@ Jsem také členem
 
 **Budu rád za jakékoliv otázky, zpětnou vazbu, nápady nebo podněty.**
 
-## Já, hráč
+### Já, hráč
 
 Bridž hraji od roku 2013. Účastnil jsem se mnoha turnajů, jak v Česku, tak i v zahraničí.
 
@@ -94,7 +94,7 @@ Na některé moje výsledky se můžete podívat do databáze WBF [zde](http://d
 
 Pro výsledky v Česku se podívejte na [Matriku Českého bridžového svazu](https://matrikacbs.cz/Detail-hrace.aspx?id=2876).
 
-## Já, vedoucí turnajů
+### Já, vedoucí turnajů
 
 <div class="img-container me"> <div>
 <img src="me-td.jpg" alt="Zdeněk Tomis">
@@ -106,7 +106,7 @@ Bridžové turnaje řídím od roku 2021.
 V sekci [turnaje](/tournaments) naleznete seznam národních turnajů, kterých jsem se zúčastnil jako rozhodčí, a sekci [turnaje v Pražském bridžovém klubu](/bkp-tournaments) pro seznam turnajů v Pražském bridžovém klubu, které jsem řídil.
 
 
-## HABRA - kde jsem se naučil bridž
+### HABRA - kde jsem se naučil bridž
 
 [HABRA - HAvířovská BRidžová Akademie](https://bridzhavirov.cz) - je bridžová škola a klub v Havířově, kde jsem vyrůstal a naučil se hrát bridž.
 
