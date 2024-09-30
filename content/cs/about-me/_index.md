@@ -71,7 +71,7 @@ Bridž hraji od roku 2013. Účastnil jsem se mnoha turnajů, jak v Česku, tak 
 <span>Já s Adamem Janasem v Lyonu, Francie</span>
 </div>
 <div>
-<img alt="Já s Adamem Pyszkem v Českých Budějovicích" src="me-adamp.jpg">
+<img alt="Já s Adamem Pyszkem v Českých Budějovicích" src="me-adampy.jpg">
 <span>Já s Adamem Pyszkem v Českých Budějovicích, Česko</span>
 </div>
 <div>

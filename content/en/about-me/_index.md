@@ -74,7 +74,7 @@ both in Czechia and abroad.
 <span>Me with Adam Janas in Lyon, France</span>
 </div>
 <div>
-<img alt="Me with Adam Pyszko in Budweis" src="me-adamp.jpg">
+<img alt="Me with Adam Pyszko in Budweis" src="me-adampy.jpg">
 <span>Me with Adam Pyszko in Budweis, Czechia</span>
 </div>
 <div>
