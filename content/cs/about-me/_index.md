@@ -108,6 +108,6 @@ V sekci [turnaje](/tournaments) naleznete seznam národních turnajů, kterých 
 
 ## HABRA - kde jsem se naučil bridž
 
-[HABRA - HAvířovská BRidžová Akademie](https://bridzhavirov.cz) - je bridžová škola a klub v Havířově,kde jsem vyrůstal a naučil se hrát bridge.
+[HABRA - HAvířovská BRidžová Akademie](https://bridzhavirov.cz) - je bridžová škola a klub v Havířově, kde jsem vyrůstal a naučil se hrát bridž.
 
-Rád bych vyjádřil svůj velký vdě a obdiv, kteří tuto školu založili a tak dobře se o ni starají, zejména mému prvnímu učiteli bridge, Jardovi Hájkovi, a mým dalším učitelům, kolegům a partnerům, Danielu Vachtarčíkovi, Soně Hájkové a Petru Pszczolkovi.
+Rád bych vyjádřil svůj velký vděk a obdiv, kteří tuto školu založili a tak dobře se o ni starají, zejména mému prvnímu učiteli bridže, Jardovi Hájkovi, a mým dalším učitelům, kolegům a partnerům, Danielu Vachtarčíkovi, Soně Hájkové a Petru Pszczolkovi.
