@@ -16,6 +16,7 @@ def make_tournament_file(data: dict, dirname):
         content_file = data["content-file"]
         del data["content-file"]
     
+    data["layout"] = "tournament"
     data["type"] = "tournament"
      
     front_matter = yaml.dump(data, allow_unicode=True, explicit_start=True)

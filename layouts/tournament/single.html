@@ -11,7 +11,7 @@
 
     <h1>{{ .Title }}</h1>
 
-    {{ if .Params.entries }}
+      {{ if .Params.entries }}
     
     {{ partial "_tournament_entries" (dict "entries" .Params.entries "tournament" .)}}
 
