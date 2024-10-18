@@ -748,7 +748,7 @@
             "title": "Main Pairs Tournament",
             "entries": [
               {
-                "link": "https://vysledky.bkpraha.cz/prezentace/2024/cbt-praha-vedlejsi-pary",
+                "link": "https://vysledky.bkpraha.cz/prezentace/2024/cbt-praha-vedlejsi-parovy",
                 "type": "result-presentation"
               },
               {
@@ -774,7 +774,7 @@
             "title": "Team Tournament",
             "entries": [
               {
-                "link": "https://vysledky.bkpraha.cz/prezentace/2024/cbt-praha-tymy",
+                "link": "https://vysledky.bkpraha.cz/prezentace/2024/cbt-praha-vedlejsi-tymovy",
                 "type": "result-presentation"
               },
               {
@@ -794,7 +794,7 @@
             "title": "Vedlejší párový turnaj",
             "entries": [
               {
-                "link": "https://vysledky.bkpraha.cz/prezentace/2024/cbt-praha-vedlejsi-pary",
+                "link": "https://vysledky.bkpraha.cz/prezentace/2024/cbt-praha-vedlejsi-parovy",
                 "type": "result-presentation"
               },
               {
@@ -820,7 +820,7 @@
             "title": "Vedlejší týmový turnaj",
             "entries": [
               {
-                "link": "https://vysledky.bkpraha.cz/prezentace/2024/cbt-praha-tymy",
+                "link": "https://vysledky.bkpraha.cz/prezentace/2024/cbt-praha-vedlejsi-tymovy",
                 "type": "result-presentation"
               },
               {
