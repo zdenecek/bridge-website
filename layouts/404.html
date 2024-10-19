@@ -4,5 +4,7 @@
 
 <header>
     <h1>404 {{i18n "notfound"}}</h1>
+    {{ $image := resources.Get "img/not-found.png" }}
+    <img src="{{ $image.RelPermalink }}" class="not-found-img"  alt="Image with being confused">
 </header>
 {{ end }}

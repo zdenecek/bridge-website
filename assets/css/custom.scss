@@ -123,3 +123,7 @@ body[a="light"] {
     @include light-appearance;
   }
 }
+
+.not-found-img {
+  max-width: 300px;
+}

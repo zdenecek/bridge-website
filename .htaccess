@@ -1,0 +1,41 @@
+RewriteEngine On
+RewriteBase /domains/bridge.zdenektomis.eu/
+
+# figuring this out took like forever
+# good job Zdenku
+
+# Redirect all HTTP traffic to HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Redirect /2023/(.*) to /vysledky/2023/$1
+RewriteRule ^2023/(.*)$ /vysledky/2023/$1 [R=301,L]
+
+# Redirect /2024/(.*) to /vysledky/2024/$1
+RewriteRule ^2024/(.*)$ /vysledky/2024/$1 [R=301,L]
+
+# CUSTOM SHORTCUTS
+RewriteRule ^liga$ /vysledky/2024/2-liga/0/ [R=301,L]
+RewriteRule ^2liga$ /vysledky/2024/2-liga/0/ [R=301,L]
+RewriteRule ^pbl$ /vysledky/2024/pbl-jaro/ [R=301,L]
+RewriteRule ^havirov$ /tournaments/cbt-havirov-2024/ [R=301,L]
+RewriteRule ^slavonice$ /tournaments/slavonice-2024/ [R=301,L]
+RewriteRule ^slavonice24$ /tournaments/slavonice-2024/ [R=301,L]
+
+# Permalink fix - THIS WILL HAVE TO STAY FOREVER
+RewriteRule ^tournaments(.*) /turnaje$1 [R=301,L]
+# this is not as important, but still
+RewriteRule ^bkp-tournaments(.*) /turnaje-v-bk-praha$1 [R=301,L]
+
+# Exclude URLs that start with /soubory or /vysledky from being rewritten
+RewriteCond %{REQUEST_URI} !^/domains/bridge.zdenektomis.eu/soubory
+RewriteCond %{REQUEST_URI} !^/domains/bridge.zdenektomis.eu/vysledky
+RewriteCond %{REQUEST_URI} !^/domains/bridge.zdenektomis.eu/fools
+
+# Exclude URLs that already start with /web to prevent looping
+RewriteCond %{REQUEST_URI} !^/domains/bridge.zdenektomis.eu/web/
+RewriteCond %{REQUEST_URI} !-f
+RewriteCond %{REQUEST_URI} !-d
+
+# Rewrite all other URLs to start with /web
+RewriteRule ^(.*)$ web/$1 [L]
