@@ -1,5 +1,5 @@
 ---
-title: Download the Player List from MatrikaCBS player database in UTF-8
+title: Czech player database in UTF-8 csv
 date: 2024-08-30
 ---
 
@@ -13,6 +13,8 @@ SEPARATED VALUES, that is, with commas.
 It is also possible to remap the columns for compatibility with Tournament
 Calculator. The file can then be uploaded to the Tournament Calculator as a
 player database (Custom option).
+
+The data are live from the CBS Registry, so they are always up-to-date.
 
 <form action="matrikaCSV.php" method="GET"> 
     <button class="x-button" type="submit">Click here to download the file</button> <br> 

@@ -1,5 +1,6 @@
 ---
 title: National tournaments in Czechia
+translationKey: tournaments
 group_by_year: true
 ---
 

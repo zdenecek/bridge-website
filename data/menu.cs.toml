@@ -5,11 +5,11 @@ title = "Turnaje"
 
 [[entries.entries]]
 title = "Republikové turnaje"
-post_list = { section = "tournaments", limit = 3, show_more = true, show_more_url = "turnaje", show_more_text = "zobrazit více turnajů", show_date=true }
+post_list = { section = "turnaje", limit = 3, show_more = true, show_more_url = "turnaje", show_more_text = "zobrazit více turnajů", show_date=true }
 
 [[entries.entries]]
 title = "Turnaje v BK Praha"
-post_list = { section = "bkp-tournaments", limit = 4, show_more = true, show_more_url = "turnaje-v-bk-praha", show_more_text = "zobrazit více turnajů" }
+post_list = { section = "turnaje-v-bk-praha", limit = 4, show_more = true, show_more_url = "turnaje-v-bk-praha", show_more_text = "zobrazit více turnajů" }
 
 [[entries]]
 title = "Články a návody"

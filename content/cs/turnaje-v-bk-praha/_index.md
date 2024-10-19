@@ -1,5 +1,6 @@
 ---
 title: Turnaje v BK Praha
+translationKey: bkp-tournaments
 show_date: false
 item_dates: false
 group_by_year: true

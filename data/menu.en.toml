@@ -12,18 +12,20 @@ post_list = { section = "bkp-tournaments", limit = 4, show_more = true, show_mor
 title = "Articles"
 post_list = { section = "posts", limit = 3, show_more = true, show_more_url = "posts", show_more_text = "see more", show_date=true }
 
-[[entries]]
-title = "Fools bidding system and agreements"
-url = "/fools"
 
 
 [[entries]]
 title = "Software"
-post_list = { section = "software", show_more = false, show_date=false }
+post_list = { section="software", limit="3", show_more=true, show_date=false,  show_more_url = "software", show_more_text = "show all" }
 
 [[entries]]
 title = "Files"
 url = "/soubory"
+
+[[entries]]
+title = "Fools bidding system and agreements"
+url = "/fools"
+
 
 [[entries]]
 title = "Links"

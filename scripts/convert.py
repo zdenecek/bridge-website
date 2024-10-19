@@ -18,6 +18,7 @@ def make_tournament_file(data: dict, dirname):
     
     data["layout"] = "tournament"
     data["type"] = "tournament"
+    
      
     front_matter = yaml.dump(data, allow_unicode=True, explicit_start=True)
     file_path = os.path.join(dirname, data['date'] + "-" + data["slug"] + ".md")
@@ -39,20 +40,30 @@ def main():
 
     # JSON file to convert
     json_in = sys.argv[1]
-    # Directory to store the markdown files
-    out_dir = sys.argv[2]
     default_lang = sys.argv[3]
+
+    # Directory to store the markdown files
+    # given in format lang:dir,lang:dir ...
+    dirs = {}
+    for lang_dir in sys.argv[2].split(","):
+        if ":" not in lang_dir:
+            lang, dir = default_lang, lang_dir
+        else:
+            lang, dir = lang_dir.split(":")
+        dirs[lang] = dir
 
     with open(json_in, "r") as json_file:
         data = json.load(json_file)
 
     for entry in data:
         if "translations" in entry:
+            translation_key = list(entry["translations"].values())[0]["slug"]
+
             for lang, lang_data in entry["translations"].items():
-                make_tournament_file(lang_data, os.path.join("content", lang, out_dir))
+                lang_data["translationKey"] = translation_key
+                make_tournament_file(lang_data, os.path.join("content", lang, dirs[lang]))
         else:
-            make_tournament_file(entry, os.path.join("content", default_lang, out_dir))
-        
+            make_tournament_file(entry, os.path.join("content", default_lang,  dirs[lang]))        
             
             
 if __name__ == "__main__":

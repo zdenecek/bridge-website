@@ -1,5 +1,6 @@
 ---
 title: Tournaments in the Prague bridge club 
+translationKey: bkp-tournaments
 show_date: false
 group_by_year: true
 item_dates: false
