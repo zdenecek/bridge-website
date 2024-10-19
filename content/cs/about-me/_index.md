@@ -61,7 +61,7 @@ Jsem také členem
 
 **Budu rád za jakékoliv otázky, zpětnou vazbu, nápady nebo podněty.**
 
-### Já, hráč
+### Hráčská kariéra
 
 Bridž hraji od roku 2013. Účastnil jsem se mnoha turnajů, jak v Česku, tak i v zahraničí.
 
@@ -94,7 +94,7 @@ Na některé moje výsledky se můžete podívat do databáze WBF [zde](http://d
 
 Pro výsledky v Česku se podívejte na [Matriku Českého bridžového svazu](https://matrikacbs.cz/Detail-hrace.aspx?id=2876).
 
-### Já, vedoucí turnajů
+### Vedení turnajů
 
 <div class="img-container me"> <div>
 <img src="me-td.jpg" alt="Zdeněk Tomis">
@@ -106,7 +106,7 @@ Bridžové turnaje řídím od roku 2021.
 V sekci [turnaje](/tournaments) naleznete seznam národních turnajů, kterých jsem se zúčastnil jako rozhodčí, a sekci [turnaje v Pražském bridžovém klubu](/bkp-tournaments) pro seznam turnajů v Pražském bridžovém klubu, které jsem řídil.
 
 
-### HABRA - kde jsem se naučil bridž
+### Havířovská BRidžová Akademie 
 
 [HABRA - HAvířovská BRidžová Akademie](https://bridzhavirov.cz) - je bridžová škola a klub v Havířově, kde jsem vyrůstal a naučil se hrát bridž.
 
