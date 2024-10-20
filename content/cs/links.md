@@ -38,7 +38,12 @@ show_date: false
 
 -   [Reportáž z BK Praha v pořadu ČT1 Barvy života 12. 3. 2010](https://www.ceskatelevize.cz/porady/1095889602-barvy-zivota/210562221200005/cast/106044/)
 -   [Pořad z Metropole 21. 3. 2020](https://www.ceskatelevize.cz/porady/10116288835-z-metropole/220411058230012/cast/757660/)
+-   [HABRA v médiích](https://bridzhavirov.cz/index.php?s=clanky&s2=media)
     
+## České články
+
+-  [Bridžový seriál na webu matfyz.cz](https://www.matfyz.cz/clanky/bridzovy-serial-i-co-je-vlastne-bridz)
+
 
 ## Bridžové kluby v ČR
 
