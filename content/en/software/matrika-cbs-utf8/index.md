@@ -1,6 +1,7 @@
 ---
 title: Czech player database in UTF-8 csv
 date: 2024-08-30
+translationKey: matrika-cbs-utf8
 ---
 
 The CBS Registry is software used for managing membership databases and

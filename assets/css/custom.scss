@@ -127,3 +127,22 @@ body[a="light"] {
 .not-found-img {
   max-width: 300px;
 }
+
+
+.page-content {
+  ul {
+      list-style-type: "\2664";
+
+      li {
+          padding-left: 5px;
+      }
+
+      ul {
+          list-style-type: "\2662";
+
+          ul {
+              list-style-type: "\2667";
+          }
+      }
+  }
+}

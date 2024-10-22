@@ -11,7 +11,7 @@ střídáním.
 
 > Pokud nemáte zkušenosti s programe Tournament Calculator, přečtete si prosím
 > nejdříve
-> [článek o klubových turnajích]( {{< ref "/posts/2024-02-14-klubove-turnaje-v-TC" >}} ), ve
+> [článek o klubových turnajích]( {{< ref "/td-stuff/2024-02-14-klubove-turnaje-v-TC" >}} ), ve
 > kterém jsou popsány základní postupy. Článek stojí za přečtení, i pokud
 > neplánujete používat TC na klubové turnaje, jelikož popisuje základní postupy
 > a ovládání programu.
@@ -200,7 +200,7 @@ střídáním.
    Vyplníme FTP údaje a nastavíme název turnaje. Pro FTP údaje program nabízí
    uložit nastavení do interní databáze a při dalším turnaji je načíst a pouze
    změnit cestu s prezentací. Pro detailní návod viz
-   [článek o klubových turnajích]({{< relref "/posts/2024-02-14-klubove-turnaje-v-TC" >}} ).
+   [článek o klubových turnajích]({{< relref "/td-stuff/2024-02-14-klubove-turnaje-v-TC" >}} ).
 
 8. Navedeme hráče.
 
@@ -210,7 +210,7 @@ střídáním.
    Přidáme správný počet párů. V našem případě 28 párů.
 
    Pro detailní návod viz
-   [článek o klubových turnajích]({{< relref "/posts/2024-02-14-klubove-turnaje-v-TC" >}}).
+   [článek o klubových turnajích]({{< relref "/td-stuff/2024-02-14-klubove-turnaje-v-TC" >}}).
 
    Postup při pauze:
 
@@ -230,7 +230,7 @@ střídáním.
    kolem tvořit soubor pro druhé kolo.
 
    Pro detailní návod viz
-   [článek o klubových turnajích](/posts/2024-02-14-klubove-turnaje-v-TC/).
+   [článek o klubových turnajích](/td-stuff/2024-02-14-klubove-turnaje-v-TC/).
 
 ## Úpravy výsledků
 
@@ -269,5 +269,5 @@ předpřipraveným střídáním a vytvořit výsledky a prezentaci.
 
 ## Odkazy
 
-- [Článek o klubových turnajích v TC]({{< relref "/posts/2024-02-14-klubove-turnaje-v-TC" >}})
-- [Střídání pro dvoukolové páráky]({{< relref "/posts/2024-03-03-stridani-pro-dvoukolove-paraky" >}})
+- [Článek o klubových turnajích v TC]({{< relref "/td-stuff/2024-02-14-klubove-turnaje-v-TC" >}})
+- [Střídání pro dvoukolové páráky]({{< relref "/td-stuff/2024-03-03-stridani-pro-dvoukolove-paraky" >}})

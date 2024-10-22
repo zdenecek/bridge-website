@@ -13,11 +13,11 @@ post_list = { section = "turnaje-v-bk-praha", limit = 4, show_more = true, show_
 
 [[entries]]
 title = "Články a návody"
-post_list = { section = "posts", limit = 3, show_more = true, show_more_url = "posts", show_more_text = "zobrazit více", show_date=true }
+post_list = { section = "clanky", limit = 3, show_date=true }
 
 [[entries]]
-title = "Bridžové programy"
-post_list = { section = "software", show_more = false, show_date=false }
+title = "Program pro práci se soubory .pbn"
+url = "pbn"
 
 [[entries]]
 title = "Dražební systém Fools"

@@ -2,6 +2,7 @@
 title: Seznam hráčů z Matriky ČBS v UTF-8
 date: 2024-08-30
 url: matrika-cbs
+translationKey: matrika-cbs-utf8
 ---
 
 Matrika ČBS je software, který se používá pro správu členských základů a turnajů. Bohužel, export hráčů je v kódování Windows-1250.

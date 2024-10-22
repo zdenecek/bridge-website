@@ -2,6 +2,7 @@
 title: PBN - portable bridge notation 
 date: 2024-04-12
 layout: single
+translationKey: pbn
 ---
 
 PBN je nástroj pro práci se soubory `.pbn` (Portable Bridge Notation).
