@@ -833,6 +833,42 @@
         ]
       }
     } 
+  },
+  {
+    "id": "3liga-2024",
+    "translations": {
+      "en": {
+        "title": "3rd league 2024",
+        "date": "2024-11-02",
+        "slug": "3rd-league-2024",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/3-liga/",
+            "text": "Výsledky"
+          },
+          {
+            "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=",
+            "type": "matrika-cbs"
+          }
+        ]
+      },
+      "cs": {
+        "title": "3. liga 2024",
+        "date": "2024-11-02",
+        "slug": "3-liga-2024",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/3-liga/",
+            "text": "Výsledky"
+          },
+          {
+            "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=",
+            "type": "matrika-cbs"
+          }
+        ],
+        "content-file": "tournamentData/2024/3rd-league.md"
+      }
+    }
   }
 ]
   
