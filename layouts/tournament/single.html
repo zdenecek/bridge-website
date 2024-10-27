@@ -5,7 +5,7 @@
 
     <p class="post-meta">
         <time datetime="{{ .Date }}">
-            {{ .Date | time.Format site.Params.theme_config.date_format }}
+            {{ .Date | time.Format  ( i18n "date-format-with-year" ) }}
         </time>
     </p>
 

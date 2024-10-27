@@ -30,7 +30,7 @@
         {{- range $post := $posts -}}
         <li>
             {{- if $context_.show_date }}
-            <span>{{- ($post.Date | time.Format site.Params.theme_config.date_format) }}</span>
+            <span>{{- ($post.Date | time.Format  ( i18n "date-format-with-year" ) ) }}</span>
             {{ end }}
             {{- with .Params.redirect -}}
                 <a href="{{ . | relURL }}">{{ $post.Title }}</a>
