@@ -44,7 +44,7 @@
     {{- end -}}
     <li>
         {{- if $show_date -}} <!-- Condition to show date if show_date is not false -->
-        <span>{{- ($post.Date | time.Format (i18n "date-format-without-year")) }} </span>
+        <span class="menu-date-short">{{- ($post.Date | time.Format (i18n "date-format-without-year")) }} </span>
         {{- end -}}
         {{- with $post.Params.redirect -}}
         <a href="{{ . | absURL }}">{{ $post.Title }}</a>
