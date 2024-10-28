@@ -15,4 +15,24 @@
 
 Hrají se 3 zápasy po dvaceti rozdáních, rozdělené vždy na dva segmenty.
 
-Rozpis zápasů bude doplněn.
+#### 1. kolo
+
+| Domácí   | Stůl | Hosté       |
+|----------|------|-------------|
+| Quatro   | 1    | 6 Tygrů     |
+| Hmmm...  | 2    | Jabra U16   |
+
+#### 2. kolo
+
+| Domácí   | Stůl | Hosté       |
+|----------|------|-------------|
+| Quatro   | 1    | Hmmm...     |
+| Jabra U16| 2    | 6 Tygrů     |
+
+#### 3. kolo
+
+| Domácí   | Stůl | Hosté       |
+|----------|------|-------------|
+| Quatro   | 1    | Jabra U16   |
+| 6 Tygrů  | 2    | Hmmm...     |
+
