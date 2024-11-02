@@ -7,9 +7,9 @@
 |              | 13:30 - 15:00 | Pauza na oběd               |
 |              | 15:00         | Začátek 2. kola             |
 |              | 18:10         | Konec 2. kola               |
-| Neděle 3.11. | 9:00          | Začátek 3. kola             |
-|              | 12:10         | Konec 3. kola               |
-|              | 12:25         | Vyhlášení                   |
+| Neděle 3.11. | 8:30          | Začátek 3. kola             |
+|              | 11:40         | Konec 3. kola               |
+|              | 11:55         | Vyhlášení                   |
 
 ### Hrací systém
 
