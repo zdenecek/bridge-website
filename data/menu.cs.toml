@@ -16,6 +16,10 @@ title = "Články a návody"
 post_list = { section = "clanky", limit = 3, show_date=true }
 
 [[entries]]
+title = "Pro vedoucí turnajů"
+post_list = { section = "td-stuff", limit = 3, show_date=true }
+
+[[entries]]
 title = "Program pro práci se soubory .pbn"
 url = "pbn"
 

@@ -22,4 +22,4 @@ The data are live from the CBS Registry, so they are always up-to-date.
     <label> 
     <input type="checkbox" name="remap_columns" value="1" checked> Remap columns for compatibility with Tournament Calculator 
     </label> 
-</form>ß
+</form>
