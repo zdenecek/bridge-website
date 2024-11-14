@@ -869,5 +869,61 @@
       }
     }
   }
+  ,
+  {
+    "id": "central-european-youth-championship-2024",
+    "translations": {
+      "en": {
+        "title": "6th Central European Youth Championships",
+        "date": "2024-11-15",
+        "slug": "central-european-youth-championship-2024",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/central-european-youth-championships/pairs",
+            "text": "Pairs results"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/central-european-youth-championships/teams",
+            "text": "Teams results"
+          } 
+        ], 
+                "content-file": "tournamentData/2024/mse.en.md"
+      },
+      "cs": {
+        "title": "6. Mistrovství střední Evropy mládeže & Otevřené MČR mládeže 2024",
+        "date": "2024-11-15",
+        "slug": "mse-2024",
+        "entries": [
+          {
+            "title": "Páteční párový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2024/central-european-youth-championships/pairs",
+                "text": "Výsledky"
+              },
+              {
+                "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+          "title": "Týmový  turnaj",
+          "entries": [
+            {
+              "link": "https://bridge.zdenektomis.eu/vysledky/2024/central-european-youth-championships/teams",
+              "text": "Výsledky"
+            },
+            {
+              "link": "https://www.matrikacbs.cz/Detail-turnaje.aspx?id=",
+              "type": "matrika-cbs"
+            }
+          ]
+        }
+        ],
+        "content-file": "tournamentData/2024/mse.md"
+      }
+    }
+  }
 ]
   
