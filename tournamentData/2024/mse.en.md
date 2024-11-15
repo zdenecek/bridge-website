@@ -11,7 +11,7 @@
 
 20 teams participating.
 
-Saturday qualification with 7 rounds swiss, 7 board per match.ß
+Saturday qualification with 7 rounds swiss, 7 board per match.
 
 Sunday finals in three groups of 4 teams, remaining teams in swiss play-off.
 
