@@ -1,17 +1,17 @@
 ### Schedule
 
-| Day      | Time | Program         |
-| -------- | ---- | --------------- |
-| Fri 15th | 10AM | pairs 1st round |
-|          |      | pairs 2nd round |
-| Sat 16th |      | TBA             |
-| Sun 17th |      | TBA             |
+| Day      | Time  | Program                  |
+| -------- | ----- | ------------------------ |
+| Fri 15th | 10 AM | pairs 1st round          |
+|          | 3 PM  | pairs 2nd round          |
+| Sat 16th | 10 AM | teams first round        |
+| Sun 17th | 9 AM  | teams finals first round |
 
 ### Team Tournament Playing System
 
 20 teams participating.
 
-Saturday qualification with 7 rounds swiss.
+Saturday qualification with 7 rounds swiss, 7 board per match.ß
 
 Sunday finals in three groups of 4 teams, remaining teams in swiss play-off.
 

@@ -45,25 +45,50 @@ $lines = explode(PHP_EOL, $convertedResponse);
 array_shift($lines);
 
 $mappedCsv = [];
-$headers = ["Pid", "FirstName", "LastName", "Rank", "District", "Info1", "Info2", "Club", "Discount", "MembershipFee", "BboUsername"];
+$headers = ["Pid", "FirstName", "LastName", "Rank", "District", "Sex", "AgeCategory", "Club", "Discount", "MembershipFee", "BboUsername"];
 
 // Only add headers if remapping
 if ($remapColumns) {
     $mappedCsv[] = implode(",", $headers);
 }
+function getCategoryFromYear(int $year) : string {
+    // Possible categories based on the year
+    $currentYear = (int)date('Y');
+    $age = $currentYear - $year;
+
+    if ($age < 16) {
+        return 'U16';
+    } elseif ($age < 21) {
+        return 'U21';
+    } elseif ($age < 26) {
+        return 'U26';
+    } elseif ($age > 65) {
+        return 'Senior';
+    } else {
+        return ''; // For ages 27-64
+    }
+}
+
+$mappedCsv = [];
 
 foreach ($lines as $line) {
     $columns = str_getcsv($line, ";"); // Parse semicolon-separated CSV
     
     if ($remapColumns && count($columns) >= 10) {
+        $category = "";
+        if (is_numeric($columns[8])) { // Check if column 8 contains an integer
+            $birthYear = (int)$columns[8]; // Parse the integer
+            $category = getCategoryFromYear($birthYear); // Get the category
+        }
+
         $mappedRow = [
             'Pid' => $columns[0],
             'FirstName' => $columns[2],
             'LastName' => $columns[1],
-            'Rank' => '1', 
+            'Rank' => '1', // Empty
             'District' => '', // Empty
-            'Info1' => '', // Empty
-            'Info2' => '', // Empty
+            'Sex' => $columns[6] == "Z" ? "Female" : "Male", // Gender mapping
+            'AgeCategory' => $category,
             'Club' => $columns[4],
             'Discount' => '0',
             'MembershipFee' => '0',
@@ -85,6 +110,10 @@ else
 
 
 header('Content-Disposition: attachment; filename="' . $fileName . '"');
+// Add no-cache headers
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
 
 
 // Output the mapped and converted CSV content

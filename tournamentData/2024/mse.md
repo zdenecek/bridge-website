@@ -3,15 +3,15 @@
 | Den           | Čas   | Program               |
 | ------------- | ----- | --------------------- |
 | Pátek 15.11   | 10:00 | ostrý začátek 1. kola |
-|               |       | začátek 2. kola       |
-| Sobota 16.11. |       | Bude doplněno         |
-| Neděle 17.11. |       | Bude doplněno         |
+|               | 15:00 | začátek 2. kola       |
+| Sobota 16.11. | 10:00 | kvalifikace týmů      |
+| Neděle 17.11. | 9:00  | finále týmů           |
 
 ### Hrací systém týmového turnaje
 
 Účastní se 20 týmů.
 
-Sobotní kvalifikace na 7 kol švýcarským systémem.
+Sobotní kvalifikace na 7 kol švýcarským systémem, zápas na 7 krabic.
 
 V neděli finále na tři finálové skupiny po 4 týmech, zbylé týmy v play-off
 švýcarským systémem.
