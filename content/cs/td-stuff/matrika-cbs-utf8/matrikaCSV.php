@@ -101,14 +101,19 @@ foreach ($lines as $line) {
     }
 }
 
+if (isset($_GET['lang'])) {
+    $lang = $_GET['lang'];
+} else {
+    $lang = 'cs';
+}
+
 // Set headers to return a CSV file
-header('Content-Type: text/csv; charset=UTF-8');
 if($remapColumns) 
-    $fileName = "hraciCBS_TournamentCalculator.csv"; 
+    $fileName =  $lang == "cs" ? "hraciCBS_TournamentCalculator.csv" :  "playersDB_TournamentCalculator.csv"; 
 else 
-    $fileName = "hraciCBS.csv"; 
+    $fileName = $lang == "cs" ? "hraciCBS.csv" : "playersDB.csv"; 
 
-
+header('Content-Type: text/csv; charset=UTF-8');
 header('Content-Disposition: attachment; filename="' . $fileName . '"');
 // Add no-cache headers
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");

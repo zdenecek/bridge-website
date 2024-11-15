@@ -17,9 +17,10 @@ player database (Custom option).
 
 The data are live from the CBS Registry, so they are always up-to-date.
 
-<form action="matrikaCSV.php" method="GET"> 
+<form action="/matrika-cbs/matrikaCSV.php" method="GET"> 
     <button class="x-button" type="submit">Click here to download the file</button> <br> 
     <label> 
     <input type="checkbox" name="remap_columns" value="1" checked> Remap columns for compatibility with Tournament Calculator 
     </label> 
+     <input type="hidden" name="lang" value="en">
 </form>

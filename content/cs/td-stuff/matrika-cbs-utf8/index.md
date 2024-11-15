@@ -20,4 +20,5 @@ Data jsou přímo generovaná z Matriky ČBS, takže jsou vždy aktuální.
         <input type="checkbox" name="remap_columns" value="1" checked>
        Přemapovat sloupce pro kompatibilitu s Tournament Calculator
     </label>
+    <input type="hidden" name="lang" value="cs">
 </form>
