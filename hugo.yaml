@@ -29,4 +29,5 @@ markup:
   goldmark:
     renderer:
       unsafe: true
-
+ignoreFiles:
+  - "data/tournaments"

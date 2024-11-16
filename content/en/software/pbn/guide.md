@@ -1,11 +1,10 @@
 ---
-title: PBN user guide
 layout: single
 url: /pbn/guide
 slug: guide
 show_date: false
+title: PBN user guide
 ---
-
 
 To use this project, run the pbn-cli executable.
 
@@ -13,62 +12,72 @@ To use this project, run the pbn-cli executable.
 
 To run double-dummy analysis in `file.pbn` and save it into the same file, run the following:
 
-```sh
+```abap
 $ pbn.exe -aw file.pbn
 ```
 
-The `-a` flag adds the double-dummy analyses, 
+The `-a` flag adds the double-dummy analyses,
 the `-w` flag make the program overwrite the original file with the new contents.
 
 ## Accepted command line arguments, options, and flags
 
 The program accepts the following options and arguments:
 
-###  --help
+### --help
+
 Produces a help message with all the options listed
 
 ### --version
+
 print version information
 
-### -v [ --verbose ]
+### -v \[ --verbose ]
+
 print additional information about the file
 
 ### input-file (1st position argument) (required)
+
 Specify the input pbn file. This option is mandatory.
 
 This option can be specified as the first positional option.
 
 ### output-file (2nd position argument)
+
 Specify the output pbn file. This option is optional.
 
 If no output file is specified, nor the `-w` flag is used, the program will print the file to stdout.
 
-### -a, [--analyze]
+### -a, \[--analyze]
 
 Add double dummy analyses to the file, calculated using DDS
 
-### -r, [--renumber] arg
+### -r, \[--renumber] arg
+
 Renumber boards, use +/-x to shift numbers, x to assign new numbers
 
 Examples:
-- -r +3 will shift all board numbers by 3
-- -r 3 will assign board numbers starting from 3 (3, 4, 5, ...)
-- -r -3 will shift all board numbers by -3
 
-### -d, [--delete-boards]
+* -r +3 will shift all board numbers by 3
+* -r 3 will assign board numbers starting from 3 (3, 4, 5, ...)
+* -r -3 will shift all board numbers by -3
+
+### -d, \[--delete-boards]
+
 Delete boards, accepts numbers or number ranges
 
 Examples:
-- -d 3 will delete board 3
-- -d 3,5 will delete boards 3 and 5
-- -d 3-5 will delete boards 3, 4 and 5
-- -d 3,5-7 will delete boards 3, 5, 6 and 7
 
+* -d 3 will delete board 3
+* -d 3,5 will delete boards 3 and 5
+* -d 3-5 will delete boards 3, 4 and 5
+* -d 3,5-7 will delete boards 3, 5, 6 and 7
 
-### -s [ --strip ]
+### -s \[ --strip ]
+
 Removes all results, site and event information.
 
-### -o [ --output ] arg
+### -o \[ --output ] arg
+
 Output file name, if not specified, the
 program will use the input file name
 
@@ -76,11 +85,12 @@ If no output file is specified, nor the `-w` flag is used, the program will prin
 
 This option can be specified as the second positional option.
 
-### -w [ --overwrite ]
+### -w \[ --overwrite ]
+
 Overwrite the input file with the output file.
 
 If no output-file is specified, nor the `-w` flag is used, the program will print the file to stdout.
 
 ### --info
-Print information about the file to standard output
 
+Print information about the file to standard output

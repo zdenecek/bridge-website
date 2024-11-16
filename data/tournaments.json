@@ -325,6 +325,7 @@
   },
   {
     "id": "3-liga-2023",
+    
     "translations": {
       "en": {
         "title": "3rd National League",
@@ -554,7 +555,7 @@
             ]
           }
         ],
-        "content-file": "tournamentData/2024/slavonice.en.md"
+        "content-file": "data/tournaments/2024/slavonice.en.md"
       },
       "cs": {
         "title": "Slavonice 2024",
@@ -635,7 +636,7 @@
             ]
           }
         ],
-        "content-file": "tournamentData/2024/slavonice.md"
+        "content-file": "data/tournaments/2024/slavonice.md"
       }
     }
   },
@@ -865,7 +866,7 @@
             "type": "matrika-cbs"
           }
         ],
-        "content-file": "tournamentData/2024/3rd-league.md"
+        "content-file": "data/tournaments/2024/3rd-league.md"
       }
     }
   }
@@ -887,7 +888,7 @@
             "text": "Teams results"
           } 
         ], 
-                "content-file": "tournamentData/2024/mse.en.md"
+                "content-file": "data/tournaments/2024/mse.en.md"
       },
       "cs": {
         "title": "6. Mistrovství střední Evropy mládeže & Otevřené MČR mládeže 2024",
@@ -921,7 +922,7 @@
           ]
         }
         ],
-        "content-file": "tournamentData/2024/mse.md"
+        "content-file": "data/tournaments/2024/mse.md"
       }
     }
   }
