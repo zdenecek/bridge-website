@@ -13,7 +13,7 @@
 
 Saturday qualification with 7 rounds swiss, 7 board per match.
 
-Sunday finals in three groups of 4 teams, remaining teams in swiss play-off.
+Sunday finals in 5 groups of 4 teams, 3 rounds, 10 boards per match.
 
 #### Rotation for 4-team finals
 

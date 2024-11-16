@@ -13,8 +13,7 @@
 
 Sobotní kvalifikace na 7 kol švýcarským systémem, zápas na 7 krabic.
 
-V neděli finále na tři finálové skupiny po 4 týmech, zbylé týmy v play-off
-švýcarským systémem.
+V neděli finále na 5 finálových skupin po 4 týmech, 3 zápasy, 10 krabic na zápas.
 
 #### Střídání pro 4-členná finále
 
