@@ -925,6 +925,41 @@
         "content-file": "data/tournaments/2024/mse.md"
       }
     }
+  },
+  {
+    "id": "vanocni-parak-habra",
+    "translations": {
+      "en": {
+        "title": "Habra Christmas Pairs Tournament",
+        "date": "2024-12-20",
+        "slug": "habra-christmas-pairs-2024",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/vanocni-habra/",
+            "text": "Results"
+          },
+          {
+            "link": "#",
+            "type": "matrika-cbs"
+          }
+        ]
+      },
+      "cs": {
+        "title": "Vánoční párový turnaj HABRA",
+        "date": "2024-12-20",
+        "slug": "vanoce-habra-2024",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2024/vanocni-habra/",
+            "text": "Results"
+          },
+          {
+            "link": "#",
+            "type": "matrika-cbs"
+          } 
+        ]
+      }
+    }
   }
 ]
   
