@@ -31,3 +31,7 @@ markup:
       unsafe: true
 ignoreFiles:
   - "data/tournaments"
+module: # copy scripts to static
+  mounts:
+    - source: "scripts"
+      target: "static/apps"

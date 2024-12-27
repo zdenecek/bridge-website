@@ -1,5 +1,5 @@
 ---
-title: Czech player database in UTF-8 csv
+title: Czech bridge players database in UTF-8 csv, also for Tournament calculator
 date: 2024-08-30
 translationKey: matrika-cbs-utf8
 ---
@@ -17,7 +17,7 @@ player database (Custom option).
 
 The data are live from the CBS Registry, so they are always up-to-date.
 
-<form action="/matrika-cbs/matrikaCSV.php" method="GET"> 
+<form action="/apps/matrika-player-db" method="GET"> 
     <button class="x-button" type="submit">Click here to download the file</button> <br> 
     <label> 
     <input type="checkbox" name="remap_columns" value="1" checked> Remap columns for compatibility with Tournament Calculator 

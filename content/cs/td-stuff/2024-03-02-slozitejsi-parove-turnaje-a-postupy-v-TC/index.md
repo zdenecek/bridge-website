@@ -271,3 +271,4 @@ předpřipraveným střídáním a vytvořit výsledky a prezentaci.
 
 - [Článek o klubových turnajích v TC]({{< relref "/td-stuff/2024-02-14-klubove-turnaje-v-TC" >}})
 - [Střídání pro dvoukolové páráky]({{< relref "/td-stuff/2024-03-03-stridani-pro-dvoukolove-paraky" >}})
+- [Databáze hráčů z Matriky ČBS ve formátu pro TournamentCalculator]({{< relref "/td-stuff/matrika-cbs-utf8" >}})

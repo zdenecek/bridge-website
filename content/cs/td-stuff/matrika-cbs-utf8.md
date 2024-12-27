@@ -13,7 +13,7 @@ Dále je možné přemapovat sloupce pro kompatibilitu s Tournament Calculator. 
 
 Data jsou přímo generovaná z Matriky ČBS, takže jsou vždy aktuální.
  
-<form action="matrikaCSV.php" method="GET">
+<form action="/apps/matrika-player-db" method="GET">
     <button class="x-button" type="submit">Klikněte zde pro stažení souboru</button>
     <br>
     <label>

@@ -2,6 +2,7 @@
 title: Nástroje pro převody dat z turnajů
 date: 2024-04-30
 url: prevody-dat
+draft: true
 ---
 
 Řízení turnajů je provázeno využíváním různého software, různých mnohdy starých,

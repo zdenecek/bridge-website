@@ -1,5 +1,5 @@
 <?php
-
+// download player database from matrikacbs.cz
 
 // URL to send the POST request to
 $url = "https://matrikacbs.cz/Prehled-hracu.aspx";
