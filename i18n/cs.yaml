@@ -24,7 +24,7 @@ last-year:
   other: 'Loňský ročník'
 
 date-format-with-year:
-  other: '1. 2. 2006'
+  other: '2. 1. 2006'
 
 date-format-without-year:
   other: '2. 1.'

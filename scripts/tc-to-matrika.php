@@ -27,46 +27,75 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
 
             if ($tournamentType === 'individual' || $tournamentType === 'pair') {
                 $lines = [];
-                $filter = $noname
-                    ? function ($result) use ($tournamentType) {
-                        $participants = $tournamentType === 'individual' ? $result['Participant']['_person'] : $result['Participant'];
+            
+                // Helper function to get participant info based on tournament type
+                $getParticipants = function ($result, $tournamentType) {
+                    if ($tournamentType === 'individual') {
+                        return [
+                            'primary' => $result['Participant']['_person'] ?? null,
+                            'secondary' => null,
+                        ];
+                    } elseif ($tournamentType === 'pair') {
+                        return [
+                            'primary' => $result['Participant']['_person1'] ?? null,
+                            'secondary' => $result['Participant']['_person2'] ?? null,
+                        ];
+                    }
+                    return [null, null];
+                };
+            
+                // Generate a line based on the result and noname flag
+                $generateLine = function ($result, $tournamentType, $noname) use ($getParticipants) {
+                    $participants = $getParticipants($result, $tournamentType);
+                    $primary = $participants['primary'];
+                    $secondary = $participants['secondary'];
+            
+                    $place = $result['Place'] ?? '';
+                    $points = round(($result['Result']['_pointsDecimal'] ?? 0) * 100) / 100;
+            
+                    $primaryId = ($primary['_pid']['Number'] ?? 0) > 10000 ? '' : ($primary['_pid']['Number'] ?? '');
+                    $secondaryId = $secondary && (($secondary['_pid']['Number'] ?? 0) <= 10000) ? $secondary['_pid']['Number'] : '';
+            
+                    if ($noname) {
                         return join(",", [
-                            $result['Place'] ?? '',
-                            round(($result['Result']['_pointsDecimal'] ?? 0) * 100) / 100,
-                            '',
-                            ($participants['_person1']['_pid']['Number'] ?? 0) > 10000 ? '' : $participants['_person1']['_pid']['Number'],
-                            $tournamentType === 'pair' && isset($participants['_person2'])
-                                ? (($participants['_person2']['_pid']['Number'] ?? 0) > 10000 ? '' : $participants['_person2']['_pid']['Number'])
-                                : ''
+                            $place,
+                            $points,
+                            '', // Name is omitted when noname is true
+                            $primaryId,
+                            $secondaryId
+                        ]);
+                    } else {
+                        $name = $tournamentType === 'individual'
+                            ? ($primary['_lastName'] . ' ' . $primary['_firstName'])
+                            : ($primary['_lastName'] . ' - ' . $secondary['_lastName']);
+            
+                        return join(",", [
+                            $place,
+                            $points,
+                            $name,
+                            $primaryId,
+                            $secondaryId
                         ]);
                     }
-                    : function ($result) use ($tournamentType) {
-                        $participants = $tournamentType === 'individual' ? $result['Participant']['_person'] : $result['Participant'];
-                        return join(",", [
-                            $result['Place'] ?? '',
-                            round(($result['Result']['_pointsDecimal'] ?? 0) * 100) / 100,
-                            $tournamentType === 'individual'
-                                ? $participants['_lastName'] . " " . $participants['_firstName']
-                                : $participants['_person1']['_lastName'] . ' - ' . $participants['_person2']['_lastName'],
-                            ($participants['_person1']['_pid']['Number'] ?? 0) > 10000 ? '' : $participants['_person1']['_pid']['Number'],
-                            $tournamentType === 'pair' && isset($participants['_person2'])
-                                ? (($participants['_person2']['_pid']['Number'] ?? 0) > 10000 ? '' : $participants['_person2']['_pid']['Number'])
-                                : ''
-                        ]);
-                    };
-                $lines = array_map($filter, $results);
+                };
+            
+                // Process results
+                $lines = array_map(function ($result) use ($tournamentType, $noname, $generateLine) {
+                    return $generateLine($result, $tournamentType, $noname);
+                }, $results);
+            
                 return join("\n", $lines);
             } elseif ($tournamentType === 'team') {
-                $players = ["PID,TeamID,LastName,FirstName,Number,Club,Active,Email"];
+                $players = ["PID,TeamID,LastName,FirstName,Number,Club,,"];
                 $rankings = [""];
-                $teams = ["TeamID,TeamName,TeamShortName"];
+                $teams = ["TeamID,TeamID,TeamName"];
 
                 foreach ($results as $result) {
                     $teamId = $result['Participant']['Number'] ?? '';
                     $teamName = $result['Participant']['_name'] ?? '';
 
                     // Add team information
-                    $teams[] = join(",", [$teamId, $teamName, $teamName]);
+                    $teams[] = join(",", [$teamId, $teamId, $teamName]);
 
                     // Add player information
                     foreach ($result['Participant']['_people'] as $key => $person) {
@@ -151,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
 
     <?php if ($output !== null && !is_array($output)): ?>
         <h2><?= strpos($output, "Error") === 0 ? "Error" : "Output" ?></h2>
-        <textarea readonly><?= htmlspecialchars($output) ?></textarea>
+        <textarea readonly rows="25"><?= htmlspecialchars($output) ?></textarea>
     <?php elseif (is_array($downloadLinks)): ?>
         <h2>Download Team Tournament Files</h2>
         <?php foreach ($downloadLinks as $fileName => $content): ?>
