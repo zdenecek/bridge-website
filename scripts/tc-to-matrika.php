@@ -11,6 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
             $url .= '/results.json';
         }
 
+        if (!filter_var($url, FILTER_VALIDATE_URL)) {
+            throw new Exception("Invalid URL provided.");
+        }
+
         try {
             $jsonData = file_get_contents($url);
             if ($jsonData === false) {
