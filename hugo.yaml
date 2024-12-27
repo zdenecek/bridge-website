@@ -35,3 +35,5 @@ module: # copy scripts to static
   mounts:
     - source: "scripts"
       target: "static/apps"
+    - source: static
+      target: static

@@ -1,0 +1,14 @@
+---
+date: '2023-12-02'
+entries:
+- link: https://matrikacbs.cz/Detail-turnaje.aspx?id=5061
+  type: matrika-cbs
+- link: https://bridge.zdenektomis.eu/vysledky/2023/3-liga/
+  type: result-presentation
+layout: tournament
+slug: 3rd-national-league-2023
+title: 3rd National League
+translationKey: 3rd-national-league-2023
+type: tournament
+---
+
