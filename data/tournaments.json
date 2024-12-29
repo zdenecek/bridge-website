@@ -960,6 +960,27 @@
         ]
       }
     }
+  },
+  {
+    "id": "2-liga-2025",
+    "translations": {
+      "cs": {
+        "title": "2. celostátní liga 2025",
+        "date": "2025-02-17",
+        "slug": "2-liga-2025",
+        "content-file": "data/tournaments/2025/2liga.cs.md", 
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2025/2-liga/",
+            "text": "Prezentace"
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2025/2-liga/lineup/login.php",
+            "text": "Zadání nasazení"
+          }
+        ]
+      }
+    }
   }
 ]
   
