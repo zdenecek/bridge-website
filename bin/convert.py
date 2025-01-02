@@ -3,7 +3,7 @@ import os.path
 from pathlib import Path
 import yaml
 import json
-
+from slugify import slugify
 
 def make_tournament_file(data: dict, dirname):
     
@@ -21,7 +21,10 @@ def make_tournament_file(data: dict, dirname):
     
      
     front_matter = yaml.dump(data, allow_unicode=True, explicit_start=True)
-    file_path = os.path.join(dirname, data['date'] + "-" + data["slug"] + ".md")
+    
+    slug = data.get("slug", slugify(data["title"]))
+    
+    file_path = os.path.join(dirname, data['date'] + "-" + slug + ".md")
     with open(file_path, "w") as md_file:
         md_file.write(front_matter)
         md_file.write("---\n\n")
