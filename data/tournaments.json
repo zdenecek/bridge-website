@@ -966,7 +966,7 @@
     "translations": {
       "cs": {
         "title": "2. celostátní liga 2025",
-        "date": "2025-02-17",
+        "date": "2025-01-17",
         "slug": "2-liga-2025",
         "content-file": "data/tournaments/2025/2liga.cs.md", 
         "entries": [
@@ -977,8 +977,27 @@
           {
             "link": "https://bridge.zdenektomis.eu/vysledky/2025/2-liga/lineup/login.php",
             "text": "Zadání nasazení"
+          },
+          {
+            "link": "https://www.czechbridge.cz/UserFiles/file/Souteze/2022/CL/Propozice_cs_ligy_2022_docx.pdf",
+            "text": "Propozice (PDF)"
+          },
+          {
+            "link": "https://www.czechbridge.cz/tournaments/457",
+            "text": "Oficiální stránky turnaje"
           }
         ]
+      },
+      "en": {
+        "title": "2nd National League 2025",
+        "date": "2025-01-17",
+        "slug": "2nd-national-league-2025",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2025/2-liga/",
+            "type": "result-presentation"
+          }
+        ] 
       }
     }
   }

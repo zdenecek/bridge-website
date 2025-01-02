@@ -12,30 +12,33 @@
 
 ### Hrací systém
 
-Dle propozic se každý víkend hraje 7 kol po 12 rozdáních. Rozpis je pro každý víkend stejný, až na to, že se střídají domácí a hosté. (Více viz propozice.)
+Každý víkend se odehraje **7 kol po 12 rozdáních**. Rozpis zápasů zůstává pro každý víkend stejný, pouze se mění role domácích a hostů (viz podrobněji v propozicích).
 
-### Kroužkování / Zadání nasazení
+### Kroužkování a zadání nasazení
 
-Dle propozic jsou domácí přisedají po hostech. Obvykle se nasazení udávalo na papír na nástěnce, tzv. kroužkování.   
-Kvůli novému formátu turnaje a také díky tomu, že to podporuje výpočetní program, se bude **nasazení zadávát** do programu předem.
+Podle propozic **domácí usedají po hostech**. Dříve se nasazení hráčů zapisovalo na papírovou nástěnku, tzv. „kroužkování“. V novém formátu turnaje však nasazení probíhá elektronicky pomocí programu.
 
-Nasazení se zadává na [této stránce](https://bridge.zdenektomis.eu/vysledky/2025/2-liga/lineup/login.php). Je potřeba se nejdříve přihlásit. 
-Přihlašovací údaje dostali kapitáni týmů e-mailem. Pokud je nemáte, napište mi na [email](mailto:zdnek.tomis@gmail.com).
+#### Jak zadat nasazení?
+1. Navštivte stránku: [Nasazení](https://bridge.zdenektomis.eu/vysledky/2025/2-liga/lineup/login.php).
+2. Přihlaste se pomocí údajů, které obdrželi kapitáni týmů e-mailem.  
+   *Pokud údaje nemáte, kontaktujte organizátora na [email](mailto:zdnek.tomis@gmail.com).*
 
-Nasazení jsou povinni zadat kapitáni týmů ve všech zápasech, kde týmy hostují.
-Pro domácí není zadání nasazení povinné. Domácí uvidí nasazení soupeřů, jakmile je kapitán hostů zadá.
+#### Povinnosti kapitánů:
+- **Hostující týmy:** Musí zadat nasazení hráčů do programu pro všechny zápasy.
+- **Domácí týmy:** Zadání nasazení není povinné. Domácí vidí nasazení hostů ihned po jeho zadání.
 
-Prosím, zadávejte nasazení včas, nejlépe alespoň den předem.
+#### Důležitá pravidla:
+- Nasazení zadejte **alespoň den předem**, prosím ne na poslední chvíli.
+- Nasazení se zadává zvlášť pro každý zápas, včetně obou místností a obou stolů.
+- Nasazení lze zadat pro všechny tři víkendy dopředu. **Po odeslání však nelze v programu nasazení měnit.**
 
-Nasazení lze zadávat pro každý zápas zvlášť, v rámci zápasu je ale nutno zadat nasazení pro obě místnosti, oba stoly. 
+Pokud potřebujete opravit chybu v nasazení nebo reagovat na změnu situace (např. nemoc hráče), kontaktujte vedoucího soutěže na [email](mailto:zdnek.tomis@gmail.com).
 
-Již nyní lze zadávat nasazení pro všechny tři víkendy, ale pozor, po odeslání **nelze nasazení měnit**. 
-
-Pokud je potřeba nasazení změnit, například došlo k omylu, nebo někdo nemůže nastoupit, napište mi včas, na [email](mailto:zdnek.tomis@gmail.com).
 
 ### Rozpis zápasů
 
-1. a 3. víkend platí rozpis níže, 2. víkend se střídají domácí a hosté.
+1\. a 3. víkend se řídí pevným rozpisem níže.  
+2\. víkend se role domácích a hostů střídají.
 
 #### 1. kolo
 
