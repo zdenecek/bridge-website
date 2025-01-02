@@ -60,7 +60,7 @@ def main():
 
     for entry in data:
         if "translations" in entry:
-            translation_key = list(entry["translations"].values())[0]["slug"]
+            translation_key = entry['id']
 
             for lang, lang_data in entry["translations"].items():
                 lang_data["translationKey"] = translation_key
