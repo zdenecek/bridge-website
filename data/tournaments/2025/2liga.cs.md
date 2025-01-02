@@ -22,10 +22,13 @@ Podle propozic **domácí usedají po hostech**. Dříve se nasazení hráčů z
 1. Navštivte stránku: [Nasazení](https://bridge.zdenektomis.eu/vysledky/2025/2-liga/lineup/login.php).
 2. Přihlaste se pomocí údajů, které obdrželi kapitáni týmů e-mailem.  
    *Pokud údaje nemáte, kontaktujte organizátora na [email](mailto:zdnek.tomis@gmail.com).*
+3. Pro každý zápas, ve kterém váš tým hostuje, vyplňte nasazení hráčů. 
+4. Poté se můžete odhlásit.
 
 #### Povinnosti kapitánů:
 - **Hostující týmy:** Musí zadat nasazení hráčů do programu pro všechny zápasy.
 - **Domácí týmy:** Zadání nasazení není povinné. Domácí vidí nasazení hostů ihned po jeho zadání.
+  Pro zobrazení nasazení se přihlašte a rozklikněte zápas.
 
 #### Důležitá pravidla:
 - Nasazení zadejte **alespoň den předem**, prosím ne na poslední chvíli.

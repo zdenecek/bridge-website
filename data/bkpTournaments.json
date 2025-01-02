@@ -160,15 +160,137 @@
     "translations": {
       "en": {
         "title": "Results Bavlnka 2024",
-        "date": "2024-05-01",
+        "date": "2024-12-01",
         "slug": "results-bavlnka-2024",
         "redirect": "https://bridge.zdenektomis.eu/vysledky/2024/BKP/en.php"
       },
       "cs": {
         "title": "Výsledky Bavlnek 2024",
-        "date": "2024-05-01",
+        "date": "2024-12-01",
         "slug": "bavlnky-2024",
         "redirect": "https://bridge.zdenektomis.eu/vysledky/2024/BKP/"
+      }
+    }
+  },
+  {
+    "id": "skupinova-a-leto-2024",
+    "translations": {
+      "en": {
+        "title": "Group A Summer 2024",
+        "date": "2024-04-16",
+        "slug": "group-a-summer-2024",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-a-leto-2024"
+      },
+      "cs": {
+        "title": "Skupinová A Léto 2024",
+        "date": "2024-04-16",
+        "slug": "skupinova-a-leto-2024",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-a-leto-2024"
+      }
+    }
+  },
+  {
+    "id": "skupinova-a-podzim-2024",
+    "translations": {
+      "en": {
+        "title": "Group A Fall 2024",
+        "date": "2024-09-23",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-a-podzim-2024"
+      },
+      "cs": {
+        "title": "Skupinová A Podzim 2024",
+        "date": "2024-09-23",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-a-podzim-2024"
+      }
+    }
+  },
+  {
+    "id": "skupinova-b-podzim-2024",
+    "translations": {
+      "en": {
+        "title": "Group B Fall 2024",
+        "date": "2024-09-23",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-podzim-2024"
+      },
+      "cs": {
+        "title": "Skupinová B Podzim 2024",
+        "date": "2024-09-25",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-b-podzim-2024"
+      }
+    }
+  },
+  {
+    "id": "skupinova-a-zima-2024",
+    "translations": {
+      "en": {
+        "title": "Group A Winter 2024",
+        "date": "2024-11-24",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-a-zima-2024"
+      },
+      "cs": {
+        "title": "Skupinová A Zima 2024",
+        "date": "2024-11-24",
+        "redirect": "https://vysledky.zdenektomis.eu/tournament/skupinova-a-zima-2024"
+      }
+    }
+  },
+  {
+    "id": "pbl-2024-25",
+    "translations": {
+      "en": {
+        "title": "Prague Bridge League 2024-25",
+        "date": "2024-09-30",
+        "redirect": "https://vysledky.bkpraha.cz/prezentace/2024/prazska-bridzova-liga/"
+      },
+      "cs": {
+        "title": "Pražská Bridžová Liga 2024-25",
+        "date": "2024-09-30",
+        "redirect": "https://vysledky.bkpraha.cz/prezentace/2024/prazska-bridzova-liga/"
+      }
+    }
+  },
+  {
+    "id": "swiss-fall-2024",
+    "translations": {
+      "en": {
+        "title": "Swiss groups Fall 2024",
+        "date": "2024-09-18",
+        "redirect": "https://vysledky.bkpraha.cz/prezentace/2024/svycarska-skupinovka-podzim/"
+      },
+      "cs": {
+        "title": "Švýcarská skupinovka podzim 2024", 
+        "date": "2024-09-18",
+        "redirect": "https://vysledky.bkpraha.cz/prezentace/2024/svycarska-skupinovka-podzim/"
+      }
+    }
+  },
+  {
+    "id": "swiss-winter-2024",
+    "translations": {
+      "en": {
+        "title": "Swiss groups Winter 2024",
+        "date": "2024-11-27",
+        "redirect": "https://vysledky.bkpraha.cz/prezentace/2024/svycarska-skupinovka-zima/"
+      },
+      "cs": {
+        "title": "Švýcarská skupinovka zima 2024", 
+        "date": "2024-11-27",
+        "redirect": "https://vysledky.bkpraha.cz/prezentace/2024/svycarska-skupinovka-zima/"
+      }
+    }
+  },
+  {
+    "id": "bavlnky-2025",
+    "translations": {
+      "en": {
+        "title": "Results Bavlnka 2025",
+        "date": "2025-12-01",
+        "redirect": "https://bridge.zdenektomis.eu/vysledky/2025/bkp-bavlnka/en.php"
+      },
+      "cs": {
+        "title": "Výsledky Bavlnek 2025",
+        "date": "2025-12-01",
+        "redirect": "https://bridge.zdenektomis.eu/vysledky/2025/bkp-bavlnka/"
       }
     }
   }
