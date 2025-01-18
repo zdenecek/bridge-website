@@ -22,3 +22,9 @@ Data jsou přímo generovaná z Matriky ČBS, takže jsou vždy aktuální.
     </label>
     <input type="hidden" name="lang" value="cs">
 </form>
+
+V Tournament Calculatoru lze zadat url pro stažení souboru, použijte následující url:
+
+```
+https://bridge.zdenektomis.eu/apps/matrika-player-db?remap_columns=1
+```
