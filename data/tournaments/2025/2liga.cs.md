@@ -16,27 +16,19 @@ Každý víkend se odehraje **7 kol po 12 rozdáních**. Rozpis zápasů zůstá
 
 ### Kroužkování a zadání nasazení
 
-Podle propozic **domácí usedají po hostech**. Dříve se nasazení hráčů zapisovalo na papírovou nástěnku, tzv. „kroužkování“. V novém formátu turnaje však nasazení probíhá elektronicky pomocí programu.
+Podle propozic **domácí usedají po hostech**. Dříve se nasazení hráčů zapisovalo na papírovou nástěnku, tzv. „kroužkování“. V novém formátu turnaje však předání informace o nasazení probíhá elektronicky pomocí programu.
 
-#### Jak zadat nasazení?
-1. Navštivte stránku: [Nasazení](https://bridge.zdenektomis.eu/vysledky/2025/2-liga/lineup/login.php).
+### Jak zadat nasazení?  
+
+1. Navštivte stránku: [Nasazení](https://bridge.zdenektomis.eu/vysledky/2025/2-liga/lineup/login.php).  
 2. Přihlaste se pomocí údajů, které obdrželi kapitáni týmů e-mailem.  
-   *Pokud údaje nemáte, kontaktujte organizátora na [email](mailto:zdnek.tomis@gmail.com).*
-3. Pro každý zápas, ve kterém váš tým hostuje, vyplňte nasazení hráčů. 
-4. Poté se můžete odhlásit.
+   Pokud údaje nemáte, kontaktujte VT na [email](mailto:zdnek.tomis@gmail.com).
+3. Hostující týmy zadávají nasazení hráčů pro všechny zápasy, ve kterých hostují. Domácí týmy mohou vidět nasazení hostů ihned po jeho zadání a přihlášením si jej zobrazit.  
+4. Pro každý zápas se nasazení vyplňuje zvlášť, včetně obou místností a obou stolů. Lze ho zadat i pro všechny tři víkendy dopředu, ale po odeslání už nelze v programu měnit.  
+5. Nasazení je vhodné zadat **alespoň den předem**, ne na poslední chvíli.  
+6. Po vyplnění se můžete odhlásit.  
 
-#### Povinnosti kapitánů:
-- **Hostující týmy:** Musí zadat nasazení hráčů do programu pro všechny zápasy.
-- **Domácí týmy:** Zadání nasazení není povinné. Domácí vidí nasazení hostů ihned po jeho zadání.
-  Pro zobrazení nasazení se přihlašte a rozklikněte zápas.
-
-#### Důležitá pravidla:
-- Nasazení zadejte **alespoň den předem**, prosím ne na poslední chvíli.
-- Nasazení se zadává zvlášť pro každý zápas, včetně obou místností a obou stolů.
-- Nasazení lze zadat pro všechny tři víkendy dopředu. **Po odeslání však nelze v programu nasazení měnit.**
-
-Pokud potřebujete opravit chybu v nasazení nebo reagovat na změnu situace (např. nemoc hráče), kontaktujte vedoucího soutěže na [email](mailto:zdnek.tomis@gmail.com).
-
+Pokud je nutné opravit chybu v nasazení nebo reagovat na změnu situace (např. nemoc hráče), kontaktujte vedoucího soutěže na [email](mailto:zdnek.tomis@gmail.com), nebo osobně na místě.
 
 ### Rozpis zápasů
 
@@ -105,3 +97,13 @@ Pokud potřebujete opravit chybu v nasazení nebo reagovat na změnu situace (na
 | Callimero   | 2    | Havířov 0pts  |
 | Elán        | 3    | NM - TU       |
 | 6 Tygrů     | 4    | Pauza         |
+
+<style>
+    table {
+        width: unset;
+    }
+
+    td:nth-child(1), th:nth-child(1), td:nth-child(3), th:nth-child(3) {
+        width: 150px;
+    }
+</style>
