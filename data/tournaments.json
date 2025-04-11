@@ -428,10 +428,18 @@
               }
             ]
           },
-          {
-            "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2023/",
-            "type": "last-year"
-          }
+           {
+            "entries": [
+              {
+                "link": "https://www.rajce.idnes.cz/bridzhavirov/album/cbt-havirov-2024",
+                "type": "photogallery"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2023/",
+                "type": "last-year"
+              }
+            ]
+           }
         ]
       },
       "cs": {
@@ -466,9 +474,18 @@
             ]
           },
           {
-            "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2023/",
-            "type": "last-year"
-          }
+            "entries": [
+              {
+                "link": "https://www.rajce.idnes.cz/bridzhavirov/album/cbt-havirov-2024",
+                "type": "photogallery"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2023/",
+                "type": "last-year"
+              }
+            ]
+           }
+       
         ]
       }
     }
