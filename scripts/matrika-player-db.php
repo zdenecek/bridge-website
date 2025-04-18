@@ -37,6 +37,13 @@ $convertedResponse = iconv("CP1250", "UTF-8//TRANSLIT", $response);
 
 // Check if the remap_columns parameter is set
 $remapColumns = isset($_GET['remap_columns']) && $_GET['remap_columns'] == '1';
+$projectRank = isset($_GET['map_rank']) 
+    ? ($_GET['map_rank'] === 'square' 
+        ? 'square' 
+        : ($_GET['map_rank'] === 'exp' 
+            ? 'exp' 
+            : ''))
+    : "";
 
 // Convert semicolon-separated CSV to comma-separated and map columns
 $lines = explode(PHP_EOL, $convertedResponse);
@@ -81,11 +88,19 @@ foreach ($lines as $line) {
             $category = getCategoryFromYear($birthYear); // Get the category
         }
 
+        if ($projectRank == "square") {
+            $rank = $columns[7] * $columns[7];
+        } else if ($projectRank == "exp") {
+            $rank = exp($columns[7]);
+        } else {
+            $rank = $columns[7];
+        }
+
         $mappedRow = [
             'Pid' => $columns[0],
             'FirstName' => $columns[2],
             'LastName' => $columns[1],
-            'Rank' => '1', // Empty
+            'Rank' => $rank,
             'District' => '', // Empty
             'Sex' => $columns[6] == "Z" ? "Female" : "Male", // Gender mapping
             'AgeCategory' => $category,
