@@ -91,7 +91,7 @@ foreach ($lines as $line) {
         if ($projectRank == "square") {
             $rank = $columns[7] * $columns[7];
         } else if ($projectRank == "exp") {
-            $rank = exp($columns[7]);
+            $rank = round(exp($columns[7]));
         } else {
             $rank = $columns[7];
         }
