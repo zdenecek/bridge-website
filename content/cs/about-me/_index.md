@@ -63,7 +63,7 @@ Jsem také členem
 
 ### Hráčská kariéra
 
-Bridž hraji od roku 2013. Účastnil jsem se mnoha turnajů, jak v Česku, tak i v zahraničí.
+Bridž hraju od roku 2013. Účastnil jsem se mnoha turnajů, jak v Česku, tak i v zahraničí.
 
 <div class="img-container gallery">
 <div>
@@ -111,3 +111,5 @@ V sekci [turnaje](/tournaments) naleznete seznam národních turnajů, kterých 
 [HABRA - HAvířovská BRidžová Akademie](https://bridzhavirov.cz) - je bridžová škola a klub v Havířově, kde jsem vyrůstal a naučil se hrát bridž.
 
 Rád bych vyjádřil svůj velký vděk a obdiv, kteří tuto školu založili a tak dobře se o ni starají, zejména mému prvnímu učiteli bridže, Jardovi Hájkovi, a mým dalším učitelům, kolegům a partnerům, Danielu Vachtarčíkovi, Soně Hájkové a Petru Pszczolkovi.
+
+x
