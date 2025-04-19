@@ -112,4 +112,3 @@ V sekci [turnaje](/tournaments) naleznete seznam národních turnajů, kterých 
 
 Rád bych vyjádřil svůj velký vděk a obdiv, kteří tuto školu založili a tak dobře se o ni starají, zejména mému prvnímu učiteli bridže, Jardovi Hájkovi, a mým dalším učitelům, kolegům a partnerům, Danielu Vachtarčíkovi, Soně Hájkové a Petru Pszczolkovi.
 
-x
