@@ -37,7 +37,7 @@ Všechny výstupy lze snadno zkopírovat do schránky nebo stáhnout jako textov
 ## Technické detaily
 
 - Čísla partií odpovídají skutečným číslům partií v turnaji (ne pořadovým číslům souborů)
-- Průměry jsou zaokrouhleny na celá čísla
+- Průměry jsou zaokrouhleny na nejbližších 10 bodů (např. 423 → 420, 438 → 440)
 - Při filtrování je vždy zachován alespoň jeden výsledek pro výpočet průměru
 - Nástroj automaticky odstraňuje případné parametry a fragmenty z URL adresy
 
