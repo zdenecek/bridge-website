@@ -5,8 +5,6 @@ translationKey: tc-to-freq
 url: tc-freq
 ---
 
-# Frekvence a průměry z Tournament Calculator prezentace
-
 Tento nástroj umožňuje zpracovat výsledky z Tournament Calculator prezentace a zobrazit frekvence a průměry pro každou partii. Nástroj je užitečný zejména pro:
 
 - Rychlé zobrazení frekvencí výsledků na jednotlivých partiích
@@ -43,4 +41,4 @@ Všechny výstupy lze snadno zkopírovat do schránky nebo stáhnout jako textov
 - Při filtrování je vždy zachován alespoň jeden výsledek pro výpočet průměru
 - Nástroj automaticky odstraňuje případné parametry a fragmenty z URL adresy
 
-[Spustit nástroj](/scripts/tc-to-frequencies.php)
+[Přejít na nástroj](/apps/tc-to-frequencies.php)
