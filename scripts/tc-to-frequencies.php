@@ -96,7 +96,7 @@ function calculateBoardStats(array $scores, $dropCount = 0, $dropPercentage = 0)
     $excludedLow = array_slice($scores, 0, $dropFromEach);
     $excludedHigh = array_slice(array_reverse($scores), 0, $dropFromEach);
     
-    $average = count($includedScores) > 0 ? array_sum($includedScores) / count($includedScores) : null;
+    $average = count($includedScores) > 0 ? round(array_sum($includedScores) / count($includedScores), -1) : null;
     
     return [
         'average' => $average,
