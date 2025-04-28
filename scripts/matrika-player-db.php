@@ -1,5 +1,6 @@
 <?php
 // download player database from matrikacbs.cz
+// allows for mapping of columns and various other options
 
 // URL to send the POST request to
 $url = "https://matrikacbs.cz/Prehled-hracu.aspx";

@@ -1,4 +1,8 @@
 <?php
+/**
+ * Convert Tournament Calculator results to matrikacbs.cz import format
+ */
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
     $url = preg_replace('/#.*$/', '', $_GET['url']); // Remove fragment from URL
     $noname = isset($_GET['noname']);

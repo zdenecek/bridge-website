@@ -1,4 +1,6 @@
 <?php
+/** Donwload a file and convert it from Windows-1250 encoding */
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['filename'], $_POST['content'])) {
     $filename = basename($_POST['filename']); // Ensure the filename is safe
     $content = base64_decode($_POST['content']); // Decode the content
