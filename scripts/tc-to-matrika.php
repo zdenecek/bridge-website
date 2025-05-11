@@ -156,6 +156,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
 } else {
     $output = null;
     $downloadLinks = null;
+    $noname = false;
+    $tournamentType = 'pair';
 }
 ?>
 
@@ -165,25 +167,117 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>matrikacbs.cz convertor</title>
-    <link rel="stylesheet" href="https://unpkg.com/bamboo.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        input[type="submit"], button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        input[type="submit"]:hover, button:hover {
+            background-color: #45a049;
+        }
+        textarea {
+            width: 100%;
+            font-family: monospace;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        .button-group {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .intro {
+            margin-bottom: 25px;
+            line-height: 1.5;
+            color: #444;
+        }
+        .flex {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .flex label {
+            margin-bottom: 0;
+        }
+        .radio-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .radio-group label {
+            margin-bottom: .5em;
+            margin-top: .5em;
+            margin-right: 1em;
+        }
+    </style>
 </head>
 <body>
     <h1>Convert TournamentCalculator to <a href="https://matrikacbs.cz">matrikacbs.cz</a></h1>
+    <div class="intro">
+        This tool converts Tournament Calculator results to the import format for <a href="https://matrikacbs.cz">matrikacbs.cz</a>.<br>
+        Enter the URL of the Tournament Calculator results, select the tournament type, and choose whether to exclude participant names. The output can be copied or downloaded for direct import.
+    </div>
     <form method="get">
-        <label for="url">Tournament URL:</label>
-        <input type="text" id="url" name="url" value="<?= htmlspecialchars($_GET['url'] ?? '') ?>" required>
-        <br>
-        <label for="type">Tournament Type:</label>
-        <select id="type" name="type">
-            <option value="pair" <?= $tournamentType === 'pair' ? 'selected' : '' ?>>Pair Tournament</option>
-            <option value="individual" <?= $tournamentType === 'individual' ? 'selected' : '' ?>>Individual Tournament</option>
-            <option value="team" <?= $tournamentType === 'team' ? 'selected' : '' ?>>Team Tournament</option>
-        </select>
-        <br>
-        <input type="checkbox" id="noname" name="noname" <?= $noname ? 'checked' : '' ?>>
-        <label for="noname">Exclude participant names (use when all players have matrika numbers assigned and filled in)</label>
-        <br>
-        <button type="submit">Convert</button>
+        <div class="form-group">
+            <label for="url">Tournament URL:</label>
+            <input type="text" id="url" name="url" value="<?= htmlspecialchars($_GET['url'] ?? '') ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="type">Tournament Type:</label>
+            <div class="radio-group">
+                <input type="radio" id="type-pair" name="type" value="pair" <?= $tournamentType === 'pair' ? 'checked' : '' ?>>
+                <label for="type-pair">Pair Tournament</label>
+                
+                <input type="radio" id="type-individual" name="type" value="individual" <?= $tournamentType === 'individual' ? 'checked' : '' ?>>
+                <label for="type-individual">Individual Tournament</label>
+                
+                <input type="radio" id="type-team" name="type" value="team" <?= $tournamentType === 'team' ? 'checked' : '' ?>>
+                <label for="type-team">Team Tournament</label>
+            </div>
+        </div>
+        <div class="form-group flex">
+            <input type="checkbox" id="noname" name="noname" <?= $noname ? 'checked' : '' ?>>
+            <label for="noname">Exclude participant names (use when all players have matrika numbers assigned and filled in)</label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Convert">
+        </div>
     </form>
 
     <?php if ($output !== null && !is_array($output)): ?>
@@ -191,6 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
         <textarea readonly rows="25"><?= htmlspecialchars($output) ?></textarea>
     <?php elseif (is_array($downloadLinks)): ?>
         <h2>Download Team Tournament Files</h2>
+        <div class="button-group">
         <?php foreach ($downloadLinks as $fileName => $content): ?>
             <form method="post" action="download" style="display:inline;">
                 <input type="hidden" name="filename" value="<?= htmlspecialchars($fileName) ?>">
@@ -198,6 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
                 <button type="submit">Download <?= htmlspecialchars($fileName) ?></button>
             </form>
         <?php endforeach; ?>
+        </div>
     <?php endif; ?>
 </body>
 </html>
