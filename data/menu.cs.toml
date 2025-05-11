@@ -9,19 +9,27 @@ post_list = { section = "turnaje", limit = 3, show_more = true, show_more_url = 
 
 [[entries.entries]]
 title = "Turnaje v BK Praha"
-post_list = { section = "turnaje-v-bk-praha", limit = 4, show_more = true, show_more_url = "turnaje-v-bk-praha", show_more_text = "zobrazit více turnajů" }
+post_list = { section = "turnaje-v-bk-praha", limit = 2, show_more = true, show_more_url = "turnaje-v-bk-praha", show_more_text = "zobrazit více turnajů" }
 
 [[entries]]
 title = "Články a návody"
 post_list = { section = "clanky", limit = 3, show_date=true }
 
-[[entries.entries]]
-title = "Pro vedoucí turnajů"
-url = "td-stuff"
-
 [[entries]]
+title = "Pro vedoucí turnajů"
+
+[[entries.entries]]
 title = "Program pro práci se soubory .pbn"
 url = "pbn"
+
+[[entries.entries]]
+title = "Převodník TC → matrika"
+url = "/apps/tc-to-matrika"
+
+[[entries.entries]]
+title = "další nástroje"
+url = "td-stuff"
+
 
 [[entries]]
 title = "Dražební systém Fools"

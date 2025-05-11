@@ -1,11 +1,11 @@
 ---
-title: Návod na prezentace
+title: Jak se vyznat ve výsledcích turnaje
 date: 2024-10-20
 description: Uživatelský návod na prezentace generované Tournament Calculator
 ---
 
 Tato stránka obsahuje uživatelský, hráčský návod na prezentace turnajů
-generované Tournament Calculator.
+generované programem Tournament Calculator, který používám na výpočet výsledků turnajů.
 
 [Tournament Calculator](tournamentcalculator.com) je polský program Stanislawa
 Mączky, který jsem začal používat na turnajích v roce 2022.
