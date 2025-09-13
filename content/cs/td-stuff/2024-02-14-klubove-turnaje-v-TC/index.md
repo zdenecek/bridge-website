@@ -135,7 +135,7 @@ Tím, že pauzu zadáme před vytvořením BWS, docílíme toho, že Bridgematy 
 
 Dále je ale nutné zadat výsledky s pauzou v Tournament Calculator. Pokud máme zapnuto nastavení `Enter sit-out results automatically`, budou výsledky zadány automaticky. 
 
-[automatické zadání výsledků s pauzou](autoEnterSitout.png)
+![automatické zadání výsledků s pauzou](autoEnterSitout.png)
 
 > TC automaticky vyplní výsledky tam, kde hraje SIT-OUT. Výsledky pro jednotlivá kola budou vyplněny, jakmile bude zadáno 30 % všech výsledků daného kola.
 
