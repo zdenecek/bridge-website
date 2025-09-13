@@ -81,6 +81,10 @@
     background-color: $--secondary-text-color !important; 
     code { color: $--bg-color !important; }
   }
+
+  :target {
+    background-color: $--link-color !important;
+  }
 }
 
 
