@@ -3,17 +3,29 @@ title: Klubové turnaje v Tournament Calculator
 date: 2024-02-12
 ---
 
+- [Možnosti vytvoření turnaje](#možnosti-vytvoření-turnaje)
+- [Založení prázdného turnaje](#založení-prázdného-turnaje)
+- [Navigace v programu](#navigace-v-programu)
+- [Navedení hráčů](#navedení-hráčů)
+  - [Pauza](#pauza)
+- [Import střídání](#import-střídání)
+- [Vytvoření BWS databáze a spuštění bridgematů](#vytvoření-bws-databáze-a-spuštění-bridgematů)
+- [Nastavení prezentace](#nastavení-prezentace)
+- [Konec turnaje](#konec-turnaje)
+- [Odkazy](#odkazy)
+
+
 Tento článek popisuje, jak využít Tournament Calculator pro pořádání klubových
 turnajů. Tedy párových turnajů s jedním kolem.
 
-## Vytvoření turnaje
+## Možnosti vytvoření turnaje
 
 Při vytváření turnaje máme v zásadě dvě možnosti:
 
 1. Použijeme průvodce (wizard), který nám dá na výběr z předdefinovaných
    střídaní, podle toho, kolik máme stolů a kolik rozdání chceme hrát. TC umí
    mnoho různých střídání. Střídací lístky pak můžeme vytisknout, případně
-   můžeme střídat podle BridgeMate (Jména hráčů podporují až od verze 2).
+   můžeme střídat podle BridgeMate (Zobrazit jména hráčů umí jen nové BridgeMaty - verze 2).
 
 2. Vytvoříme prázdný turnaj a střídání importujeme. Tento přístup má tu výhodu,
    že můžeme využít předpřipravené střídací lístky.
@@ -34,20 +46,18 @@ kole rozdání z nesouvislého intervalu (např. 1-3 a 7-9), je potřeba rozděl
 kola na půlkola. Nic jako půlkola ale v TC neexistuje, každé kolo se rozdělí na
 dvě celá kola a celkový počet kol bude dvojnásobný.
 
-Pro účely toho článku vytvořím turnaj ručně a střídání importuji. Jako příklad
+Pro účely toho článku vytvořím turnaj prázdný a střídání importuji. Jako příklad
 poslouží turnaj na čtyři stoly, použijeme předpřipravený soubor se střídáním.
 
-### Postup
+## Založení prázdného turnaje
 
-1. Otevřu TC
-2. Odmítnu aktualizaci, aby se mi nesmazala licence.
-3. Dám `File -> Empty -> Pairs`
-4. Otevře se mi dialog pro uložení turnaje, vyberu název a umístění souboru.
+1. `File -> Empty -> Pairs`
+2. Otevře se mi dialog pro uložení turnaje, vyberu název a umístění souboru.
 
    Soubory turnajů v TC mají příponu `.npc` a celý turnaj je obsažen v jediném
    souboru.
 
-#### Navigace v programu
+## Navigace v programu
 
 Nyní máme otevřený prázdný turnaj. Záložky v horní části programu slouží k
 navigaci. V programu jsou tyto záložky:
@@ -63,27 +73,22 @@ navigaci. V programu jsou tyto záložky:
 - **BWS** - Správa bridgematů - zde se vytvoří soubor s databází pro bridgemate
   a lze odsud také rovnou spustit program pro obsluhu bridgematů.
 
-### Další postup
+
 
 V dalších krocích postupně provedeme postupně tyto úkony:
 
-1.  Navedení hráčů
-2.  Import střídání
-3.  Vytvoření BWS databáze a spuštění bridgematů
-4.  Nastavení prezentace s výsledky
+1. Navedení hráčů
+2. Import střídání
+3. Vytvoření BWS databáze a spuštění bridgematů
+4. Nastavení prezentace
 
-#### Navedení hráčů
+## Navedení hráčů
 
 Pro tento účel navedeme do programu databázi českých hráčů z ČBS.
 
-Databázi hráčů lze stáhnout z [Matriky ČBS](https://matrikacbs.cz/). Formát souboru ale není ve správném formátu. Upravený soubor `databazeHracu.csv` lze stáhnout [zde](/soubory/databazeHracu.csv).
+Databázi hráčů lze stáhnout z [Matriky ČBS](https://matrikacbs.cz/). Formát souboru ale není ve správném formátu. Upravený soubor lze stáhnout [zde]({{< relref "/td-stuff/matrika-cbs-utf8" >}}).
 
 ![nastaveni databaze hracu](set-player-db.png)
-
-1. stáhnu `databazeHracu.csv`
-2. v záložce `Participants` zakliknu `Use database`
-3. vyberu možnost Custom pro formát databáze
-4. tlačítka `Open from file` a vyberu soubor `databazeHracu.csv`
 
 Nyní máme navedenou databázi a můžeme přidat hráče.
 
@@ -118,7 +123,35 @@ Ruční zadávání hráčů je možno zcela přeskočit, pokud necháme zadat h
 
 ![alt text](readPeopleBWS.png)
 
-#### Import střídání
+### Pauza
+
+Pauzu můžeme zadat následujícím způsobem:
+
+1. V záložce `Participants` klikneme na tlačítko `Manage sit-outs`
+2. V dialogu zadáme číslo pauzujícího páru, případně více, oddělené čárkou.
+3. Potvrdíme.
+
+Tím, že pauzu zadáme před vytvořením BWS, docílíme toho, že Bridgematy budou správě přeskakovat zadání výsledků u pauzujících párů.
+
+Dále je ale nutné zadat výsledky s pauzou v Tournament Calculator. Pokud máme zapnuto nastavení `Enter sit-out results automatically`, budou výsledky zadány automaticky. 
+
+[automatické zadání výsledků s pauzou](autoEnterSitout.png)
+
+> TC automaticky vyplní výsledky tam, kde hraje SIT-OUT. Výsledky pro jednotlivá kola budou vyplněny, jakmile bude zadáno 30 % všech výsledků daného kola.
+
+V opačném případě je nutné zadat výsledky ručně v záložce `Calculation`.
+
+![rucni zadani výsledků s pauzou](sitout-button.png)
+
+Tato akce umožnuje čtyři možnosti výsledků s pauzou:
+- SIT-OUT - výsledek se nezapočte
+- AA - průměr
+- AM - "průměrné mínus" 
+- AP - "průměrné plus"
+
+Pro většinu případů je nejvhodnější možnost SIT-OUT.
+
+## Import střídání
 
 Nyní máme navedené hráče a můžeme importovat střídání.
 
@@ -138,7 +171,7 @@ Vybereme všecha kol pomocí políčka All.
 
 Odklikneme OK v potvrzovacím dialogu.
 
-#### Spuštění bridgematů a vytvoření souboru s databází
+## Vytvoření BWS databáze a spuštění bridgematů
 
 1. V záložce BWS klikneme na tlačítko `Create new BWS`  
    BWS je formát databáze výsledků pro bridgematy. Nikdy ho nebudeme přímo upravovat, ale pro zajímavost se jedná o databázi MS Access se změněnou příponou.
@@ -172,7 +205,7 @@ Poté je vždy možné spustit BCS z TC, a to pomocí zeleného tlačítka Run B
 
 ![alt text](runBCSmanually.png)
 
-#### Nastavení prezentace
+## Nastavení prezentace
 
 Pro prezentaci musím vyplnit správně
 
@@ -196,7 +229,7 @@ Další možnosti, které lze nastavit:
 
 Tlačítkem `Send to FTP now` lze prezentaci nahrát ručně, nebo počkat, až se nahrává automaticky. (defaultní nastavení je každých 30s, pokud jsou zaplé Live results)
 
-### Konec turnaje
+## Konec turnaje
 
 Na konci turnaje je možné zavřít BCS.
 
@@ -211,5 +244,6 @@ Prezentaci pak manuálně přenahrajeme tlačítkem `Send to FTP now`, nebo poč
 - [Databáze hráčů z Matriky ČBS ve formátu pro TournamentCalculator]({{< relref "/td-stuff/matrika-cbs-utf8" >}})
 - [Bridge Mate Control](https://support.bridgemate.com/en/support/solutions/articles/44002262504-bridgemate-control-software-3-9-9) - program pro obsluhu bridgematů 
 - [Článek s pokročilými postupy]({{< relref "/td-stuff/2024-03-02-slozitejsi-parove-turnaje-a-postupy-v-TC" >}})
+- [Jak dostat databázi hráčů z Matriky do Tournament Calculator]({{< relref "/td-stuff/matrika-cbs-utf8" >}})
 
 

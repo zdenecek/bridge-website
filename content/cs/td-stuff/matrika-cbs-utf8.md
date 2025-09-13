@@ -28,3 +28,9 @@ V Tournament Calculatoru lze zadat url pro stažení souboru, použijte následu
 ```
 https://bridge.zdenektomis.eu/apps/matrika-player-db?remap_columns=1
 ```
+
+Tuto hodnotu zadejte v Tournament Calculatoru do pole `Custom database URL`:
+
+![custom database url](matrika-cbs-utf8.png)
+
+Poté můžete použít tlačítko `Download player database` pro načtení aktuální databáze hráčů.
