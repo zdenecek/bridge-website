@@ -137,7 +137,7 @@ Dále je ale nutné zadat výsledky s pauzou v Tournament Calculator. Pokud mám
 
 ![automatické zadání výsledků s pauzou](autoEnterSitout.png)
 
-> TC automaticky vyplní výsledky tam, kde hraje SIT-OUT. Výsledky pro jednotlivá kola budou vyplněny, jakmile bude zadáno 30 % všech výsledků daného kola.
+Z dokumentace:TC automaticky vyplní výsledky tam, kde hraje SIT-OUT. Výsledky pro jednotlivá kola budou vyplněny, jakmile bude zadáno 30 % všech výsledků daného kola.
 
 V opačném případě je nutné zadat výsledky ručně v záložce `Calculation`.
 

@@ -1097,6 +1097,41 @@
         ]
       }
     }
+  },
+  {
+    "id": "3-liga-2025",
+    "translations": {
+      "en": {
+        "title": "3rd National League",
+        "date": "2025-10-04",
+        "slug": "3rd-national-league-2025",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga/",
+            "text": "Results - Bohemia"
+          },
+          {
+            "link": "https://prezentace.bridzhavirov.cz/2025/3ligaM04-10-25/",
+            "text": "Results - Moravia & Silesia"
+          }
+        ]
+      },
+      "cs": {
+        "title": "3. celostátní liga",
+        "date": "2025-10-04",
+        "slug": "3-liga-2025",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga/",
+            "text": "Výsledky české části"
+          },
+          {
+            "link": "https://prezentace.bridzhavirov.cz/2025/3ligaM04-10-25/",
+            "text": "Výsledky moravské-slezské části"
+          }
+        ]
+      }
+    }
   }
 ]
   
