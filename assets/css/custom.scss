@@ -135,6 +135,7 @@ body[a="light"] {
 
 .page-content {
   ul {
+    padding-left: 20px;
       list-style-type: "\2664";
 
       li {
@@ -143,7 +144,7 @@ body[a="light"] {
 
       ul {
           list-style-type: "\2662";
-
+          padding-left: 20px;
           ul {
               list-style-type: "\2667";
           }
@@ -151,13 +152,48 @@ body[a="light"] {
   }
 }
 
+@media (max-width: 768px) {
+  // On the phone, list indentation is smaller
+  .page-content {
+    ul {
+      padding-left: 5px;
+    }
+
+    ul ul {
+      padding-left: 12px;
+    }
+  }
+}
+
 .menu-date {
   display: inline-block;
+  vertical-align: middle;
   width: 7.5em;
+  padding-bottom: 0.2em;
   font-size: 0.8em;
 }
 
 .menu-date-short {
   display: inline-block;
   width: 4.5em; 
+}
+
+
+@media (max-width: 768px) {
+  // On the phone, the width of the content is smaller
+  .menu-date {
+    font-size: 0.7em;
+  }
+  
+  .menu-date-short {
+    display: inline-block;
+    width: 4.5em; 
+  }
+}
+
+@media (max-width: 768px) {
+  // On the phone, the width of the content is smaller
+  .w {
+    padding: 2rem 1rem;
+  }
 }
