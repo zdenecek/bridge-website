@@ -1117,9 +1117,10 @@
         ]
       },
       "cs": {
-        "title": "3. celostátní liga",
+        "title": "3. celostátní liga 2025",
         "date": "2025-10-04",
         "slug": "3-liga-2025",
+        "content-file": "data/tournaments/2025/3liga.cs.md",
         "entries": [
           {
             "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga/",
