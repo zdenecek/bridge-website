@@ -1133,6 +1133,80 @@
         ]
       }
     }
+  },
+  {
+    "id": "cbt-praha-2025",
+    "translations": {
+      "en": {
+        "title": "Czech Bridge Tour Prague 2025",
+        "date": "2025-10-18",
+        "slug": "cbt-prague-2025",
+        "entries": [
+          {
+            "title": "Friday Side Pairs Tournament",
+            "entries": [
+              {
+                "link": "https://vysledky.bkpraha.cz/prezentace/2025/cbt-praha-vedlejsi-parovy",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Saturday Main Pairs Tournament",
+            "entries": [
+              {
+                "link": "https://vysledky.bkpraha.cz/prezentace/2025/cbt-praha",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Sunday Team Tournament",
+            "entries": [
+              {
+                "link": "https://vysledky.bkpraha.cz/prezentace/2025/cbt-praha-vedlejsi-tymovy",
+                "type": "result-presentation"
+              }
+            ]
+          }
+        ]
+      },
+
+      "cs": {
+        "title": "Czech Bridge Tour Praha 2025",
+        "date": "2025-10-18",
+        "slug": "cbt-praha-2025",
+        "entries": [
+          {
+            "title": "Vedlejší párový turnaj",
+            "entries": [
+              {
+                "link": "https://vysledky.bkpraha.cz/prezentace/2025/cbt-praha-vedlejsi-parovy",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Hlavní párový turnaj",
+            "entries": [
+              {
+                "link": "https://vysledky.bkpraha.cz/prezentace/2025/cbt-praha",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Vedlejší týmový turnaj",
+            "entries": [
+              {
+                "link": "https://vysledky.bkpraha.cz/prezentace/2025/cbt-praha-vedlejsi-tymovy",
+                "type": "result-presentation"
+              }
+            ]
+          }
+        ]
+      }
+    } 
   }
 ]
   
