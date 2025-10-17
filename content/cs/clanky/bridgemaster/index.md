@@ -23,6 +23,6 @@ Tradičně se používá emulátor DOSBox, který simuluje staré prostředí, v
 Na mém webu si můžete Bridge Master spustit přímo v prohlížeči, zcela zdarma a bez nutnosti cokoliv instalovat.
 Program běží v integrovaném prostředí, které automaticky používá DOSBox na pozadí – stačí kliknout a hrát!
 
-[Spustit Bridge Master online](/static/bridgemaster/)
+[Spustit Bridge Master online](/bridgemaster/)
 
 Ať už jste začátečník nebo zkušený turnajový hráč, Bridge Master vás vždy dokáže naučit něco nového.

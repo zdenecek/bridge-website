@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if(running) return; 
   canvas.style.visibility = "visible"; 
   canvas.style.display = displaystyle; 
-  dos.run("/static/bridgemaster/BM.jsdos"); 
+  dos.run("/bridgemaster/BM.jsdos"); 
   running = true; 
   console.log("start");
 });
