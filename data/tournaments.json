@@ -1107,12 +1107,30 @@
         "slug": "3rd-national-league-2025",
         "entries": [
           {
-            "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga/",
-            "text": "Results - Bohemia"
-          },
+            "title": "Final",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga-finale/",
+                "text": "Results"
+              },
+              {
+                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=5583",
+                "type": "matrika-cbs"
+              }
+            ]
+          },  
           {
-            "link": "https://prezentace.bridzhavirov.cz/2025/3ligaM04-10-25/",
-            "text": "Results - Moravia & Silesia"
+            "title": "Regionals",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga/",
+                "text": "Results - Bohemia"
+              },
+              {
+                "link": "https://prezentace.bridzhavirov.cz/2025/3ligaM04-10-25/",
+                "text": "Results - Moravia & Silesia"
+              }
+            ]
           }
         ]
       },
@@ -1122,14 +1140,33 @@
         "slug": "3-liga-2025",
         "content-file": "data/tournaments/2025/3liga.cs.md",
         "entries": [
-          {
-            "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga/",
-            "text": "Výsledky české části"
-          },
-          {
-            "link": "https://prezentace.bridzhavirov.cz/2025/3ligaM04-10-25/",
-            "text": "Výsledky moravské-slezské části"
-          }
+           {
+            "title": "Finále",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga-finale/",
+                "text": "Výsledky"
+              },
+              {
+                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=5583",
+                "type": "matrika-cbs"
+              }
+            ]
+           },
+        
+           {
+            "title": "Regionální části",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga/",
+                "text": "Výsledky české části"
+              },
+              {
+                "link": "https://prezentace.bridzhavirov.cz/2025/3ligaM04-10-25/",
+                "text": "Výsledky moravské-slezské části"
+              }
+            ]
+           }
         ]
       }
     }

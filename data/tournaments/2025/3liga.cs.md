@@ -11,6 +11,31 @@ Za chybu se omlouváme.
 
 ## Harmonogram
 
+### Finále 8. 11. 2025
+
+Zápas se hraje na 2x8 rozdání.  
+Místo konání: Gymnázium Havířov Podlesí, Studentská 1198/11, Havířov.
+
+#### 1. kolo
+- 1. segment: 9:20 – 10:30  
+- Přestávka: 10:30 – 10:40  
+- 2. segment: 10:40 – 11:50  
+
+- Přestávka mezi koly: 11:50 – 12:00  
+
+#### 2. kolo
+- 1. segment: 12:00 – 13:10  
+- Přestávka: 13:10 – 13:20  
+- 2. segment: 13:20 – 14:30  
+
+- Obědová pauza: 14:30 – 16:00  
+
+#### 3. kolo
+- 1. segment: 16:00 – 17:10  
+- Přestávka: 17:10 – 17:20  
+- 2. segment: 17:20 – 18:30  
+
+
 ### Havířovská část
 Harmonogram byl zaslán přihlášeným družstvům.
 
