@@ -1114,7 +1114,7 @@
                 "text": "Results"
               },
               {
-                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=5583",
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5592",
                 "type": "matrika-cbs"
               }
             ]
@@ -1144,20 +1144,15 @@
             "title": "Finále",
             "entries": [
               {
-                "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga-finale/#000000OO000000000001000001000001000000000000000000",
-                "text": "Nasazení"
-              },
-              {
                 "link": "https://bridge.zdenektomis.eu/vysledky/2025/3-liga-finale/",
                 "text": "Výsledky"
               },
               {
-                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=5583",
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5592",
                 "type": "matrika-cbs"
               }
             ]
            },
-        
            {
             "title": "Regionální části",
             "entries": [

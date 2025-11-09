@@ -1,12 +1,7 @@
-## Postupový klíč
 
-- Z každé regionální části postupují dvě družstva do finále.
-- Do 2. ligy postupují dvě družstva.
-- Pokud se všichni kapitáni postupujících družstev dohodnou, je možné jednat o změně termínu či místa finále.
+Do druhé ligy postupují družstva Zoo a NM-TU. Gratulujeme!
 
-**Poznámka:**  
-V původních propozicích byla chyba – postupují dvě družstva (nikoliv tři).
-Za chybu se omlouváme.
+---
 
 ## Harmonogram
 
