@@ -1269,12 +1269,12 @@
     } 
   },
   {
-    "id": "vc-tranava",
+    "id": "vc-trnava",
     "translations": {
       "en": {
     "date": "2025-11-21",
-    "slug": "gp-tranava-2025",
-        "title": "GP Tranava 2025",
+    "slug": "gp-trnava-2025",
+        "title": "GP Trnava 2025",
         "entries": [
           {
             "entries": [
@@ -1302,8 +1302,8 @@
       "cs": {
 
         "date": "2025-11-21",
-        "slug": "gp-tranava-2025",
-        "title": "VC Tranava 2025",
+        "slug": "gp-trnava-2025",
+        "title": "VC Trnava 2025",
         "entries": [
           {
             "entries": [
