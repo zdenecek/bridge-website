@@ -1267,6 +1267,68 @@
         ]
       }
     } 
+  },
+  {
+    "id": "vc-tranava",
+    "translations": {
+      "en": {
+    "date": "2025-11-21",
+    "slug": "gp-tranava-2025",
+        "title": "GP Tranava 2025",
+        "entries": [
+          {
+            "entries": [
+              {
+                "text": "Tournament website",
+                "link": "https://vctt.bridgeclub.sk"
+              }
+            ]
+          },
+          {
+            "title": "Results",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2025/vc-trnava/tymy/",
+                "text": "Teams tournament"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2025/vc-trnava/pary/",
+                "text": "Pairs tournament"
+              }
+            ]
+          }
+        ]
+      },
+      "cs": {
+
+        "date": "2025-11-21",
+        "slug": "gp-tranava-2025",
+        "title": "VC Tranava 2025",
+        "entries": [
+          {
+            "entries": [
+              {
+                "text": "Stránky turnaje",
+                "link": "https://vctt.bridgeclub.sk"
+              }
+            ]
+          },
+          {
+            "title": "Výsledky",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2025/vc-trnava/tymy/",
+                "text": "Týmový turnaj"
+              },
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2025/vc-trnava/pary/",
+                "text": "Párový turnaj"
+              }
+            ]
+          }
+        ]
+      }
+    }
   }
 ]
   
