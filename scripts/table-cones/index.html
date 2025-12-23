@@ -37,6 +37,33 @@
       box-shadow: 4px 0 20px rgba(0,0,0,0.3);
     }
 
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .close-sidebar {
+      display: none;
+      background: none;
+      border: none;
+      color: #888;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+    }
+
+    .close-sidebar:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .close-sidebar {
+        display: block;
+      }
+    }
+
     .sidebar h1 {
       font-size: 18px;
       font-weight: 600;
@@ -217,7 +244,6 @@
       display: none;
       flex-direction: column;
       gap: 16px;
-      padding-top: 12px;
     }
 
     .advanced-content.open {
@@ -369,15 +395,69 @@
 
     @page {
       size: A4 portrait;
+    }
+
+    /* Mobile Styles */
+    .mobile-toggle {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #333;
+      color: #fff;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1001;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .mobile-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .main-content {
+        padding: 20px;
+        padding-bottom: 80px;
+      }
       margin: 0;
     }
   </style>
 </head>
 <body>
-  <aside class="sidebar">
-    <div>
-      <h1>Table Number Generator</h1>
-      <p class="subtitle">Create printable table number cones. Stackable, easily visible, inexpensive.</p>
+  <aside class="sidebar open">
+    <div class="sidebar-header">
+      <div>
+        <h1>Table Cone Generator</h1>
+        <p class="subtitle">Create printable table number cones. Stackable, easily visible, inexpensive.</p>
+      </div>
+      <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
     </div>
 
     <div class="control-row">
@@ -393,7 +473,7 @@
 
     <div class="control-group">
       <label>Triangle Side (mm)</label>
-      <input type="number" id="triangleSize" value="90" min="30" max="120">
+      <input type="number" id="triangleSize" value="100" min="30" max="120">
       <span class="info">↳ Auto-adjusts cones per page & gap</span>
     </div>
 
@@ -422,6 +502,11 @@
       <div class="control-group">
         <label>Gap Between Cones (mm)</label>
         <input type="number" id="gapSize" value="15" min="0" max="100">
+      </div>
+
+      <div class="control-group">
+        <label>Top Page Margin (mm)</label>
+        <input type="number" id="topMargin" value="5" min="0" max="50" onchange="generate()">
       </div>
 
       <div class="control-group">
@@ -476,7 +561,7 @@
       </div>
       <div class="footer-links">
         <div class="footer-links-row">
-          <a href="https://github.com/zdenecek/table-number-generator" target="_blank">
+          <a href="https://github.com/zdenecek/bridge-website" target="_blank">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
             </svg>
@@ -492,10 +577,13 @@
 
   <main class="main-content" id="output"></main>
 
+  <button class="mobile-toggle" onclick="toggleSidebar()">⚙️</button>
+
   <script>
     // Constants
     const A4_HEIGHT_MM = 297;
     const MARGIN_MM = 15;
+    const BOTTOM_MARGIN_MM = 10; // Fixed bottom margin for page
     const AVAILABLE_HEIGHT_MM = A4_HEIGHT_MM - (MARGIN_MM * 2); // 267mm
 
     let fontSizeAdjust = 0;
@@ -506,6 +594,11 @@
       const content = document.getElementById('advancedContent');
       toggle.classList.toggle('open');
       content.classList.toggle('open');
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      sidebar.classList.toggle('open');
     }
 
     function adjustFontSize(delta) {
@@ -570,37 +663,53 @@
       return sideMM * Math.sqrt(3) / 2;
     }
 
+    // Get available height based on current top margin
+    function getAvailableHeight() {
+      const topMargin = parseInt(document.getElementById('topMargin').value) || 5;
+      return A4_HEIGHT_MM - topMargin - BOTTOM_MARGIN_MM;
+    }
+
     // Calculate optimal number of cones that fit on a page
     function calculateOptimalCones(sideMM) {
       const triangleHeight = getTriangleHeight(sideMM);
-      // We want at least 15mm gap between cones
-      const minGap = 15;
+      const availableHeight = getAvailableHeight();
+      // We want at least 10mm gap between cones
+      const minGap = 10;
       // How many cones can fit with minimum gap?
       // N * height + (N-1) * minGap <= availableHeight
       // N * height + N * minGap - minGap <= availableHeight
       // N * (height + minGap) <= availableHeight + minGap
       // N <= (availableHeight + minGap) / (height + minGap)
-      const maxCones = Math.floor((AVAILABLE_HEIGHT_MM + minGap) / (triangleHeight + minGap));
+      const maxCones = Math.floor((availableHeight + minGap) / (triangleHeight + minGap));
       return Math.max(1, Math.min(maxCones, 10)); // Clamp between 1 and 10
     }
 
     // Calculate optimal gap for even spacing
     function calculateOptimalGap(sideMM, numCones) {
       const triangleHeight = getTriangleHeight(sideMM);
+      const availableHeight = getAvailableHeight();
       const totalTriangleHeight = numCones * triangleHeight;
-      const remainingSpace = AVAILABLE_HEIGHT_MM - totalTriangleHeight;
+      const remainingSpace = availableHeight - totalTriangleHeight;
       
       if (numCones <= 1) {
         // Center single cone - gap doesn't matter much, return reasonable default
         return Math.max(0, remainingSpace / 2);
       }
       
-      // Distribute remaining space as gaps between cones
-      // We have (numCones - 1) gaps between cones
-      // Plus we want some padding at top and bottom
-      // Total gaps = numCones + 1 (top padding, between each, bottom padding)
-      // But for simplicity, let's just do gaps between cones
+      // Distribute remaining space among (numCones - 1) gaps between cones
+      // The bottom margin (BOTTOM_MARGIN_MM) already provides space after last cone
+      // If bottom margin >= calculated gap, it naturally provides the visual spacing
       const gap = remainingSpace / (numCones - 1);
+      
+      // If bottom margin is larger than gap, we can reduce gaps slightly
+      // to make spacing more even (include bottom margin as part of last "gap")
+      if (BOTTOM_MARGIN_MM >= gap) {
+        // Bottom margin already provides enough spacing after last cone
+        // Redistribute to make gaps slightly larger and more even
+        const adjustedGap = (remainingSpace + BOTTOM_MARGIN_MM) / numCones;
+        return Math.max(0, Math.round(adjustedGap));
+      }
+      
       return Math.max(0, Math.round(gap));
     }
 
@@ -621,7 +730,7 @@
 
     // Called when cones per page changes - recalculate gap
     function onConesPerPageChange() {
-      const sideMM = parseInt(document.getElementById('triangleSize').value) || 90;
+      const sideMM = parseInt(document.getElementById('triangleSize').value) || 100;
       const numCones = parseInt(document.getElementById('conesPerPage').value) || 3;
       
       // Calculate optimal gap for this number of cones
@@ -634,9 +743,10 @@
     function generate() {
       const startNum = parseInt(document.getElementById('startNum').value) || 1;
       const endNum = parseInt(document.getElementById('endNum').value) || 12;
-      const triangleSizeMM = parseInt(document.getElementById('triangleSize').value) || 90;
+      const triangleSizeMM = parseInt(document.getElementById('triangleSize').value) || 100;
       const conesPerPage = parseInt(document.getElementById('conesPerPage').value) || 3;
       const gapSizeMM = parseInt(document.getElementById('gapSize').value) || 15;
+      const topMarginMM = parseInt(document.getElementById('topMargin').value) || 5;
       const uppercaseText = document.getElementById('uppercaseText').checked;
       const rawCustomText = document.getElementById('customText').value;
       const customText = uppercaseText ? rawCustomText.toUpperCase() : rawCustomText;
@@ -666,6 +776,7 @@
         const page = document.createElement('div');
         page.className = 'page';
         page.style.gap = gap + 'px';
+        page.style.paddingTop = topMarginMM + 'mm';
 
         pageNumbers.forEach(num => {
           const strip = createTriangleStrip(num, side, height, customText, fontFamily, bottomMarginAdjust);
@@ -766,7 +877,7 @@
       numberText.setAttribute('y', numberY);
       numberText.setAttribute('text-anchor', 'middle');
       numberText.setAttribute('dominant-baseline', 'middle');
-      numberText.setAttribute('font-family', `'${fontFamily}', serif`);
+      numberText.setAttribute('font-family', `${fontFamily}, serif`);
       numberText.setAttribute('font-weight', '700');
       numberText.setAttribute('font-size', numberFontSize);
       numberText.setAttribute('fill', '#1a1a1a');
@@ -779,7 +890,7 @@
         subText.setAttribute('y', textY);
         subText.setAttribute('text-anchor', 'middle');
         subText.setAttribute('dominant-baseline', 'middle');
-        subText.setAttribute('font-family', "'Segoe UI', system-ui, sans-serif");
+        subText.setAttribute('font-family', `${fontFamily}, serif`);
         subText.setAttribute('font-weight', '600');
         subText.setAttribute('letter-spacing', '2');
         subText.setAttribute('font-size', textFontSize);
@@ -804,6 +915,16 @@
       
       // Checkbox
       document.getElementById('uppercaseText').addEventListener('change', generate);
+      
+      // Show custom font input if "custom" is selected on page load
+      const fontSelect = document.getElementById('fontFamily');
+      const customFontInput = document.getElementById('customFont');
+      if (fontSelect.value === 'custom') {
+        customFontInput.style.display = 'block';
+      }
+      
+      // Listen for custom font input changes
+      customFontInput.addEventListener('input', generate);
       
       // Initial calculation
       onTriangleSizeChange();
