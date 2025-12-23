@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Cone Generator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Playfair+Display:wght@700&family=Cormorant+Garamond:wght@700&family=Merriweather:wght@700&family=Crimson+Pro:wght@700&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 300px;
+      min-width: 300px;
+      background: linear-gradient(180deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #fff;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+      box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+    }
+
+    .sidebar h1 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .sidebar .subtitle {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .control-group label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #999;
+    }
+
+    .control-group input, .control-group select {
+      padding: 10px 12px;
+      border: 1px solid #444;
+      border-radius: 6px;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .control-group input:focus, .control-group select:focus {
+      outline: none;
+      border-color: #666;
+    }
+
+    .control-group .info {
+      font-size: 10px;
+      color: #666;
+      font-style: italic;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      color: #ccc;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .control-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .control-row .control-group {
+      flex: 1;
+    }
+
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .font-controls button {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    .font-controls span.percent-sign {
+      font-size: 13px;
+      color: #888;
+      margin-left: -4px;
+    }
+
+    .adjust-input {
+      width: 50px;
+      padding: 6px 4px;
+      text-align: center;
+      font-size: 13px;
+      background: #333;
+      border: 1px solid #555;
+      border-radius: 4px;
+      color: #fff;
+      -moz-appearance: textfield;
+    }
+
+    .adjust-input::-webkit-outer-spin-button,
+    .adjust-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .custom-font-input {
+      margin-top: 8px;
+      width: 100%;
+      padding: 10px 12px;
+      background: #333;
+      border: 1px solid #555;
+      border-radius: 6px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 10px 16px;
+      background: #fff;
+      color: #1a1a1a;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s, background 0.2s;
+    }
+
+    button:hover {
+      background: #e8e8e8;
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: #4a9eff;
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: #3a8eef;
+    }
+
+    /* Advanced Section */
+    .advanced-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 10px 0;
+      border-top: 1px solid #444;
+      margin-top: 4px;
+    }
+
+    .advanced-toggle:hover {
+      color: #ccc;
+    }
+
+    .advanced-toggle .arrow {
+      transition: transform 0.2s;
+      font-size: 10px;
+    }
+
+    .advanced-toggle.open .arrow {
+      transform: rotate(90deg);
+    }
+
+    .advanced-content {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 12px;
+    }
+
+    .advanced-content.open {
+      display: flex;
+    }
+
+    .dependency-note {
+      background: #333;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 11px;
+      color: #aaa;
+      line-height: 1.5;
+    }
+
+    .dependency-note strong {
+      color: #4a9eff;
+    }
+
+    /* Footer */
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid #444;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+    }
+
+    .footer-links-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #888;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    .footer-links svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .footer-links span {
+      color: #555;
+    }
+
+    .footer-credits {
+      color: #666;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-credits a {
+      color: #888;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      overflow-y: auto;
+    }
+
+    /* A4 Page */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: white;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      padding: 15mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    /* Triangle Strip */
+    .triangle-strip {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .triangle-strip svg {
+      display: block;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: white;
+        display: block;
+      }
+
+      .sidebar {
+        display: none !important;
+      }
+
+      .main-content {
+        padding: 0;
+        gap: 0;
+      }
+
+      .page {
+        box-shadow: none;
+        margin: 0;
+        width: 210mm;
+        height: 297mm;
+        page-break-after: always;
+        page-break-inside: avoid;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div>
+      <h1>Table Number Generator</h1>
+      <p class="subtitle">Create printable table number cones. Stackable, easily visible, inexpensive.</p>
+    </div>
+
+    <div class="control-row">
+      <div class="control-group">
+        <label>Start</label>
+        <input type="number" id="startNum" value="1" min="1">
+      </div>
+      <div class="control-group">
+        <label>End</label>
+        <input type="number" id="endNum" value="12" min="1">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Triangle Side (mm)</label>
+      <input type="number" id="triangleSize" value="90" min="30" max="120">
+      <span class="info">↳ Auto-adjusts cones per page & gap</span>
+    </div>
+
+    <div class="control-group">
+      <label>Custom Text (optional)</label>
+      <input type="text" id="customText" placeholder="e.g. OPEN">
+      <span class="info">💡 Using colored paper? Add color name for color vision accessibility - so all people feel included</span>
+    </div>
+
+    <div class="advanced-toggle" onclick="toggleAdvanced()">
+      <span class="arrow">▶</span>
+      <span>Advanced Options</span>
+    </div>
+
+    <div class="advanced-content" id="advancedContent">
+      <div class="dependency-note">
+        <strong>Tip:</strong> Set triangle size first. Cones per page and gap are auto-calculated for optimal spacing. You can fine-tune them below.
+      </div>
+
+      <div class="control-group">
+        <label>Cones per Page</label>
+        <input type="number" id="conesPerPage" value="3" min="1" max="10">
+        <span class="info">↳ Changing recalculates gap</span>
+      </div>
+
+      <div class="control-group">
+        <label>Gap Between Cones (mm)</label>
+        <input type="number" id="gapSize" value="15" min="0" max="100">
+      </div>
+
+      <div class="control-group">
+        <label>Font</label>
+        <select id="fontFamily" onchange="onFontFamilyChange()">
+          <option value="Libre Baskerville">Libre Baskerville</option>
+          <option value="Playfair Display">Playfair Display</option>
+          <option value="Cormorant Garamond">Cormorant Garamond</option>
+          <option value="Merriweather">Merriweather</option>
+          <option value="Crimson Pro">Crimson Pro</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Georgia">Georgia</option>
+          <option value="custom">Custom...</option>
+        </select>
+        <input type="text" id="customFont" class="custom-font-input" placeholder="Enter font name" style="display: none;" oninput="generate()">
+      </div>
+
+      <div class="control-group">
+        <label>Font Size Adjust</label>
+        <div class="font-controls">
+          <button onclick="adjustFontSize(-5)">−</button>
+          <input type="number" id="fontSizeInput" value="0" class="adjust-input" onchange="setFontSize(this.value)">
+          <span class="percent-sign">%</span>
+          <button onclick="adjustFontSize(5)">+</button>
+          <button onclick="resetFontSize()">↺</button>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label>Text Bottom Margin</label>
+        <div class="font-controls">
+          <button onclick="adjustBottomMargin(-5)">−</button>
+          <input type="number" id="bottomMarginInput" value="0" class="adjust-input" onchange="setBottomMargin(this.value)">
+          <span class="percent-sign">%</span>
+          <button onclick="adjustBottomMargin(5)">+</button>
+          <button onclick="resetBottomMargin()">↺</button>
+        </div>
+      </div>
+
+      <div class="control-group checkbox-group">
+        <label>
+          <input type="checkbox" id="uppercaseText" checked>
+          Uppercase custom text (recommended)
+        </label>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="btn-primary" onclick="window.print()">🖨️ Print</button>
+      <div style="font-size:11px;color:#aaa;margin-top:6px;line-height:1.4">
+        <strong>Tip:</strong> For best results, print in <b>Google Chrome</b>. (Firefox breaks on pages 2 and beyond)
+      </div>
+      <div class="footer-links">
+        <div class="footer-links-row">
+          <a href="https://github.com/zdenecek/table-number-generator" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+            GitHub
+          </a>
+          <span>·</span>
+          <a href="https://github.com/zdenecek/bridge-website/issues/new?title=Table%20Cone%20Generator%3A%20Bug%20Report%2FFeature%20Request&body=%23%23%20Description%0A%0APlease%20describe%20the%20issue%20or%20feature%20request%20here.%0A%0A%23%23%20Steps%20to%20Reproduce%20(for%20bugs)%0A%0A1.%20%0A2.%20%0A3.%20%0A%0A%23%23%20Expected%20Behavior%0A%0A%0A%23%23%20Additional%20Info%0A" target="_blank">Report Issue</a>
+        </div>
+        <div class="footer-credits">Created&nbsp;by&nbsp;<a href="https://bridge.zdenektomis.eu" target="_blank">Zdeněk&nbsp;Tomis</a></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content" id="output"></main>
+
+  <script>
+    // Constants
+    const A4_HEIGHT_MM = 297;
+    const MARGIN_MM = 15;
+    const AVAILABLE_HEIGHT_MM = A4_HEIGHT_MM - (MARGIN_MM * 2); // 267mm
+
+    let fontSizeAdjust = 0;
+    let bottomMarginAdjust = 0;
+
+    function toggleAdvanced() {
+      const toggle = document.querySelector('.advanced-toggle');
+      const content = document.getElementById('advancedContent');
+      toggle.classList.toggle('open');
+      content.classList.toggle('open');
+    }
+
+    function adjustFontSize(delta) {
+      fontSizeAdjust += delta;
+      document.getElementById('fontSizeInput').value = fontSizeAdjust;
+      generate();
+    }
+
+    function setFontSize(value) {
+      fontSizeAdjust = parseInt(value) || 0;
+      generate();
+    }
+
+    function resetFontSize() {
+      fontSizeAdjust = 0;
+      document.getElementById('fontSizeInput').value = 0;
+      generate();
+    }
+
+    function adjustBottomMargin(delta) {
+      bottomMarginAdjust += delta;
+      bottomMarginAdjust = Math.max(-50, Math.min(50, bottomMarginAdjust));
+      document.getElementById('bottomMarginInput').value = bottomMarginAdjust;
+      generate();
+    }
+
+    function setBottomMargin(value) {
+      bottomMarginAdjust = parseInt(value) || 0;
+      bottomMarginAdjust = Math.max(-50, Math.min(50, bottomMarginAdjust));
+      document.getElementById('bottomMarginInput').value = bottomMarginAdjust;
+      generate();
+    }
+
+    function resetBottomMargin() {
+      bottomMarginAdjust = 0;
+      document.getElementById('bottomMarginInput').value = 0;
+      generate();
+    }
+
+    function onFontFamilyChange() {
+      const select = document.getElementById('fontFamily');
+      const customInput = document.getElementById('customFont');
+      if (select.value === 'custom') {
+        customInput.style.display = 'block';
+        customInput.focus();
+      } else {
+        customInput.style.display = 'none';
+      }
+      generate();
+    }
+
+    function getSelectedFont() {
+      const select = document.getElementById('fontFamily');
+      if (select.value === 'custom') {
+        return document.getElementById('customFont').value || 'serif';
+      }
+      return select.value;
+    }
+
+    // Calculate triangle height from side length
+    function getTriangleHeight(sideMM) {
+      return sideMM * Math.sqrt(3) / 2;
+    }
+
+    // Calculate optimal number of cones that fit on a page
+    function calculateOptimalCones(sideMM) {
+      const triangleHeight = getTriangleHeight(sideMM);
+      // We want at least 15mm gap between cones
+      const minGap = 15;
+      // How many cones can fit with minimum gap?
+      // N * height + (N-1) * minGap <= availableHeight
+      // N * height + N * minGap - minGap <= availableHeight
+      // N * (height + minGap) <= availableHeight + minGap
+      // N <= (availableHeight + minGap) / (height + minGap)
+      const maxCones = Math.floor((AVAILABLE_HEIGHT_MM + minGap) / (triangleHeight + minGap));
+      return Math.max(1, Math.min(maxCones, 10)); // Clamp between 1 and 10
+    }
+
+    // Calculate optimal gap for even spacing
+    function calculateOptimalGap(sideMM, numCones) {
+      const triangleHeight = getTriangleHeight(sideMM);
+      const totalTriangleHeight = numCones * triangleHeight;
+      const remainingSpace = AVAILABLE_HEIGHT_MM - totalTriangleHeight;
+      
+      if (numCones <= 1) {
+        // Center single cone - gap doesn't matter much, return reasonable default
+        return Math.max(0, remainingSpace / 2);
+      }
+      
+      // Distribute remaining space as gaps between cones
+      // We have (numCones - 1) gaps between cones
+      // Plus we want some padding at top and bottom
+      // Total gaps = numCones + 1 (top padding, between each, bottom padding)
+      // But for simplicity, let's just do gaps between cones
+      const gap = remainingSpace / (numCones - 1);
+      return Math.max(0, Math.round(gap));
+    }
+
+    // Called when triangle size changes - recalculate cones and gap
+    function onTriangleSizeChange() {
+      const sideMM = parseInt(document.getElementById('triangleSize').value) || 60;
+      
+      // Calculate optimal cones
+      const optimalCones = calculateOptimalCones(sideMM);
+      document.getElementById('conesPerPage').value = optimalCones;
+      
+      // Calculate optimal gap
+      const optimalGap = calculateOptimalGap(sideMM, optimalCones);
+      document.getElementById('gapSize').value = optimalGap;
+      
+      generate();
+    }
+
+    // Called when cones per page changes - recalculate gap
+    function onConesPerPageChange() {
+      const sideMM = parseInt(document.getElementById('triangleSize').value) || 90;
+      const numCones = parseInt(document.getElementById('conesPerPage').value) || 3;
+      
+      // Calculate optimal gap for this number of cones
+      const optimalGap = calculateOptimalGap(sideMM, numCones);
+      document.getElementById('gapSize').value = optimalGap;
+      
+      generate();
+    }
+
+    function generate() {
+      const startNum = parseInt(document.getElementById('startNum').value) || 1;
+      const endNum = parseInt(document.getElementById('endNum').value) || 12;
+      const triangleSizeMM = parseInt(document.getElementById('triangleSize').value) || 90;
+      const conesPerPage = parseInt(document.getElementById('conesPerPage').value) || 3;
+      const gapSizeMM = parseInt(document.getElementById('gapSize').value) || 15;
+      const uppercaseText = document.getElementById('uppercaseText').checked;
+      const rawCustomText = document.getElementById('customText').value;
+      const customText = uppercaseText ? rawCustomText.toUpperCase() : rawCustomText;
+      const fontFamily = getSelectedFont();
+
+      const output = document.getElementById('output');
+      output.innerHTML = '';
+
+      // Convert mm to pixels for SVG (assuming 96 DPI, 1mm ≈ 3.78px)
+      const mmToPx = 3.78;
+      const side = triangleSizeMM * mmToPx;
+      const height = side * Math.sqrt(3) / 2;
+      const gap = gapSizeMM * mmToPx;
+
+      const numbers = [];
+      for (let i = startNum; i <= endNum; i++) {
+        numbers.push(i);
+      }
+
+      // Group into pages
+      const pages = [];
+      for (let i = 0; i < numbers.length; i += conesPerPage) {
+        pages.push(numbers.slice(i, i + conesPerPage));
+      }
+
+      pages.forEach((pageNumbers) => {
+        const page = document.createElement('div');
+        page.className = 'page';
+        page.style.gap = gap + 'px';
+
+        pageNumbers.forEach(num => {
+          const strip = createTriangleStrip(num, side, height, customText, fontFamily, bottomMarginAdjust);
+          page.appendChild(strip);
+        });
+
+        output.appendChild(page);
+      });
+    }
+
+    function createTriangleStrip(number, side, height, customText, fontFamily, bottomMarginAdjust) {
+      const container = document.createElement('div');
+      container.className = 'triangle-strip';
+
+      const totalWidth = side * 2;
+      const totalHeight = height;
+
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('width', totalWidth);
+      svg.setAttribute('height', totalHeight);
+      svg.setAttribute('viewBox', `0 0 ${totalWidth} ${totalHeight}`);
+
+      // Triangle 1 - pointing up (left) - rotated 120° for folding
+      const tri1 = {
+        points: `${side/2},0 ${side},${height} 0,${height}`,
+        cx: side / 2,
+        cy: height * 2 / 3,
+        rotation: 120
+      };
+
+      // Triangle 2 - pointing down (middle) - rotated 180° (upside down)
+      const tri2 = {
+        points: `${side/2},0 ${side*1.5},0 ${side},${height}`,
+        cx: side,
+        cy: height / 3,
+        rotation: 180
+      };
+
+      // Triangle 3 - pointing up (right) - rotated 240° for folding
+      const tri3 = {
+        points: `${side*1.5},0 ${side*2},${height} ${side},${height}`,
+        cx: side * 1.5,
+        cy: height * 2 / 3,
+        rotation: 240
+      };
+
+      [tri1, tri2, tri3].forEach(tri => {
+        addTriangle(svg, tri.points, number, customText, side, height, tri.cx, tri.cy, tri.rotation, fontFamily, bottomMarginAdjust);
+      });
+
+      container.appendChild(svg);
+      return container;
+    }
+
+    function addTriangle(svg, points, number, customText, side, triangleHeight, cx, cy, rotation, fontFamily, bottomMarginAdjust) {
+      const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+      polygon.setAttribute('points', points);
+      polygon.setAttribute('fill', 'white');
+      polygon.setAttribute('stroke', '#999');
+      polygon.setAttribute('stroke-width', '1');
+      svg.appendChild(polygon);
+
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.setAttribute('transform', `translate(${cx}, ${cy}) rotate(${rotation})`);
+
+      const fontMultiplier = 1 + (fontSizeAdjust / 100);
+      const inRadius = (side * Math.sqrt(3)) / 6;
+      
+      const numStr = String(number);
+      let numberFontSize;
+      if (numStr.length === 1) {
+        numberFontSize = side * 0.4 * fontMultiplier;
+      } else if (numStr.length === 2) {
+        numberFontSize = side * 0.32 * fontMultiplier;
+      } else {
+        numberFontSize = side * 0.24 * fontMultiplier;
+      }
+      
+      const textFontSize = side * 0.09 * fontMultiplier;
+      
+      // Apply bottom margin adjustment (negative moves up, positive moves down)
+      const marginAdjust = (bottomMarginAdjust / 100) * inRadius;
+      
+      // Base offset - positive values move text down toward bottom of triangle
+      const baseOffset = customText ? (inRadius * 0.5 + marginAdjust) : (inRadius * 0.3 + marginAdjust);
+      
+      let numberY, textY;
+      if (customText) {
+        // Text at bottom, number above it
+        textY = baseOffset;
+        numberY = baseOffset - textFontSize * 1.2 - numberFontSize * 0.3;
+      } else {
+        numberY = baseOffset - numberFontSize * 0.15;
+      }
+
+      const numberText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+      numberText.setAttribute('x', '0');
+      numberText.setAttribute('y', numberY);
+      numberText.setAttribute('text-anchor', 'middle');
+      numberText.setAttribute('dominant-baseline', 'middle');
+      numberText.setAttribute('font-family', `'${fontFamily}', serif`);
+      numberText.setAttribute('font-weight', '700');
+      numberText.setAttribute('font-size', numberFontSize);
+      numberText.setAttribute('fill', '#1a1a1a');
+      numberText.textContent = number;
+      g.appendChild(numberText);
+
+      if (customText) {
+        const subText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        subText.setAttribute('x', '0');
+        subText.setAttribute('y', textY);
+        subText.setAttribute('text-anchor', 'middle');
+        subText.setAttribute('dominant-baseline', 'middle');
+        subText.setAttribute('font-family', "'Segoe UI', system-ui, sans-serif");
+        subText.setAttribute('font-weight', '600');
+        subText.setAttribute('letter-spacing', '2');
+        subText.setAttribute('font-size', textFontSize);
+        subText.setAttribute('fill', '#333');
+        subText.textContent = customText;
+        g.appendChild(subText);
+      }
+
+      svg.appendChild(g);
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      // Set up event listeners with specific handlers
+      document.getElementById('triangleSize').addEventListener('input', onTriangleSizeChange);
+      document.getElementById('conesPerPage').addEventListener('input', onConesPerPageChange);
+      
+      // Other inputs just regenerate
+      ['startNum', 'endNum', 'customText', 'gapSize', 'fontFamily'].forEach(id => {
+        document.getElementById(id).addEventListener('input', generate);
+      });
+      
+      // Checkbox
+      document.getElementById('uppercaseText').addEventListener('change', generate);
+      
+      // Initial calculation
+      onTriangleSizeChange();
+    });
+  </script>
+</body>
+</html>
