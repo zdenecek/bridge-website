@@ -293,5 +293,20 @@
         "redirect": "https://bridge.zdenektomis.eu/vysledky/2025/bkp-bavlnka/"
       }
     }
+  },
+  {
+    "id": "bavlnky-2026",
+    "translations": {
+      "en": {
+        "title": "Results Bavlnka 2026",
+        "date": "2026-12-01",
+        "redirect": "https://bridge.zdenektomis.eu/vysledky/2026/bkp-bavlnka/en.php"
+      },
+      "cs": {
+        "title": "Výsledky Bavlnek 2026",
+        "date": "2026-12-01",
+        "redirect": "https://bridge.zdenektomis.eu/vysledky/2026/bkp-bavlnka/"
+      }
+    }
   }
 ]
