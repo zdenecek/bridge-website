@@ -1356,6 +1356,86 @@
         ]
       }
     }
+  },
+  {
+    "id": "cbt-havirov-2026",
+    "translations": {
+      "en": {
+        "title": "Czech Bridge Tour Havířov 2026",
+        "date": "2026-04-12",
+        "slug": "cbt-havirov-2026",
+        "entries": [
+          {
+            "title": "Main Pairs Tournament",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/vc-havirov/",
+                "type": "result-presentation"
+              },
+              {
+                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "title": "Team Tournament",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/vc-havirov-tymy/",
+                "type": "result-presentation"
+              },
+              {
+                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2025/",
+            "type": "last-year"
+          }
+        ]
+      },
+      "cs": {
+        "title": "Czech Bridge Tour Havířov 2026",
+        "date": "2025-04-18",
+        "slug": "cbt-havirov-2026",
+
+        "entries": [
+          {
+            "title": "Hlavní párový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/vc-havirov/",
+                "type": "result-presentation"
+              },
+              {
+                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "title": "Týmový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/vc-havirov-tymy/",
+                "type": "result-presentation"
+              },
+              {
+                "link": "#https://matrikacbs.cz/Detail-turnaje.aspx?id=",
+                "type": "matrika-cbs"
+              }
+            ]
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-havirov-2025/",
+            "type": "last-year"
+          }
+        ]
+      }
+    }
   }
 ]
 
