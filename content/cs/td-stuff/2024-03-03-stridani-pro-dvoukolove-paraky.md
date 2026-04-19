@@ -241,9 +241,14 @@ obrat po 9.kole !!!!
 
 ### Soubory
 
-- [32-2.csv](/soubory/movements/dvoukolove/32-2.csv) (ze souboru 32-2.dat)
 - [32-1a.csv](/soubory/movements/dvoukolove/32-1a.csv) (ze souboru 32-1a.dat)
 - [32-1b.csv](/soubory/movements/dvoukolove/32-1b.csv) (ze souboru 32-1b.dat)
+- [32-2.csv](/soubory/movements/dvoukolove/32-2.csv) (ze souboru 32-2.dat)
+
+Pro TC:
+- [32-1.csv](/soubory/movements/dvoukolove/32-1.csv) - spojení 32-1a.csv a 32-1b.csv
+- [32-2-renumbered.csv](/soubory/movements/dvoukolove/32-2-renumbered.csv) - přečíslování rozdání v 2. kole na 27-52
+
 
 ## 33
 
@@ -260,6 +265,19 @@ Obrat vždy po 6.kole !!!
 - [33-2A.csv](/soubory/movements/dvoukolove/33-2A.csv) (ze souboru 33-2A.DAT)
 - [33-2B.csv](/soubory/movements/dvoukolove/33-2B.csv) (ze souboru 33-2B.DAT)
 
+### Tříkolová varianta
+
+Tříkolová varianta tvoří značně lepší turnaj, jelikož se dá hrát proti 27 soupeřům na 54 rozdání. Tvoří se skupiny 9+9+9+6, 6 sedí v Reduced Howellu, dvě skupiny hrají Mitchell. 
+
+Čísla párů: 1-9, 11-19, 21-29, 30-35
+
+Soubory pro Reduced Howell:
+
+- [33-H1.csv](/soubory/movements/dvoukolove/33-H1.csv)
+- [33-H2.csv](/soubory/movements/dvoukolove/33-H2.csv)
+- [33-H3.csv](/soubory/movements/dvoukolove/33-H3.csv)
+
+
 ## 34
 
 1.kolo = sprazeny Howell 2x9 stolů,potkávací stůl č. 6, páry 1-(17p)18 a
@@ -274,6 +292,10 @@ obrat po 9.kole!!!
 
 - [34-2.csv](/soubory/movements/dvoukolove/34-2.csv) (ze souboru 34-2.dat)
 - [34-1.csv](/soubory/movements/dvoukolove/34-1.csv) (ze souboru 34-1.dat)
+
+### Tříkolová varianta
+
+Viz 33.
 
 ## 35
 
