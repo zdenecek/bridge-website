@@ -9,20 +9,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
     $tournamentType = $_GET['type'] ?? 'pair';
 
     function fetchAndProcessResults($url, $noname = false, $tournamentType = 'pair') {
-        // Ensure the URL ends with 'results.json'
-        $url = rtrim($url, '/');
-        if (!preg_match('/results\.json$/', $url)) {
-            $url .= '/results.json';
-        }
-
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
-            throw new Exception("Invalid URL provided.");
-        }
-
         try {
-            $jsonData = file_get_contents($url);
+            // Older Tournament Calculator versions serve results.json, newer ones results.json.gz
+            $url = rtrim($url, '/');
+            if (!preg_match('/results\.json(\.gz)?$/', $url)) {
+                $url .= '/results.json';
+            }
+
+            $candidates = [$url];
+            if (substr($url, -3) !== '.gz') {
+                $candidates[] = $url . '.gz';
+            }
+
+            $jsonData = false;
+            foreach ($candidates as $candidate) {
+                if (!filter_var($candidate, FILTER_VALIDATE_URL)) {
+                    throw new Exception("Invalid URL provided.");
+                }
+                $jsonData = @file_get_contents($candidate);
+                if ($jsonData !== false) {
+                    break;
+                }
+            }
+
             if ($jsonData === false) {
-                throw new Exception("Failed to fetch data from URL: $url");
+                throw new Exception("Failed to fetch data from URL: " . join(" or ", $candidates));
+            }
+
+            if (strncmp($jsonData, "\x1f\x8b", 2) === 0) {
+                $jsonData = @gzdecode($jsonData);
+                if ($jsonData === false) {
+                    throw new Exception("Failed to decompress gzipped results");
+                }
             }
 
             $data = json_decode($jsonData, true);
