@@ -84,10 +84,14 @@ Pod **Rozpis po rozdáních** zkontrolujete každé rozdání: body, průměr a 
 
 ## Přepis z fotky pomocí AI
 
-Lísteček můžete vyfotit a nechat přepsat AI (Claude, ChatGPT). Pak ať opíše i
-skóre z lístečku: program ho porovná se závazkem a upozorní na řádky, kde
-nesedí. To je skoro vždy špatně přečtený závazek, nejčastěji barva (♥ místo ♦)
-nebo hráč. Počítá se podle závazku, takže řádek podle lístečku opravte.
+Tlačítko **Načíst z fotky** nad textovým polem pošle fotku lístečku do Gemini
+(na mobilu jde rovnou vyfotit) a vyplní přepis i se skóre a jmény párů. Skóre
+program porovná se závazkem a upozorní na řádky, kde nesedí. To je skoro vždy
+špatně přečtený závazek, nejčastěji barva (♥ místo ♦) nebo hráč. Počítá se
+podle závazku, takže řádek podle lístečku opravte.
+
+Fotku můžete přepsat i v jiné AI (Claude, ChatGPT) a text vložit sami, třeba
+s tímto zadáním:
 
 ```text
 Přepiš tento lísteček, jeden řádek na rozdání:
