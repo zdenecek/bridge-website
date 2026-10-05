@@ -21,7 +21,8 @@ IMPy i VP.
 
 ## Příprava rozdání v Jacku
 
-1. Nepovinné: vygenerujte rozdání programem BigDeal, `28` je počet rozdání.
+1. Soubor s rozdáními (PBN) obvykle dodá Adam. **Jen v nouzi**, když ho
+   nemáte, vygenerujte rozdání sami programem BigDeal, `28` je počet rozdání.
    Program se zeptá na název souboru bez přípony, např. `26doh01`.
 
    ```text
