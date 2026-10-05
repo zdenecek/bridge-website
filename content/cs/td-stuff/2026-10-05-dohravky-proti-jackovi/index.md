@@ -3,6 +3,7 @@ title: Dohrávky proti Jackovi
 date: 2026-10-05
 ---
 
+- [Příprava rozdání v Jacku](#příprava-rozdání-v-jacku)
 - [Jak se dohrávka počítá](#jak-se-dohrávka-počítá)
 - [Co budete potřebovat](#co-budete-potřebovat)
 - [Založení dohrávky](#založení-dohrávky)
@@ -18,6 +19,27 @@ výsledky z lístečku se zadají rovnou do
 [prezentace výsledků](https://vysledky.bkpraha.cz) a ta dopočítá průměry,
 IMPy i VP.
 
+## Příprava rozdání v Jacku
+
+1. Nepovinné: vygenerujte rozdání programem BigDeal, `28` je počet rozdání.
+   Program se zeptá na název souboru bez přípony, např. `26doh01`.
+
+   ```text
+   bigdeal.exe -n 28
+   ```
+
+2. Otevřete Jack a zvolte **File → Create Tournament → Use deals from a PBN
+   File**. Soubor s rozdáními nesmí být na připojeném Google Disku, musí ležet
+   na lokálním disku.
+3. **File → Create tournament with replay Jack → OK.**
+4. Vyplňte název, vyberte **Compensation**, **20** stolů a zaškrtněte
+   **Random convention cards** a **Store bidding and play**.
+5. Vyberte, kam turnaj uložit (zase ne na Google Disk). Soubor pojmenujte
+   stejně jako rozdání, jen s příponou `.jack.pbn`, např. `26doh01.jack.pbn`.
+6. Počkejte, až Jack dohraje, trvá to asi 2 hodiny.
+
+Výsledný soubor `.jack.pbn` pak nahrajete do dohrávky.
+
 ## Jak se dohrávka počítá
 
 - Rozdání dohrávky odehraje Jack na 15–20 stolech. To je srovnávací pole.
@@ -30,8 +52,9 @@ IMPy i VP.
 
 ## Co budete potřebovat
 
-- PBN z Jacka se všemi odehranými stoly. Každé rozdání je v něm tolikrát, kolik
-  stolů Jack odehrál (28 rozdání × 15 stolů = 420 her).
+- PBN z Jacka se všemi odehranými stoly (viz
+  [Příprava rozdání v Jacku](#příprava-rozdání-v-jacku)). Každé rozdání je v
+  něm tolikrát, kolik stolů Jack odehrál (28 rozdání × 20 stolů = 560 her).
 - Lístečky ze všech stolů dohrávky.
 - Heslo k úpravám turnaje.
 
