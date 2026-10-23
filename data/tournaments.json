@@ -1436,6 +1436,34 @@
         ]
       }
     }
+  },
+  {
+    "id": "3-liga-2026",
+    "translations": {
+      "en": {
+        "title": "3rd National League",
+        "date": "2026-10-24",
+        "slug": "3rd-national-league-2026",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/en/tournaments/3rd-national-league-2025/",
+            "type": "last-year"
+          }
+        ]
+      },
+      "cs": {
+        "title": "3. celostátní liga 2026",
+        "date": "2026-10-24",
+        "slug": "3-liga-2026",
+        "content-file": "data/tournaments/2026/3liga.cs.md",
+        "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/turnaje/3-liga-2025/",
+            "type": "last-year"
+          }
+        ]
+      }
+    }
   }
 ]
 
