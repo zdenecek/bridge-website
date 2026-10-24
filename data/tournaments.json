@@ -1446,6 +1446,10 @@
         "slug": "3rd-national-league-2026",
         "entries": [
           {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2026/3-liga/",
+            "type": "result-presentation"
+          },
+          {
             "link": "https://bridge.zdenektomis.eu/en/tournaments/3rd-national-league-2025/",
             "type": "last-year"
           }
@@ -1457,6 +1461,10 @@
         "slug": "3-liga-2026",
         "content-file": "data/tournaments/2026/3liga.cs.md",
         "entries": [
+          {
+            "link": "https://bridge.zdenektomis.eu/vysledky/2026/3-liga/",
+            "type": "result-presentation"
+          },
           {
             "link": "https://bridge.zdenektomis.eu/turnaje/3-liga-2025/",
             "type": "last-year"
