@@ -1472,6 +1472,87 @@
         ]
       }
     }
+  },
+  {
+    "id": "cbt-praha-2026",
+    "translations": {
+      "en": {
+        "title": "Czech Bridge Tour Prague 2026",
+        "date": "2026-11-07",
+        "slug": "cbt-prague-2026",
+        "entries": [
+          {
+            "title": "Friday Side Pairs Tournament",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha-vedlejsi-parovy",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Saturday Main Pairs Tournament",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Sunday Team Tournament",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha-vedlejsi-tymovy",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-praha-2025/",
+            "type": "last-year"
+          }
+        ]
+      },
+      "cs": {
+        "title": "Czech Bridge Tour Praha 2026",
+        "date": "2026-11-07",
+        "slug": "cbt-praha-2026",
+        "entries": [
+          {
+            "title": "Vedlejší párový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha-vedlejsi-parovy",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Hlavní párový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Vedlejší týmový turnaj",
+            "entries": [
+              {
+                "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha-vedlejsi-tymovy",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "link": "https://bridge.zdenektomis.eu/web/tournaments/cbt-praha-2025/",
+            "type": "last-year"
+          }
+        ]
+      }
+    }
   }
 ]
 
