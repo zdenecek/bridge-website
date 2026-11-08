@@ -149,16 +149,35 @@ snapne ♥9. Je to „normální“ sehrávka?
 
 ## 3. Námysl a pak hrubá chyba neprovinilé strany (rozdělené skóre)
 
-*CBT Praha 2026, vedlejší párový turnaj, rozdání 11. Rozhodoval jsem s
-Adamem Kubicou po telefonu.*
+*CBT Praha 2026, vedlejší párový turnaj, rozdání 11. Rozdával Jih, nikdo v manši.*
 
-**Situace:** Po nesporném námyslu Východu dražil Západ s 6-4 na listu
-potřetí, ačkoli to už ukázal. Námysl naznačoval dvojitý fit, takže pas byl
-logická alternativa. Bez nesrovnalosti by NS hráli 4♠ (double dummy 11 zdvihů).
-Kvůli třetí hlášce Západu skončili v 5♠. Hlavní hráčka pak ve 5♠ hrubě chybovala:
-místo bezplatné kontroly dělení trumfů (pikové eso, pak do krále) hrála rovnou
-impas na dělení 4-1 a spadla. Výsledek **5♠ -1** (NS -50). Se správnou
-sehrávkou by 5♠ splnila.
+```
+            ♠ K54
+            ♥ 1074
+            ♦ D
+            ♣ AK10952
+♠ J6                  ♠ 987
+♥ KJD2                ♥ A9865
+♦ AK7642              ♦ J953
+♣ 3                   ♣ J
+            ♠ AD1032
+            ♥ 3
+            ♦ 108
+            ♣ D8764
+```
+
+**Dražba:** Západ ukázal dvěma hláškami kára a srdce (6-4). Východ celou
+dražbu pasoval, jednou po zřetelném námyslu, který nikdo nerozporoval. Po
+námyslu dražil Západ potřetí, ačkoli rozlohu už ukázal. NS pak skončili
+v **5♠** hraných Jihem místo ve 4♠. Hráči NS reklamovali námysl u soupeřů
+hned po dražbě, vedoucího zavolali až na začátku dalšího rozdání.
+
+**Sehrávka:** Výnos ♦A. První tři zdvihy byly dva srdcové a jeden kárový,
+hlavní hráčka musela snapnout v ruce. Pak zahrála pik do krále a rovnou
+impas, místo aby sehrála pikové eso a pak do krále. Kontrola dělení byla
+zdarma a pik J6 u Západu by padl. Hrála na dělení 4-1, protože po třetí
+hlášce Západu čekala divokou rozlohu. Výsledek **5♠ -1** (NS -50). Double
+dummy NS splní 11 zdvihů, ve 4♠ by splnila i s touto sehrávkou.
 
 **Otázky:** Upravit výsledek? Kolik dát NS, když si část škody způsobili sami?
 
@@ -205,8 +224,7 @@ jejich vlastní chyba. NS proto zůstává výsledek od stolu (30 %), EW dostano
 4♠+1 (25 %). Součet nedává 100 %, to je u rozděleného skóre v pořádku.
 
 **Co jsem u stolu dal:** NS 4♠= (69,83 %), EW 4♠+1 (25,21 %). Podle metody
-EBL je to pro NS příliš štědré. Adam to tušil („4S= je příliš vstřícný
-výsledek“).
+EBL je to pro NS příliš štědré.
 
 ### Jak to zadat v Tournament Calculatoru
 
