@@ -1,9 +1,11 @@
 ---
-title: Časté situace u stolu
+title: Zajímavé situace u stolu
 date: 2026-11-02
+aliases:
+  - /td-stuff/2026-11-02-caste-situace/
 ---
 
-Sbírka situací, které se u stolu opakují, s rozhodnutím a odkazy na pravidla.
+Sbírka situací, které jsem řešil u stolu, s rozhodnutím a odkazy na pravidla.
 Odkazy vedou na anglický text Mezinárodních pravidel bridže 2017, jedno
 pravidlo na stránku.
 
@@ -105,7 +107,7 @@ malý trumf.
             ♣ xx
 ```
 
-Trik ztratí jen takto: na ♦10 Východ odhodí kříž, hlavní hráčka nesnapne a
+Zdvih ztratí jen takto: na ♦10 Východ odhodí kříž, hlavní hráčka nesnapne a
 odhodí z ruky. Ze stolu pak zahraje kříž, ona musí přiznat barvu a Východ
 snapne ♥9. Je to „normální“ sehrávka?
 
