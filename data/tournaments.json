@@ -1508,6 +1508,10 @@
               {
                 "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha",
                 "type": "result-presentation"
+              },
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5835",
+                "type": "matrika-cbs"
               }
             ]
           },
@@ -1517,6 +1521,10 @@
               {
                 "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha-vedlejsi-tymovy",
                 "type": "result-presentation"
+              },
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5836",
+                "type": "matrika-cbs"
               }
             ]
           },
@@ -1550,6 +1558,10 @@
               {
                 "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha",
                 "type": "result-presentation"
+              },
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5835",
+                "type": "matrika-cbs"
               }
             ]
           },
@@ -1559,6 +1571,10 @@
               {
                 "link": "https://bridge.zdenektomis.eu/vysledky/2026/cbt-praha-vedlejsi-tymovy",
                 "type": "result-presentation"
+              },
+              {
+                "link": "https://matrikacbs.cz/Detail-turnaje.aspx?id=5836",
+                "type": "matrika-cbs"
               }
             ]
           },
