@@ -206,31 +206,30 @@ rozdání:
 
 | | Výsledek NS | % pro NS |
 |---|---|---|
-| skóre u stolu (5♠ -1) | -50 | 30,17 % |
-| očekávané skóre ve skutečném závazku při normální hře (5♠ =) | +450 | 74,79 % |
-| normální skóre bez nesrovnalosti (4♠ +1) | +450 | 74,79 % |
+| skóre u stolu (5♠ -1) | -50 | 36,36 % |
+| očekávané skóre ve skutečném závazku při normální hře (5♠ =) | +450 | 77,27 % |
+| normální skóre bez nesrovnalosti (4♠ +1) | +450 | 77,27 % |
 
-- **Vlastní škoda** = očekávané - u stolu = 74,79 - 30,17 = 44,62 %.
-- **NS** = normální - vlastní škoda = 74,79 - 44,62 = **30,17 %**.
-- **EW** dostanou normální skóre: 100 - 74,79 = **25,21 %**.
+- **Vlastní škoda** = očekávané - u stolu = 77,27 - 36,36 = 40,91 %.
+- **NS** = normální - vlastní škoda = 77,27 - 40,91 = **36,36 %**.
+- **EW** dostanou normální skóre: 100 - 77,27 = **22,73 %**.
 
-Procenta jsou spočítaná jako v Tournament Calculatoru: 11 výsledků z 12 stolů,
-Neubergova úprava. Kontrola: 4♠= pro NS dává v TC 69,83 % a 4♠+1 pro EW
-25,21 %, obojí sedí.
+Procenta jsou ze 12 výsledků na rozdání, 2 body za porážku (top 22).
+Kontrola: 4♠= pro NS dává v TC 72,73 % a 4♠+1 pro EW 22,73 %, obojí sedí.
 
 **Co z toho plyne:** Ve 5♠ se při normální hře dalo dostat stejně jako
 ve 4♠+1 (+450). Nesrovnalost tedy sama o sobě NS nic nestála a celá ztráta je
-jejich vlastní chyba. NS proto zůstává výsledek od stolu (30 %), EW dostanou
-4♠+1 (25 %). Součet nedává 100 %, to je u rozděleného skóre v pořádku.
+jejich vlastní chyba. NS proto zůstává výsledek od stolu (36 %), EW dostanou
+4♠+1 (23 %). Součet nedává 100 %, to je u rozděleného skóre v pořádku.
 
-**Co jsem u stolu dal:** NS 4♠= (69,83 %), EW 4♠+1 (25,21 %). Podle metody
+**Co jsem u stolu dal:** NS 4♠= (72,73 %), EW 4♠+1 (22,73 %). Podle metody
 EBL je to pro NS příliš štědré.
 
 ### Jak to zadat v Tournament Calculatoru
 
 TC rozdělené skóre podle této metody spočítat neumí, procenta se počítají
 ručně. V editoru TD skóre:
-- **NS:** volba *% from single board* a zadat spočítané procento (30,17).
+- **NS:** volba *% from single board* a zadat spočítané procento (36,36).
 - **EW:** *Normal score* s výsledkem 4♠ S +1.
 
 ### Na co si dát pozor
@@ -241,7 +240,7 @@ ručně. V editoru TD skóre:
   dělení byla zdarma a chyba je nezávislá.
 - Hrubá chyba musí být *mimořádně závažná* (extremely serious error), běžná
   slabší sehrávka nestačí.
-- Bez druhého kroku (hrubé chyby) by NS dostali normální upravené skóre (74,79 %).
+- Bez druhého kroku (hrubé chyby) by NS dostali normální upravené skóre (77,27 %).
 
 ### Zdroje
 
