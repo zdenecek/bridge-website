@@ -1488,6 +1488,7 @@
         "title": "Czech Bridge Tour Prague 2026",
         "date": "2026-11-07",
         "slug": "cbt-prague-2026",
+        "content-file": "data/tournaments/2026/cbt-praha-memorial.en.md",
         "entries": [
           {
             "title": "Friday Side Pairs Tournament",
@@ -1538,6 +1539,7 @@
         "title": "Czech Bridge Tour Praha 2026",
         "date": "2026-11-07",
         "slug": "cbt-praha-2026",
+        "content-file": "data/tournaments/2026/cbt-praha-memorial.cs.md",
         "entries": [
           {
             "title": "Vedlejší párový turnaj",
