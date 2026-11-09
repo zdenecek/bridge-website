@@ -761,6 +761,7 @@
         "title": "Czech Bridge Tour Prague 2024",
         "date": "2024-10-18",
         "slug": "cbt-prague-2024",
+        "content-file": "data/tournaments/2024/cbt-praha-memorial.en.md",
         "entries": [
           {
             "title": "Friday Side Pairs Tournament",
@@ -807,6 +808,7 @@
         "title": "Czech Bridge Tour Praha 2024",
         "date": "2024-10-18",
         "slug": "cbt-praha-2024",
+        "content-file": "data/tournaments/2024/cbt-praha-memorial.cs.md",
         "entries": [
           {
             "title": "Vedlejší párový turnaj",
@@ -1177,6 +1179,7 @@
         "title": "Czech Bridge Tour Prague 2025",
         "date": "2025-10-18",
         "slug": "cbt-prague-2025",
+        "content-file": "data/tournaments/2025/cbt-praha-memorial.en.md",
         "entries": [
           {
             "title": "Friday Side Pairs Tournament",
@@ -1228,6 +1231,7 @@
         "title": "Czech Bridge Tour Praha 2025",
         "date": "2025-10-18",
         "slug": "cbt-praha-2025",
+        "content-file": "data/tournaments/2025/cbt-praha-memorial.cs.md",
         "entries": [
           {
             "title": "Vedlejší párový turnaj",
