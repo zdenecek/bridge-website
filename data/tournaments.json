@@ -1599,6 +1599,78 @@
         ]
       }
     }
+  },
+  {
+    "id": "pybf-2026",
+    "translations": {
+      "en": {
+        "title": "8th Prague Youth Bridge Festival 2026",
+        "date": "2026-11-13",
+        "slug": "pybf-2026",
+        "content-file": "data/tournaments/2026/pybf.en.md",
+        "entries": [
+          {
+            "title": "Welcome Pairs",
+            "entries": [
+              {
+                "link": "https://kubusiu.michzimny.pl/26Praha/1113/",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Teams",
+            "entries": [
+              {
+                "link": "https://kubusiu.michzimny.pl/26Praha/team/",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "link": "https://milanbridge.com/pybf/",
+            "text": "Festival website"
+          },
+          {
+            "link": "https://kubusiu.michzimny.pl/25Praha/team/",
+            "type": "last-year"
+          }
+        ]
+      },
+      "cs": {
+        "title": "8. Prague Youth Bridge Festival 2026",
+        "date": "2026-11-13",
+        "slug": "pybf-2026",
+        "content-file": "data/tournaments/2026/pybf.cs.md",
+        "entries": [
+          {
+            "title": "Welcome Pairs",
+            "entries": [
+              {
+                "link": "https://kubusiu.michzimny.pl/26Praha/1113/",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "title": "Týmový turnaj",
+            "entries": [
+              {
+                "link": "https://kubusiu.michzimny.pl/26Praha/team/",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
+            "link": "https://milanbridge.com/pybf/",
+            "text": "Stránka festivalu"
+          },
+          {
+            "link": "https://kubusiu.michzimny.pl/25Praha/team/",
+            "type": "last-year"
+          }
+        ]
+      }
+    }
   }
 ]
-
