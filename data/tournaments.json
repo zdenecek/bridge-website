@@ -1628,8 +1628,21 @@
             ]
           },
           {
+            "title": "Main Pairs",
+            "entries": [
+              {
+                "link": "https://kubusiu.michzimny.pl/26Praha/pairs/",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
             "link": "https://milanbridge.com/pybf/",
             "text": "Festival website"
+          },
+          {
+            "link": "https://photos.app.goo.gl/WArdGvVxKS9pxXFE6",
+            "type": "photogallery"
           },
           {
             "link": "https://kubusiu.michzimny.pl/25Praha/team/",
@@ -1662,8 +1675,21 @@
             ]
           },
           {
+            "title": "Hlavní párový turnaj",
+            "entries": [
+              {
+                "link": "https://kubusiu.michzimny.pl/26Praha/pairs/",
+                "type": "result-presentation"
+              }
+            ]
+          },
+          {
             "link": "https://milanbridge.com/pybf/",
             "text": "Stránka festivalu"
+          },
+          {
+            "link": "https://photos.app.goo.gl/WArdGvVxKS9pxXFE6",
+            "type": "photogallery"
           },
           {
             "link": "https://kubusiu.michzimny.pl/25Praha/team/",
