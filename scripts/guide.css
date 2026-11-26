@@ -1,0 +1,76 @@
+.app-guide {
+    margin: 0 0 20px;
+    padding: 10px 14px;
+    border: 1px solid rgba(128, 128, 128, 0.4);
+    border-radius: 6px;
+    line-height: 1.5;
+}
+
+.app-guide summary {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.app-guide[open] summary {
+    margin-bottom: 8px;
+}
+
+.app-guide h3 {
+    font-size: 1em;
+    margin: 14px 0 4px;
+}
+
+.app-guide ul,
+.app-guide ol {
+    margin: 4px 0;
+    padding-left: 22px;
+}
+
+.app-guide p {
+    margin: 6px 0;
+}
+
+.app-guide code {
+    font-family: monospace;
+}
+
+.app-guide-lang {
+    float: right;
+    display: flex;
+    gap: 4px;
+}
+
+.app-guide-lang button {
+    font: inherit;
+    font-size: 12px;
+    padding: 2px 8px;
+    margin: 0;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.app-guide-lang button:hover {
+    background: transparent;
+    opacity: 1;
+}
+
+.app-guide-lang button[aria-pressed="true"] {
+    opacity: 1;
+    font-weight: 600;
+}
+
+.app-home {
+    font-size: 13px;
+    margin: 0 0 10px;
+}
+
+@media print {
+    .app-guide,
+    .app-home {
+        display: none !important;
+    }
+}

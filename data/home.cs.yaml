@@ -43,14 +43,13 @@ td:
     - page: /pravidla
       title: Pravidla bridže 2017
       desc: česky i anglicky, s vyhledáváním
-    - page: /td-stuff/tc-to-matrika
+    - url: /apps/tc-to-matrika?lang=cs
       title: Převodník TC → matrika
-      url: /apps/tc-to-matrika
       desc: turnaj z TC k nahrání do Matriky ČBS
-    - page: /td-stuff/tc-to-frequencies
+    - url: /apps/tc-to-frequencies?lang=cs
       title: Frekvence a průměry
       desc: z prezentace TC pro každé rozdání
-    - page: /td-stuff/generator-cisel-stolu
+    - url: /apps/table-cones/?lang=cs
       title: Generátor čísel stolů
       desc: tisknutelné kužely s čísly stolů
     - page: /td-stuff/matrika-cbs-utf8

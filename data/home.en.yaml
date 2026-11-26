@@ -38,14 +38,13 @@ td:
     - page: /laws
       title: Laws of Duplicate Bridge 2017
       desc: full text with search
-    - page: /software/tc-to-matrika
+    - url: /apps/tc-to-matrika?lang=en
       title: TC to Matrika ČBS
-      url: /apps/tc-to-matrika
       desc: upload a TC tournament to the Czech results database
-    - page: /software/tc-to-frequencies
+    - url: /apps/tc-to-frequencies?lang=en
       title: Frequencies and averages
       desc: per board, from a TC presentation
-    - page: /software/table-number-generator
+    - url: /apps/table-cones/?lang=en
       title: Table number generator
       desc: printable table number cones
     - page: /software/matrika-cbs-utf8

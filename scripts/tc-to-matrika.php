@@ -264,13 +264,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
             margin-right: 1em;
         }
     </style>
+    <link rel="stylesheet" href="/apps/guide.css">
 </head>
 <body>
+    <p class="app-home"><a href="/">← bridge.zdenektomis.eu</a></p>
     <h1>Convert TournamentCalculator to <a href="https://matrikacbs.cz">matrikacbs.cz</a></h1>
     <div class="intro">
         This tool converts Tournament Calculator results to the import format for <a href="https://matrikacbs.cz">matrikacbs.cz</a>.<br>
         Enter the URL of the Tournament Calculator results, select the tournament type, and choose whether to exclude participant names. The output can be copied or downloaded for direct import.
     </div>
+    <details class="app-guide">
+        <summary><span data-lang="cs">Návod</span><span data-lang="en">How to use</span></summary>
+        <span class="app-guide-lang"><button type="button" value="cs">CS</button><button type="button" value="en">EN</button></span>
+        <div data-lang="cs">
+            <p>Turnaj musí mít webovou prezentaci z Tournament Calculatoru. Do pole <em>Tournament URL</em> vložte její adresu.</p>
+            <h3>Párové a individuální turnaje</h3>
+            <p>Výstupem je csv soubor, jeden řádek na pár nebo hráče:</p>
+            <p><code>umístění, výsledek, název, id hráčů ...</code></p>
+            <ul>
+                <li><code>umístění</code>: pořadí v turnaji. Při dělených místech se uvádí nejvyšší, např. 1, 1, 3 pro 1.–2. a 3. místo.</li>
+                <li><code>výsledek</code>: libovolný text.</li>
+                <li><code>název</code>: jména hráčů. Pokud mají všichni hráči číslo z Matriky, zaškrtněte <em>Exclude participant names</em> a název se vynechá.</li>
+                <li><code>id hráčů</code>: čísla hráčů z Matriky. Hráči s číslem nad 10000 (dočasná čísla v TC) zůstanou bez čísla.</li>
+            </ul>
+            <p>Matrika přijímá „české csv“, tedy s oddělovačem středníkem a v kódování Windows-1250.</p>
+            <h3>Týmové turnaje</h3>
+            <p>Výstupem jsou tři soubory ke stažení: <code>players.csv</code>, <code>rankings.csv</code> a <code>teams.csv</code>.</p>
+        </div>
+        <div data-lang="en">
+            <p>The tournament needs a Tournament Calculator web presentation. Paste its address into <em>Tournament URL</em>.</p>
+            <h3>Pair and individual tournaments</h3>
+            <p>The output is a csv file with one line per pair or player:</p>
+            <p><code>place, result, name, player ids ...</code></p>
+            <ul>
+                <li><code>place</code>: final ranking. Shared places use the highest one, e.g. 1, 1, 3 for 1st–2nd and 3rd.</li>
+                <li><code>result</code>: any text.</li>
+                <li><code>name</code>: player names. If every player has a Matrika number, tick <em>Exclude participant names</em> to leave the name out.</li>
+                <li><code>player ids</code>: Matrika numbers. Players numbered above 10000 (temporary numbers in TC) are left without a number.</li>
+            </ul>
+            <p>Matrika accepts “Czech csv”: semicolon as separator and Windows-1250 encoding.</p>
+            <h3>Team tournaments</h3>
+            <p>The output is three files to download: <code>players.csv</code>, <code>rankings.csv</code> and <code>teams.csv</code>.</p>
+        </div>
+    </details>
     <form method="get">
         <div class="form-group">
             <label for="url">Tournament URL:</label>
@@ -313,5 +349,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['url'])) {
         <?php endforeach; ?>
         </div>
     <?php endif; ?>
+    <script src="/apps/guide.js"></script>
 </body>
 </html>

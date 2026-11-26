@@ -406,8 +406,10 @@ header('Content-Type: text/html; charset=utf-8');
             color: #444;
         }
     </style>
+    <link rel="stylesheet" href="/apps/guide.css">
 </head>
 <body>
+    <p class="app-home"><a href="/">← bridge.zdenektomis.eu</a></p>
     <h1>Tournament Calculator Frequencies</h1>
     
     <div class="intro">
@@ -417,6 +419,53 @@ header('Content-Type: text/html; charset=utf-8');
         and board averages. For averages, you can choose to use all scores or drop extreme results either by count or percentage 
         from each end. The board numbers shown correspond to the actual tournament board numbers.
     </div>
+
+    <details class="app-guide">
+        <summary><span data-lang="cs">Návod</span><span data-lang="en">How to use</span></summary>
+        <span class="app-guide-lang"><button type="button" value="cs">CS</button><button type="button" value="en">EN</button></span>
+        <div data-lang="cs">
+            <ol>
+                <li><strong>URL prezentace</strong>: základní adresa prezentace z Tournament Calculatoru, kde jsou JSON soubory.</li>
+                <li><strong>Rozsah partií</strong>: první a poslední partie. Pro celé kolo zadejte počet partií na kolo a číslo kola a klikněte na <em>Set Range</em>.</li>
+                <li><strong>Filtrování průměrů</strong>: použít všechny výsledky, nebo vyloučit daný počet či procento nejlepších a nejhorších výsledků.</li>
+            </ol>
+            <h3>Výstup</h3>
+            <ul>
+                <li><strong>Frekvence</strong>: četnost každého výsledku na každé partii.</li>
+                <li><strong>Průměry</strong>: řádky ve tvaru <code>číslo_partie průměr</code>.</li>
+                <li><strong>Detailní výpočty</strong>: pro každou partii metoda filtrování, průměr a započtené i vyloučené výsledky.</li>
+            </ul>
+            <p>Každý výstup lze zkopírovat do schránky nebo stáhnout jako textový soubor.</p>
+            <h3>Podrobnosti</h3>
+            <ul>
+                <li>Čísla partií odpovídají skutečným číslům partií v turnaji, ne pořadí souborů.</li>
+                <li>Průměry se zaokrouhlují na desítky (423 → 420, 438 → 440).</li>
+                <li>Filtrování vždy ponechá alespoň jeden výsledek.</li>
+                <li>Parametry a fragmenty v URL se odstraní automaticky.</li>
+            </ul>
+        </div>
+        <div data-lang="en">
+            <ol>
+                <li><strong>Presentation URL</strong>: the base address of the Tournament Calculator presentation, where the JSON files are.</li>
+                <li><strong>Board range</strong>: first and last board. For a whole round, enter boards per round and the round number, then click <em>Set Range</em>.</li>
+                <li><strong>Average filtering</strong>: use all scores, or drop a number or percentage of the top and bottom scores.</li>
+            </ol>
+            <h3>Output</h3>
+            <ul>
+                <li><strong>Frequencies</strong>: how often each score occurred on each board.</li>
+                <li><strong>Averages</strong>: lines in the form <code>board_number average</code>.</li>
+                <li><strong>Detailed calculations</strong>: for each board the filtering method, the average, and the included and excluded scores.</li>
+            </ul>
+            <p>Every output can be copied to the clipboard or downloaded as a text file.</p>
+            <h3>Details</h3>
+            <ul>
+                <li>Board numbers are the real tournament board numbers, not file order.</li>
+                <li>Averages are rounded to the nearest 10 (423 → 420, 438 → 440).</li>
+                <li>Filtering always keeps at least one score.</li>
+                <li>Parameters and fragments are removed from the URL automatically.</li>
+            </ul>
+        </div>
+    </details>
     
     <?php if ($error): ?>
         <div class="error"><?= htmlspecialchars($error) ?></div>
@@ -617,6 +666,7 @@ header('Content-Type: text/html; charset=utf-8');
             }
         };
     </script>
+    <script src="/apps/guide.js"></script>
 </body>
 </html>
 

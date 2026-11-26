@@ -466,7 +466,19 @@
         padding-bottom: 80px;
       }
     }
+
+    .sidebar .app-guide {
+      margin: 0;
+      font-size: 12px;
+      color: #ccc;
+      border-color: #444;
+    }
+
+    .sidebar .app-guide strong {
+      color: #fff;
+    }
   </style>
+  <link rel="stylesheet" href="/apps/guide.css">
 </head>
 <body>
   <aside class="sidebar open">
@@ -477,6 +489,43 @@
       </div>
       <button class="close-sidebar" onclick="toggleSidebar()">✕</button>
     </div>
+
+    <details class="app-guide">
+      <summary><span data-lang="cs">Návod</span><span data-lang="en">How to use</span></summary>
+      <span class="app-guide-lang"><button type="button" value="cs">CS</button><button type="button" value="en">EN</button></span>
+      <div data-lang="cs">
+        <p>Tisknutelná čísla stolů ve tvaru trojbokých kuželů, které se složí a postaví na stůl.</p>
+        <ol>
+          <li>Zadejte první a poslední číslo stolu.</li>
+          <li>Nastavte stranu trojúhelníku (30–120 mm). Počet kuželů na stránku a mezery se dopočítají samy.</li>
+          <li>Volitelně přidejte text pod číslo, např. „OPEN“ nebo „NOVICE“.</li>
+          <li>Vytiskněte tlačítkem <strong>Print</strong> na papír A4.</li>
+        </ol>
+        <p>V <strong>Advanced Options</strong> lze změnit font, velikost čísla, pozici textu, počet kuželů na stránku a mezery mezi nimi.</p>
+        <h3>Tipy</h3>
+        <ul>
+          <li>Na barevném papíře připište název barvy do vlastního textu (např. „ČERVENÝ“), ať se v něm vyznají i lidé, kteří barvy nerozlišují.</li>
+          <li>Větší trojúhelníky jsou lépe vidět, ale zaberou víc místa na stránce.</li>
+        </ul>
+        <p>Kužely se generují jako vektorové SVG. Každý se skládá ze tří trojúhelníků, které se složí do prostorového tvaru.</p>
+      </div>
+      <div data-lang="en">
+        <p>Printable table numbers shaped as three-sided cones that you fold and stand on the table.</p>
+        <ol>
+          <li>Enter the first and last table number.</li>
+          <li>Set the triangle side (30–120 mm). Cones per page and gaps are calculated for you.</li>
+          <li>Optionally add text below the number, e.g. “OPEN” or “NOVICE”.</li>
+          <li>Print with the <strong>Print</strong> button on A4 paper.</li>
+        </ol>
+        <p><strong>Advanced Options</strong> change the font, number size, text position, cones per page and the gap between them.</p>
+        <h3>Tips</h3>
+        <ul>
+          <li>On coloured paper, add the colour name to the custom text (e.g. “RED”) so colour-blind players can tell them apart.</li>
+          <li>Larger triangles are easier to see but take more space on the page.</li>
+        </ul>
+        <p>Cones are generated as vector SVG. Each one is three triangles that fold into a 3D shape.</p>
+      </div>
+    </details>
 
     <div class="control-row">
       <div class="control-group">
@@ -948,5 +997,6 @@
       onTriangleSizeChange();
     });
   </script>
+  <script src="/apps/guide.js"></script>
 </body>
 </html>
