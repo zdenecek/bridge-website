@@ -7,7 +7,7 @@
         <main class="page-content laws-layout" aria-label="Content">
             {{- partial "laws/nav.html" . -}}
             <div class="laws-main">
-                {{- partial "language_switcher.html" . -}}
+                {{- if eq site.Language.Lang "cs" }}{{ partial "language_switcher.html" . }}{{ end -}}
                 {{- block "main" . }}{{- end }}
             </div>
         </main>

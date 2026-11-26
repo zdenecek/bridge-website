@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{- $other := false -}}
-{{- range .Translations }}{{ $other = . }}{{ end -}}
+{{- if eq site.Language.Lang "cs" }}{{ range .Translations }}{{ $other = . }}{{ end }}{{ end -}}
 <article class="law">
     <h1>{{ .Title }}</h1>
     {{ .Content }}

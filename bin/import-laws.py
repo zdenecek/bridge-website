@@ -31,6 +31,10 @@ EXTRA_PAGES = {
 }
 
 
+def plain(s):
+    return re.sub(r"<[^>]+>.*?</[^>]+>|<[^>]+>", "", s).strip()
+
+
 def sentence_case(s):
     s = s.strip().lower()
     return s[:1].upper() + s[1:]
@@ -96,7 +100,7 @@ def english(pzbs_dir):
     for n in range(1, 94):
         body = read_tresc(pzbs_dir / f"l{n}.html")
         h1 = re.search(r"<h1[^>]*>(.*?)</h1>", body, re.S)
-        heading = html.unescape(h1.group(1)).strip()
+        heading = html.unescape(h1.group(1)).strip().replace('href="#przypis"', 'href="#footnote"')
         body = body.replace(h1.group(0), "")
         rev = None
         m = re.search(r'<p class="rev2024info">.*?</p>', body, re.S)
@@ -421,8 +425,7 @@ cascade:
 INDEX_EN = """<p>The 2017 Laws of Duplicate Bridge of the World Bridge Federation, including the 2024 amendments to Laws 73 and 89.
 Each law is on its own page; the list on the left stays visible, and the search box searches the text of all laws
 (type a reference such as <code>64A2</code> to jump straight to it).</p>
-<p>The English text follows the <a href="https://www.pzbs.pl/sedziowie/mpb/2017/en/home.html">HTML edition of the Polish Bridge Union (PZBS)</a>.
-A Czech translation is available for every law.</p>
+<p>The English text follows the <a href="https://www.pzbs.pl/sedziowie/mpb/2017/en/home.html">HTML edition of the Polish Bridge Union (PZBS)</a>.</p>
 """
 
 INDEX_CS = """<p>Mezinárodní pravidla bridže 2017 Světové bridžové federace (WBF). Každé pravidlo má vlastní stránku, seznam pravidel
@@ -447,7 +450,7 @@ def main(pzbs_dir, pdf):
     for n in range(1, 94):
         e = en[n]
         write(EN_DIR / f"{n}.html",
-              front_matter(title=f"Law {n}: {sentence_case(e['heading'])}", short=sentence_case(e["heading"]),
+              front_matter(title=f"Law {n}: {sentence_case(plain(e['heading']))}", short=sentence_case(plain(e["heading"])),
                            heading=e["heading"], law=n, weight=n, translationKey=f"law-{n}", rev2024=e["rev2024"]),
               en_links(e["body"], EN_URL))
         c = cs[n]

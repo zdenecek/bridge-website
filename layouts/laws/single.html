@@ -12,9 +12,9 @@
 {{ partial "laws/pager.html" $pager }}
 
 <article class="law" data-law="{{ .Params.law }}">
-    {{- range .Translations }}
+    {{- if eq site.Language.Lang "cs" }}{{ range .Translations }}
     <p class="law-translation"><a href="{{ .RelPermalink }}" hreflang="{{ .Lang }}">{{ .Language.LanguageName }}: {{ .Title }}</a></p>
-    {{- end }}
+    {{- end }}{{ end }}
 
     {{- if and .Params.rev2024 (eq site.Language.Lang "cs") }}
     <p class="law-note">{{ i18n "laws-note-2017" }}</p>

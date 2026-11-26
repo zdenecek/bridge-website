@@ -1,7 +1,7 @@
 {{- $section := .CurrentSection -}}
 {{- $current := . -}}
 {{- $alt := "" -}}
-{{- range $section.Translations }}{{ $alt = .RelPermalink }}{{ end -}}
+{{- if eq site.Language.Lang "cs" }}{{ range $section.Translations }}{{ $alt = .RelPermalink }}{{ end }}{{ end -}}
 <aside class="laws-nav" id="laws-nav">
     <a class="laws-nav-title" href="{{ $section.RelPermalink }}">{{ $section.Title }}</a>
     <div class="laws-search">

@@ -36,7 +36,7 @@ laws-search-placeholder:
   other: 'Search… (text or 64A2)'
 
 laws-search-both:
-  other: 'also search in Czech'
+  other: ""
 
 laws-list-toggle:
   other: 'List of Laws'
