@@ -1,0 +1,79 @@
+tournaments:
+  title: Turnaje
+  groups:
+    - title: Republikové
+      section: turnaje
+      limit: 3
+    - title: V BK Praha
+      section: turnaje-v-bk-praha
+      limit: 2
+  more:
+    title: všechny turnaje
+    url: turnaje
+
+articles:
+  title: Články
+  section: clanky
+  limit: 4
+  extra:
+    - title: Dražební systém Fools
+      url: /fools
+  more:
+    title: všechny články
+    url: clanky
+
+links:
+  title: Odkazy
+  items:
+    - title: Český bridžový svaz
+      url: https://czechbridge.cz
+    - title: Bridžový klub Praha
+      url: https://www.bkpraha.cz
+    - title: Havířovská bridžová akademie a Bridžový spolek Havířov
+      url: https://bridzhavirov.cz
+    - title: Osobní stránka
+      url: https://zdenektomis.eu/cs
+  more:
+    title: další bridžové odkazy
+    page: /links
+
+td:
+  title: Pro vedoucí turnajů
+  tools:
+    - page: /pravidla
+      title: Pravidla bridže 2017
+      desc: česky i anglicky, s vyhledáváním
+    - page: /td-stuff/tc-to-matrika
+      title: Převodník TC → matrika
+      url: /apps/tc-to-matrika
+      desc: turnaj z TC k nahrání do Matriky ČBS
+    - page: /td-stuff/tc-to-frequencies
+      title: Frekvence a průměry
+      desc: z prezentace TC pro každé rozdání
+    - page: /td-stuff/generator-cisel-stolu
+      title: Generátor čísel stolů
+      desc: tisknutelné kužely s čísly stolů
+    - page: /td-stuff/matrika-cbs-utf8
+      title: Hráči z Matriky v UTF-8
+      desc: seznam hráčů ČBS i pro TC
+    - page: /programy/pbn
+      title: Program pro soubory .pbn
+      desc: úpravy a převody rozdání
+    - page: /td-stuff/conversion-scripts
+      title: Převody dat z turnajů
+      desc: skripty mezi bridžovými programy
+    - page: /td-stuff/matrika
+      title: Dokumentace matriky
+      desc: jak pracovat s matrikacbs.cz
+  guides:
+    title: Návody
+    section: td-stuff
+    limit: 5
+    more:
+      title: všechny návody
+      url: td-stuff
+  files:
+    title: Soubory
+    items:
+      - title: Soubory ke stažení
+        url: /soubory

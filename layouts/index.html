@@ -1,21 +1,87 @@
 {{ define "main" }}
+{{- $home := index site.Data (printf "home.%s" site.Language.Lang) -}}
 
-<header>
-    <div class="clearfix"></div>
+<header class="home-header">
     {{ $image := resources.Get "img/front.png" }}
-    <img src="{{ $image.RelPermalink }}" class="front-image"  alt="Image with people playing bridge">
-    <h1 align="center">{{ $.Site.Title }}</h1>
-    {{- if $.Site.Params.theme_config.show_description -}}
-        <p>{{ $.Site.Params.description }}</p>
-    {{- end -}}
+    <img src="{{ $image.RelPermalink }}" class="front-image" alt="Image with people playing bridge">
+    <h1>{{ site.Title }}</h1>
+    {{ .Content }}
 </header>
-{{ .Content }}{{ $lang := .Site.Language.Lang }}
 
-{{/* following code find the menu file based on the language and default menu file if not found */}}
-{{ $lang := .Site.Language.Lang }}
-{{ $menuFile := printf "menu.%s" $lang }}
-{{ $defaultMenuFile := "menu" }}
-{{ $menu := index $.Site.Data $menuFile | default (index $.Site.Data $defaultMenuFile) }}
-{{ partial "menu_item.html" (dict "context" . "collection" $menu.entries) }}
+<div class="home-cols">
+    {{- with $home.tournaments }}
+    <section>
+        <h2>{{ .title }}</h2>
+        {{- range .groups }}
+        {{- $list := partial "home/pages.html" (dict "section" .section "limit" .limit "dates" "after") }}
+        {{- if $list }}
+        <div class="home-sub">{{ .title }}</div>
+        <ul>{{ $list }}</ul>
+        {{- end }}
+        {{- end }}
+        {{- with .more }}<span class="home-more">{{ partial "home/link.html" . }} →</span>{{ end }}
+    </section>
+    {{- end }}
 
+    {{- with $home.articles }}
+    <section>
+        <h2>{{ .title }}</h2>
+        <ul>
+            {{- with .section }}{{ partial "home/pages.html" (dict "section" . "limit" $home.articles.limit) }}{{ end }}
+            {{- range .extra }}<li>{{ partial "home/link.html" . }}</li>{{ end }}
+        </ul>
+        {{- with .more }}<span class="home-more">{{ partial "home/link.html" . }} →</span>{{ end }}
+    </section>
+    {{- end }}
+
+    {{- with $home.links }}
+    <section>
+        <h2>{{ .title }}</h2>
+        <ul>
+            {{- range .items }}<li>{{ partial "home/link.html" . }}</li>{{ end }}
+        </ul>
+        {{- with .more }}<span class="home-more">{{ partial "home/link.html" . }} →</span>{{ end }}
+    </section>
+    {{- end }}
+</div>
+
+{{- with $home.td }}
+<h2 class="home-part">{{ .title }}</h2>
+
+{{- $toolPages := slice }}
+<div class="home-tools">
+    {{- range .tools }}
+    {{- $p := site.GetPage .page }}
+    {{- if $p }}
+    {{- $toolPages = $toolPages | append $p }}
+    <a class="tool" href="{{ with .url }}{{ . | relLangURL }}{{ else }}{{ $p.RelPermalink }}{{ end }}">
+        <b>{{ .title | default $p.Title }}</b>
+        {{- with .desc }}<span>{{ . }}</span>{{ end }}
+    </a>
+    {{- end }}
+    {{- end }}
+</div>
+
+<div class="home-cols home-cols-21">
+    {{- with .guides }}
+    <section>
+        <h2>{{ .title }}</h2>
+        {{- with .note }}<p>{{ . }}</p>{{ end }}
+        {{- with .section }}
+        <ul>{{ partial "home/pages.html" (dict "section" . "limit" $home.td.guides.limit "exclude" $toolPages "dates" "before") }}</ul>
+        {{- end }}
+        {{- with .more }}<span class="home-more">{{ partial "home/link.html" . }} →</span>{{ end }}
+    </section>
+    {{- end }}
+
+    {{- with .files }}
+    <section>
+        <h2>{{ .title }}</h2>
+        <ul>
+            {{- range .items }}<li>{{ partial "home/link.html" . }}</li>{{ end }}
+        </ul>
+    </section>
+    {{- end }}
+</div>
+{{- end }}
 {{ end }}

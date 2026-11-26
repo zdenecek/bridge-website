@@ -1,0 +1,12 @@
+{{- $pages := where site.RegularPages "Section" .section -}}
+{{- with .exclude }}{{ $pages = $pages | complement . }}{{ end -}}
+{{- $pages = $pages.ByDate.Reverse -}}
+{{- with .limit }}{{ $pages = first . $pages }}{{ end -}}
+{{- $style := .dates | default "none" -}}
+{{- range $pages }}
+<li>
+    {{- if eq $style "before" }}<span class="home-date">{{ .Date | time.Format (i18n "date-format-with-year") }}</span>{{ end -}}
+    <a href="{{ with .Params.redirect }}{{ . | relURL }}{{ else }}{{ .RelPermalink }}{{ end }}">{{ .Title }}</a>
+    {{- if eq $style "after" }} <span class="home-date-after">{{ .Date | time.Format (i18n "date-format-without-year") }}</span>{{ end -}}
+</li>
+{{- end }}

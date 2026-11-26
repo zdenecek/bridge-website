@@ -85,6 +85,32 @@
   :target {
     background-color: $--link-color !important;
   }
+
+  .home-sub, .home-date, .home-date-after {
+    color: $--secondary-text-color;
+  }
+
+  .home-part, .home-header + .home-cols {
+    border-color: $--secondary-text-color;
+  }
+
+  .tool {
+    border: solid 1px $--primary-text-color;
+    color: $--primary-text-color;
+
+    b { color: $--link-color; }
+    span { color: $--secondary-text-color; }
+
+    &:visited { color: $--primary-text-color; }
+
+    &:hover {
+      text-decoration: none;
+      background-color: $--primary-text-color;
+      transition: color 0.4s ease-in-out, background-color 0.4s ease-in-out;
+
+      b, span { color: $--bg-color; }
+    }
+  }
 }
 
 
@@ -195,5 +221,119 @@ body[a="light"] {
   // On the phone, the width of the content is smaller
   .w {
     padding: 2rem 1rem;
+  }
+}
+
+.w.w-home {
+  max-width: 1000px;
+}
+
+.home-header {
+  max-width: 640px;
+  margin: 0 auto 2.5rem;
+
+  .front-image {
+    margin-top: 1rem;
+  }
+
+  h1 {
+    text-align: center;
+  }
+}
+
+.home-cols {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+
+  h2 {
+    font-size: 1.15rem;
+    margin: 0 0 0.6rem;
+  }
+
+  ul {
+    margin: 0;
+  }
+
+  li {
+    margin: 0.35rem 0;
+  }
+}
+
+.home-cols-21 {
+  grid-template-columns: 2fr 1fr;
+  margin-top: 2rem;
+}
+
+.home-sub {
+  font-size: 0.85em;
+  margin: 0.9rem 0 0.2rem;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.home-date {
+  display: inline-block;
+  width: 8.5em;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.home-date-after {
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.home-more {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.9em;
+}
+
+h2.home-part {
+  font-size: 1.35rem;
+  margin: 3rem 0 1.25rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid;
+}
+
+.home-tools {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+
+  .tool {
+    display: block;
+    padding: 0.7rem 0.8rem;
+
+    b {
+      font-weight: normal;
+    }
+
+    span {
+      display: block;
+      font-size: 0.8em;
+      margin-top: 0.25rem;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .home-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-cols,
+  .home-cols-21 {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-tools {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

@@ -6,7 +6,7 @@
 
 
 
-            <div class="w">
+            <div class="w{{ if .IsHome }} w-home{{ end }}">
                 {{- partial "language_switcher.html" . -}}
                 {{- block "main" . }}{{- end }}
             </div>

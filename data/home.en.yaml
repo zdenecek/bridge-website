@@ -1,0 +1,67 @@
+tournaments:
+  title: Tournaments
+  groups:
+    - title: National
+      section: tournaments
+      limit: 3
+    - title: Prague Bridge Club
+      section: bkp-tournaments
+      limit: 2
+  more:
+    title: all tournaments
+    url: tournaments
+
+articles:
+  title: For players
+  extra:
+    - title: Fools bidding system and agreements
+      url: /fools
+
+links:
+  title: Links
+  items:
+    - title: Czech Bridge Federation
+      url: https://czechbridge.cz
+    - title: Prague Bridge Club
+      url: https://www.bkpraha.cz
+    - title: Havířov Bridge Academy and Bridge Club
+      url: https://bridzhavirov.cz
+    - title: Personal page
+      url: https://zdenektomis.eu/en
+  more:
+    title: more links
+    page: /links
+
+td:
+  title: For tournament directors
+  tools:
+    - page: /laws
+      title: Laws of Duplicate Bridge 2017
+      desc: full text with search
+    - page: /software/tc-to-matrika
+      title: TC to Matrika ČBS
+      url: /apps/tc-to-matrika
+      desc: upload a TC tournament to the Czech results database
+    - page: /software/tc-to-frequencies
+      title: Frequencies and averages
+      desc: per board, from a TC presentation
+    - page: /software/table-number-generator
+      title: Table number generator
+      desc: printable table number cones
+    - page: /software/matrika-cbs-utf8
+      title: Czech players in UTF-8
+      desc: Czech federation player list, also for TC
+    - page: /software/pbn
+      title: PBN tool
+      desc: edit and convert deal files
+  guides:
+    title: Guides
+    note: Guides for tournament directors are in Czech.
+    more:
+      title: guides (in Czech)
+      url: /td-stuff
+  files:
+    title: Files
+    items:
+      - title: Downloads
+        url: /soubory
