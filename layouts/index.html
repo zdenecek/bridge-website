@@ -8,7 +8,7 @@
     {{ .Content }}
 </header>
 
-<div class="home-cols">
+<div class="home-cols home-cols-top">
     {{- with $home.tournaments }}
     <section>
         <h2>{{ .title }}</h2>
@@ -23,6 +23,7 @@
     </section>
     {{- end }}
 
+    <div class="home-stack">
     {{- with $home.articles }}
     <section>
         <h2>{{ .title }}</h2>
@@ -43,6 +44,7 @@
         {{- with .more }}<span class="home-more">{{ partial "home/link.html" . }} →</span>{{ end }}
     </section>
     {{- end }}
+    </div>
 </div>
 
 {{- with $home.td }}
@@ -50,13 +52,18 @@
 
 {{- $toolPages := slice }}
 <div class="home-tools">
-    {{- range .tools }}
-    {{- $p := site.GetPage .page }}
-    {{- if $p }}
-    {{- $toolPages = $toolPages | append $p }}
-    <a class="tool" href="{{ with .url }}{{ . | relLangURL }}{{ else }}{{ $p.RelPermalink }}{{ end }}">
-        <b>{{ .title | default $p.Title }}</b>
-        {{- with .desc }}<span>{{ . }}</span>{{ end }}
+    {{- range $t := .tools }}
+    {{- $p := false }}
+    {{- with $t.page }}{{ $p = site.GetPage . }}{{ end }}
+    {{- with $p }}{{ $toolPages = $toolPages | append . }}{{ end }}
+    {{- $href := "" }}
+    {{- with $t.url }}{{ $href = . | relURL }}{{ else }}{{ with $p }}{{ $href = .RelPermalink }}{{ end }}{{ end }}
+    {{- $title := $t.title }}
+    {{- if not $title }}{{ with $p }}{{ $title = .Title }}{{ end }}{{ end }}
+    {{- if $href }}
+    <a class="tool" href="{{ $href }}">
+        <b>{{ $title }}</b>
+        {{- with $t.desc }}<span>{{ . }}</span>{{ end }}
     </a>
     {{- end }}
     {{- end }}

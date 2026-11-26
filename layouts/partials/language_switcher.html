@@ -1,13 +1,12 @@
 {{- if .IsTranslated -}}
-<div id="language-switcher" title="{{ i18n "change-language"}}" >
-    {{ $icon := resources.Get "img/language-icon.svg" }}
-    <div class="language-icon"> </div>
-    <select autocomplete="off" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-        <option selected hidden> {{ i18n "change-language"}} </option>
-        <option disabled> &check; {{ $.Language.LanguageName }} ({{ .Lang }})</option>
-        {{ range .Translations }}
-            <option value="{{ .Permalink }}" value="/{{ .Permalink }}"> {{ .Language.LanguageName }} ({{ .Lang }})</option>
-        {{ end }}
-    </select>
-</div>
-{{ end }}
+<nav id="language-switcher" title="{{ i18n "change-language" }}">
+    {{- range $i, $l := site.Languages }}
+    {{- if $i }}<span class="sep">·</span>{{ end }}
+    {{- if eq $l.Lang $.Lang }}
+    <span class="current" lang="{{ $l.Lang }}">{{ $l.Lang }}</span>
+    {{- else }}{{ range where $.Translations "Lang" $l.Lang }}
+    <a href="{{ .RelPermalink }}" hreflang="{{ .Lang }}" lang="{{ .Lang }}">{{ .Lang }}</a>
+    {{- end }}{{ end }}
+    {{- end }}
+</nav>
+{{- end }}
