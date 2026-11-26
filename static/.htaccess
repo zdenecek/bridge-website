@@ -5,11 +5,8 @@ RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/web/(.*)\sHTTP/[0-9.]+$
 RewriteRule ^ /%1 [R=302,L]
 
 RewriteRule ^tc-matrika/?$ /apps/tc-to-matrika?lang=cs [R=301,L]
-RewriteRule ^en/software/tc-to-matrika/?$ /apps/tc-to-matrika?lang=en [R=301,L]
 RewriteRule ^tc-freq/?$ /apps/tc-to-frequencies?lang=cs [R=301,L]
-RewriteRule ^en/tc-freq/?$ /apps/tc-to-frequencies?lang=en [R=301,L]
 RewriteRule ^td-stuff/generator-cisel-stolu/?$ /apps/table-cones/?lang=cs [R=301,L]
-RewriteRule ^en/software/table-number-generator/?$ /apps/table-cones/?lang=en [R=301,L]
 
 # Attempt to serve .php files if the requested file doesn't exist
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -1,4 +1,7 @@
 RewriteEngine On
 
+RewriteRule ^software/tc-to-matrika/?$ /apps/tc-to-matrika?lang=en [R=301,L]
+RewriteRule ^tc-freq/?$ /apps/tc-to-frequencies?lang=en [R=301,L]
+RewriteRule ^software/table-number-generator/?$ /apps/table-cones/?lang=en [R=301,L]
 
 ErrorDocument 404 /en/404.html
