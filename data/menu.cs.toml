@@ -19,6 +19,10 @@ post_list = { section = "clanky", limit = 3, show_date=true }
 title = "Pro vedoucí turnajů"
 
 [[entries.entries]]
+title = "Pravidla bridže 2017"
+url = "pravidla"
+
+[[entries.entries]]
 title = "Program pro práci se soubory .pbn"
 url = "pbn"
 

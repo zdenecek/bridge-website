@@ -28,3 +28,33 @@ date-format-with-year:
 
 date-format-without-year:
   other: "01-02"
+
+laws-search:
+  other: 'Search the Laws'
+
+laws-search-placeholder:
+  other: 'Search… (text or 64A2)'
+
+laws-search-both:
+  other: 'also search in Czech'
+
+laws-list-toggle:
+  other: 'List of Laws'
+
+laws-contents:
+  other: 'Contents'
+
+laws-refs:
+  other: 'Further references'
+
+laws-note-2017:
+  other: 'This is the 2017 text.'
+
+laws-note-2024:
+  other: 'This Law was amended with effect from 2024.'
+
+laws-prev-version:
+  other: 'Previous version (2017)'
+
+laws-note-untranslated:
+  other: ''

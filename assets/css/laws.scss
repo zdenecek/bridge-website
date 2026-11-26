@@ -1,0 +1,398 @@
+:root {
+  --laws-bg: #ffffff;
+  --laws-fg: #212121;
+  --laws-muted: #666666;
+  --laws-line: #dddddd;
+  --laws-accent: #65a9b2;
+  --laws-current: #e6f2f3;
+  --laws-mark: #fff1a8;
+  --laws-note: #f6f6f6;
+}
+
+@media (prefers-color-scheme: dark) {
+  body[a="auto"] {
+    --laws-bg: #212121;
+    --laws-fg: #fafafa;
+    --laws-muted: #b0b0b0;
+    --laws-line: #3a3a3a;
+    --laws-accent: #dcb196;
+    --laws-current: #3a332e;
+    --laws-mark: #6b5a1e;
+    --laws-note: #2b2b2b;
+  }
+}
+
+body[a="dark"] {
+  --laws-bg: #212121;
+  --laws-fg: #fafafa;
+  --laws-muted: #b0b0b0;
+  --laws-line: #3a3a3a;
+  --laws-accent: #dcb196;
+  --laws-current: #3a332e;
+  --laws-mark: #6b5a1e;
+  --laws-note: #2b2b2b;
+}
+
+.laws-layout {
+  display: grid;
+  grid-template-columns: 22rem minmax(0, 1fr);
+  gap: 2.5rem;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.laws-main {
+  max-width: 48rem;
+  padding: 2rem 0 4rem;
+  min-width: 0;
+}
+
+.laws-nav {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1.5rem 1rem 2rem 0;
+  border-right: 1px solid var(--laws-line);
+  font-size: 0.85rem;
+  line-height: 1.3;
+  box-sizing: border-box;
+}
+
+.laws-nav-title {
+  display: block;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.laws-search {
+  position: sticky;
+  top: -1.5rem;
+  background: var(--laws-bg);
+  padding: 0.25rem 0 0.5rem;
+  z-index: 1;
+
+  input[type="search"] {
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    font-size: 0.9rem;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid var(--laws-line);
+    border-radius: 4px;
+    background: var(--laws-bg);
+    color: var(--laws-fg);
+
+    &:focus {
+      outline: 2px solid var(--laws-accent);
+      outline-offset: -1px;
+    }
+  }
+}
+
+.laws-both {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--laws-muted);
+  cursor: pointer;
+}
+
+.laws-toggle {
+  display: none;
+}
+
+.page-content .laws-nav ul,
+.page-content .laws-nav ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.laws-list {
+  a {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    color: var(--laws-fg) !important;
+
+    &:hover {
+      background: var(--laws-current);
+      text-decoration: none;
+    }
+
+    &.current {
+      background: var(--laws-current);
+      font-weight: bold;
+    }
+  }
+
+  .n {
+    flex: 0 0 1.6rem;
+    text-align: right;
+    color: var(--laws-muted);
+  }
+
+  .laws-extra {
+    margin: 0.4rem 0 !important;
+  }
+}
+
+.laws-results {
+  a {
+    display: block;
+    padding: 0.4rem;
+    border-radius: 3px;
+    color: var(--laws-fg) !important;
+    border-bottom: 1px solid var(--laws-line);
+
+    &:hover,
+    &.active {
+      background: var(--laws-current);
+      text-decoration: none;
+    }
+  }
+
+  .r-ref {
+    font-weight: bold;
+    margin-right: 0.4rem;
+  }
+
+  .r-lang {
+    font-size: 0.75rem;
+    color: var(--laws-muted);
+    margin-left: 0.3rem;
+  }
+
+  .r-snippet {
+    display: block;
+    color: var(--laws-muted);
+    margin-top: 0.15rem;
+  }
+
+  .r-info {
+    color: var(--laws-muted);
+    padding: 0.4rem;
+  }
+}
+
+mark {
+  background: var(--laws-mark);
+  color: inherit;
+  padding: 0 1px;
+}
+
+.laws-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.law {
+  h1 {
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin: 1.5rem 0 1rem;
+  }
+
+  h2 {
+    font-size: 1.05rem;
+    margin: 2rem 0 0.75rem;
+  }
+
+  p,
+  li {
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  ol {
+    padding-left: 2rem;
+    margin: 0.5rem 0;
+  }
+
+  ol ol {
+    list-style-type: lower-alpha;
+  }
+
+  ol ol ol {
+    list-style-type: lower-roman;
+  }
+
+  li > p {
+    margin: 0.5rem 0;
+  }
+
+  li.no-preface > ol {
+    margin-top: 0;
+  }
+
+  table {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  table,
+  th,
+  td {
+    border-color: var(--laws-line);
+  }
+
+  dt {
+    font-weight: bold;
+    margin-top: 1.25rem;
+  }
+
+  dd {
+    margin-left: 1.5rem;
+  }
+
+  .footnote {
+    font-size: 0.85rem;
+    color: var(--laws-muted);
+  }
+
+  [id] {
+    scroll-margin-top: 1rem;
+  }
+}
+
+.law-translation {
+  text-align: right !important;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.law-note {
+  background: var(--laws-note);
+  border-left: 3px solid var(--laws-accent);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.law-refs {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--laws-line);
+}
+
+.law-ref-badge {
+  font-size: 0.7rem;
+  margin-left: 0.3rem;
+  padding: 0 0.3rem;
+  border: 1px solid var(--laws-accent);
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.page-content #indeks {
+  list-style: none;
+  padding-left: 0;
+
+  > li {
+    font-weight: bold;
+    margin: 1.25rem 0 0.25rem;
+  }
+
+  ul {
+    font-weight: normal;
+    list-style: none;
+    padding-left: 1rem;
+  }
+
+  li {
+    padding-left: 0;
+    text-align: left;
+  }
+
+  span {
+    float: right;
+    margin-left: 1rem;
+  }
+
+  li::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.page-content .laws-toc {
+  padding-left: 2.5rem;
+
+  li {
+    margin: 0.3rem 0;
+  }
+}
+
+.laws-toc-alt {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--laws-muted);
+}
+
+@media (max-width: 900px) {
+  .laws-layout {
+    display: block;
+    padding: 0 1rem;
+  }
+
+  .laws-nav {
+    position: static;
+    height: auto;
+    overflow: visible;
+    border-right: none;
+    border-bottom: 1px solid var(--laws-line);
+    padding: 1rem 0 0.75rem;
+  }
+
+  .laws-search {
+    position: static;
+  }
+
+  .laws-toggle {
+    display: block;
+    margin-top: 0.5rem;
+    font: inherit;
+    background: none;
+    border: 1px solid var(--laws-line);
+    border-radius: 4px;
+    color: var(--laws-fg);
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+  }
+
+  .laws-list {
+    display: none;
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-top: 0.5rem;
+  }
+
+  .laws-nav.open .laws-list {
+    display: block;
+  }
+
+  .laws-main {
+    padding-top: 1rem;
+  }
+
+  .law p,
+  .law li {
+    text-align: left;
+  }
+
+  .page-content #indeks span {
+    float: none;
+    display: block;
+    margin-left: 0;
+  }
+}

@@ -37,3 +37,6 @@ module: # copy scripts to static
       target: "static/apps"
     - source: static
       target: static
+security:
+  allowContent:
+    - "! ^text/org$"

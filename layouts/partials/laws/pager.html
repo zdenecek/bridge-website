@@ -1,0 +1,5 @@
+<nav class="laws-pager">
+    {{- with .prev }}<a href="{{ .RelPermalink }}" data-nav="prev" title="{{ .Title }}">← {{ .Params.law | default .Params.short }}</a>{{ else }}<span></span>{{ end }}
+    <a href="{{ .section.RelPermalink }}">{{ i18n "laws-contents" }}</a>
+    {{- with .next }}<a href="{{ .RelPermalink }}" data-nav="next" title="{{ .Title }}">{{ .Params.law | default .Params.short }} →</a>{{ else }}<span></span>{{ end }}
+</nav>

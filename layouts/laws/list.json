@@ -1,0 +1,7 @@
+{{- $out := slice -}}
+{{- range .Pages.ByWeight -}}
+{{- if ne .Params.extra "index" -}}
+{{- $out = $out | append (dict "u" .RelPermalink "n" (.Params.law | default "") "t" .Params.short "c" .Content) -}}
+{{- end -}}
+{{- end -}}
+{{- $out | jsonify -}}

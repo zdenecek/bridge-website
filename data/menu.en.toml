@@ -19,6 +19,10 @@ title = "Software"
 post_list = { section="software", limit="3", show_more=true, show_date=false,  show_more_url = "software", show_more_text = "show all" }
 
 [[entries]]
+title = "Laws of Duplicate Bridge 2017"
+url = "/en/laws"
+
+[[entries]]
 title = "Files"
 url = "/soubory"
 

@@ -110,6 +110,25 @@ The `bin/convert.py` script converts these JSON files into Hugo content files:
 - English content goes in `content/en/`
 - Both directories mirror each other's structure
 
+### Laws of Duplicate Bridge
+
+The laws live in `content/cs/pravidla/` and `content/en/laws/`, one HTML file per law, with
+paragraph ids (`A1`, `C1a`, …) shared by both languages. They were generated once by
+`bin/import-laws.py` from the PZBS HTML edition and the Czech translation PDF; edit the files
+directly from now on, since re-running the script overwrites them.
+
+References to other documents (White Book, Blue Book, WBF Commentary) go in
+`data/laws/refs.yaml`, keyed by law number; `anchor` adds a badge to that paragraph:
+
+```yaml
+laws:
+  "64":
+    - source: whitebook
+      ref: "§8.64.1"
+      anchor: C1
+      note: { cs: "Opakovaný renonc", en: "Repeated revokes" }
+```
+
 ## Configuration
 
 - `hugo.yaml` - Main Hugo configuration

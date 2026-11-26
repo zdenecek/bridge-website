@@ -1,0 +1,36 @@
+{{- $section := .CurrentSection -}}
+{{- $current := . -}}
+{{- $alt := "" -}}
+{{- range $section.Translations }}{{ $alt = .RelPermalink }}{{ end -}}
+<aside class="laws-nav" id="laws-nav">
+    <a class="laws-nav-title" href="{{ $section.RelPermalink }}">{{ $section.Title }}</a>
+    <div class="laws-search">
+        <input type="search" id="laws-q" autocomplete="off" spellcheck="false"
+               placeholder="{{ i18n "laws-search-placeholder" }}" aria-label="{{ i18n "laws-search" }}"
+               data-index="{{ $section.RelPermalink }}index.json"
+               {{- with $alt }} data-index-alt="{{ . }}index.json"{{ end }}
+               data-lang="{{ site.Language.Lang }}">
+        {{- with $alt }}
+        <label class="laws-both"><input type="checkbox" id="laws-both"> {{ i18n "laws-search-both" }}</label>
+        {{- end }}
+        <button type="button" class="laws-toggle" id="laws-toggle" aria-controls="laws-list" aria-expanded="false">{{ i18n "laws-list-toggle" }}</button>
+    </div>
+    <div class="laws-results" id="laws-results" hidden></div>
+    <nav class="laws-list" id="laws-list" aria-label="{{ i18n "laws-list-toggle" }}">
+        <ul class="laws-extra">
+            {{- range $section.Pages.ByWeight }}{{ if and .Params.extra (lt .Weight 0) }}
+            <li><a href="{{ .RelPermalink }}"{{ if eq . $current }} class="current" aria-current="page"{{ end }}>{{ .Params.short }}</a></li>
+            {{- end }}{{ end }}
+        </ul>
+        <ol class="laws-items">
+            {{- range where $section.Pages.ByWeight "Params.law" "!=" nil }}
+            <li><a href="{{ .RelPermalink }}"{{ if eq . $current }} class="current" aria-current="page"{{ end }}><span class="n">{{ .Params.law }}</span><span class="t">{{ .Params.short }}</span></a></li>
+            {{- end }}
+        </ol>
+        <ul class="laws-extra">
+            {{- range $section.Pages.ByWeight }}{{ if and .Params.extra (gt .Weight 0) }}
+            <li><a href="{{ .RelPermalink }}"{{ if eq . $current }} class="current" aria-current="page"{{ end }}>{{ .Params.short }}</a></li>
+            {{- end }}{{ end }}
+        </ul>
+    </nav>
+</aside>

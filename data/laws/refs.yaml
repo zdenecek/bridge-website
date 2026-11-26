@@ -1,0 +1,15 @@
+sources:
+  whitebook:
+    name: EBU White Book
+    short: WB
+    url: https://www.ebu.co.uk/documents/laws-and-ethics/white-book/white-book.pdf
+  bluebook:
+    name: EBU Blue Book
+    short: BB
+    url: https://www.ebu.co.uk/documents/laws-and-ethics/blue-book/blue-book.pdf
+  commentary:
+    name: WBF Commentary on the 2017 Laws
+    short: WBF
+    url: https://www.worldbridge.org/wp-content/uploads/2019/01/2017LawsCommentary.pdf
+
+laws: {}

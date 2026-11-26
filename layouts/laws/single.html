@@ -1,0 +1,38 @@
+{{ define "main" }}
+{{- $pages := .CurrentSection.Pages.ByWeight -}}
+{{- $prev := false -}}{{- $next := false -}}{{- $found := false -}}
+{{- range $pages -}}
+    {{- if $found -}}{{- if not $next }}{{ $next = . }}{{ end -}}
+    {{- else if eq . $ -}}{{- $found = true -}}
+    {{- else -}}{{- $prev = . -}}
+    {{- end -}}
+{{- end -}}
+
+{{- $pager := dict "prev" $prev "next" $next "section" .CurrentSection -}}
+{{ partial "laws/pager.html" $pager }}
+
+<article class="law" data-law="{{ .Params.law }}">
+    {{- range .Translations }}
+    <p class="law-translation"><a href="{{ .RelPermalink }}" hreflang="{{ .Lang }}">{{ .Language.LanguageName }}: {{ .Title }}</a></p>
+    {{- end }}
+
+    {{- if and .Params.rev2024 (eq site.Language.Lang "cs") }}
+    <p class="law-note">{{ i18n "laws-note-2017" }}</p>
+    {{- else if .Params.rev2024 }}
+    <p class="law-note">{{ i18n "laws-note-2024" }} <a href="https://www.pzbs.pl/sedziowie/mpb/2017/en/l{{ .Params.law }}-v1.html">{{ i18n "laws-prev-version" }}</a></p>
+    {{- end }}
+    {{- if .Params.untranslated }}
+    <p class="law-note">{{ i18n "laws-note-untranslated" }}</p>
+    {{- end }}
+
+    <h1>{{ with .Params.law }}{{ . }}. {{ end }}{{ .Params.heading | default .Title | safeHTML }}</h1>
+
+    <div class="law-content">
+        {{ .Content }}
+    </div>
+
+    {{ partial "laws/refs.html" . }}
+</article>
+
+{{ partial "laws/pager.html" $pager }}
+{{ end }}

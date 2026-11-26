@@ -28,3 +28,33 @@ date-format-with-year:
 
 date-format-without-year:
   other: '2. 1.'
+
+laws-search:
+  other: 'Hledat v pravidlech'
+
+laws-search-placeholder:
+  other: 'Hledat… (text nebo 64A2)'
+
+laws-search-both:
+  other: 'hledat i v angličtině'
+
+laws-list-toggle:
+  other: 'Seznam pravidel'
+
+laws-contents:
+  other: 'Obsah'
+
+laws-refs:
+  other: 'Další zdroje'
+
+laws-note-2017:
+  other: 'Český překlad odpovídá znění z roku 2017. Od roku 2024 platí upravené znění, viz anglická verze.'
+
+laws-note-2024:
+  other: 'Toto pravidlo bylo od roku 2024 změněno.'
+
+laws-note-untranslated:
+  other: 'Český překlad této části není k dispozici, níže je anglický originál.'
+
+laws-prev-version:
+  other: 'Znění z roku 2017'

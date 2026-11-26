@@ -1,0 +1,26 @@
+{{ define "main" }}
+{{- $other := false -}}
+{{- range .Translations }}{{ $other = . }}{{ end -}}
+<article class="law">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+
+    <ul class="laws-toc-extra">
+        {{- range .Pages.ByWeight }}{{ if .Params.extra }}
+        <li><a href="{{ .RelPermalink }}">{{ .Params.short }}</a></li>
+        {{- end }}{{ end }}
+    </ul>
+
+    <ol class="laws-toc">
+        {{- range where .Pages.ByWeight "Params.law" "!=" nil }}
+        {{- $law := .Params.law }}
+        <li value="{{ $law }}">
+            <a href="{{ .RelPermalink }}">{{ .Params.short }}</a>
+            {{- with $other }}{{ range where .Pages "Params.law" $law }}
+            <span class="laws-toc-alt" lang="{{ .Lang }}">{{ .Params.short }}</span>
+            {{- end }}{{ end }}
+        </li>
+        {{- end }}
+    </ol>
+</article>
+{{ end }}

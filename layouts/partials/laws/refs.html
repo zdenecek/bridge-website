@@ -1,0 +1,19 @@
+{{- $data := site.Data.laws.refs | default dict -}}
+{{- $key := .Params.law | default .Params.extra | string -}}
+{{- $refs := index ($data.laws | default dict) $key -}}
+{{- with $refs }}
+<section class="law-refs">
+    <h2>{{ i18n "laws-refs" }}</h2>
+    <ul>
+        {{- range . }}
+        {{- $src := index ($data.sources | default dict) .source | default dict }}
+        {{- $note := .note }}{{ if reflect.IsMap $note }}{{ $note = index $note site.Language.Lang }}{{ end }}
+        <li{{ with .anchor }} data-anchor="{{ . }}"{{ end }} data-source="{{ $src.short | default $src.name }}">
+            {{- with .anchor }}<a class="law-ref-anchor" href="#{{ . }}">{{ $.Params.law }}{{ . }}</a> {{ end -}}
+            <a href="{{ .url | default $src.url }}">{{ $src.name | default .source }}{{ with .ref }} {{ . }}{{ end }}</a>
+            {{- with $note }}: {{ . | markdownify }}{{ end }}
+        </li>
+        {{- end }}
+    </ul>
+</section>
+{{- end }}
