@@ -9,7 +9,7 @@ tournaments:
       limit: 2
   more:
     title: všechny turnaje
-    url: turnaje
+    page: /turnaje
 
 articles:
   title: Články
@@ -17,10 +17,10 @@ articles:
   limit: 4
   extra:
     - title: Dražební systém Fools
-      url: /fools
+      url: /fools/
   more:
     title: všechny články
-    url: clanky
+    page: /clanky
 
 links:
   title: Odkazy
@@ -70,9 +70,9 @@ td:
     limit: 5
     more:
       title: všechny návody
-      url: td-stuff
+      page: /td-stuff
   files:
     title: Soubory
     items:
       - title: Soubory ke stažení
-        url: /soubory
+        url: /soubory/

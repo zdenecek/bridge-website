@@ -9,13 +9,13 @@ tournaments:
       limit: 2
   more:
     title: all tournaments
-    url: tournaments
+    page: /tournaments
 
 articles:
   title: For players
   extra:
     - title: Fools bidding system and agreements
-      url: /fools
+      url: /fools/
 
 links:
   title: Links
@@ -58,9 +58,9 @@ td:
     note: Guides for tournament directors are in Czech.
     more:
       title: guides (in Czech)
-      url: /td-stuff
+      url: /td-stuff/
   files:
     title: Files
     items:
       - title: Downloads
-        url: /soubory
+        url: /soubory/

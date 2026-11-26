@@ -1,7 +1,7 @@
 {{- $p := false -}}
 {{- with .page }}{{ $p = site.GetPage . }}{{ end -}}
 {{- $href := "" -}}{{- $title := .title -}}
-{{- with .url }}{{ $href = . | relLangURL }}{{ end -}}
+{{- with .url }}{{ $href = . | relURL }}{{ end -}}
 {{- with $p -}}
     {{- if not $href }}{{ $href = .RelPermalink }}{{ end -}}
     {{- if not $title }}{{ $title = .Title }}{{ end -}}
