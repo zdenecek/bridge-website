@@ -38,6 +38,9 @@ laws-search-placeholder:
 laws-search-both:
   other: ""
 
+laws-search-semantic:
+  other: 'search by meaning too'
+
 laws-list-toggle:
   other: 'List of Laws'
 

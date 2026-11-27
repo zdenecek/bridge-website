@@ -38,6 +38,9 @@ laws-search-placeholder:
 laws-search-both:
   other: 'hledat i v angličtině'
 
+laws-search-semantic:
+  other: 'hledat i podle významu'
+
 laws-list-toggle:
   other: 'Seznam pravidel'
 

@@ -14,6 +14,9 @@
         {{- with $alt }}
         <label class="laws-both"><input type="checkbox" id="laws-both"> {{ i18n "laws-search-both" }}</label>
         {{- end }}
+        {{- if site.Params.lawsEmbed }}
+        <label class="laws-both"><input type="checkbox" id="laws-semantic" checked> {{ i18n "laws-search-semantic" }}</label>
+        {{- end }}
         <button type="button" class="laws-toggle" id="laws-toggle" aria-controls="laws-list" aria-expanded="false">{{ i18n "laws-list-toggle" }}</button>
     </div>
     <div class="laws-results" id="laws-results" hidden></div>

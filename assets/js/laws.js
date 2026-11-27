@@ -1,6 +1,7 @@
 const nav = document.getElementById("laws-nav");
 const input = document.getElementById("laws-q");
 const both = document.getElementById("laws-both");
+const semanticBox = document.getElementById("laws-semantic");
 const results = document.getElementById("laws-results");
 const list = document.getElementById("laws-list");
 const toggle = document.getElementById("laws-toggle");
@@ -13,7 +14,6 @@ const TEXT = {
     none: "Nic nenalezeno.",
     more: "Zobrazeno prvních {n} výsledků.",
     meaning: "Podobné významem",
-    words: "Obsahuje slova",
     searching: "Hledám…",
   },
   en: {
@@ -22,7 +22,6 @@ const TEXT = {
     none: "No results.",
     more: "Showing the first {n} results.",
     meaning: "Similar in meaning",
-    words: "Contains the words",
     searching: "Searching…",
   },
 };
@@ -216,10 +215,51 @@ async function semanticHits(q, sources) {
 
 // ---------------------------------------------------------------- results
 
-function resultLink(b, href, body) {
+const RRF_K = 10;
+const PRIORITY = 3;
+
+function keyOf(b) {
+  return b.title ? `${b.page.u}#~title` : `${b.page.u}#${b.anchor}`;
+}
+
+function wordScore(b, phrase, terms) {
+  if (b.title) {
+    const t = fold(b.page.t);
+    if (t === phrase) return 100;
+    return t.includes(phrase) ? 60 : 40;
+  }
+  if (b.folded.includes(phrase)) return terms.length >= 3 ? 80 : 20;
+  return 10;
+}
+
+function merge(words, sem) {
+  const entries = new Map();
+  const add = (b, rank, kind) => {
+    const key = keyOf(b);
+    let e = entries.get(key);
+    if (!e) {
+      e = { b, score: 0, word: false, sem: false, priority: false, strong: false };
+      entries.set(key, e);
+    }
+    if (e[kind]) return;
+    e[kind] = true;
+    e.score += 1 / (RRF_K + rank);
+    if (rank < PRIORITY) e.priority = true;
+  };
+  words.forEach(({ b, score }, i) => {
+    add(b, i, "word");
+    if (score >= 60) entries.get(keyOf(b)).strong = true;
+  });
+  sem.forEach((b, i) => add(b, i, "sem"));
+  const all = [...entries.values()];
+  const order = (a, b) => b.strong - a.strong || b.score - a.score;
+  return [...all.filter((e) => e.priority).sort(order), ...all.filter((e) => !e.priority).sort(order)];
+}
+
+function resultLink(b, href, body, tag = "") {
   const label = b.page.n ? `${b.page.n}${b.title ? "" : b.anchor.startsWith("fn") ? "" : b.anchor}` : b.page.t;
   const langTag = b.idxLang !== lang ? `<span class="r-lang">${b.idxLang.toUpperCase()}</span>` : "";
-  return `<a href="${href}"><span class="r-ref">${escapeHtml(String(label))}</span>${langTag}<span class="r-snippet">${body}</span></a>`;
+  return `<a href="${href}"><span class="r-ref">${escapeHtml(String(label))}</span>${langTag}${tag}<span class="r-snippet">${body}</span></a>`;
 }
 
 function shorten(text, n = 180) {
@@ -229,30 +269,26 @@ function shorten(text, n = 180) {
 let state = null;
 
 function render() {
-  const { q, ref, terms, hits, semantic } = state;
+  const { q, ref, terms, words, semantic } = state;
   const out = [];
   if (ref) out.push(`<a href="${ref.href}">${ref.html}</a>`);
 
-  const seen = new Set();
-  const sem = semantic || [];
-  for (const b of sem) seen.add(`${b.page.u}#${b.anchor}`);
-  const words = hits.filter((b) => b.title || !seen.has(`${b.page.u}#${b.anchor}`));
-
-  if (sem.length) {
-    if (words.length) out.push(`<div class="r-head">${TEXT[lang].meaning}</div>`);
-    for (const b of sem) out.push(resultLink(b, b.page.u + (b.anchor ? `#${b.anchor}` : ""), escapeHtml(shorten(b.text))));
-    if (words.length) out.push(`<div class="r-head">${TEXT[lang].words}</div>`);
-  }
-
+  const merged = merge(words, semantic || []);
   const qs = `?q=${encodeURIComponent(q)}`;
-  for (const b of words.slice(0, MAX_RESULTS)) {
-    const href = b.page.u + qs + (b.anchor && !b.title ? `#${b.anchor}` : "");
-    out.push(resultLink(b, href, b.title ? escapeHtml(b.page.t) : snippet(b.text, b.folded, terms)));
+  const semTag = `<span class="r-lang" title="${TEXT[lang].meaning}">≈</span>`;
+  for (const e of merged.slice(0, MAX_RESULTS)) {
+    const b = e.b;
+    if (e.word) {
+      const href = b.page.u + qs + (b.anchor && !b.title ? `#${b.anchor}` : "");
+      out.push(resultLink(b, href, b.title ? escapeHtml(b.page.t) : snippet(b.text, b.folded, terms)));
+    } else {
+      out.push(resultLink(b, b.page.u + (b.anchor ? `#${b.anchor}` : ""), escapeHtml(shorten(b.text)), semTag));
+    }
   }
-  if (!words.length && !sem.length && !ref) {
+  if (!merged.length && !ref) {
     out.push(`<div class="r-info">${semantic === undefined ? TEXT[lang].searching : TEXT[lang].none}</div>`);
   }
-  if (words.length > MAX_RESULTS) out.push(`<div class="r-info">${TEXT[lang].more.replace("{n}", MAX_RESULTS)}</div>`);
+  if (merged.length > MAX_RESULTS) out.push(`<div class="r-info">${TEXT[lang].more.replace("{n}", MAX_RESULTS)}</div>`);
 
   const keep = active;
   results.innerHTML = out.join("");
@@ -261,6 +297,10 @@ function render() {
 }
 
 let semTimer;
+
+function semanticEnabled() {
+  return !semanticOff && (!semanticBox || semanticBox.checked);
+}
 
 async function search() {
   const q = input.value.trim();
@@ -277,23 +317,29 @@ async function search() {
 
   const ref = refResult(q);
   const terms = fold(q).split(/\s+/).filter((t) => t.length > 1 || /\d/.test(t));
+  const phrase = fold(q).replace(/\s+/g, " ");
   const sources = [[input.dataset.index, lang]];
   if (both && both.checked && input.dataset.indexAlt) sources.push([input.dataset.indexAlt, lang === "cs" ? "en" : "cs"]);
 
-  const hits = [];
+  const words = [];
   if (terms.length) {
     const sets = await Promise.all(sources.map(([u, l]) => loadIndex(u, l)));
     if (input.value.trim() !== q) return;
+    const seen = new Map();
     for (const blocks of sets) {
       for (const b of blocks) {
-        if (terms.every((t) => b.folded.includes(t))) hits.push(b);
+        if (!terms.every((t) => b.folded.includes(t))) continue;
+        const hit = { b, score: wordScore(b, phrase, terms) };
+        const prev = seen.get(keyOf(b));
+        if (prev && prev.score >= hit.score) continue;
+        seen.set(keyOf(b), hit);
       }
     }
-    hits.sort((a, b) => (b.title === true) - (a.title === true));
+    words.push(...[...seen.values()].sort((a, b) => b.score - a.score));
   }
 
-  const wantSemantic = !semanticOff && !ref && q.length >= 3;
-  state = { q, ref, terms, hits, semantic: wantSemantic ? undefined : null };
+  const wantSemantic = semanticEnabled() && !ref && q.length >= 3;
+  state = { q, ref, terms, words, semantic: wantSemantic ? undefined : null };
   active = -1;
   render();
 
@@ -319,6 +365,17 @@ input.addEventListener("input", () => {
 });
 input.addEventListener("focus", () => loadIndex(input.dataset.index, lang), { once: true });
 if (both) both.addEventListener("change", search);
+if (semanticBox) {
+  try {
+    if (localStorage.getItem("laws-semantic") === "0") semanticBox.checked = false;
+  } catch (e) {}
+  semanticBox.addEventListener("change", () => {
+    try {
+      localStorage.setItem("laws-semantic", semanticBox.checked ? "1" : "0");
+    } catch (e) {}
+    search();
+  });
+}
 
 input.addEventListener("keydown", (e) => {
   if (e.key === "ArrowDown") {
