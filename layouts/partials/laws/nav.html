@@ -9,6 +9,7 @@
                placeholder="{{ i18n "laws-search-placeholder" }}" aria-label="{{ i18n "laws-search" }}"
                data-index="{{ $section.RelPermalink }}index.json"
                {{- with $alt }} data-index-alt="{{ . }}index.json"{{ end }}
+               {{- with site.Params.lawsEmbed }} data-embed="{{ . }}"{{ end }}
                data-lang="{{ site.Language.Lang }}">
         {{- with $alt }}
         <label class="laws-both"><input type="checkbox" id="laws-both"> {{ i18n "laws-search-both" }}</label>

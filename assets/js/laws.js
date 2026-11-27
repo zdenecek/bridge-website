@@ -7,8 +7,24 @@ const toggle = document.getElementById("laws-toggle");
 const lang = input.dataset.lang;
 
 const TEXT = {
-  cs: { law: "Pravidlo", goto: "Přejít na", none: "Nic nenalezeno.", more: "Zobrazeno prvních {n} výsledků." },
-  en: { law: "Law", goto: "Go to", none: "No results.", more: "Showing the first {n} results." },
+  cs: {
+    law: "Pravidlo",
+    goto: "Přejít na",
+    none: "Nic nenalezeno.",
+    more: "Zobrazeno prvních {n} výsledků.",
+    meaning: "Podobné významem",
+    words: "Obsahuje slova",
+    searching: "Hledám…",
+  },
+  en: {
+    law: "Law",
+    goto: "Go to",
+    none: "No results.",
+    more: "Showing the first {n} results.",
+    meaning: "Similar in meaning",
+    words: "Contains the words",
+    searching: "Searching…",
+  },
 };
 const MAX_RESULTS = 60;
 
@@ -121,48 +137,179 @@ function setActive(i) {
   items[active].scrollIntoView({ block: "nearest" });
 }
 
+// ---------------------------------------------------------------- semantic search
+
+const EMBED = input.dataset.embed;
+const SEM_MAX = 5;
+const SEM_MIN = 0.5;
+const SEM_SPREAD = 0.12;
+const vectorSets = {};
+const queryVectors = new Map();
+let semanticOff = !EMBED;
+
+function loadVectors(indexUrl) {
+  const url = indexUrl.replace(/index\.json$/, "vectors.json");
+  if (!vectorSets[url]) {
+    vectorSets[url] = fetch(url)
+      .then((r) => {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      })
+      .then((v) => {
+        const raw = atob(v.vectors);
+        const vecs = new Int8Array(raw.length);
+        for (let i = 0; i < raw.length; i++) vecs[i] = raw.charCodeAt(i);
+        return { dim: v.dim, items: v.items, vecs };
+      });
+  }
+  return vectorSets[url];
+}
+
+function embedQuery(q) {
+  if (!queryVectors.has(q)) {
+    const p = fetch(`${EMBED}?q=${encodeURIComponent(q)}`)
+      .then((r) => {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      })
+      .then((r) => {
+        const v = Float32Array.from(r.data[0]);
+        const norm = Math.hypot(...v) || 1;
+        return v.map((x) => x / norm);
+      });
+    p.catch(() => queryVectors.delete(q));
+    queryVectors.set(q, p);
+  }
+  return queryVectors.get(q);
+}
+
+function blockLookup(blocks) {
+  if (!blocks.byAnchor) {
+    blocks.byAnchor = new Map();
+    for (const b of blocks) {
+      if (b.title) continue;
+      const key = `${b.page.u}#${b.anchor}`;
+      const prev = blocks.byAnchor.get(key);
+      blocks.byAnchor.set(key, prev ? { ...prev, text: `${prev.text} ${b.text}` } : b);
+    }
+  }
+  return blocks.byAnchor;
+}
+
+async function semanticHits(q, sources) {
+  const [qv, ...rest] = await Promise.all([embedQuery(q), ...sources.map(([u, l]) => Promise.all([loadVectors(u), loadIndex(u, l)]))]);
+  const scored = [];
+  for (const [{ dim, items, vecs }, blocks] of rest) {
+    const lookup = blockLookup(blocks);
+    for (let i = 0; i < items.length; i++) {
+      let s = 0;
+      const o = i * dim;
+      for (let j = 0; j < dim; j++) s += qv[j] * vecs[o + j];
+      const b = lookup.get(`${items[i][0]}#${items[i][1]}`);
+      if (b) scored.push({ b, score: s / 127 });
+    }
+  }
+  scored.sort((a, b) => b.score - a.score);
+  const best = scored.length ? scored[0].score : 0;
+  return scored.filter((x) => x.score >= Math.max(SEM_MIN, best - SEM_SPREAD)).slice(0, SEM_MAX).map((x) => x.b);
+}
+
+// ---------------------------------------------------------------- results
+
+function resultLink(b, href, body) {
+  const label = b.page.n ? `${b.page.n}${b.title ? "" : b.anchor.startsWith("fn") ? "" : b.anchor}` : b.page.t;
+  const langTag = b.idxLang !== lang ? `<span class="r-lang">${b.idxLang.toUpperCase()}</span>` : "";
+  return `<a href="${href}"><span class="r-ref">${escapeHtml(String(label))}</span>${langTag}<span class="r-snippet">${body}</span></a>`;
+}
+
+function shorten(text, n = 180) {
+  return text.length > n ? text.slice(0, text.lastIndexOf(" ", n) > 0 ? text.lastIndexOf(" ", n) : n) + "…" : text;
+}
+
+let state = null;
+
+function render() {
+  const { q, ref, terms, hits, semantic } = state;
+  const out = [];
+  if (ref) out.push(`<a href="${ref.href}">${ref.html}</a>`);
+
+  const seen = new Set();
+  const sem = semantic || [];
+  for (const b of sem) seen.add(`${b.page.u}#${b.anchor}`);
+  const words = hits.filter((b) => b.title || !seen.has(`${b.page.u}#${b.anchor}`));
+
+  if (sem.length) {
+    if (words.length) out.push(`<div class="r-head">${TEXT[lang].meaning}</div>`);
+    for (const b of sem) out.push(resultLink(b, b.page.u + (b.anchor ? `#${b.anchor}` : ""), escapeHtml(shorten(b.text))));
+    if (words.length) out.push(`<div class="r-head">${TEXT[lang].words}</div>`);
+  }
+
+  const qs = `?q=${encodeURIComponent(q)}`;
+  for (const b of words.slice(0, MAX_RESULTS)) {
+    const href = b.page.u + qs + (b.anchor && !b.title ? `#${b.anchor}` : "");
+    out.push(resultLink(b, href, b.title ? escapeHtml(b.page.t) : snippet(b.text, b.folded, terms)));
+  }
+  if (!words.length && !sem.length && !ref) {
+    out.push(`<div class="r-info">${semantic === undefined ? TEXT[lang].searching : TEXT[lang].none}</div>`);
+  }
+  if (words.length > MAX_RESULTS) out.push(`<div class="r-info">${TEXT[lang].more.replace("{n}", MAX_RESULTS)}</div>`);
+
+  const keep = active;
+  results.innerHTML = out.join("");
+  active = -1;
+  if (out.length) setActive(Math.max(0, keep));
+}
+
+let semTimer;
+
 async function search() {
   const q = input.value.trim();
+  clearTimeout(semTimer);
   if (!q) {
     results.hidden = true;
     results.innerHTML = "";
     list.hidden = false;
+    state = null;
     return;
   }
   list.hidden = true;
   results.hidden = false;
 
-  const out = [];
   const ref = refResult(q);
-  if (ref) out.push(`<a href="${ref.href}">${ref.html}</a>`);
-
   const terms = fold(q).split(/\s+/).filter((t) => t.length > 1 || /\d/.test(t));
+  const sources = [[input.dataset.index, lang]];
+  if (both && both.checked && input.dataset.indexAlt) sources.push([input.dataset.indexAlt, lang === "cs" ? "en" : "cs"]);
+
+  const hits = [];
   if (terms.length) {
-    const urls = [[input.dataset.index, lang]];
-    if (both && both.checked && input.dataset.indexAlt) urls.push([input.dataset.indexAlt, lang === "cs" ? "en" : "cs"]);
-    const sets = await Promise.all(urls.map(([u, l]) => loadIndex(u, l)));
+    const sets = await Promise.all(sources.map(([u, l]) => loadIndex(u, l)));
     if (input.value.trim() !== q) return;
-    const hits = [];
     for (const blocks of sets) {
       for (const b of blocks) {
         if (terms.every((t) => b.folded.includes(t))) hits.push(b);
       }
     }
     hits.sort((a, b) => (b.title === true) - (a.title === true));
-    const qs = `?q=${encodeURIComponent(q)}`;
-    for (const b of hits.slice(0, MAX_RESULTS)) {
-      const label = b.page.n ? `${b.page.n}${b.title ? "" : b.anchor.startsWith("fn") ? "" : b.anchor}` : b.page.t;
-      const langTag = b.idxLang !== lang ? `<span class="r-lang">${b.idxLang.toUpperCase()}</span>` : "";
-      const href = b.page.u + qs + (b.anchor && !b.title ? `#${b.anchor}` : "");
-      const body = b.title ? escapeHtml(b.page.t) : snippet(b.text, b.folded, terms);
-      out.push(`<a href="${href}"><span class="r-ref">${escapeHtml(String(label))}</span>${langTag}<span class="r-snippet">${body}</span></a>`);
-    }
-    if (!hits.length && !ref) out.push(`<div class="r-info">${TEXT[lang].none}</div>`);
-    if (hits.length > MAX_RESULTS) out.push(`<div class="r-info">${TEXT[lang].more.replace("{n}", MAX_RESULTS)}</div>`);
   }
-  results.innerHTML = out.join("");
+
+  const wantSemantic = !semanticOff && !ref && q.length >= 3;
+  state = { q, ref, terms, hits, semantic: wantSemantic ? undefined : null };
   active = -1;
-  if (out.length) setActive(0);
+  render();
+
+  if (!wantSemantic) return;
+  const current = state;
+  semTimer = setTimeout(async () => {
+    let sem = [];
+    try {
+      sem = await semanticHits(q, sources);
+    } catch (e) {
+      if (String(e.message) === "404") semanticOff = true;
+    }
+    if (state !== current) return;
+    state.semantic = sem;
+    render();
+  }, 350);
 }
 
 let timer;

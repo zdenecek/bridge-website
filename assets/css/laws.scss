@@ -181,6 +181,14 @@ body[a="dark"] {
     color: var(--laws-muted);
     padding: 0.4rem;
   }
+
+  .r-head {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--laws-muted);
+    padding: 0.6rem 0.4rem 0.2rem;
+  }
 }
 
 mark {

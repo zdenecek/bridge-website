@@ -3,6 +3,7 @@ languageCode: "cs-CZ"
 defaultContentLanguage: cs
 params:
   debug: false
+  lawsEmbed: "https://laws-search.laws-search.workers.dev/embed"
 theme: "nostyleplease"
 custom_css: 
   - "css/custom.css"

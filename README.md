@@ -129,6 +129,32 @@ laws:
       note: { cs: "Opakovaný renonc", en: "Repeated revokes" }
 ```
 
+#### Semantic search
+
+The laws search also finds paragraphs by meaning. Each paragraph has a stored vector in
+`static/en/laws/vectors.json` and `static/pravidla/vectors.json`. The visitor's query is
+embedded by the `laws-search` Cloudflare Worker (`workers/laws-search/`, Workers AI model
+`@cf/baai/bge-m3`, free daily allowance), and the browser ranks the paragraphs.
+
+One-time setup:
+
+```bash
+cd workers/laws-search
+npm install
+npx wrangler login
+npx wrangler deploy
+```
+
+Put the printed URL plus `/embed` into `lawsEmbed` in `hugo.yaml`. Then build the vectors and
+commit them (again whenever the law texts change):
+
+```bash
+make site
+python3 bin/embed-laws.py https://laws-search.<account>.workers.dev
+```
+
+Without `lawsEmbed` or the vectors files, the search falls back to matching words only.
+
 ## Configuration
 
 - `hugo.yaml` - Main Hugo configuration
