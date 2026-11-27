@@ -82,7 +82,7 @@ def en_clean(body):
     body = body.replace("Vulnerable/td>", "Vulnerable</td>")
     body = re.sub(r'<h2 id="([A-Z])">\s*(.*?)\s*</h2>',
                   lambda m: f'<h2 id="{m.group(1)}">{m.group(1)}. {m.group(2)}'.rstrip() + "</h2>", body)
-    body = body.replace('id="przypis"', 'id="footnote"').replace('href="#przypis"', 'href="#footnote"')
+    body = re.sub(r'(id="|href="#)przypis', r"\1footnote", body)
     body = body.replace('class="przypis"', 'class="footnote"')
     body = re.sub(r"^[ \t]+", "", body, flags=re.M)
     body = re.sub(r"\n{3,}", "\n\n", body)
