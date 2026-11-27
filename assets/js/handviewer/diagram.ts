@@ -3,6 +3,21 @@ import type { Texts } from './i18n';
 import { type Call, type Contract, contract, isBid, isComplete, noteNumbers } from './auction';
 import type { Analysis, Par } from './dd';
 import { type Deal, type Hand, type Seat, SEATS, SUITS, dealShape, handSize, hcp, isVulnerable } from './model';
+import { type Play, type PlayContract, type Position, sideOf, trickSeats } from './play';
+
+/** What the play mode shows: the contract, the position reached and, once solved, each playable card's value. */
+export interface PlayView {
+  play: Play;
+  pos: Position;
+  values: Map<string, number> | null;
+  /** Declarer's double dummy tricks, to compare with at the end of an auto play. */
+  ddTricks?: number;
+}
+
+/** In auto play the defenders' cards are played for them. */
+export function defendersTurn(pv: PlayView): boolean {
+  return !!pv.pos.next && sideOf(pv.pos.next) !== sideOf(pv.play.contract.declarer);
+}
 
 export const SUIT_GLYPH = { S: '♠', H: '♥', D: '♦', C: '♣' } as const;
 
@@ -28,13 +43,74 @@ export function compass(deal: Deal, t: Texts): SVGElement {
   return svg;
 }
 
-function hand(seat: Seat, cards: Hand, t: Texts): HTMLElement {
+/**
+ * In play mode every card sits in a slot of the same width, numbered or not, and each hand keeps
+ * the width of its longest suit at the start, so nothing moves as the turn passes or cards go.
+ */
+function hand(seat: Seat, cards: Hand, t: Texts, pv: PlayView | null = null, start: Hand = cards): HTMLElement {
   const blank = handSize(cards) === 0;
-  return h('div', { class: `hv-hand hv-${seat.toLowerCase()}${blank ? ' hv-blank' : ''}`, 'data-seat': seat, title: t.seats[seat] },
+  const toPlay = pv?.pos.next === seat;
+  const clickable = toPlay && !(pv.play.auto && defendersTurn(pv));
+  const values = pv?.play.auto ? null : pv?.values;
+  const best = toPlay && values ? Math.max(...[...pv.pos.legal].map((c) => values.get(c) ?? 0)) : 0;
+  const slots = (suit: (typeof SUITS)[number]) => [...cards[suit]].map((rank) => {
+    const card = suit + rank;
+    if (!clickable) return h('span', { class: 'hv-pc' }, rank);
+    const legal = pv!.pos.legal.has(card);
+    const value = legal ? values?.get(card) : undefined;
+    const grade = value === undefined ? '' : ` hv-v${Math.min(2, best - value)}`;
+    return h('button', { type: 'button', class: `hv-pc${grade}`, 'data-card': card, disabled: !legal },
+      rank, value === undefined ? null : h('sub', {}, String(value)));
+  });
+  const longest = Math.max(1, ...SUITS.map((suit) => start[suit].length));
+  const cls = `hv-hand hv-${seat.toLowerCase()}${blank && !pv ? ' hv-blank' : ''}${toPlay ? ' hv-to-play' : ''}${pv ? ' hv-playing' : ''}`;
+  return h('div', { class: cls, 'data-seat': seat, title: t.seats[seat], style: pv ? `--n:${longest}` : null },
     SUITS.map((suit) => [
       h('span', { class: `hv-suit hv-suit-${suit.toLowerCase()}` }, SUIT_GLYPH[suit]),
-      h('span', { class: 'hv-cards' }, cards[suit] || (blank ? '' : '—')),
+      h('span', { class: 'hv-cards' }, pv ? (cards[suit] ? slots(suit) : '—') : cards[suit] || (blank ? '' : '—')),
     ]),
+  );
+}
+
+function trickView(pos: Position, deal: Deal, t: Texts): HTMLElement {
+  const showLast = !pos.trick.length && pos.lastTrick;
+  const cards = showLast ? trickSeats(pos.lastTrick!.cards, pos.lastTrick!.leader) : trickSeats(pos.trick, pos.leader);
+  return h('div', { class: `hv-trick${showLast ? ' hv-trick-done' : ''}` },
+    SEATS.map((seat) => {
+      const card = cards[seat];
+      const won = showLast && pos.lastTrick!.winner === seat;
+      return h('span', { class: `hv-tc hv-tc-${seat.toLowerCase()}${won ? ' hv-tc-won' : ''}${pos.next === seat ? ' hv-tc-next' : ''}` },
+        card ? [h('span', { class: `hv-suit-${card[0]!.toLowerCase()}` }, SUIT_GLYPH[card[0] as 'S']), card[1]!] : seat);
+    }),
+  );
+}
+
+export function playContractParts(c: PlayContract, t: Texts): Part[] {
+  return [{ text: c.level ? String(c.level) : '' }, ...strainParts(c.strain, t), { text: ` ${c.declarer}` }];
+}
+
+function playBar(pv: PlayView, t: Texts): HTMLElement {
+  const { pos, play } = pv;
+  const c = play.contract;
+  const declared = pos.won[sideOf(c.declarer)];
+  let state: string;
+  if (pos.next) state = `${t.toPlay}: ${t.seats[pos.next]}`;
+  else if (c.level) {
+    const diff = declared - c.level - 6;
+    state = `${t.playDone}: ${diff === 0 ? '=' : diff > 0 ? `+${diff}` : `−${-diff}`}`;
+  } else state = t.playDone;
+  if (!pos.next && play.auto && pv.ddTricks !== undefined) state += ` · ${t.ddShort} ${pv.ddTricks}`;
+  const act = (name: string, label: string, title: string, disabled = false) =>
+    h('button', { type: 'button', class: 'hv-pb-btn', 'data-act': name, title, 'aria-label': title, disabled }, label);
+  return h('div', { class: 'hv-playbar' },
+    h('span', { class: 'hv-pb-contract', title: t.pickContract }, parts(playContractParts(c, t))),
+    h('span', { class: 'hv-pb-tricks' }, `NS ${pos.won.NS} · EW ${pos.won.EW}`),
+    h('span', { class: 'hv-pb-state' }, state),
+    h('span', { class: 'hv-pb-acts' },
+      h('button', { type: 'button', class: 'hv-pb-auto', 'data-act': 'auto', 'aria-pressed': String(!!play.auto), title: t.autoHelp }, 'Auto'),
+      act('undo', '↶', t.undoCard, !play.played.length),
+      act('restart', '⟲', t.restart, !play.played.length),
+      act('close', '✕', t.stopPlay)),
   );
 }
 
@@ -124,7 +200,7 @@ export function parParts(par: Par, t: Texts): Part[] {
   return out;
 }
 
-function ddTable(dd: DdView, t: Texts, full: boolean): HTMLElement {
+function ddTable(dd: DdView, t: Texts, full: boolean, pick: PlayContract | null = null): HTMLElement {
   const table = dd.analysis?.table;
   return h('table', { class: `hv-dd${dd.busy ? ' hv-busy' : ''}`, 'aria-label': t.ddTitle, title: t.ddTitle },
     h('thead', {}, h('tr', {}, h('th', {}), DD_STRAINS.map((st) => h('th', {}, parts(strainParts(st, t)))))),
@@ -132,33 +208,35 @@ function ddTable(dd: DdView, t: Texts, full: boolean): HTMLElement {
       h('th', {}, seat),
       DD_STRAINS.map((st) => {
         const n = table?.[seat][st];
-        return h('td', { class: full && n !== undefined && n >= 7 ? 'hv-makes' : null }, n === undefined ? '·' : String(n));
+        const cls = [full && n !== undefined && n >= 7 ? 'hv-makes' : '', pick && pick.declarer === seat && pick.strain === st ? 'hv-picked' : ''].join(' ').trim();
+        return h('td', { class: cls || null, 'data-dd': pick ? `${seat}:${st}` : null }, n === undefined ? '·' : String(n));
       }),
     ))),
   );
 }
 
-export function diagram(deal: Deal, t: Texts, dd: DdView | null = null): HTMLElement {
-  return h('div', { class: 'hv-deal' }, board(deal, t, dd), auctionTable(deal, t));
+export function diagram(deal: Deal, t: Texts, dd: DdView | null = null, pv: PlayView | null = null): HTMLElement {
+  return h('div', { class: `hv-deal${pv ? ' hv-deal-playing' : ''}` }, pv ? playBar(pv, t) : null, board(deal, t, dd, pv), auctionTable(deal, t));
 }
 
-function board(deal: Deal, t: Texts, dd: DdView | null): HTMLElement {
+function board(deal: Deal, t: Texts, dd: DdView | null, pv: PlayView | null): HTMLElement {
   const shape = dealShape(deal);
   const full = shape.kind === 'full';
   const showHcp = deal.show.hcp && shape.kind !== 'ending';
-  const showDd = deal.show.dd && dd;
+  const showDd = (deal.show.dd || pv) && dd;
+  const showTrick = pv && (pv.pos.trick.length || pv.pos.lastTrick);
   const points = SEATS.map((seat) => (handSize(deal.hands[seat]) ? String(hcp(deal.hands[seat])) : ''));
   return h('div', { class: 'hv-board' },
-    SEATS.map((seat) => hand(seat, deal.hands[seat], t)),
+    SEATS.map((seat) => hand(seat, pv ? pv.pos.hands[seat] : deal.hands[seat], t, pv, deal.hands[seat])),
     h('div', { class: 'hv-header' },
       deal.board ? h('span', { class: 'hv-num' }, String(deal.board)) : null,
       h('span', { class: 'hv-sub' }, `${t.vuls[deal.vul]} / ${deal.dealer}`),
     ),
-    h('div', { class: 'hv-center' }, compass(deal, t)),
+    h('div', { class: 'hv-center' }, showTrick ? trickView(pv.pos, deal, t) : compass(deal, t)),
     showHcp ? h('div', { class: 'hv-hcp', 'aria-label': t.hcp, title: t.hcp },
       SEATS.map((seat, i) => h('span', { class: `hv-hcp-${seat.toLowerCase()}` }, points[i])),
     ) : null,
-    showDd ? h('div', { class: 'hv-dd-wrap' }, ddTable(dd, t, full)) : null,
+    showDd ? h('div', { class: 'hv-dd-wrap' }, ddTable(dd, t, full, pv?.play.contract ?? null)) : null,
     showDd && full && dd.analysis ? h('div', { class: `hv-par${dd.busy ? ' hv-busy' : ''}` }, h('b', {}, 'Par '), parts(parParts(dd.analysis.par, t))) : null,
   );
 }

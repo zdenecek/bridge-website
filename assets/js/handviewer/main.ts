@@ -1,8 +1,9 @@
-import { type Call, STRAINS, formatAuction, isLegal, parseAuction } from './auction';
+import { type Call, STRAINS, contract, formatAuction, isLegal, parseAuction } from './auction';
 import { h } from './dom';
 import { dealImage } from './image';
-import { ddAnalyser } from './dd';
-import { type DdView, SUIT_GLYPH, callParts, diagram } from './diagram';
+import { ddSolver } from './dd';
+import { type DdView, type PlayView, SUIT_GLYPH, callParts, defendersTurn, diagram } from './diagram';
+import { type Play, type PlayContract, type Strain, contractCode, parseContractCode, position, sideOf } from './play';
 import { texts } from './i18n';
 import {
   type Deal, type Seat, RANKS, SEATS, SUITS, VULS, type Vul,
@@ -32,12 +33,21 @@ function readHash(): Deal | null {
   return deal;
 }
 
-function writeHash(deal: Deal) {
+function readPlay(): Play | null {
+  const params = new URLSearchParams(location.hash.slice(1));
+  const [code, cards = ''] = (params.get('p') ?? '').split(':');
+  const c = parseContractCode(code ?? '');
+  return c ? { contract: c, played: cards.match(/[SHDC][AKQJT2-9]/g) ?? [], auto: params.get('pa') === '1' } : null;
+}
+
+function writeHash(deal: Deal, play: Play | null = null) {
   const parts = [`dl=${deal.dealer}`, `v=${deal.vul}`, `d=${toPbn(deal).replace(/ /g, '+')}`];
   if (deal.board) parts.unshift(`b=${deal.board}`);
   if (deal.auction.length) parts.push(`a=${formatAuction(deal.auction, deal.notes, '-').replace(/[%&#+]/g, encodeURIComponent).replace(/ /g, '+')}`);
   if (!deal.show.hcp) parts.push('h=0');
   if (!deal.show.dd) parts.push('dd=0');
+  if (play) parts.push(`p=${contractCode(play.contract)}${play.played.length ? ':' + play.played.join('') : ''}`);
+  if (play?.auto) parts.push('pa=1');
   history.replaceState(null, '', '#' + parts.join('&'));
 }
 
@@ -107,17 +117,79 @@ function mount(root: HTMLElement) {
   const status = h('p', { class: 'hv-status', 'aria-live': 'polite' });
   const ddStatus = h('span', { class: 'hv-warn' });
 
-  const analyse = root.dataset.ddsWorker ? ddAnalyser(root.dataset.ddsWorker) : null;
+  const dds = root.dataset.ddsWorker ? ddSolver(root.dataset.ddsWorker) : null;
+  const analyse = dds?.analyse ?? null;
   let dd: DdView | null = null;
   let ddKey = '';
   let ddTimer: ReturnType<typeof setTimeout> | undefined;
+
+  let play: Play | null = dds ? readPlay() : null;
+  let playDeal = toPbn(deal);
+  let playValues: Map<string, number> | null = null;
+  let valuesKey = '';
+
+  function requestValues(pv: PlayView) {
+    const k = `${toPbn(deal)}|${contractCode(pv.play.contract)}|${pv.play.played.join('')}`;
+    if (k === valuesKey) return;
+    valuesKey = k;
+    playValues = null;
+    if (!pv.pos.next || !dds) return;
+    dds.cardValues(pv.play, pv.pos)
+      .then((values) => {
+        if (valuesKey !== k) return;
+        playValues = values;
+        renderView();
+      })
+      .catch(() => (ddStatus.textContent = t.ddFailed));
+  }
+
+  let autoKey = '';
+  /** Plays a defender's best card, the lowest of equal ones, once its values are known. */
+  function autoDefend(pv: PlayView) {
+    if (!pv.play.auto || !defendersTurn(pv) || !playValues || autoKey === valuesKey) return;
+    const k = (autoKey = valuesKey);
+    const values = playValues;
+    const legal = [...pv.pos.legal];
+    const best = Math.max(...legal.map((c) => values.get(c) ?? 0));
+    const card = legal.filter((c) => values.get(c) === best).sort((a, b) => RANKS.indexOf(b[1]!) - RANKS.indexOf(a[1]!))[0]!;
+    setTimeout(() => {
+      if (!play || valuesKey !== k) return;
+      play.played.push(card);
+      refresh();
+    }, 450);
+  }
+
   const renderView = () => {
-    view.replaceChildren(diagram(deal, t, dd));
+    let pv: PlayView | null = null;
+    if (play) {
+      pv = { play, pos: position(deal, play), values: null };
+      requestValues(pv);
+      pv.values = playValues;
+      if (dd?.analysis && !dd.busy) pv.ddTricks = dd.analysis.table[play.contract.declarer][play.contract.strain];
+      autoDefend(pv);
+    }
+    view.replaceChildren(diagram(deal, t, dd, pv));
     if (selected !== null) view.querySelector(`.hv-auction [data-index="${selected}"]`)?.classList.add('hv-selected');
   };
 
+  function defaultContract(): PlayContract {
+    const c = contract(deal.auction, deal.dealer);
+    if (c && c !== 'passout') return { strain: c.strain === 'N' ? 'NT' : c.strain, declarer: c.declarer, level: c.level };
+    const fresh = dd && !dd.busy && dealShape(deal).kind === 'full';
+    const par = fresh ? dd.analysis?.par.contracts.find((p) => p.level > 0) : undefined;
+    if (par) return { strain: par.strain, declarer: par.declarer[0] as Seat, level: par.level };
+    return { strain: 'NT', declarer: 'S' };
+  }
+
+  const playBtn = h('button', { type: 'button', class: 'hv-play-toggle' });
+  playBtn.addEventListener('click', () => {
+    play = play ? null : { contract: defaultContract(), played: [] };
+    playDeal = toPbn(deal);
+    refresh();
+  });
+
   function requestDd(complete: boolean) {
-    complete &&= deal.show.dd;
+    complete &&= deal.show.dd || !!play;
     const k = complete ? `${toPbn(deal)}|${deal.dealer}|${deal.vul}` : '';
     if (k === ddKey) return;
     ddKey = k;
@@ -370,8 +442,28 @@ function mount(root: HTMLElement) {
 
   view.addEventListener('click', (e) => {
     const target = e.target as Element;
+    if (play) {
+      const card = target.closest<HTMLElement>('[data-card]')?.dataset.card;
+      const pick = target.closest<HTMLElement>('[data-dd]')?.dataset.dd;
+      const act = target.closest<HTMLElement>('[data-act]')?.dataset.act;
+      if (card) play.played.push(card);
+      if (pick) {
+        const [declarer, strain] = pick.split(':') as [Seat, Strain];
+        const tricks = dd?.analysis?.table[declarer][strain];
+        play = { contract: { declarer, strain, level: tricks && tricks >= 7 ? tricks - 6 : undefined }, played: [], auto: play.auto };
+      }
+      if (act === 'undo') {
+        const declarers = sideOf(play.contract.declarer);
+        do play.played.pop();
+        while (play.auto && play.played.length && sideOf(position(deal, play).next!) !== declarers);
+      }
+      if (act === 'auto') play = { ...play, played: [], auto: !play.auto };
+      if (act === 'restart') play.played = [];
+      if (act === 'close') play = null;
+      if (card || pick || act) return refresh();
+    }
     const seat = target.closest<HTMLElement>('.hv-hand')?.dataset.seat as Seat | undefined;
-    if (seat) handInputs[seat].focus();
+    if (seat && !play) handInputs[seat].focus();
     const index = target.closest<HTMLElement>('[data-index]')?.dataset.index;
     if (index !== undefined) {
       selected = Number(index);
@@ -382,7 +474,7 @@ function mount(root: HTMLElement) {
 
   root.replaceChildren(
     h('section', { class: 'hv-view' }, view,
-      h('div', { class: 'hv-view-opts' }, hcpToggle.el, ddToggle.el),
+      h('div', { class: 'hv-view-opts' }, hcpToggle.el, ddToggle.el, playBtn),
       status, h('div', { class: 'hv-view-links' }, copyImage, downloadImage, copyLink, solver)),
     h('section', { class: 'hv-editor' },
       h('div', { class: 'hv-meta' },
@@ -471,7 +563,15 @@ function mount(root: HTMLElement) {
     const dups = duplicates(deal);
     const shape = dealShape(deal);
     const complete = shape.kind === 'full';
-    requestDd(complete || shape.kind === 'ending');
+    const playable = !!dds && (complete || shape.kind === 'ending');
+    if (!playable) play = null;
+    if (play && toPbn(deal) !== playDeal) play.played = [];
+    playDeal = toPbn(deal);
+    playBtn.hidden = !dds;
+    playBtn.disabled = !playable;
+    playBtn.textContent = play ? `■ ${t.stopShort}` : `▶ ${t.play}`;
+    playBtn.setAttribute('aria-pressed', String(!!play));
+    requestDd(playable);
     renderView();
     status.replaceChildren(
       ...dups.map(([card, seats]) => h('span', { class: 'hv-warn' }, t.dup(SUIT_GLYPH[card[0] as 'S'] + card[1], seats.join(', ')))),
@@ -483,13 +583,17 @@ function mount(root: HTMLElement) {
     solver.hidden = !complete;
     if (complete) solver.href = solverUrl(deal);
 
-    writeHash(deal);
+    writeHash(deal, play);
   }
 
   window.addEventListener('hashchange', () => {
     const next = readHash();
-    if (next && key(next) !== key(deal)) {
+    const nextPlay = dds ? readPlay() : null;
+    const playCode = (p: Play | null) => (p ? contractCode(p.contract) + p.played.join('') + (p.auto ? '!' : '') : '');
+    if (next && (key(next) !== key(deal) || playCode(nextPlay) !== playCode(play))) {
       deal = next;
+      play = nextPlay;
+      playDeal = toPbn(deal);
       refresh();
     }
   });

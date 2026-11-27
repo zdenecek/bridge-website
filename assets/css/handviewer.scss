@@ -371,6 +371,184 @@ body.hv-body .hv-page a:visited {
   b { font-weight: 600; }
 }
 
+/*
+ * Play mode: the side to play clicks a card; each shows the tricks its side ends with.
+ * Cards sit in fixed slots and hands keep their starting width, so the layout never moves.
+ */
+.hv-deal-playing { --slot: 1.15em; }
+.hv-deal-playing .hv-hand { cursor: default; }
+.hv-deal-playing .hv-hand:hover { background: none; }
+
+.hv-card:has(.hv-deal-playing) { font-size: clamp(0.75rem, 3.2vw, 1.4rem); }
+
+.hv-hand.hv-playing {
+  width: calc(1.3em + var(--n) * var(--slot));
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+.hv-playing .hv-cards {
+  display: flex;
+  letter-spacing: 0;
+}
+
+.hv-hand.hv-to-play {
+  background: color-mix(in srgb, var(--hv-felt) 10%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--hv-felt) 35%, transparent);
+}
+
+.hv-pc {
+  position: relative;
+  flex: none;
+  width: var(--slot);
+  box-sizing: border-box;
+  font: inherit;
+  line-height: inherit;
+  text-align: left;
+  color: var(--hv-ink);
+  background: none;
+  border: 0;
+  border-radius: 0.25em;
+  padding: 0 0 0 0.08em;
+  margin: 0;
+
+  sub {
+    position: absolute;
+    right: 0.06em;
+    bottom: 0.12em;
+    font-size: 0.48em;
+    font-weight: 600;
+    line-height: 1;
+  }
+}
+
+button.hv-pc {
+  cursor: pointer;
+
+  &:hover:not(:disabled) { outline: 2px solid var(--hv-felt); outline-offset: -1px; }
+  &:disabled { opacity: 0.35; cursor: default; }
+  &.hv-v0 { background: color-mix(in srgb, #32ad01 22%, transparent); }
+  &.hv-v1 { background: color-mix(in srgb, #ff9b00 28%, transparent); }
+  &.hv-v2 { background: color-mix(in srgb, #ff3b30 22%, transparent); }
+}
+
+.hv-trick {
+  display: grid;
+  grid-template-columns: repeat(3, 1.8em);
+  grid-template-rows: repeat(3, 1.8em);
+  place-items: center;
+  width: 5.4em;
+  height: 5.4em;
+}
+
+.hv-tc {
+  font-weight: 600;
+  font-size: 0.85em;
+  color: var(--hv-muted);
+  opacity: 0.5;
+  white-space: nowrap;
+
+  &:has(> span) {
+    opacity: 1;
+    color: var(--hv-ink);
+    background: var(--hv-field);
+    border: 1px solid var(--hv-rule);
+    border-radius: 0.3em;
+    padding: 0.05em 0.25em;
+  }
+
+  &.hv-tc-next:not(:has(> span)) { opacity: 1; color: var(--hv-felt); }
+}
+
+.hv-tc-n { grid-row: 1; grid-column: 2; }
+.hv-tc-e { grid-row: 2; grid-column: 3; }
+.hv-tc-s { grid-row: 3; grid-column: 2; }
+.hv-tc-w { grid-row: 2; grid-column: 1; }
+
+.hv-trick-done .hv-tc:has(> span) { opacity: 0.45; }
+.hv-trick-done .hv-tc.hv-tc-won { opacity: 1; border-color: var(--hv-felt); }
+
+.hv-dd td[data-dd] {
+  cursor: pointer;
+  border-radius: 0.25em;
+
+  &:hover { background: color-mix(in srgb, var(--hv-felt) 15%, transparent); }
+}
+
+.hv-dd td.hv-picked {
+  background: var(--hv-felt);
+  color: #fff;
+}
+
+.hv-playbar {
+  align-self: stretch;
+  box-sizing: border-box;
+  width: 0;
+  min-width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  align-items: center;
+  gap: 0.3em 0.9em;
+  padding: 0.35em 0.5em 0.35em 0.75em;
+  border-radius: 0.6em;
+  background: color-mix(in srgb, var(--hv-felt) 8%, transparent);
+  font-size: 0.65em;
+  color: var(--hv-muted);
+}
+
+.hv-pb-contract { font-weight: 700; color: var(--hv-ink); font-size: 1.15em; cursor: help; }
+.hv-pb-tricks { font-variant-numeric: tabular-nums; font-weight: 600; min-width: 6.2em; }
+.hv-pb-state { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.hv-pb-acts { margin-left: auto; display: flex; gap: 0.25em; }
+
+.hv-pb-auto {
+  font: inherit;
+  font-weight: 600;
+  height: 2em;
+  padding: 0 0.7em;
+  margin-right: 0.3em;
+  border-radius: 999px;
+  border: 1px solid var(--hv-rule);
+  background: var(--hv-field);
+  color: var(--hv-muted);
+  cursor: pointer;
+
+  &:hover { border-color: var(--hv-felt); color: var(--hv-felt); }
+  &[aria-pressed="true"] { background: var(--hv-felt); border-color: var(--hv-felt); color: #fff; }
+}
+
+.hv-pb-btn {
+  font: inherit;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  border: 1px solid var(--hv-rule);
+  background: var(--hv-field);
+  color: var(--hv-ink);
+  cursor: pointer;
+
+  &:hover:not(:disabled) { border-color: var(--hv-felt); color: var(--hv-felt); }
+  &:disabled { opacity: 0.35; cursor: default; }
+}
+
+.hv-play-toggle {
+  margin-left: auto;
+  white-space: nowrap;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.2em 0.8em;
+  border-radius: 999px;
+  border: 1px solid var(--hv-rule);
+  background: var(--hv-card);
+  color: var(--hv-felt);
+  cursor: pointer;
+
+  &:hover:not(:disabled) { border-color: var(--hv-felt); }
+  &:disabled { opacity: 0.4; cursor: default; }
+  &[aria-pressed="true"] { background: var(--hv-felt); border-color: var(--hv-felt); color: #fff; }
+  &[hidden] { display: none; }
+}
+
 .hv-busy {
   opacity: 0.35;
   transition: opacity 0.2s;
@@ -391,6 +569,7 @@ body.hv-body .hv-page a:visited {
 
 .hv-view-opts {
   display: flex;
+  align-items: center;
   gap: 1.25rem;
   margin: 0.75rem 0.25rem 0;
   font-size: 0.85rem;
@@ -399,6 +578,7 @@ body.hv-body .hv-page a:visited {
 
 .hv-toggle {
   display: inline-flex;
+  white-space: nowrap;
   align-items: center;
   gap: 0.35rem;
   cursor: pointer;
