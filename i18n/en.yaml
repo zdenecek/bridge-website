@@ -61,3 +61,30 @@ laws-prev-version:
 
 laws-note-untranslated:
   other: ''
+
+laws-search-whitebook:
+  other: 'also search the EBU White Book'
+
+laws-search-commentary:
+  other: 'also search the WBF Commentary'
+
+laws-search-laws:
+  other: 'also search the Laws'
+
+guide-whitebook:
+  other: 'EBU White Book'
+
+guide-commentary:
+  other: 'WBF Commentary'
+
+guide-notes-whitebook:
+  other: 'EBU White Book on this Law'
+
+guide-notes-commentary:
+  other: 'WBF Commentary on this Law'
+
+guide-notes-general:
+  other: 'General'
+
+guide-open:
+  other: 'Open in context'

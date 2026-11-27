@@ -1,11 +1,12 @@
 const nav = document.getElementById("laws-nav");
 const input = document.getElementById("laws-q");
-const both = document.getElementById("laws-both");
+const extraSources = [...document.querySelectorAll(".laws-source")];
 const semanticBox = document.getElementById("laws-semantic");
 const results = document.getElementById("laws-results");
 const list = document.getElementById("laws-list");
 const toggle = document.getElementById("laws-toggle");
 const lang = input.dataset.lang;
+const kind = input.dataset.kind || "laws";
 
 const TEXT = {
   cs: {
@@ -71,7 +72,7 @@ function buildBlocks(pages, idxLang) {
     const doc = parser.parseFromString(`<div>${page.c}</div>`, "text/html");
     const title = page.n ? `${page.n} ${page.t}` : page.t;
     blocks.push({ page, idxLang, anchor: "", text: title, folded: fold(title), title: true });
-    for (const el of doc.querySelectorAll("h2, li, p, dt, dd, td")) {
+    for (const el of doc.querySelectorAll("h2, h3, h4, li, p, dt, dd, td, pre")) {
       const text = ownText(el);
       if (!text) continue;
       const holder = el.id ? el : el.closest("[id]");
@@ -86,6 +87,7 @@ function buildBlocks(pages, idxLang) {
 const REF_RE = /^(?:law|l|pravidlo|p)?\s*(\d{1,2})\s*([a-h])?\s*(\d{1,2})?\s*\(?([a-z])?\)?$/i;
 
 function refResult(q) {
+  if (kind !== "laws") return null;
   const m = q.trim().match(REF_RE);
   if (!m) return null;
   const n = parseInt(m[1], 10);
@@ -257,7 +259,13 @@ function merge(words, sem) {
 }
 
 function resultLink(b, href, body, tag = "") {
-  const label = b.page.n ? `${b.page.n}${b.title ? "" : b.anchor.startsWith("fn") ? "" : b.anchor}` : b.page.t;
+  let label;
+  if (b.page.s) {
+    const sec = /^\d+(\.\d+)+$/.test(b.anchor) ? `§${b.anchor}` : b.page.n || b.page.t;
+    label = `${b.page.s} ${sec}`;
+  } else {
+    label = b.page.n ? `${b.page.n}${b.title ? "" : b.anchor.startsWith("fn") ? "" : b.anchor}` : b.page.t;
+  }
   const langTag = b.idxLang !== lang ? `<span class="r-lang">${b.idxLang.toUpperCase()}</span>` : "";
   return `<a href="${href}"><span class="r-ref">${escapeHtml(String(label))}</span>${langTag}${tag}<span class="r-snippet">${body}</span></a>`;
 }
@@ -319,7 +327,7 @@ async function search() {
   const terms = fold(q).split(/\s+/).filter((t) => t.length > 1 || /\d/.test(t));
   const phrase = fold(q).replace(/\s+/g, " ");
   const sources = [[input.dataset.index, lang]];
-  if (both && both.checked && input.dataset.indexAlt) sources.push([input.dataset.indexAlt, lang === "cs" ? "en" : "cs"]);
+  for (const box of extraSources) if (box.checked) sources.push([box.dataset.index, box.dataset.lang]);
 
   const words = [];
   if (terms.length) {
@@ -364,7 +372,22 @@ input.addEventListener("input", () => {
   timer = setTimeout(search, 120);
 });
 input.addEventListener("focus", () => loadIndex(input.dataset.index, lang), { once: true });
-if (both) both.addEventListener("change", search);
+for (const box of extraSources) {
+  const key = box.dataset.key && `laws-src-${box.dataset.key}`;
+  if (key) {
+    try {
+      box.checked = localStorage.getItem(key) === "1";
+    } catch (e) {}
+  }
+  box.addEventListener("change", () => {
+    if (key) {
+      try {
+        localStorage.setItem(key, box.checked ? "1" : "0");
+      } catch (e) {}
+    }
+    search();
+  });
+}
 if (semanticBox) {
   try {
     if (localStorage.getItem("laws-semantic") === "0") semanticBox.checked = false;

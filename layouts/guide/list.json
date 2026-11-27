@@ -1,0 +1,6 @@
+{{- $out := slice -}}
+{{- $src := .Params.source -}}
+{{- range .Pages.ByWeight -}}
+{{- $out = $out | append (dict "u" .RelPermalink "n" (.Params.num | default "" | string) "t" .Params.short "s" $src "c" .Content) -}}
+{{- end -}}
+{{- $out | jsonify -}}

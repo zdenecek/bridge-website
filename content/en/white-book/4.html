@@ -1,0 +1,384 @@
+---
+title: "White Book 4: Score Calculations and Implementation"
+short: "Score Calculations and Implementation"
+num: 4
+weight: 5
+---
+
+<section id="4.1">
+<h2>4.1 Adjusting Scores</h2>
+<section id="4.1.1">
+<h3>4.1.1 Types of score adjustment</h3>
+<section id="4.1.1.1">
+<h4>4.1.1.1 Artificial adjusted scores</h4>
+<p>If a board is unable to be completed then an artificial adjusted score is given under Law <a href="/en/laws/12/#C2">12C2</a>, but see <a href="/en/white-book/8/#8.12.7">§8.12.7</a>. For example, if a player has heard a result from a neighbouring table, or has looked at the wrong hand, and the TD decides the board cannot be played (see Law <a href="/en/laws/16/#D2d">16D2 (d)</a>) then the TD will give each side an artificial adjusted score.</p>
+<p>Such a score is average plus (AVE+) if the side is not at fault, average (AVE) if the side is partly at fault and average minus (AVE−) if the side is fully at fault. See <a href="/en/white-book/8/#8.12.8">§8.12.8</a> for what 'partly at fault’ means. This usually translates into 60% or +3 IMPs for AVE+, 50 % or 0 IMPs for AVE, 40% or −3 IMPs for AVE− (see <a href="/en/white-book/8/#8.12.3">§8.12.3</a> for other forms of scoring).</p>
+<p><strong>Note</strong> In head-to-head teams AVE+/AVE− translates to +3 IMPs, i.e. a team that led by 23 IMPs without this board leads by 26 IMPs.</p>
+<p>However, in a match-pointed pairs event, if a pair’s average score (percentage) is greater than 60% then they get their average score for AVE+. Similarly, if a pair’s average score is less than 40% then they get their average score for AVE−. A similar approach is used at IMPs, e.g. a pair that has an average of +4 IMPs gets +4 IMPs for AVE+, and a pair that has an average −4 IMPs gets −4 IMPs for AVE−.</p>
+<p class="i1">• A Swiss pairs or individual match is a session in its own right for this purpose. Hence an ‘AVE+’ adjustment within the match is the greater of 60% and the pair’s average percentage on the other boards in the match in question; see <a href="/en/white-book/8/#8.80.6.1">§8.80.6.1</a>.</p>
+<p class="i1">• For an all-play-all stage of a competition, the average score is calculated over the whole stage, which may consist of more than one session; see <a href="/en/white-book/8/#8.80.6.2">§8.80.6.2</a>.</p>
+<p class="i1">• Otherwise, the average score is calculated over a session; see <a href="/en/white-book/8/#8.80.6.3">§8.80.6.3</a>.</p>
+<p>When using Bridgemates the TD enters such a score by using the TD Menu. The TD will then enter the percentage for each side separately.</p>
+<p>As a principle, the TD should not give an artificial adjusted score that adds up to more than 100% unless there was an outside agency at fault.</p>
+<p><strong>Examples </strong></p>
+<p class="i1">(a) A board is unplayable because the previous table fouled. The TD gives AVE+/AVE+ (A6060) since an outside agency was at fault.</p>
+<p class="i1">(b) A board cannot be played because there is no time left. The TD might decide both sides are at fault and give AVE−/AVE− (A4040). However, if the TD decides there are extenuating circumstances the TD can give AVE/AVE (A5050), or AVE+/AVE− (A6040) if only one side is at fault. But they should not give AVE+/AVE (A6050) unless the table was delayed by an outside influence, such as by another table, or by the TD.</p>
+<p>There are special regulations where an artificial adjusted score is given even though the board is completed. These are as a result of playing an illegal agreement, or when a psyche or deviation is fielded. The board is completed, and then an artificial adjusted score is given unless the nonoffending side has done better than AVE+.</p>
+<p>The score given is AVE+/AVE− (A6040) except for a fielded psyche. In that case a procedural penalty is added, usually the standard penalty (25% top at match points, 1 VP at Victory Points, but see <a href="/en/white-book/8/#8.90.2">§8.90.2</a>). This is recorded as A6040, with a separate record of the penalty.</p>
+</section>
+<section id="4.1.1.2">
+<h4>4.1.1.2 Assigned adjusted scores</h4>
+<p>When a score is obtained on a board, and the TD decides it should be changed because of an infraction, the TD adjusts it under Law <a href="/en/laws/12/#C1">12C1</a>. For example, if a N/S pair defend 3 because they were misinformed, and the TD judges that if correctly informed they would have bid 3NT vulnerable and made eleven tricks, then the TD assigns a score of +660 for N/S to both sides. See <a href="/en/white-book/4/#4.1.1.4">§4.1.1.4</a> for weighted scores: it is not expected now to give a single assigned score, and it should only be done when the TD is confident they know how the auction and play would have gone without the infraction.</p>
+<p>In a pairs event a single score of this sort replaces the score obtained at the table and is used in the scoring instead.</p>
+</section>
+<section id="4.1.1.3">
+<h4>4.1.1.3 Split scores</h4>
+<p>There are certain occasions when a TD should give the two sides different adjusted scores.</p>
+<p class="i1">(a) Suppose a player knows their opponents have done something wrong. They reach a final contract, and the player judges that they will get an adjustment anyway. So, the player decides to try a gambling double: if they get a good score, that is fine: if not, then they will expect to get an adjustment anyway.</p>
+<p class="i2">This is known as the ‘double shot’, permitted in many sports, but not acceptable in bridge. The player’s final score is considered to be caused by the ‘gambling action’ subsequent to the opponents’ infraction so is not fully adjusted. However, the score for the offending side is adjusted in the normal way. See <a href="/en/white-book/8/#8.12.5">§8.12.5</a> for when to deny redress and see <a href="/en/white-book/4/#4.1.3">§4.1.3</a> for the non-offender’s score.</p>
+<p class="example"><strong>Example</strong> A Ghestem jump overcall of 3 over 1 is described as hearts and diamonds. Overcaller looks surprised at their partner’s explanation and bids 3 over their partner’s 3 and then 4 over 4. No doubt this will be ruled back since overcaller appears to have used unauthorised information. But an opponent makes a ridiculous double of 4, which makes.</p>
+<p class="i3">The offenders get adjusted back to some contract in hearts. If the doubler’s action is considered ‘gambling‘ then the non-offenders’ redress is reduced by the amount the double cost, i.e. the difference between 4 made and 4 doubled and made.</p>
+<p class="i1">(b) It is possible that a player will make a call or play after an infraction by their opponents which is considered so bad as to be gambling or is considered an extremely serious error (unrelated to the infraction), even if there is no suggestion of a double shot. As in (a) this player will not get full redress, but the score will be adjusted fully for the opponents. See <a href="/en/white-book/8/#8.12.5">§8.12.5</a> for when to deny redress and see <a href="/en/white-book/4/#4.1.3">§4.1.3</a> for the non-offender’s score.</p>
+<p class="i2"><strong>Example </strong> A pair is misinformed as to the meaning of a bid of 2 in response to 1NT, but do not realise until dummy appears. The TD will adjust the score against the offending side if there is damage.</p>
+<p class="i3">However, the other side, after getting doubled in 3, freely bid 4 and lose 800! There can be no question of the double shot since they did not know there was an infraction. Nevertheless, full redress will be denied for their side since the 4 bid is ruled as ‘gambling’.</p>
+<p class="i1">(c) Under Law <a href="/en/laws/82/#C">82C</a> when a TD has made an error which is too late to correct, the TD will assign a score to each side. Since the TD is required to treat both sides as nonoffending these scores will often not balance.</p>
+<p class="i2"><strong>Example </strong> A player bids 3 and is then told that they have been misinformed. The TD is called but fails to give them a chance to change their bid. The player makes ten tricks and afterwards claims that they would have bid 4 with the correct information. If the TD feels that they might or might not have bid 4, they could assign 4 making to this player but 3 plus one to their opponents. More normally, the TD will weight the scores given to each side – see (f).</p>
+<p class="i1">(d) When an artificial adjusted score is given – see <a href="/en/white-book/4/#4.1.1.1">§4.1.1.1</a> – the scores for the two sides need not balance.</p>
+<p class="i1">(e) One of the effects of split scores is that in an event scored by Victory Points the final VP scores need not balance. If the TD adjusts as in (c) above the final score in a VP match with top 20 might be 16-6. Similarly, with an artificial adjusted score as in (d).</p>
+<p class="i1">(f) The next section deals with ‘weighted’ scores: it is also possible to get a score that is both split and weighted – see <a href="/en/white-book/4/#4.1.1.5">§4.1.1.5</a> and <a href="/en/white-book/4/#4.1.4">§4.1.4</a>.</p>
+</section>
+<section id="4.1.1.4">
+<h4>4.1.1.4 Weighted scores</h4>
+<p>Law <a href="/en/laws/12/#C1c">12C1 (c)</a> allows a TD to give weighted scores to reflect the probabilities of a number of results. A TD who gives a single adjustment rather than a weighted score should be confident they know what the outcome would have been without the irregularity.</p>
+<p>Using this law, a TD who is giving an adjustment and feels there might have been several possible outcomes should give a weighting to each outcome.</p>
+<p><strong>Note</strong> The L&amp;EC has commented on the failure of TDs and Appeals Committees to use weighted scores: despite it being the normal procedure to use them. The EBU RC encourage both TDs and Appeals Committees to give more serious consideration to their use.</p>
+<p class="example"><strong>Example</strong> Because of misinformation a pair defends 4 doubled. If correctly informed they will certainly bid game in spades, possibly slam, and make eleven or twelve tricks, twelve being more likely.</p>
+<p class="i2">Under Law <a href="/en/laws/12/#C1c">12C1 (c)</a> a weighted score would be given, for example:</p>
+<p class="i3">25% of +1430 (6=) plus 40% of +680 (4+2) plus 20% of +650 (4+1) plus 15% of −100 (6−1)</p>
+<p>This is often acceptable to the players as a method of assigning scores to achieve equity. The offenders must not gain from this, so the weighting should lean in the non-offenders’ favour. This is called ‘sympathetic weighting‘, see <a href="/en/white-book/8/#8.12.14">§8.12.14</a>.</p>
+<p><strong>Note</strong> When giving weighted scores in unauthorised information cases care must be taken to avoid giving ‘Reveley’ rulings – see <a href="/en/white-book/8/#8.16.3">§8.16.3</a> for details.</p>
+<p>Once such a ruling has been given it needs to be calculated. This is done by converting each score to match points or IMPs and then applying the weighting. If fractions arise, see <a href="/en/white-book/4/#4.2.6.1">§4.2.6.1</a>.</p>
+<p>In MP events there are special forms to be filled in and given to the scorer. The scorer will calculate the adjustment and input it. With better software the scorer will simply be able to input it. Such software is now readily available.</p>
+<p><strong>Examples </strong></p>
+<p class="i1">(a) It is match-point pairs. The assignment is:</p>
+<p class="i3">25% of +1430 (6=) plus 40% of +680 (4+2) plus 20% of +650 (4+1) plus 15% of −100 (6−1)</p>
+<p class="i2">Assuming good software which calculates weighted scores is not available, an average is entered into the computer, and the frequencies calculated. Then the match points are found. The calculation might be thus:</p>
+<div class="guide-table"><table>
+<tr><td>Score</td><td>MP</td><td>Weight</td><td>Adjust</td></tr>
+<tr><td>+1430</td><td>17.1</td><td>25%</td><td>4.275</td></tr>
+<tr><td>+680</td><td>12.2</td><td>40%</td><td>4.88</td></tr>
+<tr><td>+650</td><td>8.7</td><td>20%</td><td>1.74</td></tr>
+<tr><td>−100</td><td>3.4</td><td>15%</td><td>0.51</td></tr>
+<tr><td></td><td>Total</td><td></td><td>11.405</td></tr>
+<tr><td></td><td>Rounded</td><td></td><td>11.4</td></tr>
+</table></div>
+<p class="i2">If average is 10 then an adjustment of 1.4 (11.4 − 10) is added to the N/S score and subtracted from the E/W score.</p>
+<p class="i1">(b) It is teams. The assignment is:</p>
+<p class="i3">25% of N/S +1430 (6=) plus 40% of N/S +680 (4+2) plus 20% of N/S +650 (4+1) plus 15% of N/S −100 (6−1)</p>
+<p class="i2">In the other room, suppose N/S scored +650 in 4. The calculation would be thus:</p>
+<div class="guide-table"><table>
+<tr><td>Score</td><td>Imps</td><td>Weight</td><td>Adjust</td></tr>
+<tr><td>+1430</td><td>+13</td><td>25%</td><td>+3.25</td></tr>
+<tr><td>+680</td><td>+1</td><td>40%</td><td>+0.40</td></tr>
+<tr><td>+650</td><td>0</td><td>20%</td><td>0.00</td></tr>
+<tr><td>−100</td><td>−13</td><td>15%</td><td>−1.95</td></tr>
+<tr><td></td><td>Total</td><td></td><td>+1.7</td></tr>
+<tr><td></td><td>Rounded</td><td></td><td>+2</td></tr>
+</table></div>
+<p class="i2">So the board is scored as +2 IMPs to the non-offending side.</p>
+<p>To avoid confusion, weighted scores should always be presented in the same way. See our example:</p>
+<p class="i2">25% of +1430 (6=) plus 40% of +680 (4+2) plus 20% of +650 (4+1) plus 15% of −100 (6−1)</p>
+<p>Scores are always shown as N/S scores, and tabulated in descending order. Calculation is easier if each weighting is given a line to itself.</p>
+</section>
+<section id="4.1.1.5">
+<h4>4.1.1.5 Split and Weighted scores</h4>
+<p class="i1">(a) In <a href="/en/white-book/4/#4.1.1.3">§4.1.1.3</a> (a) and (b) we saw that if a non-offender commits ‘gambling action’ then their side gets a reduced adjustment, sometimes their actual table score, but the score is still adjusted for the offenders. Of course, this adjustment could be a weighted score.</p>
+<p class="i1">(b) When the TD has made an error and Law <a href="/en/laws/82/#C">82C</a> is applied the assigned scores will often not balance. If the TD gives weighted scores as well then these scores will be split and weighted – see <a href="/en/white-book/8/#8.82.1">§8.82.1</a> (and <a href="/en/white-book/4/#4.1.4">§4.1.4</a>).</p>
+<p class="i2"><strong>Example </strong> An Appeals Committee decided that the TD had failed to apply the law properly, so ruled under Law <a href="/en/laws/82/#C">82C</a>. It was clear that if the law had been applied properly one side would have reached a heart contract and made ten tricks, but which contract? The Committee finally ruled:</p>
+<p class="i3">For N/S:</p>
+<p class="i3">75% of 4 =, N/S +420 + 25% of 3 +1, N/S +170</p>
+<p class="i3">For E/W:</p>
+<p class="i3">25% of 4 =, N/S +420 + 75% of 3 +1, N/S +170</p>
+<p class="i1">(c) Suppose the TD is not called after an infraction and the result is a mess that could easily have been avoided. Since both sides are at fault the TD might assign, treating each side as offending. The assignments will often be weighted, thus leading to a split and weighted assignment.</p>
+<p class="i1">(d) It is not normal to have an adjusted score that is both split and weighted except in these three situations, i.e. when the non-offenders get part of their redress reduced, when both sides are treated as non-offending, and when both sides are treated as offending.</p>
+</section>
+<section id="4.1.1.6">
+<h4>4.1.1.6 Method of calculating split and/or weighted scores at pairs contests</h4>
+<p>In a pairs event it is normal to input an average and then do manual adjustments for split and/or weighted scores. Better software is readily available which allows these adjustments to be calculated by computer. See <a href="/en/white-book/7/#7.2.4.5">§7.2.4.5</a> for the procedure to inform the scorer, and <a href="/en/white-book/4/#4.2.1">§4.2.1</a> and <a href="/en/white-book/4/#4.2.2">§4.2.2</a> for the scoring procedure.</p>
+</section>
+<section id="4.1.1.7">
+<h4>4.1.1.7 Method of calculating weighted scores at hybrid-IMP scoring</h4>
+<p>When a weighted score is given at hybrid-IMP scoring, the weighted score should be calculated in the point-a-board and IMP components separately, and then converted to ‘hybrid’ VPs.</p>
+<p><strong>Example </strong> It is the Pachabo Cup: teams-of-four with hybrid-IMP scoring.</p>
+<p class="i2">On board 4, A v B, the score is NS +660; and B v A, the assigned score is:</p>
+<p class="i3">70% of NS −100 (6-1) plus 20% of NS +650 (4+1) plus 10% of NS +680 (4+2)</p>
+<p class="i2">The score on board 4 is</p>
+<div class="guide-table"><table>
+<tr><td>Weight</td><td>Result</td><td>Points</td><td>Weighted Points</td><td>IMPs</td><td>Weighted IMPs</td></tr>
+<tr><td></td><td>EW A</td><td>A B</td><td>A B</td><td>A B</td><td>A B</td></tr>
+<tr><td>70% 20% 10%</td><td>100 -650 -680</td><td>2 0 2 0 0 2</td><td>1.4 0 0.4 0 0 0.2</td><td>13 -13 0 0 -1 1</td><td>9.1 -9.1 0 0 -0.1 0.1</td></tr>
+<tr><td></td><td>Score</td><td></td><td>1.8 0.2</td><td></td><td>9 -9</td></tr>
+</table></div>
+<p class="i2">Given the other scores in the match, this gives a match score card:</p>
+<div class="guide-table"><table>
+<tr><td>Team A v B</td><td></td><td></td><td></td><td>Points</td><td>IMPs</td><td>IMPs&gt;VP</td><td>Match VP</td></tr>
+<tr><td>Board</td><td>NSContr</td><td>EWContr</td><td>NS A EW A</td><td>A B</td><td>A B</td><td>A B</td><td></td></tr>
+<tr><td>1 2 3 4</td><td>3C-1 W 6S-3 E 4S+2 S 3N+2 N</td><td>3S-2 N 4H+1 W 5Dx-3 E Weighted</td><td>50 100 150 450 480 -800 660 Artf</td><td>2 0 2 0 0 2 1.8 0.2</td><td>4 -4 12 -12 -8 8 9 -9</td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td>5.8 2.2</td><td>17 -17</td><td>7 1</td><td></td></tr>
+</table></div>
+<p class="i2">But if the result on board for NS A were NS +650, the score would be different – with changed rows highlighted:</p>
+<div class="guide-table"><table>
+<tr><td>Weight</td><td>Result</td><td>Points</td><td></td><td>Weighted Points</td><td></td><td>IMPs</td><td></td><td>Weighted IMPs</td><td></td></tr>
+<tr><td></td><td>EW A</td><td>A B</td><td></td><td>A B</td><td></td><td>A B</td><td></td><td>A B</td><td></td></tr>
+<tr><td>70%</td><td>100</td><td>2 0</td><td></td><td>1.4 0</td><td></td><td>13 -13</td><td></td><td>9.1 -9.1</td><td></td></tr>
+<tr><td>20%</td><td>-650</td><td>1</td><td>1</td><td>0.2</td><td>0.2</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>10%</td><td>-680</td><td>0 2</td><td></td><td>0 0.2</td><td></td><td>-1 1</td><td></td><td>-0.1 0.1</td><td></td></tr>
+<tr><td></td><td>Score</td><td></td><td></td><td>1.6</td><td>0.4</td><td></td><td></td><td>9</td><td>-9</td></tr>
+</table></div>
+<div class="guide-table"><table>
+<tr><td>Team A v B</td><td></td><td></td><td></td><td></td><td>Points</td><td></td><td>IMPs</td><td></td><td>IMPs&gt;VP</td><td></td><td>Match VP</td><td></td></tr>
+<tr><td>Board</td><td>NSContr</td><td>EWContr</td><td>NS A EW A</td><td></td><td>A B</td><td></td><td>A B</td><td></td><td>A B</td><td></td><td>A B</td><td></td></tr>
+<tr><td>1 2 3</td><td>3C-1 W 6S-3 E 4S+2 S</td><td>3S-2 N 4H+1 W 5Dx-3 E</td><td>50 100 150 450 480 -800</td><td></td><td>2 0 2 0 0 2</td><td></td><td>4 -4 12 -12 -8 8</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>4</td><td>4S+1 N</td><td>Weighted</td><td>650</td><td>Artf</td><td>1.6</td><td>0.4</td><td>9</td><td>-9</td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td>5.6</td><td>2.4</td><td>17</td><td>-17</td><td>7</td><td>1</td><td>12.6</td><td>3.4</td></tr>
+</table></div>
+<p>4 4S+1 N Weighted 650 Artf 1.6 0.4 9 -9 5.6 2.4 17 -17 7 1 12.6 3.4 <em>4.1.1.8</em> <em>Method of calculating weighted scores at cross-IMP scoring </em></p>
+<p>When a weighted score is given at cross-IMP scoring, the calculations should be done on a per comparison basis.</p>
+</section>
+</section>
+<section id="4.1.2">
+<h3>4.1.2 Standard adjustments for various methods of scoring</h3>
+<p>The table in <a href="/en/white-book/8/#8.12.3">§8.12.3</a> includes the equivalent to the ‘standard’ 10% of a top (for the purposes of awarding AVE+ and AVE−) for certain other methods of scoring. See also <a href="/en/white-book/8/#8.90.2">§8.90.2</a>.</p>
+</section>
+<section id="4.1.3">
+<h3>4.1.3 How to deny redress under Law 12C1 (e)</h3>
+<section id="4.1.3.1">
+<h4>4.1.3.1 General</h4>
+<p>Consider a case (with only N/S vulnerable) where N/S allow 4 doubled to be played by E/W because they were misinformed, and the TD judges that if they had not been misinformed they would have bid and made 4+2. Suppose that 4 doubled is always 3 down except that N/S commit an extremely serious error (e.g. a revoke) and the result is only 2 down. Let us say that the result in the other room was N/S +680. How do we apply Law <a href="/en/laws/12/#C">12C</a>?</p>
+<p>E/W, the offending side, get the score for N/S +680 (0 IMPs) under Law <a href="/en/laws/12/#C1e">12C1 (e)</a> (i).</p>
+<p>Applying Law <a href="/en/laws/12/#C1e">12C1 (e)</a> to the non-offending side, we have to calculate the part of the damage that was self-inflicted. The self-inflicted damage is the difference in score between N/S +500 and N/S +300 = imp(500 − 680) − imp(300 − 680) = −5 − (−9) = 4 IMPs. So do N/S get the adjustment for the offending side less the self-inflicted damage = −4 IMPs? Yes, because this is better than their score at the table imp(500 − 680) = −5 IMPs. This reflects the real damage and the selfinflicted damage.</p>
+<p>If this had been match-point pairs, and 4 making scores 15 MPs, +500 scores 8 MPs, and +300 scores 5 MPs, then E/W get the reverse of 15 MPs, but N/S get 15 MPs less the difference between 8 MPs and 5 MPs, so they get 15 − 3=12 MPs.</p>
+<p>Now, compare this. Let us suppose that the contract is always 4 down except that N/S commit an extremely serious error (e.g. a revoke) and the result is only 3 down. How does this affect it? E/W, the offending side, get the score for N/S +680 (0 IMPs) under Law <a href="/en/laws/12/#C1e">12C1 (e)</a> (i).</p>
+<p>When we apply Law <a href="/en/laws/12/#C1e">12C1 (e)</a> (ii) to the non-offending side, then we have to calculate the part of the damage that was self-inflicted. The self-inflicted damage is the difference in score between N/S +800 and N/S +500 = imp(800 − 680) − imp(500 − 680) = 3 − (−5) = 8 IMPs. So should N/S get the adjustment for the offending side less the self-inflicted damage = −8 IMPs?</p>
+<p>Obviously not, because this is worse than their score at the table imp(500 − 680) = −5 IMPs. This is because all the damage was self-inflicted. There was no damage as a consequence of the infraction, the damage was all subsequent (caused by the revoke). The upshot is that N/S keep their table score, −5 IMPs.</p>
+<p>This is a general conclusion from the application of Law <a href="/en/laws/12/#C1e">12C1 (e)</a>. When the damage is all selfinflicted (without the [extremely serious] error, the non-offending side should have done better with the infraction) then the non-offending side keep their table result.</p>
+<p>If this had been match-point pairs, and 4 making scores 15 MPs, +500 scores 8 MPs, and +800 scores 20 MPs, then E/W get the reverse of 15 MPs. Under the initial calculation, N/S would get 15 MPs less the difference between 8 MPs and 20 MPs, so they might get 15 − 12=3 MPs. In fact, we let them keep their 8 MPs, and rule all the damage was self-inflicted.</p>
+<p><strong>Note</strong> The case where all the damage is self-inflicted has been reviewed since the publication of the 2017 laws. A revised interpretation is that if all the damage was self-inflicted then the original infraction did not damage the other side (Law <a href="/en/laws/12/#B1">12B1</a>) and so there is no adjusted score (for either side). We await resolution of this issue from the WBF LC (as of August 2018).</p>
+</section>
+<section id="4.1.3.2">
+<h4>4.1.3.2 Law 12C1 (e) score calculation</h4>
+<p>In practice there are four cases: all damage is self-inflicted, some is self-inflicted, no self-inflicted damage, or no damage at all. There are scores we have to consider</p>
+<p class="i1">A. the score for the Actual table result (including any extremely serious error or gambling</p>
+<p class="i1">action)</p>
+<p class="i1">B. the score for the result Before infraction (assigned by Law <a href="/en/laws/12/#C1c">12C1 (c)</a>)</p>
+<p class="i1">C. (≥ A) the score for the result that Could have been scored, with the infraction but</p>
+<p class="i1">without the extremely serious error or gambling action (this might be weighted)</p>
+<p>The overall damage can be divided as</p>
+<p class="i1">• Real damage: DR = B − C</p>
+<p class="i1">• Self-inflicted damage: DS = C − A</p>
+<p>Starting from C ≥ A there are four cases</p>
+<p class="i1">• C ≥ A &gt; B: no advantage, no damage, no adjustment;</p>
+<p class="i1">• C ≥ B ≥ A: all damage self-inflicted, no real damage DR ≤ 0 (virtual damage), non-offending side get A, offending side get B (but see the <strong>Note</strong> in <a href="/en/white-book/4/#4.1.3.1">§4.1.3.1</a>);</p>
+<p class="i1">• B &gt; C = A: no self-inflicted damage, DS = 0, non-offending side get B, offending side get B;</p>
+<p class="i1">• B &gt; C &gt; A: real damage and some self-inflicted.</p>
+<p>In the final case, the offending side get B and the non-offending side get A + B − C. The adjustment for the non-offending side can be seen as either:</p>
+<p class="i1">• actual score + real damage = A + DR = A + (B − C); or</p>
+<p class="i1">• adjusted score − self-inflicted damage = B − DS = B − (C − A) = A + B − C.</p>
+</section>
+<section id="4.1.3.3">
+<h4>4.1.3.3 Some examples</h4>
+<p>N/S bid to 4 and E/W ‘use unauthorised information’ to compete to 4, which is doubled. In defending 4X, N/S might revoke (an extremely serious error) and lose a trick they would otherwise score. Neither side is vulnerable and the result in the other room is 4=, N/S +420. This is the normal result in 4, so B (the result before the infraction) is 0 IMPs. The type of adjustment depends on the table result.</p>
+<p><strong>4</strong><strong>X−1 N/S</strong>, <strong>+100. Revoke </strong></p>
+<p class="i2">A = imp(100−420) = −8 IMPs. Without the revoke: 4X−2 N/S +300. C = imp(300−420) = −3 IMPs.</p>
+<p class="i2">Real damage DR = 3 IMPs, self-inflicted damage DS = 5 IMPs.</p>
+<p class="i2">Offending side (team of E/W) get 0 IMPs, non-offending side (team of N/S) get 0 + (−8) − (−3) = −5 IMPs.</p>
+<p><strong>4</strong><strong>X−2 N/S +300. Revoke </strong></p>
+<p class="i2">A = −3 IMPs. Without the revoke: 4X−3 N/S +500. C = imp(500−420) = +2 IMPs.</p>
+<p class="i2">No real damage (DR &lt; 0).</p>
+<p class="i2">Offending side get 0 IMPs, non-offending side get −3 IMPs (table result).</p>
+<p class="i2">But see the <strong>Note</strong> in <a href="/en/white-book/4/#4.1.3.1">§4.1.3.1</a>.</p>
+<p><strong>4</strong><strong>X−2 N/S +300. No revoke </strong></p>
+<p class="i2">A = C = −3 IMPs. No self-inflicted damage (DS = 0). Both sides get 0 IMPs.</p>
+<p><strong>4</strong><strong>X−3 N/S +500 </strong></p>
+<p class="i2">A = +2 IMPs. No damage. Table result for both sides.</p>
+</section>
+</section>
+<section id="4.1.4">
+<h3>4.1.4 Example of Director’s Error: Law 82C</h3>
+<p>Suppose that RHO leads a spade out of turn. Declarer forbids LHO from leading spades. Unfortunately the TD tells LHO they may not lead spades again. Later in the deal LHO gets in and fails to find the killing spade switch. If the TD had not got this wrong then perhaps the defender would have found the switch, perhaps not.</p>
+<p>The TD realises their mistake and has to adjust the score, if necessary. Suppose the result was 3NT making, but a spade switch beats it by one. Since both sides are treated as non-offending, and since the spade switch was reasonable but not automatic the ruling is weighted giving both sides the benefit of the doubt.</p>
+<p>For declarer (South):</p>
+<p class="i2">60% of 3NT=, N/S +400 + 40% of 3NT−1, N/S −50;</p>
+<p>and for defenders (East-West):</p>
+<p class="i2">40% of 3NT=, N/S +400 + 60% of 3NT−1, N/S −50</p>
+<p>Both sides get weighting sympathetic to them because they are both treated as non-offending.</p>
+<p>The match points on the board might be (on a top of 70):</p>
+<div class="guide-table"><table>
+<tr><td>N/S score</td><td>N/S MPs</td><td>E/W MPs</td></tr>
+<tr><td>+430</td><td>68.0</td><td>2.0</td></tr>
+<tr><td>+420</td><td>60.0</td><td>10.0</td></tr>
+<tr><td>+400</td><td>37.4</td><td>32.4</td></tr>
+<tr><td>−50</td><td>11.4</td><td>58.4</td></tr>
+<tr><td>−100</td><td>1.0</td><td>69.0</td></tr>
+</table></div>
+<p>So declarer will get</p>
+<p class="i2">60% of N/S +400 = 60% of 37.4 MPs = 22.44 MPs + 40% of N/S −50 = 40% of 11.4 MPs = 4.56 MPs</p>
+<p class="i3">Total = 27.00 MPs</p>
+<p>and the defenders will get</p>
+<p class="i2">40% of N/S +400 = 40% of 32.4 MPs = 12.96 MPs + 60% of N/S −50 = 60% of 58.4 MPs = 35.04 MPs</p>
+<p class="i3">Total = 48.00 MPs</p>
+<p>These scores do not balance since the weighting was not the same for the two sides.</p>
+</section>
+</section>
+<section id="4.2">
+<h2>4.2 Methods of Scoring</h2>
+<section id="4.2.1">
+<h3>4.2.1 How to input split and weighted scores to match-point software</h3>
+<section id="4.2.1.1">
+<h4>4.2.1.1 Introduction</h4>
+<p>Most but not all of the software available to TDs deals with split or weighted scores correctly. Where modern software is not available, the earlier method is to calculate the result manually and enter a manual adjustment. To show the method we take two simple examples based on a six-table movement. Before any adjustment the frequencies were:</p>
+<div class="guide-table"><table>
+<tr><td>Score</td><td>Frequency</td><td>Adjusted Frequency</td><td>N/S MPs</td><td>E/W MPs</td></tr>
+<tr><td>+650</td><td>1</td><td>1</td><td>10</td><td>0</td></tr>
+<tr><td>+620</td><td>1</td><td>1</td><td>8</td><td>2</td></tr>
+<tr><td>−100</td><td>2</td><td>2</td><td>5</td><td>5</td></tr>
+<tr><td>−200</td><td>1</td><td>1</td><td>2</td><td>8</td></tr>
+<tr><td>−790</td><td>1</td><td>1</td><td>0</td><td>10</td></tr>
+</table></div>
+<p>Now let us suppose that there is an adjustment at a table where the score was N/S +620. We shall consider two cases:</p>
+<p class="i1">(a) An adjustment for both sides to</p>
+<p class="i2">30% of N/S +650 + 70% of N/S −100</p>
+<p class="i1">(b) An adjustment for N/S to</p>
+<p class="i3">N/S −100</p>
+<p class="i2">And for E/W to</p>
+<p class="i3">N/S +650</p>
+<p>This is how it is done.</p>
+</section>
+<section id="4.2.1.2">
+<h4>4.2.1.2 The right way</h4>
+<p>With good software there is a facility to input weighted or split scores, and then the calculation will be done by the software and will produce accurate scores and frequencies.</p>
+<p class="i1">(a) The weighted score will appear in the frequencies with its weighting, so the correct frequency chart will read:</p>
+<div class="guide-table"><table>
+<tr><td>Score</td><td>Frequency</td><td>Adjusted Frequency</td><td>N/S MPs</td><td>E/W MPs</td></tr>
+<tr><td>+650</td><td>1.3</td><td>1.3</td><td>9.7</td><td>0.3</td></tr>
+<tr><td>−100</td><td>2.7</td><td>2.7</td><td>5.7</td><td>4.3</td></tr>
+<tr><td>−200</td><td>1.0</td><td>1.0</td><td>2.0</td><td>8.0</td></tr>
+<tr><td>−790</td><td>1.0</td><td>1.0</td><td>0.0</td><td>10.0</td></tr>
+</table></div>
+<p class="i2">Note how the ‘scores’ of 30% of N/S +650 and 70% of N/S −100 appear in the frequencies.</p>
+<p class="i2">The calculation for N/S:</p>
+<p class="i3">30% of N/S +650 = 30% x 9.7 = 2.91 + 70% of N/S −100 = 70% x 5.7 = 3.99</p>
+<p class="i3">N/S total 6.90</p>
+<p class="i2">Similarly, E/W get 3.10.</p>
+<p class="i2">In practice the software will do these calculations. Recommended is a facility for up to 5 different results, and 2 decimal places of weighting (e.g. 33% which is shown as 0.33).</p>
+<p class="i1">(b) For split scores, however, there should be two frequency charts, one for N/S, one for E/W. So they will read:</p>
+<div class="guide-table"><table>
+<tr><td>Score</td><td>Frequency</td><td>Adjusted Frequency</td><td>N/S MPs</td><td></td><td></td><td></td></tr>
+<tr><td>+650</td><td>1</td><td>1</td><td>10</td><td></td><td></td><td></td></tr>
+<tr><td>−100</td><td>3</td><td>3</td><td></td><td>6</td><td></td><td></td></tr>
+<tr><td>−200</td><td>1</td><td>1</td><td>2</td><td></td><td></td><td></td></tr>
+<tr><td>−790</td><td>1</td><td>1</td><td>0</td><td></td><td></td><td></td></tr>
+</table></div>
+<div class="guide-table"><table>
+<tr><td>Score</td><td>Frequency</td><td>Adjusted Frequency</td><td></td><td>E/W MPs</td><td></td><td></td></tr>
+<tr><td>+650</td><td>2</td><td>2</td><td></td><td></td><td>1</td><td></td></tr>
+<tr><td>−100</td><td>2</td><td>2</td><td></td><td>5</td><td></td><td></td></tr>
+<tr><td>−200</td><td>1</td><td>1</td><td></td><td>8</td><td></td><td></td></tr>
+<tr><td>−790</td><td>1</td><td>1</td><td></td><td>10</td><td></td><td></td></tr>
+</table></div>
+<p class="i2">N/S get N/S −100 = 6.0 E/W get N/S +650 = 1.0</p>
+<p>There may be weighted and split scores, and more than one split or weighted score. So long as there is at least one split score then there will be separate frequency charts for N/S and E/W, with or without weighted scores on each.</p>
+</section>
+</section>
+<section id="4.2.2">
+<h3>4.2.2 Assigned adjusted score has not occurred on board</h3>
+<p>When a score is assigned instead of the original score obtained on the board the new score should be input if possible. If the session has already been scored then it should be re-calculated. However, sometimes adjustments come too late when the session has been finalised and the adjustment has to be done manually, i.e. the adjustment calculated in match points by the TD, and the scorer given an adjustment in match points or VPs to add or subtract. The following procedure occurs at such times.</p>
+<p>If in match-pointed pairs an assigned adjusted score has not occurred on the board, then the match points for the contestants is the weighted (by the reciprocal of the frequency) average of the scores on the board next higher, and next lower.</p>
+<p><strong>Example </strong> Consider the following frequency table with eight scores. Suppose that an Appeals Committee revises one of these scores, and N/S are assigned a score of +430.</p>
+<div class="guide-table"><table>
+<tr><td>Score</td><td>Frequency</td><td>Adjusted Frequency</td><td>N/S MPs</td><td>E/W MPs</td></tr>
+<tr><td>+500</td><td>1</td><td>1</td><td>14</td><td>0</td></tr>
+<tr><td>+450</td><td>2</td><td>2</td><td>11</td><td>3</td></tr>
+<tr><td>+420</td><td>5</td><td>5</td><td>4</td><td>10</td></tr>
+</table></div>
+<p class="i2">The match points assigned to an intermediate score are the match points assigned to the next lower score plus its frequency, so 9 MPs should be assigned to +430, because 5+4 equals 9.</p>
+<p class="i2">Alternatively, the same solution is obtained by assigning the match points assigned to the next higher score, less its frequency: thus +430 gets 11−2, which again gives 9.</p>
+<p>No award is ever made of greater than a top or less than zero. It should be noted that this is only an approximate procedure. The correct way to do it would be to re-score the board completely. However, that would change everyone’s score so there would be a lot of manual changes, and while it might be possible for sixteen pairs it would soon become completely impractical; if scoring by hand.</p>
+<p>In the case of weighted scores (see <a href="/en/white-book/4/#4.1.1.4">§4.1.1.4</a>), this applies to individual scores before the weighting is applied. This is a more common procedure because such adjustments are still sometimes entered manually because modern software is not always available. Split scores (see <a href="/en/white-book/4/#4.1.1.3">§4.1.1.3</a>) are dealt with similarly.</p>
+</section>
+<section id="4.2.3">
+<h3>4.2.3 Scoring of a board with fewer results than other boards at MP pairs</h3>
+<section id="4.2.3.1">
+<h4>4.2.3.1 Fewer results than other boards</h4>
+<p>Scores on a board may need treatment for a variety of reasons, including, but not limited to:</p>
+<p class="i1">(a) the nature of the movement, where some boards are played less often than others;</p>
+<p class="i1">(b) award of one or more artificial adjusted scores;</p>
+<p class="i1">(c) a fouled board;</p>
+<p class="i1">(d) incorrect marking (as to dealer or vulnerability) of a board.</p>
+</section>
+<section id="4.2.3.2">
+<h4>4.2.3.2 Neuberg’s formula</h4>
+<p>The formula is used if A &gt; 3 or A &gt; E/3.</p>
+<p>The match points are determined by multiplying the frequencies by E/A, so that a competitor’s score on a board is:</p>
+<p class="i1">Match points = ((M + 1)/A) x E − 1 = (M x E) + E − A</p>
+<p class="i1">A where:</p>
+<p class="i2">M = match points earned by the pair considering only the group itself</p>
+<p class="i2">E = number of scores expected on any board</p>
+<p class="i2">A = actual number of results in the group</p>
+<p>The score is computed to the nearest 0.0001 of a match point, 0.00005 being rounded away from average.</p>
+</section>
+<section id="4.2.3.3">
+<h4>4.2.3.3 Small sub-fields</h4>
+<p>If the size of the group is at most three and is at most a third of the total number of results Neuberg’s formula is not used. Instead a group of two results is scored with a top as 65% and a bottom of 55%, and a group of three results is scored with a top of 70% and a bottom of 50%; with intermediate and tied results scored as for ordinary match-pointing.</p>
+<p>The formula is used if A = 2 or A = 3, and E ≥ 3 A</p>
+<p class="i1">Percentage = 60% + (M – (A – 1)) x 5%</p>
+<p class="i1">Match points = ((M – (A – 1) + 12)/10) x (E – 1)</p>
+<p class="i1"><strong>Note</strong> The small sub-field ‘formula’ awards scores that sum to 120% (AVE+ + AVE+) –</p>
+<p class="i2">this is as compensation to the pairs involved, for not getting a proper comparison.</p>
+</section>
+</section>
+<section id="4.2.4">
+<h3>4.2.4 Scoring of a board with fewer results than other boards otherwise</h3>
+<p><a href="/en/white-book/4/#4.2.3">§4.2.3</a> applies to match-pointed pairs events. A similar approach is used for individual events, or Butler or cross-imped events. Here is an example at Butler scoring.</p>
+<p class="example"><strong>Example</strong> Take an 8-table tournament in which it has been decided to omit the top and bottom score in order to calculate the datum (from the 6 central results). However, a board has been fouled, and instead of having the expected 8 results there are only 5 results.</p>
+<p class="i2">To score this board, we must first factor the frequencies by 8/5 just as we would do in a normal match-pointed pairs game.</p>
+<div class="guide-table"><table>
+<tr><td>N/S Score</td><td>Frequency</td><td>Factored Frequency</td></tr>
+<tr><td>+630</td><td>1</td><td>1.6</td></tr>
+<tr><td>+600</td><td>2</td><td>3.2</td></tr>
+<tr><td>+150</td><td>1</td><td>1.6</td></tr>
+<tr><td>−100</td><td>1</td><td>1.6</td></tr>
+</table></div>
+<p class="i2">To calculate the datum, we ignore 1.0 top and bottom scores. So, our 6 central results are:</p>
+<p class="i3">0.6 of +630 = 378 3.2 of +600 = 1920 1.6 of +150 = 240 0.6 of −100 = −60</p>
+<p class="i3">Total = 2478</p>
+<p class="i2">So, the datum is 2478 divided by 6 = 413, which becomes +410.</p>
+<p class="i2">We then imp each of our actual results against the datum of +410 in the usual way which results in scores of +6, +5, −6, and −11 IMPs respectively for the N/S pairs.</p>
+<p>Similar principles can be used for any other form of scoring. Factor the frequencies, and then score as you would normally do based on these factored frequencies. Modern software is often available to do this for the scorer.</p>
+</section>
+<section id="4.2.5">
+<h3>4.2.5 Overall scoring</h3>
+<p>The following principles apply to producing the overall score when boards do not have the same number of results, or some contestants play different numbers of boards.</p>
+<p class="i1">1. All boards count equally, so all boards should be scored as if they were all played the same number of times (‘match-pointed to a common top’) using <a href="/en/white-book/4/#4.2.3">§4.2.3</a> or <a href="/en/white-book/4/#4.2.4">§4.2.4</a>.</p>
+<p class="i1">2. When contestants play different numbers of boards, and the final method of scoring is the same as the basic method (‘no conversion to Victory Points’), a contestant’s score is scaled by the number of boards played. For example, match points are expressed as a percentage of the ‘maximum’ match points available.</p>
+</section>
+<section id="4.2.6">
+<h3>4.2.6 Calculations and rounding</h3>
+<section id="4.2.6.1">
+<h4>4.2.6.1 General</h4>
+<p>In general, all calculations are to be performed without any rounding during the course of the calculation.</p>
+<p class="i1">• The scores for a single board (the initial method of scoring) are rounded to the nearest unit of scoring (see <a href="/en/white-book/8/#8.12.3">§8.12.3</a>), with exact halves rounded away from average.</p>
+<p class="i1">• If the final method of scoring is some form of victory points, the score for a round/match may need to be rounded to the unit of scoring (see <a href="/en/white-book/8/#8.12.3">§8.12.3</a>), with exact halves rounded away from average.</p>
+<p class="i1">• If the final method of scoring involves totalling the board scores and factoring to account for different numbers of boards played, that calculation should be performed to sufficient precision so as not to introduce ties (‘single precision’ may suffice).</p>
+<p class="i1">• Results may be displayed to fewer decimal places than the calculations actually made, as is normal, for example, in MP pairs.</p>
+</section>
+<section id="4.2.6.2">
+<h4>4.2.6.2 Butler scoring</h4>
+<p>The datum is to be rounded to the nearest 10 points, with exact 5s rounded away from average so there is no necessity to consider swings falling between the gaps in the IMP scale.</p>
+</section>
+<section id="4.2.6.3">
+<h4>4.2.6.3 Cross IMPs</h4>
+<p>When cross IMP scoring is to be converted to VPs, the IMPs for a match are calculated, totalled and divided by a figure as detailed in <a href="/en/white-book/3/#3.1.3">§3.1.3</a>. The total is then rounded to the nearest IMP, with exact halves rounded away from average, so there is no necessity to consider swings falling between the gaps in the VP scale.</p>
+</section>
+</section>
+</section>

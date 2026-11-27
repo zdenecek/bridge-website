@@ -1,0 +1,19 @@
+{{- $key := .Params.law | default .Params.extra | string -}}
+{{- range slice (dict "data" site.Data.laws.whitebook "title" (i18n "guide-notes-whitebook") "tag" "WB" "cls" "whitebook") (dict "data" site.Data.laws.commentary "title" (i18n "guide-notes-commentary") "tag" "WBF" "cls" "commentary") }}
+{{- $items := index (.data | default dict) $key -}}
+{{- $tag := .tag -}}{{- $title := .title -}}{{- $cls := .cls -}}
+{{- with $items }}
+<section class="law-notes law-notes-{{ $cls }}" lang="en">
+    <h2 lang="{{ site.Language.Lang }}">{{ $title }}{{ if eq site.Language.Lang "cs" }} <span class="law-notes-lang">{{ i18n "guide-notes-english" }}</span>{{ end }}</h2>
+    {{- range . }}
+    <details class="law-note-item">
+        <summary>{{ if and .id (eq $tag "WB") }}<span class="n">§{{ .id }}</span> {{ end }}{{ .t | default (i18n "guide-notes-general") }}</summary>
+        <div class="law-note-body">
+            {{ .h | safeHTML }}
+            <p class="law-note-src"><a href="{{ .u }}{{ with .id }}#{{ . }}{{ end }}">{{ i18n "guide-open" }} →</a></p>
+        </div>
+    </details>
+    {{- end }}
+</section>
+{{- end }}
+{{- end }}

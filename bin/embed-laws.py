@@ -21,8 +21,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SECTIONS = {"en": "en/laws", "cs": "pravidla"}
-BLOCK_TAGS = {"h2", "li", "p", "dt", "dd", "td"}
+SECTIONS = {"en": "en/laws", "cs": "pravidla", "wb": "en/white-book", "wbf": "en/wbf-commentary"}
+BLOCK_TAGS = {"h2", "h3", "h4", "li", "p", "dt", "dd", "td", "pre"}
 SKIP_TAGS = {"ol", "ul", "sup"}
 VOID_TAGS = {"br", "img", "hr", "input", "meta", "link", "wbr", "col", "area", "source"}
 BATCH = 25
@@ -129,11 +129,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("endpoint", nargs="?")
     ap.add_argument("--dry-run", action="store_true", help="only count the chunks")
+    ap.add_argument("--only", nargs="+", choices=SECTIONS, help="embed only these sections")
     args = ap.parse_args()
     if not args.endpoint and not args.dry_run:
         ap.error("endpoint is required unless --dry-run")
 
     for lang, section in SECTIONS.items():
+        if args.only and lang not in args.only:
+            continue
         index = ROOT / "public" / section / "index.json"
         if not index.exists():
             sys.exit(f"{index} not found, run `make site` first")

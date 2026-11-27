@@ -396,3 +396,128 @@ mark {
     margin-left: 0;
   }
 }
+
+.guide {
+  h2 {
+    font-size: 1.15rem;
+    margin: 2.25rem 0 0.75rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.5rem;
+  }
+
+  h4 {
+    font-size: 0.95rem;
+    font-style: italic;
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  section[id] {
+    scroll-margin-top: 1rem;
+  }
+}
+
+.law-content,
+.law-note-body {
+  .i1 {
+    margin-left: 1.5rem;
+  }
+
+  .i2 {
+    margin-left: 3rem;
+  }
+
+  .i3 {
+    margin-left: 4.5rem;
+  }
+
+  .example {
+    background: var(--laws-note);
+    padding: 0.5rem 0.75rem;
+    border-radius: 3px;
+  }
+
+  .hand {
+    font-size: 0.85rem;
+    line-height: 1.35;
+    color: inherit;
+    border: none;
+    white-space: pre;
+    background: var(--laws-note) !important;
+    padding: 0.5rem 0.75rem;
+    overflow-x: auto;
+  }
+
+  .guide-table {
+    overflow-x: auto;
+
+    table {
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    td {
+      border: 1px solid var(--laws-line);
+      padding: 0.2rem 0.4rem;
+      vertical-align: top;
+    }
+  }
+}
+
+.page-content .guide-toc {
+  list-style: none;
+  padding-left: 0;
+
+  .n {
+    display: inline-block;
+    min-width: 3.5rem;
+    color: var(--laws-muted);
+  }
+}
+
+.guide-items .n {
+  flex-basis: 2.6rem !important;
+}
+
+.law-notes {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--laws-line);
+
+  h2 {
+    font-size: 1.05rem;
+  }
+
+  .law-notes-lang {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: var(--laws-muted);
+  }
+}
+
+.law-note-item {
+  border-bottom: 1px solid var(--laws-line);
+
+  summary {
+    cursor: pointer;
+    padding: 0.45rem 0;
+    font-weight: bold;
+
+    .n {
+      color: var(--laws-muted);
+      font-weight: normal;
+      margin-right: 0.3rem;
+    }
+  }
+
+  .law-note-body {
+    padding: 0 0 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .law-note-src {
+    font-size: 0.85rem;
+    text-align: right !important;
+  }
+}

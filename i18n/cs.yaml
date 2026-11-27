@@ -61,3 +61,33 @@ laws-note-untranslated:
 
 laws-prev-version:
   other: 'Znění z roku 2017'
+
+laws-search-whitebook:
+  other: 'hledat i v EBU White Book'
+
+laws-search-commentary:
+  other: 'hledat i v komentáři WBF'
+
+laws-search-laws:
+  other: 'hledat i v pravidlech'
+
+guide-whitebook:
+  other: 'EBU White Book'
+
+guide-commentary:
+  other: 'Komentář WBF'
+
+guide-notes-whitebook:
+  other: 'EBU White Book k tomuto pravidlu'
+
+guide-notes-commentary:
+  other: 'Komentář WBF k tomuto pravidlu'
+
+guide-notes-general:
+  other: 'Obecně'
+
+guide-notes-english:
+  other: 'Pouze anglicky.'
+
+guide-open:
+  other: 'Otevřít v souvislostech'

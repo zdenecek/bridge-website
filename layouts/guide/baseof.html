@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode }}">
+    {{- partial "head.html" . -}}
+    {{- $css := resources.Get "css/laws.scss" | css.Sass (dict "outputStyle" "compressed") | resources.Fingerprint "sha512" }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    <body a="{{ $.Site.Params.theme_config.appearance | default "auto" }}">
+        <main class="page-content laws-layout" aria-label="Content">
+            {{- partial "laws/nav.html" . -}}
+            <div class="laws-main">
+                {{- if eq site.Language.Lang "cs" }}{{ partial "language_switcher.html" . }}{{ end -}}
+                {{- block "main" . }}{{- end }}
+            </div>
+        </main>
+        {{- $js := resources.Get "js/laws.js" | js.Build (dict "minify" true) | resources.Fingerprint "sha512" }}
+        <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+    </body>
+</html>

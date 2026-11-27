@@ -129,6 +129,20 @@ laws:
       note: { cs: "Opakovaný renonc", en: "Repeated revokes" }
 ```
 
+#### White Book and WBF Commentary
+
+`content/en/white-book/` (EBU White Book) and `content/en/wbf-commentary/` (WBF Commentary on the
+2017 Laws) are converted from the official PDFs, together with `data/laws/whitebook.json` and
+`data/laws/commentary.json`, which list the sections shown below each Law. To update them, download
+the new PDF and rerun the converter (needs `pip install pymupdf`), then rebuild their vectors:
+
+```bash
+python3 bin/import-whitebook.py white-book.pdf
+python3 bin/import-commentary.py 2017LawsCommentary.pdf
+make site
+python3 bin/embed-laws.py https://laws-search.<account>.workers.dev --only wb wbf
+```
+
 #### Semantic search
 
 The laws search also finds paragraphs by meaning. Each paragraph has a stored vector in

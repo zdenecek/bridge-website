@@ -1,26 +1,44 @@
 {{- $section := .CurrentSection -}}
 {{- $current := . -}}
+{{- $guide := eq $section.Type "guide" -}}
 {{- $alt := "" -}}
-{{- if eq site.Language.Lang "cs" }}{{ range $section.Translations }}{{ $alt = .RelPermalink }}{{ end }}{{ end -}}
+{{- if and (not $guide) (eq site.Language.Lang "cs") }}{{ range $section.Translations }}{{ $alt = .RelPermalink }}{{ end }}{{ end -}}
+{{- $sources := slice -}}
+{{- with $alt }}{{ $sources = $sources | append (dict "url" (print . "index.json") "lang" "en" "key" "" "label" (i18n "laws-search-both")) }}{{ end -}}
+{{- if $guide }}{{ $sources = $sources | append (dict "url" "/en/laws/index.json" "lang" "en" "key" "laws" "label" (i18n "laws-search-laws")) }}{{ end -}}
+{{- if ne $section.RelPermalink "/en/white-book/" }}{{ $sources = $sources | append (dict "url" "/en/white-book/index.json" "lang" "en" "key" "whitebook" "label" (i18n "laws-search-whitebook")) }}{{ end -}}
+{{- if ne $section.RelPermalink "/en/wbf-commentary/" }}{{ $sources = $sources | append (dict "url" "/en/wbf-commentary/index.json" "lang" "en" "key" "commentary" "label" (i18n "laws-search-commentary")) }}{{ end -}}
 <aside class="laws-nav" id="laws-nav">
     <a class="laws-nav-title" href="{{ $section.RelPermalink }}">{{ $section.Title }}</a>
     <div class="laws-search">
         <input type="search" id="laws-q" autocomplete="off" spellcheck="false"
                placeholder="{{ i18n "laws-search-placeholder" }}" aria-label="{{ i18n "laws-search" }}"
                data-index="{{ $section.RelPermalink }}index.json"
-               {{- with $alt }} data-index-alt="{{ . }}index.json"{{ end }}
+               data-kind="{{ if $guide }}guide{{ else }}laws{{ end }}"
                {{- with site.Params.lawsEmbed }} data-embed="{{ . }}"{{ end }}
-               data-lang="{{ site.Language.Lang }}">
-        {{- with $alt }}
-        <label class="laws-both"><input type="checkbox" id="laws-both"> {{ i18n "laws-search-both" }}</label>
+               data-lang="{{ if $guide }}en{{ else }}{{ site.Language.Lang }}{{ end }}">
+        {{- range $sources }}
+        <label class="laws-both"><input type="checkbox" class="laws-source" data-index="{{ .url }}" data-lang="{{ .lang }}"{{ with .key }} data-key="{{ . }}"{{ end }}> {{ .label }}</label>
         {{- end }}
         {{- if site.Params.lawsEmbed }}
         <label class="laws-both"><input type="checkbox" id="laws-semantic" checked> {{ i18n "laws-search-semantic" }}</label>
         {{- end }}
-        <button type="button" class="laws-toggle" id="laws-toggle" aria-controls="laws-list" aria-expanded="false">{{ i18n "laws-list-toggle" }}</button>
+        <button type="button" class="laws-toggle" id="laws-toggle" aria-controls="laws-list" aria-expanded="false">{{ if $guide }}{{ i18n "laws-contents" }}{{ else }}{{ i18n "laws-list-toggle" }}{{ end }}</button>
     </div>
     <div class="laws-results" id="laws-results" hidden></div>
-    <nav class="laws-list" id="laws-list" aria-label="{{ i18n "laws-list-toggle" }}">
+    <nav class="laws-list" id="laws-list" aria-label="{{ if $guide }}{{ i18n "laws-contents" }}{{ else }}{{ i18n "laws-list-toggle" }}{{ end }}">
+        {{- if $guide }}
+        <ol class="laws-items guide-items">
+            {{- range $section.Pages.ByWeight }}
+            <li><a href="{{ .RelPermalink }}"{{ if eq . $current }} class="current" aria-current="page"{{ end }}><span class="n">{{ .Params.num }}</span><span class="t">{{ .Params.short }}</span></a></li>
+            {{- end }}
+        </ol>
+        <ul class="laws-extra">
+            <li><a href="/en/laws/">Laws of Duplicate Bridge</a></li>
+            {{- if ne $section.RelPermalink "/en/white-book/" }}<li><a href="/en/white-book/">{{ i18n "guide-whitebook" }}</a></li>{{ end }}
+            {{- if ne $section.RelPermalink "/en/wbf-commentary/" }}<li><a href="/en/wbf-commentary/">{{ i18n "guide-commentary" }}</a></li>{{ end }}
+        </ul>
+        {{- else }}
         <ul class="laws-extra">
             {{- range $section.Pages.ByWeight }}{{ if and .Params.extra (lt .Weight 0) }}
             <li><a href="{{ .RelPermalink }}"{{ if eq . $current }} class="current" aria-current="page"{{ end }}>{{ .Params.short }}</a></li>
@@ -35,6 +53,9 @@
             {{- range $section.Pages.ByWeight }}{{ if and .Params.extra (gt .Weight 0) }}
             <li><a href="{{ .RelPermalink }}"{{ if eq . $current }} class="current" aria-current="page"{{ end }}>{{ .Params.short }}</a></li>
             {{- end }}{{ end }}
+            <li><a href="/en/white-book/" hreflang="en">{{ i18n "guide-whitebook" }}</a></li>
+            <li><a href="/en/wbf-commentary/" hreflang="en">{{ i18n "guide-commentary" }}</a></li>
         </ul>
+        {{- end }}
     </nav>
 </aside>

@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{- $pages := .CurrentSection.Pages.ByWeight -}}
+{{- $prev := false -}}{{- $next := false -}}{{- $found := false -}}
+{{- range $pages -}}
+    {{- if $found -}}{{- if not $next }}{{ $next = . }}{{ end -}}
+    {{- else if eq . $ -}}{{- $found = true -}}
+    {{- else -}}{{- $prev = . -}}
+    {{- end -}}
+{{- end -}}
+{{- $pager := dict "prev" $prev "next" $next "section" .CurrentSection -}}
+{{ partial "laws/pager.html" $pager }}
+
+<article class="law guide">
+    <h1>{{ .Title }}</h1>
+    <div class="law-content">
+        {{ .Content }}
+    </div>
+</article>
+
+{{ partial "laws/pager.html" $pager }}
+{{ end }}
