@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Lang }}">
+    {{- partial "head.html" . -}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
+    {{- $css := resources.Get "css/handviewer.scss" | css.Sass (dict "outputStyle" "compressed") | resources.Fingerprint "sha512" }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" />
+    <body class="hv-body" a="{{ $.Site.Params.theme_config.appearance | default "auto" }}">
+        <script>try { var t = localStorage.getItem('hv-theme'); if (t) document.body.setAttribute('a', t); } catch (e) {}</script>
+        <main class="hv-page" aria-label="Content">
+            <nav class="hv-top">
+                <span class="hv-back">{{ partial "back_link.html" . }}</span>
+                {{- partial "language_switcher.html" . -}}
+                <button type="button" id="hv-theme" class="hv-theme"></button>
+            </nav>
+            {{- block "main" . }}{{- end }}
+        </main>
+        {{- $js := resources.Get "js/handviewer/main.ts" | js.Build (dict "minify" true "target" "es2020") | resources.Fingerprint "sha512" }}
+        <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+    </body>
+</html>

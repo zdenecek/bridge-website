@@ -43,6 +43,9 @@ td:
     - page: /pravidla
       title: Pravidla bridže 2017
       desc: česky i anglicky, s vyhledáváním
+    - page: /handviewer
+      title: Prohlížeč rozdání
+      desc: zadejte rozdání a uvidíte diagram
     - url: /apps/tc-to-matrika?lang=cs
       title: Převodník TC → matrika
       desc: turnaj z TC k nahrání do Matriky ČBS
