@@ -42,22 +42,22 @@ td:
   tools:
     - page: /pravidla
       title: Pravidla bridže 2017
-      desc: česky i anglicky, s vyhledáváním
+      desc: česky i anglicky, hledání podle významu, White Book a komentář WBF
     - page: /handviewer
       title: Prohlížeč rozdání
-      desc: zadejte rozdání a uvidíte diagram
+      desc: diagram, double dummy, sehrávka a ankety
     - url: /apps/tc-to-matrika?lang=cs
-      title: Převodník TC → matrika
-      desc: turnaj z TC k nahrání do Matriky ČBS
+      title: Převodník Tournament Calculator → matrika
+      desc: turnaj z Tournament Calculatoru k nahrání do Matriky ČBS
     - url: /apps/tc-to-frequencies?lang=cs
-      title: Frekvence a průměry
-      desc: z prezentace TC pro každé rozdání
+      title: Frekvence a průměry z Tournament Calculatoru
+      desc: z prezentace pro každé rozdání
     - url: /apps/table-cones/?lang=cs
-      title: Generátor čísel stolů
-      desc: tisknutelné kužely s čísly stolů
+      title: Generátor jehlanů na stoly
+      desc: tisknutelné jehlany s čísly stolů
     - page: /td-stuff/matrika-cbs-utf8
       title: Hráči z Matriky v UTF-8
-      desc: seznam hráčů ČBS i pro TC
+      desc: seznam hráčů ČBS i pro Tournament Calculator
     - page: /programy/pbn
       title: Program pro soubory .pbn
       desc: úpravy a převody rozdání
