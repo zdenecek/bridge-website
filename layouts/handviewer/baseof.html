@@ -16,7 +16,7 @@
             </nav>
             {{- block "main" . }}{{- end }}
         </main>
-        {{- $js := resources.Get "js/handviewer/main.ts" | js.Build (dict "minify" true "target" "es2020") | resources.Fingerprint "sha512" }}
-        <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+        {{- $js := resources.Get "js/handviewer/main.ts" | js.Build (dict "minify" true "format" "esm" "target" "es2020") | resources.Fingerprint "sha512" }}
+        <script type="module" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
     </body>
 </html>

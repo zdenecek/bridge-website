@@ -1,11 +1,12 @@
-import { type Call, STRAINS, isLegal, parseAuction } from './auction';
+import { type Call, STRAINS, formatAuction, isLegal, parseAuction } from './auction';
 import { h } from './dom';
 import { dealImage } from './image';
-import { SUIT_GLYPH, callParts, diagram } from './diagram';
+import { ddAnalyser } from './dd';
+import { type DdView, SUIT_GLYPH, callParts, diagram } from './diagram';
 import { texts } from './i18n';
 import {
   type Deal, type Seat, RANKS, SEATS, SUITS, VULS, type Vul,
-  boardDealer, boardVul, cardOwners, completeLastHand, duplicates, emptyDeal, emptyHand,
+  boardDealer, boardVul, cardOwners, completeLastHand, dealShape, duplicates, emptyDeal, emptyHand,
   handSize, handToString, parseHand, parsePbn, randomHands, sortRanks, toPbn,
 } from './model';
 
@@ -23,14 +24,20 @@ function readHash(): Deal | null {
   const vul = p.get('v') as Vul;
   if (VULS.includes(vul)) deal.vul = vul;
   const auction = parseAuction(p.get('a') ?? '', deal.dealer);
-  if ('calls' in auction) deal.auction = auction.calls;
+  if ('calls' in auction) {
+    deal.auction = auction.calls;
+    deal.notes = auction.notes;
+  }
+  deal.show = { hcp: p.get('h') !== '0', dd: p.get('dd') !== '0' };
   return deal;
 }
 
 function writeHash(deal: Deal) {
   const parts = [`dl=${deal.dealer}`, `v=${deal.vul}`, `d=${toPbn(deal).replace(/ /g, '+')}`];
   if (deal.board) parts.unshift(`b=${deal.board}`);
-  if (deal.auction.length) parts.push(`a=${deal.auction.join('-')}`);
+  if (deal.auction.length) parts.push(`a=${formatAuction(deal.auction, deal.notes, '-').replace(/[%&#+]/g, encodeURIComponent).replace(/ /g, '+')}`);
+  if (!deal.show.hcp) parts.push('h=0');
+  if (!deal.show.dd) parts.push('dd=0');
   history.replaceState(null, '', '#' + parts.join('&'));
 }
 
@@ -52,7 +59,7 @@ function solverUrl(deal: Deal): string {
 }
 
 function key(deal: Deal) {
-  return [deal.board, deal.dealer, deal.vul, toPbn(deal), deal.auction.join('-')].join('|');
+  return [deal.board, deal.dealer, deal.vul, toPbn(deal), formatAuction(deal.auction, deal.notes), deal.show.hcp, deal.show.dd].join('|');
 }
 
 function setupTheme(t: ReturnType<typeof texts>) {
@@ -93,10 +100,55 @@ async function copy(text: string, button: HTMLButtonElement, done: string) {
 function mount(root: HTMLElement) {
   const t = texts(document.documentElement.lang);
   let deal = readHash() ?? exampleDeal();
+  let selected: number | null = null;
   let active: Seat = 'N';
 
   const view = h('div', { class: 'hv-card' });
   const status = h('p', { class: 'hv-status', 'aria-live': 'polite' });
+  const ddStatus = h('span', { class: 'hv-warn' });
+
+  const analyse = root.dataset.ddsWorker ? ddAnalyser(root.dataset.ddsWorker) : null;
+  let dd: DdView | null = null;
+  let ddKey = '';
+  let ddTimer: ReturnType<typeof setTimeout> | undefined;
+  const renderView = () => {
+    view.replaceChildren(diagram(deal, t, dd));
+    if (selected !== null) view.querySelector(`.hv-auction [data-index="${selected}"]`)?.classList.add('hv-selected');
+  };
+
+  function requestDd(complete: boolean) {
+    complete &&= deal.show.dd;
+    const k = complete ? `${toPbn(deal)}|${deal.dealer}|${deal.vul}` : '';
+    if (k === ddKey) return;
+    ddKey = k;
+    clearTimeout(ddTimer);
+    ddStatus.textContent = '';
+    if (!analyse || !complete) {
+      dd = null;
+      return;
+    }
+    dd = { analysis: dd?.analysis ?? null, busy: true };
+    ddTimer = setTimeout(async () => {
+      try {
+        const analysis = await analyse(deal);
+        if (!analysis || ddKey !== k) return;
+        dd = { analysis, busy: false };
+      } catch {
+        dd = null;
+        ddStatus.textContent = t.ddFailed;
+      }
+      renderView();
+    }, 150);
+  }
+  const imageDd = () => (deal.show.dd && dd && !dd.busy ? dd.analysis : null);
+
+  const toggle = (label: string, which: 'hcp' | 'dd') => {
+    const box = h('input', { type: 'checkbox' });
+    box.addEventListener('change', () => { deal.show[which] = box.checked; refresh(); });
+    return { box, el: h('label', { class: 'hv-toggle' }, box, label) };
+  };
+  const hcpToggle = toggle(t.showHcp, 'hcp');
+  const ddToggle = toggle(t.showDd, 'dd');
   const solver = h('a', { class: 'hv-link', target: '_blank', rel: 'noopener' }, t.solver);
   const copyLink = h('button', { type: 'button', class: 'hv-link' }, t.copyLink);
   copyLink.addEventListener('click', () => copy(location.href, copyLink, t.copied));
@@ -113,7 +165,7 @@ function mount(root: HTMLElement) {
   };
   const copyImage = h('button', { type: 'button', class: 'hv-link' }, t.copyImage);
   copyImage.addEventListener('click', async () => {
-    const blob = dealImage(deal, t);
+    const blob = dealImage(deal, t, imageDd());
     try {
       await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
       flash(copyImage, t.imageCopied);
@@ -123,7 +175,7 @@ function mount(root: HTMLElement) {
     }
   });
   const downloadImage = h('button', { type: 'button', class: 'hv-link' }, t.downloadImage);
-  downloadImage.addEventListener('click', async () => download(await dealImage(deal, t)));
+  downloadImage.addEventListener('click', async () => download(await dealImage(deal, t, imageDd())));
 
   const boardInput = h('input', { type: 'number', min: 1, max: 999, inputmode: 'numeric', class: 'hv-input hv-board-num' });
   const dealerSelect = h('select', { class: 'hv-input' }, SEATS.map((seat) => h('option', { value: seat }, `${seat} – ${t.seats[seat]}`)));
@@ -248,22 +300,48 @@ function mount(root: HTMLElement) {
     auctionInput.removeAttribute('aria-invalid');
     auctionError.textContent = '';
     deal.auction = parsed.calls;
+    deal.notes = parsed.notes;
+    selected = null;
     refresh();
   });
   auctionInput.addEventListener('blur', () => {
-    if (!auctionInput.hasAttribute('aria-invalid')) auctionInput.value = deal.auction.join(' ');
+    if (!auctionInput.hasAttribute('aria-invalid')) auctionInput.value = formatAuction(deal.auction, deal.notes);
   });
+
+  const current = () => (selected !== null && selected < deal.auction.length ? selected : deal.auction.length - 1);
+  const annotLabel = h('span', { class: 'hv-annot-call' });
+  const alertBtn = h('button', { type: 'button', class: 'hv-call hv-alert-btn', 'aria-pressed': 'false' }, t.alert);
+  const noteInput = h('input', { class: 'hv-input hv-note-input', autocomplete: 'off', placeholder: t.notePlaceholder, 'aria-label': t.note });
+  alertBtn.addEventListener('click', () => {
+    const i = current();
+    if (i < 0) return;
+    deal.notes[i] = { ...deal.notes[i], alert: !deal.notes[i]?.alert };
+    refresh();
+  });
+  noteInput.addEventListener('input', () => {
+    const i = current();
+    if (i < 0) return;
+    deal.notes[i] = { ...deal.notes[i], note: noteInput.value.replace(/[()]/g, '').trim() || undefined };
+    refresh();
+  });
+  const annotRow = h('div', { class: 'hv-annot' }, annotLabel, alertBtn, noteInput);
+  const annotHelp = h('p', { class: 'hv-help' }, t.pickCall);
 
   const callButtons = new Map<Call, HTMLButtonElement>();
   const callButton = (call: Call, cls = 'hv-call') => {
     const b = h('button', { type: 'button', class: cls },
       callParts(call, t).map((p) => (p.suit ? h('span', { class: `hv-suit-${p.suit.toLowerCase()}` }, p.text) : p.text)));
-    b.addEventListener('click', () => { deal.auction.push(call); refresh(); });
+    b.addEventListener('click', () => { deal.auction.push(call); selected = null; refresh(); });
     callButtons.set(call, b);
     return b;
   };
   const undoBtn = h('button', { type: 'button', class: 'hv-call hv-call-wide' }, t.undo);
-  undoBtn.addEventListener('click', () => { deal.auction.pop(); refresh(); });
+  undoBtn.addEventListener('click', () => {
+    deal.auction.pop();
+    deal.notes.length = Math.min(deal.notes.length, deal.auction.length);
+    selected = null;
+    refresh();
+  });
   const biddingBox = h('div', { class: 'hv-bidbox' },
     h('div', { class: 'hv-bids' }, [1, 2, 3, 4, 5, 6, 7].flatMap((level) => STRAINS.map((strain) => callButton(`${level}${strain}`)))),
     h('div', { class: 'hv-bid-specials' },
@@ -278,11 +356,12 @@ function mount(root: HTMLElement) {
   };
   const completeBtn = button(t.complete, () => { completeLastHand(deal); refresh(); });
   const actions = h('div', { class: 'hv-buttons' },
-    button(t.random, () => { deal.hands = randomHands(); deal.auction = []; refresh(); }, 'hv-btn hv-btn-primary'),
+    button(t.random, () => { deal.hands = randomHands(); deal.auction = []; deal.notes = []; refresh(); }, 'hv-btn hv-btn-primary'),
     completeBtn,
     button(t.clear, () => {
       for (const seat of SEATS) deal.hands[seat] = emptyHand();
       deal.auction = [];
+      deal.notes = [];
       active = 'N';
       refresh();
       handInputs.N.focus();
@@ -290,12 +369,21 @@ function mount(root: HTMLElement) {
   );
 
   view.addEventListener('click', (e) => {
-    const seat = (e.target as Element).closest<HTMLElement>('.hv-hand')?.dataset.seat as Seat | undefined;
+    const target = e.target as Element;
+    const seat = target.closest<HTMLElement>('.hv-hand')?.dataset.seat as Seat | undefined;
     if (seat) handInputs[seat].focus();
+    const index = target.closest<HTMLElement>('[data-index]')?.dataset.index;
+    if (index !== undefined) {
+      selected = Number(index);
+      refresh();
+      noteInput.focus();
+    }
   });
 
   root.replaceChildren(
-    h('section', { class: 'hv-view' }, view, status, h('div', { class: 'hv-view-links' }, copyImage, downloadImage, copyLink, solver)),
+    h('section', { class: 'hv-view' }, view,
+      h('div', { class: 'hv-view-opts' }, hcpToggle.el, ddToggle.el),
+      status, h('div', { class: 'hv-view-links' }, copyImage, downloadImage, copyLink, solver)),
     h('section', { class: 'hv-editor' },
       h('div', { class: 'hv-meta' },
         h('label', {}, h('span', {}, t.board), boardInput),
@@ -311,7 +399,7 @@ function mount(root: HTMLElement) {
       ),
       h('div', { class: 'hv-auction-edit' },
         h('label', { for: 'hv-auction' }, t.auction),
-        auctionInput, auctionError, biddingBox,
+        auctionInput, auctionError, biddingBox, annotRow, annotHelp,
         h('p', { class: 'hv-help' }, t.auctionHelp),
       ),
       h('div', { class: 'hv-pbn-row' },
@@ -324,7 +412,6 @@ function mount(root: HTMLElement) {
   );
 
   function refresh() {
-    view.replaceChildren(diagram(deal, t));
 
     const focused = document.activeElement;
     if (focused !== boardInput) boardInput.value = deal.board ? String(deal.board) : '';
@@ -362,21 +449,36 @@ function mount(root: HTMLElement) {
     }
 
     if (focused !== auctionInput) {
-      auctionInput.value = deal.auction.join(' ');
+      auctionInput.value = formatAuction(deal.auction, deal.notes);
       auctionInput.removeAttribute('aria-invalid');
       auctionError.textContent = '';
     }
     for (const [call, b] of callButtons) b.disabled = !isLegal(deal.auction, deal.dealer, call);
     undoBtn.disabled = !deal.auction.length;
 
+    const ci = current();
+    annotRow.hidden = ci < 0;
+    annotHelp.hidden = ci < 0;
+    if (ci >= 0) {
+      annotLabel.replaceChildren(`${t.callNo(ci + 1)}: `, ...callParts(deal.auction[ci]!, t).map((p) => (p.suit ? h('span', { class: `hv-suit-${p.suit.toLowerCase()}` }, p.text) : p.text)));
+      alertBtn.setAttribute('aria-pressed', String(!!deal.notes[ci]?.alert));
+      if (focused !== noteInput) noteInput.value = deal.notes[ci]?.note ?? '';
+    }
+    hcpToggle.box.checked = deal.show.hcp;
+    ddToggle.box.checked = deal.show.dd;
+    ddToggle.el.hidden = !analyse;
+
     const dups = duplicates(deal);
-    const total = SEATS.reduce((n, seat) => n + handSize(deal.hands[seat]), 0);
-    const complete = !dups.length && total === 52;
+    const shape = dealShape(deal);
+    const complete = shape.kind === 'full';
+    requestDd(complete || shape.kind === 'ending');
+    renderView();
     status.replaceChildren(
       ...dups.map(([card, seats]) => h('span', { class: 'hv-warn' }, t.dup(SUIT_GLYPH[card[0] as 'S'] + card[1], seats.join(', ')))),
-      dups.length ? '' : complete ? t.done : t.missing(52 - total),
+      shape.kind === 'full' ? t.done : shape.kind === 'ending' ? t.ending(shape.cards) : shape.kind === 'partial' ? t.missing(shape.missing) : '',
+      ddStatus,
     );
-    status.classList.toggle('hv-ok', complete);
+    status.classList.toggle('hv-ok', complete || shape.kind === 'ending');
     completeBtn.disabled = SEATS.filter((seat) => handSize(deal.hands[seat]) < 13).length !== 1 || dups.length > 0;
     solver.hidden = !complete;
     if (complete) solver.href = solverUrl(deal);

@@ -6,7 +6,16 @@ export type Strain = (typeof STRAINS)[number];
 /** "P", "X", "XX" or a bid such as "1C" or "3N". */
 export type Call = string;
 
-export type AuctionError = { code: 'call'; token: string } | { code: 'illegal'; call: Call; index: number };
+export type AuctionError =
+  | { code: 'call'; token: string }
+  | { code: 'illegal'; call: Call; index: number }
+  | { code: 'note-first' };
+
+/** What a call carries besides itself: an alert, and a note shown as a numbered footnote. */
+export interface Annotation {
+  alert?: boolean;
+  note?: string;
+}
 
 export interface Contract {
   level: number;
@@ -67,16 +76,54 @@ export function isLegal(calls: Call[], dealer: Seat, call: Call): boolean {
   return st.lastBid === null || bidRank(call) > bidRank(st.lastBid);
 }
 
-/** Reads "1S P 2H P 4S P P P", also with commas or dashes, "pass", "dbl", "1NT" or suit symbols. */
-export function parseAuction(text: string, dealer: Seat): { calls: Call[] } | { error: AuctionError } {
+const SEPARATOR = /[\s,;\-–—]/;
+
+/**
+ * Reads "1S P 2H P 4S P P P", also with commas or dashes, "pass", "dbl", "1NT" or suit symbols.
+ * "1N!" alerts a call and "1N(15–17)" gives it a note.
+ */
+export function parseAuction(text: string, dealer: Seat): { calls: Call[]; notes: Annotation[] } | { error: AuctionError } {
   const calls: Call[] = [];
-  for (const token of text.trim().split(/[\s,;\-–—]+/).filter(Boolean)) {
-    const call = normalizeCall(token);
-    if (!call) return { error: { code: 'call', token } };
-    if (!isLegal(calls, dealer, call)) return { error: { code: 'illegal', call, index: calls.length } };
-    calls.push(call);
+  const notes: Annotation[] = [];
+  let i = 0;
+  while (i < text.length) {
+    const c = text[i]!;
+    if (SEPARATOR.test(c)) {
+      i++;
+    } else if (c === '(') {
+      if (!calls.length) return { error: { code: 'note-first' } };
+      const end = text.indexOf(')', i);
+      const note = text.slice(i + 1, end < 0 ? undefined : end).trim();
+      if (note) notes[calls.length - 1] = { ...notes[calls.length - 1], note };
+      i = end < 0 ? text.length : end + 1;
+    } else {
+      let j = i;
+      while (j < text.length && !SEPARATOR.test(text[j]!) && text[j] !== '(' && text[j] !== ')') j++;
+      const token = text.slice(i, Math.max(j, i + 1));
+      i = Math.max(j, i + 1);
+      const alert = token.endsWith('!');
+      const call = normalizeCall(token.replace(/!+$/, ''));
+      if (!call) return { error: { code: 'call', token } };
+      if (!isLegal(calls, dealer, call)) return { error: { code: 'illegal', call, index: calls.length } };
+      calls.push(call);
+      if (alert) notes[calls.length - 1] = { alert: true };
+    }
   }
-  return { calls };
+  return { calls, notes };
+}
+
+export function formatAuction(calls: Call[], notes: Annotation[], separator = ' '): string {
+  return calls.map((call, i) => {
+    const n = notes[i];
+    return call + (n?.alert ? '!' : '') + (n?.note ? `(${n.note})` : '');
+  }).join(separator);
+}
+
+/** Footnote numbers of the calls that have a note, in auction order. */
+export function noteNumbers(notes: Annotation[]): Map<number, number> {
+  const numbers = new Map<number, number>();
+  notes.forEach((n, i) => n?.note && numbers.set(i, numbers.size + 1));
+  return numbers;
 }
 
 /** The final contract once the auction is over, "passout" if nobody bid, null while it goes on. */

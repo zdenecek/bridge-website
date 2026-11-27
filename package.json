@@ -1,0 +1,7 @@
+{
+  "name": "bridge-zdenektomis-eu",
+  "private": true,
+  "dependencies": {
+    "bridge-dds-wasm": "github:zdenecek/bridge-dds-wasm#8cd11a9"
+  }
+}

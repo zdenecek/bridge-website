@@ -1,3 +1,5 @@
+import type { Annotation } from './auction';
+
 export const SEATS = ['N', 'E', 'S', 'W'] as const;
 export type Seat = (typeof SEATS)[number];
 
@@ -19,7 +21,17 @@ export interface Deal {
   hands: Record<Seat, Hand>;
   /** Calls from the dealer on, as in auction.ts. */
   auction: string[];
+  /** Alerts and notes, by the index of the call they belong to. */
+  notes: Annotation[];
+  show: { hcp: boolean; dd: boolean };
 }
+
+/** A full deal, an ending with the same number of cards in every hand, or a deal still being entered. */
+export type Shape =
+  | { kind: 'full' }
+  | { kind: 'ending'; cards: number }
+  | { kind: 'partial'; missing: number }
+  | { kind: 'clash' };
 
 export type HandError =
   | { code: 'rank'; char: string }
@@ -39,6 +51,8 @@ export function emptyDeal(board: number | null = 1): Deal {
     vul: board ? boardVul(board) : 'None',
     hands: { N: emptyHand(), E: emptyHand(), S: emptyHand(), W: emptyHand() },
     auction: [],
+    notes: [],
+    show: { hcp: true, dd: true },
   };
 }
 
@@ -171,6 +185,14 @@ export function cardOwners(deal: Deal): Map<string, Seat[]> {
     }
   }
   return owners;
+}
+
+export function dealShape(deal: Deal): Shape {
+  if (duplicates(deal).length) return { kind: 'clash' };
+  const sizes = SEATS.map((seat) => handSize(deal.hands[seat]));
+  if (sizes.every((n) => n === 13)) return { kind: 'full' };
+  if (sizes[0]! > 0 && sizes.every((n) => n === sizes[0])) return { kind: 'ending', cards: sizes[0]! };
+  return { kind: 'partial', missing: 52 - sizes.reduce((a, b) => a + b, 0) };
 }
 
 export function duplicates(deal: Deal): [string, Seat[]][] {

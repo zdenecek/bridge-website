@@ -15,6 +15,7 @@
   --hv-diamond: #ff9b00;
   --hv-club: #32ad01;
   --hv-error: #c62828;
+  --hv-alert: #ffe6a3;
   --hv-shadow: 0 1px 2px rgb(0 0 0 / 4%), 0 8px 24px rgb(14 90 27 / 8%);
 }
 
@@ -35,6 +36,7 @@
   --hv-diamond: #ffae33;
   --hv-club: #5fd23a;
   --hv-error: #ff7a7a;
+  --hv-alert: #6b5420;
   --hv-shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 8px 24px rgb(0 0 0 / 30%);
 }
 
@@ -179,6 +181,34 @@ body.hv-body .hv-page a:visited {
   }
 }
 
+.hv-auction td[data-index] { cursor: pointer; }
+
+.hv-call-text { padding: 0 0.15em; border-radius: 0.25em; }
+.hv-alerted { background: var(--hv-alert); }
+
+.hv-note-ref {
+  font-size: 0.6em;
+  font-weight: 600;
+  color: var(--hv-muted);
+  margin-left: 0.1em;
+}
+
+.hv-auction td.hv-selected .hv-call-text {
+  outline: 2px solid var(--hv-felt);
+  outline-offset: 1px;
+}
+
+.hv-notes {
+  list-style: none;
+  margin: 0.5em 0 0;
+  padding: 0;
+  font-size: 0.85em;
+  max-width: 22em;
+
+  li { cursor: pointer; }
+  sup { font-weight: 600; color: var(--hv-muted); margin-right: 0.2em; }
+}
+
 .hv-contract {
   margin: 0.5em 0 0;
   font-size: 0.95em;
@@ -287,8 +317,67 @@ body.hv-body .hv-page a:visited {
 .hv-hcp-s { grid-row: 3; grid-column: 2; }
 .hv-hcp-w { grid-row: 2; grid-column: 1; }
 
+/* Double dummy tricks and par, small and grey in the free corners as on the results site. */
+.hv-dd-wrap {
+  grid-row: 1;
+  grid-column: 3;
+  align-self: start;
+  justify-self: end;
+}
+
+.hv-dd {
+  border-collapse: collapse;
+  border: 0;
+  font-size: 0.6em;
+  line-height: 1.2;
+  color: var(--hv-muted);
+  font-variant-numeric: tabular-nums;
+
+  th, td { border: 0; background: none; }
+
+  thead th {
+    padding: 0.1em 0.35em 0.2em;
+    border-bottom: 1px solid var(--hv-rule);
+  }
+
+  thead th span { color: var(--hv-muted); }
+
+  tbody th {
+    padding: 0.1em 0.35em 0.1em 0;
+    font-weight: 600;
+  }
+
+  td {
+    padding: 0.1em 0.35em;
+    text-align: center;
+  }
+
+  td.hv-makes {
+    color: var(--hv-ink);
+    font-weight: 700;
+  }
+}
+
+.hv-par {
+  grid-row: 3;
+  grid-column: 3;
+  align-self: end;
+  justify-self: end;
+  text-align: right;
+  max-width: 11em;
+  font-size: 0.6em;
+  color: var(--hv-muted);
+
+  b { font-weight: 600; }
+}
+
+.hv-busy {
+  opacity: 0.35;
+  transition: opacity 0.2s;
+}
+
 .hv-status {
-  margin: 0.75rem 0.25rem 0;
+  margin: 0.4rem 0.25rem 0;
   font-size: 0.85rem;
   color: var(--hv-muted);
 
@@ -298,6 +387,24 @@ body.hv-body .hv-page a:visited {
 .hv-warn {
   display: block;
   color: var(--hv-error);
+}
+
+.hv-view-opts {
+  display: flex;
+  gap: 1.25rem;
+  margin: 0.75rem 0.25rem 0;
+  font-size: 0.85rem;
+  color: var(--hv-muted);
+}
+
+.hv-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+
+  input { accent-color: var(--hv-felt); margin: 0; }
+  &[hidden] { display: none; }
 }
 
 .hv-view-links {
@@ -572,6 +679,30 @@ body.hv-body .hv-link {
 .hv-call-pass { background: var(--hv-nonvul); }
 .hv-call-x { background: var(--hv-vul); }
 .hv-call-xx { background: #2f62c9; }
+
+.hv-annot {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+
+  &[hidden] { display: none; }
+}
+
+.hv-annot-call {
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hv-alert-btn {
+  padding: 0.35em 0.7em;
+
+  &[aria-pressed="true"] { background: var(--hv-alert); border-color: var(--hv-alert); }
+}
+
+.hv-note-input { font-size: 0.85rem; }
 
 .hv-pbn-row {
   display: flex;

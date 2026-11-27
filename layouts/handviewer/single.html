@@ -1,5 +1,6 @@
 {{ define "main" }}
+{{- $worker := resources.Get "js/handviewer/dds-worker.ts" | js.Build (dict "minify" true "format" "esm" "target" "es2020" "externals" (slice "node:*")) | resources.Fingerprint "sha512" }}
 <h1 class="hv-sr">{{ .Title }}</h1>
-<div id="handviewer" class="hv-app"></div>
+<div id="handviewer" class="hv-app" data-dds-worker="{{ $worker.RelPermalink }}"></div>
 <noscript>{{ .Params.noscript }}</noscript>
 {{ end }}

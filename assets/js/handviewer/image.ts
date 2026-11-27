@@ -1,10 +1,12 @@
-import { AUCTION_SEATS, SUIT_GLYPH, auctionRows, callParts, contractParts } from './diagram';
+import type { Analysis } from './dd';
+import { AUCTION_SEATS, DD_SEATS, DD_STRAINS, SUIT_GLYPH, auctionRows, callParts, contractParts, parParts, strainParts } from './diagram';
 import type { Texts } from './i18n';
-import { type Deal, type Hand, type Seat, SEATS, SUITS, handSize, hcp, isVulnerable } from './model';
+import { noteNumbers } from './auction';
+import { type Deal, type Hand, type Seat, SEATS, SUITS, dealShape, handSize, hcp, isVulnerable } from './model';
 
 /** The image is always light, so it reads the same pasted anywhere. */
 const C = {
-  card: '#ffffff', edge: '#e1e5e1', ink: '#222222', muted: '#5f6661', rule: '#e3e6e3',
+  card: '#ffffff', edge: '#e1e5e1', ink: '#222222', muted: '#5f6661', rule: '#e3e6e3', alert: '#ffe6a3',
   vul: '#d93636', nonvul: '#1a881a',
   S: '#33339b', H: '#ff0000', D: '#ff9b00', C: '#32ad01',
 };
@@ -18,6 +20,9 @@ const PAD = 1.5 * F;
 const GAP_X = 0.5 * F;
 const AF = 0.8 * F;
 const AROW = 1.55 * AF;
+const DF = 0.62 * F;
+const DD_CELL = 1.75 * DF;
+const DD_ROW = 1.3 * DF;
 
 type Ctx = CanvasRenderingContext2D;
 type Part = { text: string; suit?: string };
@@ -110,7 +115,7 @@ function roundRect(ctx: Ctx, x: number, y: number, w: number, h: number, r: numb
   ctx.closePath();
 }
 
-function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx): { w: number; h: number } {
+function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx, dd: Analysis | null): { w: number; h: number } {
   const m = measure;
   const hands = Object.fromEntries(SEATS.map((s) => [s, handWidth(m, deal.hands[s])])) as Record<Seat, number>;
   const handH = 4 * LH;
@@ -124,18 +129,34 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx): { w: number;
 
   const col1 = Math.max(5.5 * F, hands.W, headerW, hcpW);
   const col2 = Math.max(hands.N, hands.S, COMPASS_SIZE + 0.4 * F);
-  const col3 = Math.max(5.5 * F, hands.E);
+  const shape = dealShape(deal);
+  const full = shape.kind === 'full';
+  const showHcp = deal.show.hcp && shape.kind !== 'ending';
+  const ddW = dd ? 6 * DD_CELL : 0;
+  const ddH = dd ? 5 * DD_ROW : 0;
+  const par = dd && full ? [{ text: 'Par ' }, ...parParts(dd.par, t)] : [];
+  font(m, 500, DF);
+  const parW = par.length ? partsWidth(m, par) : 0;
+  const col3 = Math.max(5.5 * F, hands.E, ddW, parW);
   const gridW = col1 + col2 + col3 + 2 * GAP_X;
   const row2 = Math.max(handH, COMPASS_SIZE + 0.4 * F);
-  const gridH = handH + row2 + handH + 0.3 * F;
+  const row1 = Math.max(handH, ddH);
+  const gridH = row1 + row2 + handH + 0.3 * F;
 
   const rows = deal.auction.length ? auctionRows(deal.auction, deal.dealer) : [];
   const result = contractParts(deal, t);
   font(m, 500, AF);
+  const numbers = noteNumbers(deal.notes);
   const colW = [0, 1, 2, 3].map((c) => Math.max(3.4 * AF, ...rows.map((r) => {
     const cell = r[c];
-    return cell && 'call' in cell ? partsWidth(m, callParts(cell.call, t)) + AF : 0;
+    return cell && 'call' in cell ? partsWidth(m, callParts(cell.call, t)) + 1.6 * AF : 0;
   })));
+  const NF = 0.68 * F;
+  const NROW = 1.45 * NF;
+  font(m, 400, NF);
+  const noteLines = [...numbers].map(([i, n]) => ({ n: String(n), text: deal.notes[i]!.note! }));
+  const notesW = Math.max(0, ...noteLines.map((l) => m.measureText(l.text).width + 1.2 * NF));
+  const notesH = noteLines.length ? 0.4 * F + noteLines.length * NROW : 0;
   for (const r of rows) {
     const c = r.findIndex((cell) => cell && 'allPass' in cell);
     if (c < 0) continue;
@@ -146,9 +167,9 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx): { w: number;
   const auctionW = colW.reduce((a, b) => a + b, 0);
   font(m, 400, 0.75 * F);
   const resultW = result ? partsWidth(m, result) : 0;
-  const auctionH = rows.length ? AROW * (rows.length + 1) + 0.2 * F + (result ? 1.6 * 0.75 * F : 0) : 0;
+  const auctionH = rows.length ? AROW * (rows.length + 1) + notesH + 0.2 * F + (result ? 1.6 * 0.75 * F : 0) : 0;
 
-  const contentW = Math.max(gridW, auctionW, resultW);
+  const contentW = Math.max(gridW, auctionW, resultW, notesW);
   const w = Math.ceil(contentW + 2 * PAD);
   const h = Math.ceil(gridH + (auctionH ? 1.1 * F + auctionH : 0) + 2 * PAD);
   if (!ctx) return { w, h };
@@ -164,10 +185,10 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx): { w: number;
   const y0 = PAD;
   const x2 = x0 + col1 + GAP_X;
   const x3 = x2 + col2 + GAP_X;
-  const y2 = y0 + handH + 0.15 * F;
+  const y2 = y0 + row1 + 0.15 * F;
   const y3 = y2 + row2 + 0.15 * F;
 
-  drawHand(ctx, deal.hands.N, x2 + (col2 - hands.N) / 2, y0);
+  drawHand(ctx, deal.hands.N, x2 + (col2 - hands.N) / 2, y0 + row1 - handH);
   drawHand(ctx, deal.hands.S, x2 + (col2 - hands.S) / 2, y3);
   drawHand(ctx, deal.hands.W, x0 + col1 - hands.W, y2 + (row2 - handH) / 2);
   drawHand(ctx, deal.hands.E, x3, y2 + (row2 - handH) / 2);
@@ -191,9 +212,39 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx): { w: number;
   const hcpY = y3 + handH - 3 * 1.15 * 0.6 * F;
   const spots: Record<Seat, [number, number]> = { N: [1, 0], E: [2, 1], S: [1, 2], W: [0, 1] };
   for (const seat of SEATS) {
-    if (!handSize(deal.hands[seat])) continue;
+    if (!showHcp || !handSize(deal.hands[seat])) continue;
     const [c, r] = spots[seat];
     ctx.fillText(String(hcp(deal.hands[seat])), x0 + c * cell + cell / 2, hcpY + r * 1.15 * 0.6 * F + 0.3 * F);
+  }
+
+  if (dd) {
+    const dx = x3 + col3 - ddW;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    DD_STRAINS.forEach((st, c) => {
+      font(ctx, 600, DF);
+      const p = strainParts(st, t);
+      drawParts(ctx, p.map((q) => ({ ...q, suit: undefined })), dx + (c + 1.5) * DD_CELL - partsWidth(ctx, p) / 2, y0 + DD_ROW / 2, C.muted);
+    });
+    ctx.fillStyle = C.rule;
+    ctx.fillRect(dx, y0 + DD_ROW, ddW, 1);
+    DD_SEATS.forEach((seat, r) => {
+      const cy = y0 + (r + 1.5) * DD_ROW;
+      font(ctx, 600, DF);
+      ctx.textAlign = 'center';
+      ctx.fillStyle = C.muted;
+      ctx.fillText(seat, dx + DD_CELL / 2, cy);
+      DD_STRAINS.forEach((st, c) => {
+        const n = dd.table[seat][st];
+        const makes = full && n >= 7;
+        font(ctx, makes ? 700 : 400, DF);
+        ctx.fillStyle = makes ? C.ink : C.muted;
+        ctx.fillText(String(n), dx + (c + 1.5) * DD_CELL, cy);
+      });
+    });
+    font(ctx, 500, DF);
+    ctx.textBaseline = 'alphabetic';
+    if (par.length) drawParts(ctx, par, x3 + col3 - parW, y3 + handH - 0.2 * F, C.muted);
   }
 
   if (!rows.length) return { w, h };
@@ -223,7 +274,21 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx): { w: number;
     r.forEach((cellData, c) => {
       if (cellData && 'call' in cellData) {
         const parts = callParts(cellData.call, t);
-        drawParts(ctx, parts, x + (colW[c]! - partsWidth(ctx, parts)) / 2, y + AROW / 2, cellData.call === 'P' ? C.muted : C.ink);
+        const pw = partsWidth(ctx, parts);
+        const px = x + (colW[c]! - pw) / 2;
+        if (deal.notes[cellData.index]?.alert) {
+          roundRect(ctx, px - 0.25 * AF, y + 0.14 * AROW, pw + 0.5 * AF, 0.72 * AROW, 0.2 * AF);
+          ctx.fillStyle = C.alert;
+          ctx.fill();
+        }
+        drawParts(ctx, parts, px, y + AROW / 2, cellData.call === 'P' ? C.muted : C.ink);
+        const n = numbers.get(cellData.index);
+        if (n) {
+          font(ctx, 600, 0.6 * AF);
+          ctx.fillStyle = C.muted;
+          ctx.fillText(String(n), px + pw + 0.3 * AF, y + AROW * 0.3);
+          font(ctx, 500, AF);
+        }
       } else if (cellData) {
         ctx.fillStyle = C.muted;
         ctx.textAlign = 'left';
@@ -234,6 +299,21 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx): { w: number;
     y += AROW;
   }
 
+  if (noteLines.length) {
+    y += 0.4 * F;
+    const nx = PAD + (contentW - Math.max(auctionW, notesW)) / 2;
+    for (const line of noteLines) {
+      font(ctx, 600, 0.75 * NF);
+      ctx.fillStyle = C.muted;
+      ctx.textAlign = 'left';
+      ctx.fillText(line.n, nx, y + NROW * 0.4);
+      font(ctx, 400, NF);
+      ctx.fillStyle = C.ink;
+      ctx.fillText(line.text, nx + 1.2 * NF, y + NROW / 2);
+      y += NROW;
+    }
+  }
+
   if (result) {
     font(ctx, 400, 0.75 * F);
     drawParts(ctx, result, PAD + (contentW - resultW) / 2, y + 0.2 * F + 0.8 * 0.75 * F, C.muted);
@@ -241,15 +321,15 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx): { w: number;
   return { w, h };
 }
 
-export async function dealImage(deal: Deal, t: Texts): Promise<Blob> {
+export async function dealImage(deal: Deal, t: Texts, dd: Analysis | null = null): Promise<Blob> {
   await Promise.all([400, 500, 600, 700].map((wgt) => document.fonts.load(`${wgt} ${F}px Lexend`).catch(() => null)));
   const canvas = document.createElement('canvas');
   const measure = canvas.getContext('2d')!;
-  const { w, h } = draw(null, deal, t, measure);
+  const { w, h } = draw(null, deal, t, measure, dd);
   canvas.width = w * SCALE;
   canvas.height = h * SCALE;
   const ctx = canvas.getContext('2d')!;
   ctx.scale(SCALE, SCALE);
-  draw(ctx, deal, t, ctx);
+  draw(ctx, deal, t, ctx, dd);
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('toBlob'))), 'image/png'));
 }
