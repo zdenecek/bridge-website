@@ -1,8 +1,9 @@
 import { type Call, STRAINS, contract, formatAuction, isLegal, parseAuction } from './auction';
 import { h } from './dom';
-import { dealImage } from './image';
+import { dealImage, pollImage } from './image';
+import { type Form, type Poll, defaultPoll, defaultQuestion } from './poll';
 import { ddSolver } from './dd';
-import { type DdView, type PlayView, SUIT_GLYPH, callParts, defendersTurn, diagram } from './diagram';
+import { type DdView, type PlayView, SUIT_GLYPH, callParts, defendersTurn, diagram, pollView } from './diagram';
 import { type Play, type PlayContract, type Strain, contractCode, parseContractCode, position, sideOf } from './play';
 import { texts } from './i18n';
 import {
@@ -30,6 +31,19 @@ function readHash(): Deal | null {
     deal.notes = auction.notes;
   }
   deal.show = { hcp: p.get('h') !== '0', dd: p.get('dd') !== '0' };
+  if (p.get('po') === '1') {
+    const you = (p.get('py') ?? 'S') as Seat;
+    deal.poll = {
+      you: SEATS.includes(you) ? you : 'S',
+      form: ({ t: 'teams', p: 'pairs', m: 'mp', c: 'custom' } as Record<string, Form>)[p.get('pf') ?? ''] ?? '',
+      formText: p.get('pft') ?? '',
+      contract: parseContractCode(p.get('pk') ?? '') ?? undefined,
+      visible: SEATS.filter((s) => (p.get('pw') ?? you).includes(s)),
+      text: p.get('pt') ?? '',
+      question: p.get('pq') ?? '',
+      cards: p.get('pc') ?? '',
+    };
+  }
   return deal;
 }
 
@@ -37,7 +51,7 @@ function readPlay(): Play | null {
   const params = new URLSearchParams(location.hash.slice(1));
   const [code, cards = ''] = (params.get('p') ?? '').split(':');
   const c = parseContractCode(code ?? '');
-  return c ? { contract: c, played: cards.match(/[SHDC][AKQJT2-9]/g) ?? [], auto: params.get('pa') === '1' } : null;
+  return c ? { contract: c, played: cards.match(/[SHDC][AKQJT2-9]/g) ?? [], auto: params.get('pa') === '1', hideDefenders: params.get('pd') === '1' } : null;
 }
 
 function writeHash(deal: Deal, play: Play | null = null) {
@@ -48,6 +62,18 @@ function writeHash(deal: Deal, play: Play | null = null) {
   if (!deal.show.dd) parts.push('dd=0');
   if (play) parts.push(`p=${contractCode(play.contract)}${play.played.length ? ':' + play.played.join('') : ''}`);
   if (play?.auto) parts.push('pa=1');
+  if (play?.auto && play.hideDefenders) parts.push('pd=1');
+  if (deal.poll) {
+    const q = deal.poll;
+    const enc = (v: string) => encodeURIComponent(v).replace(/%20/g, '+');
+    parts.push('po=1', `py=${q.you}`, `pw=${q.visible.join('')}`);
+    if (q.form) parts.push(`pf=${q.form[0]}`);
+    if (q.form === 'custom' && q.formText) parts.push(`pft=${enc(q.formText)}`);
+    if (q.contract) parts.push(`pk=${contractCode(q.contract)}`);
+    if (q.text) parts.push(`pt=${enc(q.text)}`);
+    if (q.question) parts.push(`pq=${enc(q.question)}`);
+    if (q.cards) parts.push(`pc=${q.cards.trim().replace(/\s+/g, '+')}`);
+  }
   history.replaceState(null, '', '#' + parts.join('&'));
 }
 
@@ -69,7 +95,7 @@ function solverUrl(deal: Deal): string {
 }
 
 function key(deal: Deal) {
-  return [deal.board, deal.dealer, deal.vul, toPbn(deal), formatAuction(deal.auction, deal.notes), deal.show.hcp, deal.show.dd].join('|');
+  return [deal.board, deal.dealer, deal.vul, toPbn(deal), formatAuction(deal.auction, deal.notes), deal.show.hcp, deal.show.dd, JSON.stringify(deal.poll)].join('|');
 }
 
 function setupTheme(t: ReturnType<typeof texts>) {
@@ -160,6 +186,12 @@ function mount(root: HTMLElement) {
   }
 
   const renderView = () => {
+    root.classList.toggle('hv-polling', !!deal.poll);
+    view.classList.toggle('hv-card-poll', !!deal.poll);
+    if (deal.poll) {
+      view.replaceChildren(pollView(deal, t, play));
+      return;
+    }
     let pv: PlayView | null = null;
     if (play) {
       pv = { play, pos: position(deal, play), values: null };
@@ -183,7 +215,8 @@ function mount(root: HTMLElement) {
 
   const playBtn = h('button', { type: 'button', class: 'hv-play-toggle' });
   playBtn.addEventListener('click', () => {
-    play = play ? null : { contract: defaultContract(), played: [] };
+    play = play && !deal.poll ? null : play ?? { contract: defaultContract(), played: [] };
+    deal.poll = null;
     playDeal = toPbn(deal);
     refresh();
   });
@@ -237,7 +270,7 @@ function mount(root: HTMLElement) {
   };
   const copyImage = h('button', { type: 'button', class: 'hv-link' }, t.copyImage);
   copyImage.addEventListener('click', async () => {
-    const blob = dealImage(deal, t, imageDd());
+    const blob = deal.poll ? pollImage(deal, t, play) : dealImage(deal, t, imageDd());
     try {
       await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
       flash(copyImage, t.imageCopied);
@@ -247,7 +280,7 @@ function mount(root: HTMLElement) {
     }
   });
   const downloadImage = h('button', { type: 'button', class: 'hv-link' }, t.downloadImage);
-  downloadImage.addEventListener('click', async () => download(await dealImage(deal, t, imageDd())));
+  downloadImage.addEventListener('click', async () => download(await (deal.poll ? pollImage(deal, t, play) : dealImage(deal, t, imageDd()))));
 
   const boardInput = h('input', { type: 'number', min: 1, max: 999, inputmode: 'numeric', class: 'hv-input hv-board-num' });
   const dealerSelect = h('select', { class: 'hv-input' }, SEATS.map((seat) => h('option', { value: seat }, `${seat} – ${t.seats[seat]}`)));
@@ -458,6 +491,7 @@ function mount(root: HTMLElement) {
         while (play.auto && play.played.length && sideOf(position(deal, play).next!) !== declarers);
       }
       if (act === 'auto') play = { ...play, played: [], auto: !play.auto };
+      if (act === 'hide') play.hideDefenders = !play.hideDefenders;
       if (act === 'restart') play.played = [];
       if (act === 'close') play = null;
       if (card || pick || act) return refresh();
@@ -472,11 +506,75 @@ function mount(root: HTMLElement) {
     }
   });
 
+  const pollBtn = h('button', { type: 'button', class: 'hv-play-toggle' }, t.poll);
+  pollBtn.addEventListener('click', () => {
+    deal.poll = deal.poll ? null : defaultPoll(deal, play);
+    refresh();
+  });
+
+  const pollYou = h('select', { class: 'hv-input' }, SEATS.map((seat) => h('option', { value: seat }, t.seats[seat])));
+  const pollForm = h('select', { class: 'hv-input' },
+    h('option', { value: '' }, t.pollNoForm),
+    (['teams', 'pairs', 'mp', 'custom'] as const).map((f) => h('option', { value: f }, t.forms[f])));
+  const pollFormText = h('input', { class: 'hv-input', placeholder: t.formTextPlaceholder, autocomplete: 'off', 'aria-label': t.pollForm });
+  const pollSeats = SEATS.map((seat) => {
+    const b = h('button', { type: 'button', class: 'hv-tab', 'data-seat': seat, 'aria-pressed': 'false' }, seat);
+    b.addEventListener('click', () => {
+      const q = deal.poll!;
+      q.visible = q.visible.includes(seat) ? q.visible.filter((s) => s !== seat) : SEATS.filter((s) => s === seat || q.visible.includes(s));
+      refresh();
+    });
+    return b;
+  });
+  const pollText = h('textarea', { class: 'hv-input hv-poll-input', rows: 4, id: 'hv-poll-text' });
+  const pollQuestion = h('input', { class: 'hv-input', id: 'hv-poll-q', placeholder: t.pollQuestion, autocomplete: 'off' });
+  const pollCardsInput = h('input', { class: 'hv-input hv-auction-input', id: 'hv-poll-cards', placeholder: 'SA S8 S2 S5', autocomplete: 'off', spellcheck: 'false' });
+  const edit = (f: (q: Poll) => void) => () => { if (deal.poll) { f(deal.poll); refresh(); } };
+  pollYou.addEventListener('change', edit((q) => {
+    const old = q.you;
+    q.you = pollYou.value as Seat;
+    q.visible = SEATS.filter((s) => s === q.you || (s !== old && q.visible.includes(s)));
+  }));
+  pollForm.addEventListener('change', edit((q) => (q.form = pollForm.value as Form)));
+  pollFormText.addEventListener('input', edit((q) => (q.formText = pollFormText.value)));
+  pollText.addEventListener('input', edit((q) => (q.text = pollText.value)));
+  pollCardsInput.addEventListener('input', edit((q) => (q.cards = pollCardsInput.value)));
+  pollQuestion.addEventListener('input', edit((q) => (q.question = pollQuestion.value.trim() ? pollQuestion.value : '')));
+  const pollEditor = h('fieldset', { class: 'hv-poll-edit' },
+    h('legend', {}, t.poll),
+    h('div', { class: 'hv-poll-row' },
+      h('label', {}, h('span', {}, t.pollYou), pollYou),
+      h('label', {}, h('span', {}, t.pollForm), pollForm),
+    ),
+    pollFormText,
+    h('div', { class: 'hv-poll-seats' }, h('span', {}, t.pollVisible), h('div', { class: 'hv-tabs' }, pollSeats)),
+    h('label', { for: 'hv-poll-text' }, t.pollText), pollText, h('p', { class: 'hv-help' }, t.pollTextHelp),
+    h('label', { for: 'hv-poll-cards' }, t.pollCards), pollCardsInput, h('p', { class: 'hv-help' }, t.pollCardsHelp),
+    h('label', { for: 'hv-poll-q' }, t.pollQuestionLabel), pollQuestion,
+  );
+
+  function syncPollEditor() {
+    const q = deal.poll;
+    pollEditor.hidden = !q;
+    if (!q) return;
+    const focused = document.activeElement;
+    pollYou.value = q.you;
+    pollForm.value = q.form;
+    pollFormText.hidden = q.form !== 'custom';
+    if (focused !== pollFormText) pollFormText.value = q.formText;
+    pollQuestion.placeholder = defaultQuestion(deal, t);
+    for (const b of pollSeats) b.setAttribute('aria-pressed', String(q.visible.includes(b.dataset.seat as Seat)));
+    if (focused !== pollText) pollText.value = q.text;
+    if (focused !== pollQuestion) pollQuestion.value = q.question;
+    if (focused !== pollCardsInput) pollCardsInput.value = q.cards;
+  }
+
   root.replaceChildren(
     h('section', { class: 'hv-view' }, view,
-      h('div', { class: 'hv-view-opts' }, hcpToggle.el, ddToggle.el, playBtn),
+      h('div', { class: 'hv-view-opts' }, hcpToggle.el, ddToggle.el, h('span', { class: 'hv-mode-btns' }, pollBtn, playBtn)),
       status, h('div', { class: 'hv-view-links' }, copyImage, downloadImage, copyLink, solver)),
     h('section', { class: 'hv-editor' },
+      pollEditor,
       h('div', { class: 'hv-meta' },
         h('label', {}, h('span', {}, t.board), boardInput),
         h('label', {}, h('span', {}, t.dealer), dealerSelect),
@@ -568,6 +666,10 @@ function mount(root: HTMLElement) {
     if (play && toPbn(deal) !== playDeal) play.played = [];
     playDeal = toPbn(deal);
     playBtn.hidden = !dds;
+    pollBtn.setAttribute('aria-pressed', String(!!deal.poll));
+    hcpToggle.el.hidden = !!deal.poll;
+    ddToggle.el.hidden ||= !!deal.poll;
+    syncPollEditor();
     playBtn.disabled = !playable;
     playBtn.textContent = play ? `■ ${t.stopShort}` : `▶ ${t.play}`;
     playBtn.setAttribute('aria-pressed', String(!!play));

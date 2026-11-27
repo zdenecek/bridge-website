@@ -4,6 +4,7 @@ import { type Call, type Contract, contract, isBid, isComplete, noteNumbers } fr
 import type { Analysis, Par } from './dd';
 import { type Deal, type Hand, type Seat, SEATS, SUITS, dealShape, handSize, hcp, isVulnerable } from './model';
 import { type Play, type PlayContract, type Position, sideOf, trickSeats } from './play';
+import { type Run, defaultQuestion, paragraphs, pollContract, pollDeal, pollMeta, richRuns, trickTable } from './poll';
 
 /** What the play mode shows: the contract, the position reached and, once solved, each playable card's value. */
 export interface PlayView {
@@ -12,6 +13,11 @@ export interface PlayView {
   values: Map<string, number> | null;
   /** Declarer's double dummy tricks, to compare with at the end of an auto play. */
   ddTricks?: number;
+}
+
+/** In auto play the defenders' hands can stay hidden until the last card. */
+function hiddenSeat(pv: PlayView, seat: Seat): boolean {
+  return !!pv.play.auto && !!pv.play.hideDefenders && !!pv.pos.next && sideOf(seat) !== sideOf(pv.play.contract.declarer);
 }
 
 /** In auto play the defenders' cards are played for them. */
@@ -47,7 +53,8 @@ export function compass(deal: Deal, t: Texts): SVGElement {
  * In play mode every card sits in a slot of the same width, numbered or not, and each hand keeps
  * the width of its longest suit at the start, so nothing moves as the turn passes or cards go.
  */
-function hand(seat: Seat, cards: Hand, t: Texts, pv: PlayView | null = null, start: Hand = cards): HTMLElement {
+function hand(seat: Seat, cards: Hand, t: Texts, pv: PlayView | null = null, start: Hand = cards, hidden = false): HTMLElement {
+  if (hidden) cards = { S: '', H: '', D: '', C: '' };
   const blank = handSize(cards) === 0;
   const toPlay = pv?.pos.next === seat;
   const clickable = toPlay && !(pv.play.auto && defendersTurn(pv));
@@ -63,11 +70,11 @@ function hand(seat: Seat, cards: Hand, t: Texts, pv: PlayView | null = null, sta
       rank, value === undefined ? null : h('sub', {}, String(value)));
   });
   const longest = Math.max(1, ...SUITS.map((suit) => start[suit].length));
-  const cls = `hv-hand hv-${seat.toLowerCase()}${blank && !pv ? ' hv-blank' : ''}${toPlay ? ' hv-to-play' : ''}${pv ? ' hv-playing' : ''}`;
+  const cls = `hv-hand hv-${seat.toLowerCase()}${blank && (!pv || hidden) ? ' hv-blank' : ''}${toPlay ? ' hv-to-play' : ''}${pv ? ' hv-playing' : ''}`;
   return h('div', { class: cls, 'data-seat': seat, title: t.seats[seat], style: pv ? `--n:${longest}` : null },
     SUITS.map((suit) => [
       h('span', { class: `hv-suit hv-suit-${suit.toLowerCase()}` }, SUIT_GLYPH[suit]),
-      h('span', { class: 'hv-cards' }, pv ? (cards[suit] ? slots(suit) : '—') : cards[suit] || (blank ? '' : '—')),
+      h('span', { class: 'hv-cards' }, pv && !hidden ? (cards[suit] ? slots(suit) : '—') : cards[suit] || (blank ? '' : '—')),
     ]),
   );
 }
@@ -108,6 +115,8 @@ function playBar(pv: PlayView, t: Texts): HTMLElement {
     h('span', { class: 'hv-pb-state' }, state),
     h('span', { class: 'hv-pb-acts' },
       h('button', { type: 'button', class: 'hv-pb-auto', 'data-act': 'auto', 'aria-pressed': String(!!play.auto), title: t.autoHelp }, 'Auto'),
+      play.auto ? h('button', { type: 'button', class: 'hv-pb-auto', 'data-act': 'hide', 'aria-pressed': String(!!play.hideDefenders), title: t.hideSideHelp },
+        t.hideSide(sideOf(c.declarer) === 'NS' ? 'EW' : 'NS')) : null,
       act('undo', '↶', t.undoCard, !play.played.length),
       act('restart', '⟲', t.restart, !play.played.length),
       act('close', '✕', t.stopPlay)),
@@ -215,6 +224,42 @@ function ddTable(dd: DdView, t: Texts, full: boolean, pick: PlayContract | null 
   );
 }
 
+function runs(list: Run[]): Node[] {
+  return list.map((r) => {
+    const node = r.suit ? h('span', { class: `hv-suit-${r.suit.toLowerCase()}` }, r.text) : document.createTextNode(r.text);
+    return r.bold ? h('b', {}, node) : node;
+  });
+}
+
+/** A bidding or play problem: the seat's own view of the deal beside the question. */
+export function pollView(deal: Deal, t: Texts, play: Play | null): HTMLElement {
+  const poll = deal.poll!;
+  const table = trickTable(deal, play);
+  const declarer = pollContract(deal, play)?.declarer;
+  const dummy = declarer ? SEATS[(SEATS.indexOf(declarer) + 2) % 4] : null;
+  const mark = (seat: Seat) => (seat === poll.you ? ` (${t.youMark})` : seat === dummy ? ` (${t.dummyMark})` : '');
+  return h('div', { class: 'hv-poll' },
+    h('div', { class: 'hv-poll-deal' }, diagram(pollDeal(deal, poll), t)),
+    h('div', { class: 'hv-poll-text' },
+      h('h2', {}, t.youAre(t.seats[poll.you])),
+      h('p', { class: 'hv-poll-meta' }, runs(richRuns(pollMeta(deal, poll, t, play).join(' · ')))),
+      paragraphs(poll.text).map((p) => h('p', {}, runs(p))),
+      table ? h('table', { class: 'hv-poll-tricks' },
+        h('thead', {}, h('tr', {}, h('th', {}, t.trick), table.seats.map((s) => h('th', {}, t.seats[s] + mark(s))))),
+        h('tbody', {}, table.rows.map((r) => h('tr', {},
+          h('td', {}, String(r.n)),
+          table.seats.map((s) => {
+            const card = r.cards[s];
+            const cls = ['hv-tcard', r.winner === s ? 'hv-won' : '', r.leader === s ? 'hv-led' : ''].join(' ').trim();
+            return h('td', {}, card ? h('span', { class: cls }, runs([{ text: SUIT_GLYPH[card[0] as 'S'], suit: card[0] as 'S' }, { text: card[1]! }])) : '');
+          }),
+        ))),
+      ) : null,
+      h('div', { class: 'hv-poll-question' }, runs(richRuns(poll.question || defaultQuestion(deal, t)))),
+    ),
+  );
+}
+
 export function diagram(deal: Deal, t: Texts, dd: DdView | null = null, pv: PlayView | null = null): HTMLElement {
   return h('div', { class: `hv-deal${pv ? ' hv-deal-playing' : ''}` }, pv ? playBar(pv, t) : null, board(deal, t, dd, pv), auctionTable(deal, t));
 }
@@ -227,7 +272,7 @@ function board(deal: Deal, t: Texts, dd: DdView | null, pv: PlayView | null): HT
   const showTrick = pv && (pv.pos.trick.length || pv.pos.lastTrick);
   const points = SEATS.map((seat) => (handSize(deal.hands[seat]) ? String(hcp(deal.hands[seat])) : ''));
   return h('div', { class: 'hv-board' },
-    SEATS.map((seat) => hand(seat, pv ? pv.pos.hands[seat] : deal.hands[seat], t, pv, deal.hands[seat])),
+    SEATS.map((seat) => hand(seat, pv ? pv.pos.hands[seat] : deal.hands[seat], t, pv, deal.hands[seat], !!pv && hiddenSeat(pv, seat))),
     h('div', { class: 'hv-header' },
       deal.board ? h('span', { class: 'hv-num' }, String(deal.board)) : null,
       h('span', { class: 'hv-sub' }, `${t.vuls[deal.vul]} / ${deal.dealer}`),

@@ -1,4 +1,5 @@
 import type { Annotation } from './auction';
+import type { Poll } from './poll';
 
 export const SEATS = ['N', 'E', 'S', 'W'] as const;
 export type Seat = (typeof SEATS)[number];
@@ -24,6 +25,8 @@ export interface Deal {
   /** Alerts and notes, by the index of the call they belong to. */
   notes: Annotation[];
   show: { hcp: boolean; dd: boolean };
+  /** Set while the deal is shown as a poll. */
+  poll: Poll | null;
 }
 
 /** A full deal, an ending with the same number of cards in every hand, or a deal still being entered. */
@@ -53,6 +56,7 @@ export function emptyDeal(board: number | null = 1): Deal {
     auction: [],
     notes: [],
     show: { hcp: true, dd: true },
+    poll: null,
   };
 }
 

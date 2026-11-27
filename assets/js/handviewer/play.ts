@@ -14,6 +14,8 @@ export interface Play {
   played: string[];
   /** Declarer plays alone, without the trick numbers, against defenders who always play a best card. */
   auto?: boolean;
+  /** In auto play, the defenders' hands stay hidden until the hand is played out. */
+  hideDefenders?: boolean;
 }
 
 export interface Trick {
@@ -33,6 +35,8 @@ export interface Position {
   next: Seat | null;
   won: { NS: number; EW: number };
   lastTrick: Trick | null;
+  /** Every finished trick in order. */
+  tricks: Trick[];
   legal: Set<string>;
 }
 
@@ -41,7 +45,7 @@ export const sideOf = (seat: Seat): 'NS' | 'EW' => (seat === 'N' || seat === 'S'
 
 const higher = (a: string, b: string) => RANKS.indexOf(a) < RANKS.indexOf(b);
 
-function trickWinner(cards: string[], leader: Seat, strain: Strain): Seat {
+export function trickWinner(cards: string[], leader: Seat, strain: Strain): Seat {
   let best = 0;
   cards.forEach((card, i) => {
     const top = cards[best]!;
@@ -70,6 +74,7 @@ export function position(deal: Deal, play: Play): Position {
   let leader = nextSeat(play.contract.declarer);
   let trick: string[] = [];
   let lastTrick: Trick | null = null;
+  const tricks: Trick[] = [];
   const won = { NS: 0, EW: 0 };
   const total = handSize(hands.N);
   let count = 0;
@@ -86,6 +91,7 @@ export function position(deal: Deal, play: Play): Position {
       const winner = trickWinner(trick, leader, play.contract.strain);
       won[sideOf(winner)]++;
       lastTrick = { cards: trick, leader, winner };
+      tricks.push(lastTrick);
       leader = winner;
       trick = [];
       startHands = copyHands(hands);
@@ -96,7 +102,7 @@ export function position(deal: Deal, play: Play): Position {
   let next: Seat | null = leader;
   for (let i = 0; i < trick.length; i++) next = nextSeat(next);
   if (count >= 4 * total) next = null;
-  return { hands, startHands, trick, leader, next, won, lastTrick, legal: next ? legalCards(hands[next], trick) : new Set() };
+  return { hands, startHands, trick, leader, next, won, lastTrick, tricks, legal: next ? legalCards(hands[next], trick) : new Set() };
 }
 
 export function startPbn(pos: Position): string {

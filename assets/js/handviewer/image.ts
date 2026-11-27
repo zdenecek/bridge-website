@@ -2,11 +2,13 @@ import type { Analysis } from './dd';
 import { AUCTION_SEATS, DD_SEATS, DD_STRAINS, SUIT_GLYPH, auctionRows, callParts, contractParts, parParts, strainParts } from './diagram';
 import type { Texts } from './i18n';
 import { noteNumbers } from './auction';
+import type { Play } from './play';
+import { type Run, defaultQuestion, paragraphs, pollContract, pollDeal, pollMeta, richRuns, trickTable } from './poll';
 import { type Deal, type Hand, type Seat, SEATS, SUITS, dealShape, handSize, hcp, isVulnerable } from './model';
 
 /** The image is always light, so it reads the same pasted anywhere. */
 const C = {
-  card: '#ffffff', edge: '#e1e5e1', ink: '#222222', muted: '#5f6661', rule: '#e3e6e3', alert: '#ffe6a3',
+  card: '#ffffff', edge: '#e1e5e1', ink: '#222222', muted: '#5f6661', rule: '#e3e6e3', alert: '#ffe6a3', question: '#eef5ee', won: '#d9efd4',
   vul: '#d93636', nonvul: '#1a881a',
   S: '#33339b', H: '#ff0000', D: '#ff9b00', C: '#32ad01',
 };
@@ -321,8 +323,11 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx, dd: Analysis 
   return { w, h };
 }
 
-export async function dealImage(deal: Deal, t: Texts, dd: Analysis | null = null): Promise<Blob> {
+async function loadFonts() {
   await Promise.all([400, 500, 600, 700].map((wgt) => document.fonts.load(`${wgt} ${F}px Lexend`).catch(() => null)));
+}
+
+function dealCanvas(deal: Deal, t: Texts, dd: Analysis | null): HTMLCanvasElement {
   const canvas = document.createElement('canvas');
   const measure = canvas.getContext('2d')!;
   const { w, h } = draw(null, deal, t, measure, dd);
@@ -331,5 +336,195 @@ export async function dealImage(deal: Deal, t: Texts, dd: Analysis | null = null
   const ctx = canvas.getContext('2d')!;
   ctx.scale(SCALE, SCALE);
   draw(ctx, deal, t, ctx, dd);
+  return canvas;
+}
+
+function toBlob(canvas: HTMLCanvasElement): Promise<Blob> {
   return new Promise((resolve, reject) => canvas.toBlob((b) => (b ? resolve(b) : reject(new Error('toBlob'))), 'image/png'));
+}
+
+export async function dealImage(deal: Deal, t: Texts, dd: Analysis | null = null): Promise<Blob> {
+  await loadFonts();
+  return toBlob(dealCanvas(deal, t, dd));
+}
+
+type Placed = Run & { x: number };
+
+/** Breaks styled text into lines no wider than maxW, keeping a bid like 1♦ together. */
+function wrap(m: Ctx, list: Run[], size: number, weight: number, maxW: number): Placed[][] {
+  const pieces = list.flatMap((r) => r.text.split(/(\s+)/).filter(Boolean).map((text) => ({ ...r, text })));
+  const width = (p: Run) => {
+    font(m, p.bold ? 700 : weight, size);
+    return m.measureText(p.text).width;
+  };
+  font(m, weight, size);
+  const space = m.measureText(' ').width;
+  const lines: Placed[][] = [[]];
+  let x = 0;
+  let gap = false;
+  let word: Run[] = [];
+  const flush = () => {
+    if (!word.length) return;
+    const w = word.reduce((a, p) => a + width(p), 0);
+    if (x > 0 && x + (gap ? space : 0) + w > maxW) {
+      lines.push([]);
+      x = 0;
+    } else if (gap && x > 0) x += space;
+    for (const p of word) {
+      lines[lines.length - 1]!.push({ ...p, x });
+      x += width(p);
+    }
+    word = [];
+    gap = false;
+  };
+  for (const p of pieces) {
+    if (/^\s+$/.test(p.text)) {
+      flush();
+      gap = true;
+    } else word.push(p);
+  }
+  flush();
+  return lines;
+}
+
+function drawLines(ctx: Ctx | null, lines: Placed[][], x: number, y: number, size: number, weight: number, color: string, lh: number) {
+  if (ctx) {
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    lines.forEach((line, i) => {
+      for (const p of line) {
+        font(ctx, p.bold ? 700 : weight, size);
+        ctx.fillStyle = p.suit ? C[p.suit] : color;
+        ctx.fillText(p.text, x + p.x, y + i * lh + size);
+      }
+    });
+  }
+  return lines.length * lh;
+}
+
+const POLL_W = 24 * F;
+
+function drawPanel(ctx: Ctx | null, m: Ctx, deal: Deal, t: Texts, play: Play | null, x: number, y0: number): number {
+  const poll = deal.poll!;
+  let y = y0;
+  const text = (list: Run[], size: number, weight: number, color: string, lh = 1.45) =>
+    (y += drawLines(ctx, wrap(m, list, size, weight, POLL_W), x, y, size, weight, color, lh * size));
+
+  text([{ text: t.youAre(t.seats[poll.you]) }], 1.5 * F, 700, C.ink, 1.2);
+  y += 0.45 * F;
+  text(richRuns(pollMeta(deal, poll, t, play).join(' · ')), 0.78 * F, 400, C.muted);
+  for (const para of paragraphs(poll.text)) {
+    y += 0.55 * F;
+    text(para, 0.92 * F, 400, C.ink);
+  }
+
+  const table = trickTable(deal, play);
+  if (table) {
+    y += 0.8 * F;
+    const dummy = SEATS[(SEATS.indexOf(pollContract(deal, play)!.declarer) + 2) % 4];
+    const mark = (seat: Seat) => (seat === poll.you ? ` (${t.youMark})` : seat === dummy ? ` (${t.dummyMark})` : '');
+    const heads = [t.trick, ...table.seats.map((s) => t.seats[s] + mark(s))];
+    const HS = 0.72 * F;
+    const RS = 0.85 * F;
+    font(m, 600, HS);
+    const cols = heads.map((hd) => m.measureText(hd).width + 1.1 * F);
+    const rowH = 1.9 * RS;
+    if (ctx) {
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
+      let cx = x;
+      heads.forEach((hd, i) => {
+        font(ctx, 600, HS);
+        ctx.fillStyle = C.muted;
+        ctx.fillText(hd, cx + cols[i]! / 2, y + rowH / 2);
+        cx += cols[i]!;
+      });
+      const tw = cols.reduce((a, b) => a + b, 0);
+      ctx.fillStyle = C.rule;
+      ctx.fillRect(x, y + rowH, tw, 1);
+      table.rows.forEach((row, r) => {
+        const cy = y + (r + 1.5) * rowH;
+        let px = x;
+        font(ctx, 500, RS);
+        ctx.fillStyle = C.ink;
+        ctx.textAlign = 'center';
+        ctx.fillText(String(row.n), px + cols[0]! / 2, cy);
+        px += cols[0]!;
+        table.seats.forEach((seat, i) => {
+          const card = row.cards[seat];
+          if (card) {
+            font(ctx, row.winner === seat ? 700 : 500, RS);
+            const g = SUIT_GLYPH[card[0] as 'S'];
+            const gw = ctx.measureText(g).width;
+            const rw = ctx.measureText(card[1]!).width;
+            const sx = px + (cols[i + 1]! - gw - rw) / 2;
+            const won = row.winner === seat;
+            const led = row.leader === seat;
+            if (won || led) {
+              roundRect(ctx, sx - 0.3 * RS, cy - 0.72 * RS, gw + rw + 0.6 * RS, 1.44 * RS, 0.3 * RS);
+              if (won) {
+                ctx.fillStyle = C.won;
+                ctx.fill();
+              }
+              if (led) {
+                ctx.strokeStyle = C.muted;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+              }
+            }
+            ctx.textAlign = 'left';
+            ctx.fillStyle = C[card[0] as 'S'];
+            ctx.fillText(g, sx, cy);
+            ctx.fillStyle = C.ink;
+            ctx.fillText(card[1]!, sx + gw, cy);
+          }
+          px += cols[i + 1]!;
+        });
+        ctx.fillStyle = C.rule;
+        ctx.fillRect(x, y + (r + 2) * rowH, tw, 1);
+      });
+    }
+    y += rowH * (table.rows.length + 1);
+  }
+
+  y += 1 * F;
+  const QS = 0.95 * F;
+  const pad = 0.85 * F;
+  const lines = wrap(m, richRuns(poll.question || defaultQuestion(deal, t)), QS, 700, POLL_W - 2 * pad);
+  const boxH = lines.length * 1.4 * QS + 2 * pad;
+  if (ctx) {
+    roundRect(ctx, x, y, POLL_W, boxH, 0.7 * F);
+    ctx.fillStyle = C.question;
+    ctx.fill();
+    drawLines(ctx, lines, x + pad, y + pad, QS, 700, C.ink, 1.4 * QS);
+  }
+  y += boxH;
+  return y - y0;
+}
+
+/** The whole poll screen: the seat's view of the deal on the left, the text and question on the right. */
+export async function pollImage(deal: Deal, t: Texts, play: Play | null): Promise<Blob> {
+  await loadFonts();
+  const left = dealCanvas(pollDeal(deal, deal.poll!), t, null);
+  const lw = left.width / SCALE;
+  const lh = left.height / SCALE;
+  const OUT = 1.3 * F;
+  const GAP = 1.8 * F;
+  const m = document.createElement('canvas').getContext('2d')!;
+  const panelH = drawPanel(null, m, deal, t, play, 0, 0);
+  const w = Math.ceil(2 * OUT + lw + GAP + POLL_W);
+  const h = Math.ceil(2 * OUT + Math.max(lh, panelH + 0.4 * F));
+  const canvas = document.createElement('canvas');
+  canvas.width = w * SCALE;
+  canvas.height = h * SCALE;
+  const ctx = canvas.getContext('2d')!;
+  ctx.scale(SCALE, SCALE);
+  roundRect(ctx, 0.5, 0.5, w - 1, h - 1, 18);
+  ctx.fillStyle = C.card;
+  ctx.fill();
+  ctx.strokeStyle = C.edge;
+  ctx.stroke();
+  ctx.drawImage(left, OUT, OUT, lw, lh);
+  drawPanel(ctx, ctx, deal, t, play, OUT + lw + GAP, OUT + 0.4 * F);
+  return toBlob(canvas);
 }

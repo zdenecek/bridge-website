@@ -425,7 +425,7 @@ button.hv-pc {
   cursor: pointer;
 
   &:hover:not(:disabled) { outline: 2px solid var(--hv-felt); outline-offset: -1px; }
-  &:disabled { opacity: 0.35; cursor: default; }
+  &:disabled { opacity: 0.6; cursor: default; }
   &.hv-v0 { background: color-mix(in srgb, #32ad01 22%, transparent); }
   &.hv-v1 { background: color-mix(in srgb, #ff9b00 28%, transparent); }
   &.hv-v2 { background: color-mix(in srgb, #ff3b30 22%, transparent); }
@@ -547,6 +547,110 @@ button.hv-pc {
   &:disabled { opacity: 0.4; cursor: default; }
   &[aria-pressed="true"] { background: var(--hv-felt); border-color: var(--hv-felt); color: #fff; }
   &[hidden] { display: none; }
+}
+
+/* Poll: the seat's view of the deal beside the situation and the question, across the whole page. */
+.hv-polling .hv-view { grid-column: 1 / -1; position: static; }
+
+.hv-card.hv-card-poll {
+  display: block;
+  padding: 1.25em;
+  font-size: clamp(0.85rem, 3.4vw, 1.25rem);
+}
+
+.hv-poll {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.8em;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .hv-poll { grid-template-columns: minmax(0, 1fr); }
+}
+
+.hv-poll-deal {
+  border: 1px solid var(--hv-card-edge);
+  border-radius: 14px;
+  padding: 1.25em 1em;
+  display: flex;
+  justify-content: center;
+}
+
+.hv-poll-text {
+  font-size: 0.95em;
+  line-height: 1.5;
+
+  h2 { font-size: 1.85em; line-height: 1.2; margin: 0.1em 0 0.35em; }
+  p { margin: 0 0 0.75em; }
+  .hv-poll-meta { color: var(--hv-muted); font-size: 0.85em; margin-bottom: 1.1em; }
+}
+
+.hv-poll-tricks {
+  border-collapse: collapse;
+  border: 0;
+  margin: 0.4em 0 1.2em;
+  font-variant-numeric: tabular-nums;
+
+  th, td { border: 0; background: none; padding: 0.35em 0.9em; text-align: center; }
+  th { font-size: 0.8em; font-weight: 600; color: var(--hv-muted); border-bottom: 1px solid var(--hv-rule); }
+  td { border-bottom: 1px solid var(--hv-rule); font-weight: 500; }
+}
+
+.hv-tcard {
+  display: inline-block;
+  padding: 0.05em 0.35em;
+  border-radius: 0.3em;
+  border: 1px solid transparent;
+
+  &.hv-led { border-color: var(--hv-muted); }
+  &.hv-won { background: color-mix(in srgb, var(--hv-felt) 20%, transparent); font-weight: 700; }
+}
+
+.hv-poll-question {
+  margin-top: 1em;
+  padding: 0.9em 1.1em;
+  border-radius: 0.8em;
+  background: color-mix(in srgb, var(--hv-felt) 9%, var(--hv-card));
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.hv-mode-btns {
+  margin-left: auto;
+  display: flex;
+  gap: 0.4rem;
+
+  .hv-play-toggle { margin-left: 0; }
+}
+
+.hv-poll-edit {
+  border: 0;
+  margin: 0;
+  padding: 0 0 1rem;
+  border-bottom: 1px solid var(--hv-rule);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  &[hidden] { display: none; }
+  legend { font-size: 0.75rem; color: var(--hv-felt); font-weight: 700; padding: 0; margin-bottom: 0.3rem; }
+  label, .hv-poll-seats > span { font-size: 0.75rem; color: var(--hv-muted); font-weight: 600; }
+  .hv-tabs { margin: 0.2rem 0 0.3rem; }
+}
+
+.hv-poll-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+
+  label { display: flex; flex-direction: column; gap: 0.2rem; }
+}
+
+.hv-poll-input {
+  resize: vertical;
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
 
 .hv-busy {
