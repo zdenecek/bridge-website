@@ -30,12 +30,12 @@ export function dummyOf(deal: Deal): Seat | null {
 }
 
 /**
- * From a hand being played: the player to play (declarer for dummy) with dummy, the cards played so
- * far and the contract. Otherwise the player to call, else the opening leader, else the only hand
+ * In play mode, even before the lead: the player on turn (declarer when it is dummy's turn) with
+ * dummy shown, the cards played so far and the contract. Otherwise the player to call, else the opening leader, else the only hand
  * entered, else the dealer.
  */
 export function defaultPoll(deal: Deal, play: Play | null): Poll {
-  if (play?.played.length) {
+  if (play) {
     const next = position(deal, play).next;
     const declarer = play.contract.declarer;
     const dummy = partner(declarer);
@@ -149,7 +149,8 @@ export function pollContract(deal: Deal, play: Play | null): PlayContract | null
 /** A plain question that suggests nothing: the call, the lead or the card to play. */
 export function defaultQuestion(deal: Deal, t: Texts): string {
   if (deal.poll?.cards.trim()) return t.questionPlay;
-  return isComplete(deal.auction) && contract(deal.auction, deal.dealer) !== 'passout' ? t.questionLead : t.pollQuestion;
+  const bid = isComplete(deal.auction) && contract(deal.auction, deal.dealer) !== 'passout';
+  return bid || deal.poll?.contract ? t.questionLead : t.pollQuestion;
 }
 
 /** The tricks played so far, under the seats in the order they play from the opening lead. */
