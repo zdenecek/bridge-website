@@ -18,6 +18,8 @@ export interface Poll {
   question: string;
   /** Cards played so far, e.g. "SA S8 S2 S5", for a play problem; needs only the cards, not the hands. */
   cards: string;
+  /** Show the hands without the cards already played. */
+  hidePlayed?: boolean;
   /** The contract of a play problem taken over from the play mode, when the auction has none. */
   contract?: PlayContract;
 }
@@ -60,7 +62,13 @@ export function defaultPoll(deal: Deal, play: Play | null): Poll {
 
 /** The deal as the poll shows it: only the visible hands, no points or analysis. */
 export function pollDeal(deal: Deal, poll: Poll): Deal {
-  const hands = Object.fromEntries(SEATS.map((s) => [s, poll.visible.includes(s) ? deal.hands[s] : emptyHand()])) as Deal['hands'];
+  const played = poll.hidePlayed ? parseCards(poll.cards) : [];
+  const shown = (seat: Seat) => {
+    const hand = { ...deal.hands[seat] };
+    for (const card of played) hand[card[0] as 'S'] = hand[card[0] as 'S'].replace(card[1]!, '');
+    return hand;
+  };
+  const hands = Object.fromEntries(SEATS.map((s) => [s, poll.visible.includes(s) ? shown(s) : emptyHand()])) as Deal['hands'];
   return { ...deal, hands, show: { hcp: false, dd: false } };
 }
 
@@ -110,7 +118,14 @@ export function paragraphs(text: string): Run[][] {
   return text.split('\n').map((l) => l.trim()).filter(Boolean).map(richRuns);
 }
 
-export interface TrickRow { n: number; cards: Partial<Record<Seat, string>>; leader: Seat; winner?: Seat }
+export interface TrickRow {
+  n: number;
+  cards: Partial<Record<Seat, string>>;
+  leader: Seat;
+  winner?: Seat;
+  /** The seat to play next, shown with a question mark. */
+  ask?: Seat;
+}
 
 const SYMBOL: Record<string, string> = { '♠': 'S', '♥': 'H', '♦': 'D', '♣': 'C' };
 
@@ -136,6 +151,12 @@ function tableFrom(cards: string[], declarer: Seat, strain: Strain): { seats: Se
     rows.push({ n: rows.length + 1, cards: placed, leader, winner });
     if (winner) leader = winner;
   }
+  const last = rows[rows.length - 1]!;
+  if (cards.length % 4) {
+    let seat = last.leader;
+    for (let i = 0; i < cards.length % 4; i++) seat = nextSeat(seat);
+    last.ask = seat;
+  } else if (rows.length < 13) rows.push({ n: rows.length + 1, cards: {}, leader, ask: leader });
   return { seats, rows };
 }
 
@@ -156,23 +177,8 @@ export function defaultQuestion(deal: Deal, t: Texts): string {
 /** The tricks played so far, under the seats in the order they play from the opening lead. */
 export function trickTable(deal: Deal, play: Play | null): { seats: Seat[]; rows: TrickRow[] } | null {
   const own = deal.poll?.cards ? parseCards(deal.poll.cards) : [];
+  const cards = own.length ? own : play?.played ?? [];
   const c = pollContract(deal, play);
-  if (own.length && c) return tableFrom(own, c.declarer, c.strain);
-  if (!play?.played.length) return null;
-  const pos = position(deal, play);
-  const first = nextSeat(play.contract.declarer);
-  const seats = [first, nextSeat(first), partner(first), nextSeat(partner(first))];
-  const place = (cards: string[], leader: Seat) => {
-    const out: Partial<Record<Seat, string>> = {};
-    let seat = leader;
-    for (const card of cards) {
-      out[seat] = card;
-      seat = nextSeat(seat);
-    }
-    return out;
-  };
-  const rows: TrickRow[] = pos.tricks.map((tr, i) => ({ n: i + 1, cards: place(tr.cards, tr.leader), leader: tr.leader, winner: tr.winner }));
-  if (pos.trick.length) rows.push({ n: rows.length + 1, cards: place(pos.trick, pos.leader), leader: pos.leader });
-  return { seats, rows };
+  return cards.length && c ? tableFrom(cards, c.declarer, c.strain) : null;
 }
 

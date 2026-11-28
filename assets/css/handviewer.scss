@@ -597,6 +597,12 @@ button.hv-pc {
   td { border-bottom: 1px solid var(--hv-rule); font-weight: 500; }
 }
 
+.hv-auction td.hv-ask,
+.hv-poll-tricks td.hv-ask {
+  color: var(--hv-felt);
+  font-weight: 700;
+}
+
 .hv-tcard {
   display: inline-block;
   padding: 0.05em 0.35em;

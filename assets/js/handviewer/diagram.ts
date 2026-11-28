@@ -4,7 +4,7 @@ import { type Call, type Contract, contract, isBid, isComplete, noteNumbers } fr
 import type { Analysis, Par } from './dd';
 import { type Deal, type Hand, type Seat, SEATS, SUITS, dealShape, handSize, hcp, isVulnerable } from './model';
 import { type Play, type PlayContract, type Position, sideOf, trickSeats } from './play';
-import { type Run, defaultQuestion, paragraphs, pollContract, pollDeal, pollMeta, richRuns, trickTable } from './poll';
+import { type Run, defaultQuestion, paragraphs, parseCards, pollContract, pollDeal, pollMeta, richRuns, trickTable } from './poll';
 
 /** What the play mode shows: the contract, the position reached and, once solved, each playable card's value. */
 export interface PlayView {
@@ -125,14 +125,20 @@ function playBar(pv: PlayView, t: Texts): HTMLElement {
 
 export const AUCTION_SEATS: Seat[] = ['W', 'N', 'E', 'S'];
 
-export type AuctionCell = { call: Call; index: number } | { allPass: true; span: number } | null;
+export type AuctionCell = { call: Call; index: number } | { allPass: true; span: number } | { ask: true } | null;
+
+/** In a bidding poll the next call is a question mark. */
+export function asksCall(deal: Deal): boolean {
+  return !!deal.poll && !isComplete(deal.auction) && !parseCards(deal.poll.cards).length;
+}
 
 /** The auction as rows under W N E S, the final three passes shown as one "All pass". */
-export function auctionRows(calls: Call[], dealer: Seat): AuctionCell[][] {
+export function auctionRows(calls: Call[], dealer: Seat, ask = false): AuctionCell[][] {
   const cells: AuctionCell[] = Array(AUCTION_SEATS.indexOf(dealer)).fill(null);
   const shown = isComplete(calls) && calls.some(isBid) ? calls.slice(0, -3) : calls;
   cells.push(...shown.map((call, index) => ({ call, index })));
   if (shown !== calls) cells.push({ allPass: true, span: 4 - (cells.length % 4) });
+  else if (ask) cells.push({ ask: true });
   const rows: AuctionCell[][] = [];
   for (let i = 0; i < cells.length; i += 4) rows.push(cells.slice(i, i + 4));
   return rows;
@@ -159,12 +165,14 @@ function parts(list: { text: string; suit?: string }[]): Node[] {
 }
 
 function auctionTable(deal: Deal, t: Texts): HTMLElement | null {
-  if (!deal.auction.length) return null;
+  const ask = asksCall(deal);
+  if (!deal.auction.length && !ask) return null;
   const head = AUCTION_SEATS.map((seat) =>
     h('th', { class: isVulnerable(seat, deal.vul) ? 'hv-vul' : '', title: t.seats[seat], 'data-seat': seat, 'aria-label': seat }));
   const numbers = noteNumbers(deal.notes);
-  const rows = auctionRows(deal.auction, deal.dealer).map((row) => h('tr', {}, row.map((cell) => {
+  const rows = auctionRows(deal.auction, deal.dealer, ask).map((row) => h('tr', {}, row.map((cell) => {
     if (!cell) return h('td', {});
+    if ('ask' in cell) return h('td', { class: 'hv-ask' }, '?');
     if ('allPass' in cell) return h('td', { colspan: cell.span, class: 'hv-allpass' }, t.allPass);
     const n = numbers.get(cell.index);
     const call = h('span', { class: `hv-call-text${deal.notes[cell.index]?.alert ? ' hv-alerted' : ''}` }, parts(callParts(cell.call, t)));
@@ -251,6 +259,7 @@ export function pollView(deal: Deal, t: Texts, play: Play | null): HTMLElement {
           table.seats.map((s) => {
             const card = r.cards[s];
             const cls = ['hv-tcard', r.winner === s ? 'hv-won' : '', r.leader === s ? 'hv-led' : ''].join(' ').trim();
+            if (r.ask === s) return h('td', { class: 'hv-ask' }, '?');
             return h('td', {}, card ? h('span', { class: cls }, runs([{ text: SUIT_GLYPH[card[0] as 'S'], suit: card[0] as 'S' }, { text: card[1]! }])) : '');
           }),
         ))),

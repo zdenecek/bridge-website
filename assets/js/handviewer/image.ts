@@ -1,5 +1,5 @@
 import type { Analysis } from './dd';
-import { AUCTION_SEATS, DD_SEATS, DD_STRAINS, SUIT_GLYPH, auctionRows, callParts, contractParts, parParts, strainParts } from './diagram';
+import { AUCTION_SEATS, DD_SEATS, DD_STRAINS, SUIT_GLYPH, asksCall, auctionRows, callParts, contractParts, parParts, strainParts } from './diagram';
 import type { Texts } from './i18n';
 import { noteNumbers } from './auction';
 import type { Play } from './play';
@@ -145,7 +145,8 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx, dd: Analysis 
   const row1 = Math.max(handH, ddH);
   const gridH = row1 + row2 + handH + 0.3 * F;
 
-  const rows = deal.auction.length ? auctionRows(deal.auction, deal.dealer) : [];
+  const ask = asksCall(deal);
+  const rows = deal.auction.length || ask ? auctionRows(deal.auction, deal.dealer, ask) : [];
   const result = contractParts(deal, t);
   font(m, 500, AF);
   const numbers = noteNumbers(deal.notes);
@@ -291,6 +292,12 @@ function draw(ctx: Ctx | null, deal: Deal, t: Texts, measure: Ctx, dd: Analysis 
           ctx.fillText(String(n), px + pw + 0.3 * AF, y + AROW * 0.3);
           font(ctx, 500, AF);
         }
+      } else if (cellData && 'ask' in cellData) {
+        font(ctx, 700, AF);
+        ctx.fillStyle = C.nonvul;
+        ctx.textAlign = 'center';
+        ctx.fillText('?', x + colW[c]! / 2, y + AROW / 2);
+        font(ctx, 500, AF);
       } else if (cellData) {
         ctx.fillStyle = C.muted;
         ctx.textAlign = 'left';
@@ -452,6 +459,12 @@ function drawPanel(ctx: Ctx | null, m: Ctx, deal: Deal, t: Texts, play: Play | n
         px += cols[0]!;
         table.seats.forEach((seat, i) => {
           const card = row.cards[seat];
+          if (row.ask === seat) {
+            font(ctx, 700, RS);
+            ctx.fillStyle = C.nonvul;
+            ctx.textAlign = 'center';
+            ctx.fillText('?', px + cols[i + 1]! / 2, cy);
+          }
           if (card) {
             font(ctx, row.winner === seat ? 700 : 500, RS);
             const g = SUIT_GLYPH[card[0] as 'S'];

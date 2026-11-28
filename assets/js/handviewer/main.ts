@@ -42,6 +42,7 @@ function readHash(): Deal | null {
       text: p.get('pt') ?? '',
       question: p.get('pq') ?? '',
       cards: p.get('pc') ?? '',
+      hidePlayed: p.get('pp') === '1',
     };
   }
   return deal;
@@ -70,6 +71,7 @@ function writeHash(deal: Deal, play: Play | null = null) {
     if (q.form) parts.push(`pf=${q.form[0]}`);
     if (q.form === 'custom' && q.formText) parts.push(`pft=${enc(q.formText)}`);
     if (q.contract) parts.push(`pk=${contractCode(q.contract)}`);
+    if (q.hidePlayed) parts.push('pp=1');
     if (q.text) parts.push(`pt=${enc(q.text)}`);
     if (q.question) parts.push(`pq=${enc(q.question)}`);
     if (q.cards) parts.push(`pc=${q.cards.trim().replace(/\s+/g, '+')}`);
@@ -539,6 +541,9 @@ function mount(root: HTMLElement) {
   pollFormText.addEventListener('input', edit((q) => (q.formText = pollFormText.value)));
   pollText.addEventListener('input', edit((q) => (q.text = pollText.value)));
   pollCardsInput.addEventListener('input', edit((q) => (q.cards = pollCardsInput.value)));
+  const hidePlayedBox = h('input', { type: 'checkbox' });
+  hidePlayedBox.addEventListener('change', edit((q) => (q.hidePlayed = hidePlayedBox.checked)));
+  const hidePlayedRow = h('label', { class: 'hv-toggle' }, hidePlayedBox, t.hidePlayed);
   pollQuestion.addEventListener('input', edit((q) => (q.question = pollQuestion.value.trim() ? pollQuestion.value : '')));
   const pollEditor = h('fieldset', { class: 'hv-poll-edit' },
     h('legend', {}, t.poll),
@@ -549,7 +554,7 @@ function mount(root: HTMLElement) {
     pollFormText,
     h('div', { class: 'hv-poll-seats' }, h('span', {}, t.pollVisible), h('div', { class: 'hv-tabs' }, pollSeats)),
     h('label', { for: 'hv-poll-text' }, t.pollText), pollText, h('p', { class: 'hv-help' }, t.pollTextHelp),
-    h('label', { for: 'hv-poll-cards' }, t.pollCards), pollCardsInput, h('p', { class: 'hv-help' }, t.pollCardsHelp),
+    h('label', { for: 'hv-poll-cards' }, t.pollCards), pollCardsInput, hidePlayedRow, h('p', { class: 'hv-help' }, t.pollCardsHelp),
     h('label', { for: 'hv-poll-q' }, t.pollQuestionLabel), pollQuestion,
   );
 
@@ -567,6 +572,8 @@ function mount(root: HTMLElement) {
     if (focused !== pollText) pollText.value = q.text;
     if (focused !== pollQuestion) pollQuestion.value = q.question;
     if (focused !== pollCardsInput) pollCardsInput.value = q.cards;
+    hidePlayedBox.checked = !!q.hidePlayed;
+    hidePlayedRow.hidden = !pollCardsInput.value.trim();
   }
 
   root.replaceChildren(
